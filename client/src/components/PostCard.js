@@ -52,7 +52,7 @@ export default function PostCard({ data, secret }) {
   const handleExpandClick = () => {
     // check if data already exists
     if (!forumData) {
-      fetch(`https://cipherforums.com/api/threads/${data.url}`)
+      fetch(`/api/threads/${data.url}`)
         .then((res) => {
           return res.json();
         })

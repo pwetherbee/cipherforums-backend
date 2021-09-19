@@ -87,10 +87,10 @@ const theme = createTheme({
 // });
 
 export default function App() {
-  console.log("");
+  console.log("this is the home page");
   const [loggedIn, setLoggedIn] = useState(false);
   useEffect(async () => {
-    const res = await fetch("/login/status", {
+    const res = await fetch("/api/login/status/", {
       credentials: "include",
     });
     if (!res || res.status != 200) {

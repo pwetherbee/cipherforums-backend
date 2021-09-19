@@ -56,7 +56,7 @@ export default function Post() {
   const [comments, setComments] = useState();
   const [secret, setSecret] = useState();
   useEffect(() => {
-    fetch(`https://cipherforums.com/api/threads/${postname}`)
+    fetch(`/api/threads/${postname}`)
       .then((res) => res.json())
       .then((data) => {
         console.log(data.comments);

@@ -63,7 +63,7 @@ export default function Profile() {
         // TODO: Rename postTime to time and CommentText to text
         setComments(result.comments);
       });
-    fetch(`/user/${username}/following/list/${username}`) // TODO: Fix this mess in api
+    fetch(`/api/user/${username}/following/list/${username}`) // TODO: Fix this mess in api
       .then((res) => {
         return res.json();
       })

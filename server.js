@@ -5,14 +5,14 @@ const pug = require("pug");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 const session = require("express-session");
-
+require("dotenv").config();
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 const loginRouter = require("./routes/login");
 const apiRouter = require("./routes/api");
 const userRouter = require("./routes/user");
 var cors = require("cors");
-
+process.env.NODE_ENV = "production";
 var app = express();
 app.use(cors());
 
@@ -38,12 +38,13 @@ if (app.get("env") === "production") {
 }
 app.use(sess);
 app.use(express.static(path.join(__dirname, "client", "build")));
+app.use("/api", apiRouter);
 app.get("*", (req, res) =>
   res.sendFile(path.resolve("client", "build", "index.html"))
 );
 
 app.use("/login", loginRouter);
-app.use("/api", apiRouter);
+
 app.use("/user", userRouter);
 
 // app.use("/", indexRouter);

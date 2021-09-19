@@ -34,14 +34,14 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Login({ handleLogin }) {
-  console.log("handle login: ", handleLogin);
+  // console.log("handle login: ", handleLogin);
   const classes = useStyles();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const onSubmit = async (e) => {
     e.preventDefault();
     console.log("you submitted this form");
-    const res = await fetch("/login", {
+    const res = await fetch("/api/login", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -61,7 +61,7 @@ export default function Login({ handleLogin }) {
     if (data.valid) {
       handleLogin(data.username);
     }
-    const res2 = await fetch("https://cipherforums.com/login/status", {
+    const res2 = await fetch("/api/login/status", {
       credentials: "include",
     });
     if (!res2 || res2.status != 200) {

@@ -3,6 +3,7 @@ const idGen = require("../helpers/generateRandomID");
 var router = express.Router();
 let SQLHelper = require("../helpers/sqlQueryHelper");
 const userRouter = require("./user");
+const loginRouter = require("./login");
 router.use(express.json());
 
 // First forum created: StableBest-sellingNewt
@@ -144,6 +145,7 @@ router.put("/threads", (req, res) => {
   );
 });
 
-router.use("user", userRouter);
+router.use("/user", userRouter);
+router.use("/login", loginRouter);
 
 module.exports = router;
