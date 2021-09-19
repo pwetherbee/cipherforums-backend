@@ -5,12 +5,13 @@ const { body, validationResult } = require("express-validator");
 const sessions = require("express-session");
 const bcrypt = require("bcryptjs");
 let SQLHelper = require("../helpers/sqlQueryHelper");
+let mySQL = require("mysql");
 // var cors = require("cors");
 router.use(express.json());
 
-router.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "../dist/login/index.html"));
-});
+// router.get("/", (req, res) => {
+//   res.sendFile(path.join(__dirname, "../dist/login/index.html"));
+// });
 
 router.post("/", body("username").isAlphanumeric(), (req, res) => {
   // TODO: Validate input
@@ -29,7 +30,15 @@ router.post("/", body("username").isAlphanumeric(), (req, res) => {
   WHERE username = "${account.username}"
   LIMIT 1
   `;
-  connection.connect();
+  connection.connect((err) => {
+    if (err) {
+      console.log(err);
+      throw "cant connect to database";
+      return;
+    } else {
+      console.log("connected to the database correctly");
+    }
+  });
   connection.query(query, function (err, rows, fields) {
     if (err) throw err;
 

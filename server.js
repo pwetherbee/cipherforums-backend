@@ -9,6 +9,8 @@ const session = require("express-session");
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 const loginRouter = require("./routes/login");
+const apiRouter = require("./routes/api");
+const userRouter = require("./routes/user");
 var cors = require("cors");
 
 var app = express();
@@ -22,7 +24,7 @@ app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, "public")));
+// app.use(express.static(path.join(__dirname, "public")));
 
 let sess = session({
   resave: true,
@@ -35,10 +37,17 @@ if (app.get("env") === "production") {
   // sess.cookie.secure = true; // serve secure cookies
 }
 app.use(sess);
+app.use(express.static(path.join(__dirname, "client", "build")));
+app.get("*", (req, res) =>
+  res.sendFile(path.resolve("client", "build", "index.html"))
+);
 
-app.use("/", indexRouter);
-app.use("/users", usersRouter);
 app.use("/login", loginRouter);
+app.use("/api", apiRouter);
+app.use("/user", userRouter);
+
+// app.use("/", indexRouter);
+// app.use("/users", usersRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
