@@ -1,5 +1,5 @@
 var express = require("express");
-var keyChainRouter = require("./keyChain");
+// var keyChainRouter = require("./keyChain");
 var followingRouter = require("./following");
 const threadRouter = require("./threads");
 var router = express.Router();
@@ -70,7 +70,7 @@ router.get("/:username/info", (req, res) => {
 
 router.use("/:id/thread", threadRouter);
 
-router.use("/:id/keychain", keyChainRouter);
+// router.use("/:id/keychain", keyChainRouter);
 
 router.use("/:id/following", followingRouter);
 
