@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
     padding: 100,
   },
   paper: {
-    padding: theme.spacing(2),
+    padding: theme.spacing(0),
     textAlign: "center",
     color: theme.palette.text.secondary,
     borderTopWidth: 3,
@@ -45,7 +45,7 @@ export default function AutoGrid() {
           <Link href="/pubforum">
             {/* <Link href="/public/business"> */}
             <Paper className={classes.paper}>
-              <MonetizationOnOutlinedIcon style={{ fontSize: 200 }} />
+              <MonetizationOnOutlinedIcon style={{ fontSize: "13vw" }} />
               <Typography>Business</Typography>
             </Paper>
           </Link>
@@ -54,7 +54,7 @@ export default function AutoGrid() {
           <Link href="/pubforum">
             {/* <Link href="/public/images"> */}
             <Paper className={classes.paper}>
-              <CameraSharpIcon style={{ fontSize: 200 }} />
+              <CameraSharpIcon style={{ fontSize: "13vw" }} />
               <Typography>Images</Typography>
             </Paper>
           </Link>
@@ -63,7 +63,7 @@ export default function AutoGrid() {
           <Link href="/pubforum">
             {/* <Link href="/public/politics"> */}
             <Paper className={classes.paper}>
-              <GavelSharpIcon style={{ fontSize: 200 }} />
+              <GavelSharpIcon style={{ fontSize: "13vw" }} />
               <Typography>Politics</Typography>
             </Paper>
           </Link>
@@ -72,7 +72,7 @@ export default function AutoGrid() {
           <Link href="/pubforum">
             {/* <Link href="/public/technology"> */}
             <Paper className={classes.paper}>
-              <ComputerIcon style={{ fontSize: 200 }} />
+              <ComputerIcon style={{ fontSize: "13vw" }} />
               <Typography>Technology</Typography>
             </Paper>
           </Link>
@@ -81,7 +81,7 @@ export default function AutoGrid() {
           <Link href="/pubforum">
             {/* <Link href="/public/news"> */}
             <Paper className={classes.paper}>
-              <AnnouncementRoundedIcon style={{ fontSize: 200 }} />
+              <AnnouncementRoundedIcon style={{ fontSize: "13vw" }} />
               <Typography>News</Typography>
             </Paper>
           </Link>
@@ -90,7 +90,7 @@ export default function AutoGrid() {
           <Link href="/pubforum">
             {/* <Link href="/public/gaming"> */}
             <Paper className={classes.paper}>
-              <GamesOutlinedIcon style={{ fontSize: 200 }} />
+              <GamesOutlinedIcon style={{ fontSize: "13vw" }} />
               <Typography>Gaming</Typography>
             </Paper>
           </Link>
@@ -99,7 +99,7 @@ export default function AutoGrid() {
           <Link href="/pubforum">
             {/* <Link href="/public/music"> */}
             <Paper className={classes.paper}>
-              <AlbumSharpIcon style={{ fontSize: 200 }} />
+              <AlbumSharpIcon style={{ fontSize: "13vw" }} />
               <Typography>Music</Typography>
             </Paper>
           </Link>
@@ -108,7 +108,7 @@ export default function AutoGrid() {
           <Link href="/pubforum">
             {/* <Link href="/public/science"> */}
             <Paper className={classes.paper}>
-              <EcoRoundedIcon style={{ fontSize: 200 }} />
+              <EcoRoundedIcon style={{ fontSize: "13vw" }} />
               <Typography>Science</Typography>
             </Paper>
           </Link>
@@ -117,7 +117,7 @@ export default function AutoGrid() {
           <Link href="/pubforum">
             {/* <Link href="/public/questions"> */}
             <Paper className={classes.paper}>
-              <HelpOutlineSharpIcon style={{ fontSize: 200 }} />
+              <HelpOutlineSharpIcon style={{ fontSize: "13vw" }} />
               <Typography>Questions</Typography>
             </Paper>
           </Link>
@@ -126,7 +126,7 @@ export default function AutoGrid() {
           <Link href="/pubforum">
             {/* <Link href="/public/outdoors"> */}
             <Paper className={classes.paper}>
-              <FilterHdrIcon style={{ fontSize: 200 }} />
+              <FilterHdrIcon style={{ fontSize: "13vw" }} />
               <Typography>Outdoors</Typography>
             </Paper>
           </Link>
@@ -135,7 +135,7 @@ export default function AutoGrid() {
           <Link href="/pubforum">
             {/* <Link href="/public/puzzles"> */}
             <Paper className={classes.paper}>
-              <ExtensionSharpIcon style={{ fontSize: 200 }} />
+              <ExtensionSharpIcon style={{ fontSize: "13vw" }} />
               <Typography>Puzzles</Typography>
             </Paper>
           </Link>
@@ -144,7 +144,7 @@ export default function AutoGrid() {
           <Link href="/pubforum">
             {/* <Link href="/public/witing"> */}
             <Paper className={classes.paper}>
-              <CreateSharpIcon style={{ fontSize: 200 }} />
+              <CreateSharpIcon style={{ fontSize: "13vw" }} />
               <Typography>Writing</Typography>
             </Paper>
           </Link>
@@ -153,7 +153,7 @@ export default function AutoGrid() {
           <Link href="/pubforum">
             {/* <Link href="/public/travel"> */}
             <Paper className={classes.paper}>
-              <FlightTakeoffIcon style={{ fontSize: 200 }} />
+              <FlightTakeoffIcon style={{ fontSize: "13vw" }} />
               <Typography>Travel</Typography>
             </Paper>
           </Link>
@@ -162,7 +162,7 @@ export default function AutoGrid() {
           <Link href="/pubforum">
             {/* <Link href="/public/sports"> */}
             <Paper className={classes.paper}>
-              <SportsSharpIcon style={{ fontSize: 200 }} />
+              <SportsSharpIcon style={{ fontSize: "13vw" }} />
               <Typography>Sports</Typography>
             </Paper>
           </Link>
@@ -171,7 +171,7 @@ export default function AutoGrid() {
           <Link href="/pubforum">
             {/* <Link href="/public/comedy"> */}
             <Paper className={classes.paper}>
-              <MoodSharpIcon style={{ fontSize: 200 }} />
+              <MoodSharpIcon style={{ fontSize: "13vw" }} />
               <Typography>Comedy</Typography>
             </Paper>
           </Link>
