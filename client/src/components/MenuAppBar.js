@@ -113,7 +113,7 @@ export default function MenuAppBar({ auth }) {
                 onClick={handleMenu}
                 color="inherit"
               >
-                <AccountCircle />
+                <AccountCircle color="primary" />
               </IconButton>
               <Menu
                 id="menu-appbar"
@@ -130,8 +130,26 @@ export default function MenuAppBar({ auth }) {
                 open={open}
                 onClose={handleClose}
               >
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>My account</MenuItem>
+                <MenuItem>
+                  <Button
+                    variant={btnStyle}
+                    color="primary"
+                    component={Link}
+                    href={`/user/${auth.username}`}
+                  >
+                    Profile
+                  </Button>
+                </MenuItem>
+                <MenuItem>
+                  <Button
+                    variant={btnStyle}
+                    color="primary"
+                    component={Link}
+                    href="/settings"
+                  >
+                    My account
+                  </Button>
+                </MenuItem>
               </Menu>
             </div>
           )}
