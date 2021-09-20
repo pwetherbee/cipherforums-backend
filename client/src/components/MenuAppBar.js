@@ -130,7 +130,7 @@ export default function MenuAppBar({ auth }) {
                 open={open}
                 onClose={handleClose}
               >
-                <MenuItem>
+                <MenuItem key={1}>
                   <Button
                     variant={btnStyle}
                     color="primary"
@@ -140,7 +140,7 @@ export default function MenuAppBar({ auth }) {
                     Profile
                   </Button>
                 </MenuItem>
-                <MenuItem>
+                <MenuItem key={2}>
                   <Button
                     variant={btnStyle}
                     color="primary"
@@ -150,7 +150,7 @@ export default function MenuAppBar({ auth }) {
                     My account
                   </Button>
                 </MenuItem>
-                <MenuItem>
+                <MenuItem key={3}>
                   <Button
                     variant={btnStyle}
                     color="primary"

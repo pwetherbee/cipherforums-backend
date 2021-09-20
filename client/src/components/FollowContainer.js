@@ -50,6 +50,7 @@ export default function FollowContainer({ following }) {
       {following.map((user, i) => (
         <div>
           <ListItem
+            key={`${user}_${i}`}
             button
             component={"a"}
             href={`/user/${user.username}`}

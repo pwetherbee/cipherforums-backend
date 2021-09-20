@@ -103,7 +103,7 @@ export default function App() {
     console.log(data);
   }, []);
   const handleLogin = (username) => {
-    // setLoggedIn(true);
+    setLoggedUser({ ok: 1, username: username });
   };
   const handleLogout = (username) => {
     // setLoggedIn = false;

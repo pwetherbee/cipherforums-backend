@@ -39,12 +39,18 @@ if (app.get("env") === "production") {
 app.use(sess);
 app.use(express.static(path.join(__dirname, "client", "build")));
 app.use("/api", apiRouter);
-app.use("/logout", require("./routes/logout"));
+app.use("/logout", (req, res) => {
+  req.session.destroy(function (err) {
+    if (err) throw err;
+  });
+  res.redirect("../login");
+});
 app.get("*", (req, res) =>
   res.sendFile(path.resolve("client", "build", "index.html"))
 );
 
 app.use("/login", loginRouter);
+// app.use("/logout", require("./routes/logout"));
 app.use("/user", userRouter);
 
 // app.use("/", indexRouter);
