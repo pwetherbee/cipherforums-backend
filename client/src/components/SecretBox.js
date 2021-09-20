@@ -14,13 +14,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SecretBox({ updateSecret }) {
+export default function SecretBox({ updateSecret, secret }) {
   const classes = useStyles();
-  const [value, setValue] = React.useState("Controlled");
+  // const [value, setValue] = React.useState("Controlled");
 
   const handleChange = (event) => {
-    setValue(event.target.value);
-    console.log(value);
+    // setValue(event.target.value);
+    // console.log(value);
     updateSecret(event.target.value);
   };
 
@@ -33,7 +33,8 @@ export default function SecretBox({ updateSecret }) {
           label="Secret Key"
           placeholder="Secret Key"
           multiline
-          variant="outlined"
+          // variant="outlined"
+          value={secret}
           onChange={handleChange}
         />
       </div>

@@ -115,6 +115,7 @@ export default function Login({ handleLogin }) {
             label="Remember me"
           />
           <Button
+            disabled={!(username.length && password.length)}
             type="submit"
             fullWidth
             variant="contained"

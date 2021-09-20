@@ -137,7 +137,7 @@ export default function Post() {
               {forumData?.subtitle}
             </Typography>
           </Paper>
-          <SecretBox updateSecret={updateSecret} />
+          <SecretBox updateSecret={updateSecret} secret={secret} />
           {comments?.map((comment) => (
             <Comment comment={comment} secret={secret} />
           ))}
@@ -167,7 +167,7 @@ export default function Post() {
             >
               Submit Comment
             </Button>
-            <SecretBox updateSecret={updateSecret} />
+            <SecretBox updateSecret={updateSecret} secret={secret} />
           </Container>
         </Container>
       ) : (
