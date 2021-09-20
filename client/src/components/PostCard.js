@@ -19,6 +19,7 @@ import MoreVertIcon from "@material-ui/icons/MoreVert";
 import MiniThread from "./MiniThread";
 import LoadingIcon from "./LoadingPageIcon";
 import { Link } from "@material-ui/core";
+import { Link as RouteLink } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -66,7 +67,10 @@ export default function PostCard({ data, secret }) {
 
   return (
     <Card className={classes.root}>
-      <CardActionArea href={`${data.username}/post/${data.url}`}>
+      <CardActionArea
+        component={RouteLink}
+        to={`${data.username}/post/${data.url}`}
+      >
         <CardHeader
           avatar={
             <Avatar
@@ -79,7 +83,7 @@ export default function PostCard({ data, secret }) {
             </Avatar>
           }
           title={data.url}
-          href={"/"}
+          to={"/"}
           subheader={data.creationDate}
         />
         <CardMedia>

@@ -4,7 +4,8 @@
   "private": true,
   "proxy": "http://localhost:4001",
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "buildstart": "(cd client && npm run build) && (npm start)"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

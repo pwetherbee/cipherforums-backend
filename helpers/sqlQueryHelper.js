@@ -6,6 +6,7 @@ class SQLHelper {
   createConnection() {
     let connection = mySQL.createConnection({
       //TODO: Create an env file to store password to database
+      connectionLimit: 10,
       host: process.env.DB_HOST,
       port: process.env.DB_PORT,
       user: process.env.DB_USER,

@@ -169,8 +169,7 @@ export default function MenuAppBar({ auth }) {
               <Button
                 variant={btnStyle}
                 color="primary"
-                component={Link}
-                as={Link}
+                component={RouteLink}
                 to="/login"
               >
                 Login / Signup
