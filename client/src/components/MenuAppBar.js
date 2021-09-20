@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -30,6 +31,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function MenuAppBar({ auth }) {
+  const { innerWidth, innerHeight } = window;
+  console.log("Window dimensions are:");
+  const [mobile, setMobile] = useState(innerWidth < 1000);
+  console.log(mobile);
+  console.log(innerWidth, innerHeight);
   const classes = useStyles();
   // const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -65,45 +71,54 @@ export default function MenuAppBar({ auth }) {
       </FormGroup> */}
       <AppBar position="static">
         <Toolbar className={classes.root}>
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="primary"
-            aria-label="menu"
-          >
-            {/* <MenuIcon /> */}
-          </IconButton>
-          <Typography variant="h6" className={classes.title}>
-            <Button
-              variant="contained"
+          {!mobile && (
+            <IconButton
+              edge="start"
+              className={classes.menuButton}
               color="primary"
-              component={RouteLink}
-              to="/"
+              aria-label="menu"
             >
-              Home
-            </Button>
-            {/* <RouteLink to="/jskdfjsd">click me</RouteLink> */}
-          </Typography>
-          <Typography variant="h6" className={classes.title}>
-            <Button
-              variant={btnStyle}
-              color="primary"
-              component={RouteLink}
-              to="/public"
-            >
-              Public Topics
-            </Button>
-          </Typography>
-          <Typography variant="h6" className={classes.title}>
-            <Button
-              variant={btnStyle}
-              color="primary"
-              component={RouteLink}
-              to="/help"
-            >
-              Help
-            </Button>
-          </Typography>
+              {/* <MenuIcon /> */}
+            </IconButton>
+          )}
+          {mobile || (
+            <Typography variant="h6" className={classes.title}>
+              <Button
+                variant="contained"
+                color="primary"
+                component={RouteLink}
+                to="/"
+              >
+                Home
+              </Button>
+              {/* <RouteLink to="/jskdfjsd">click me</RouteLink> */}
+            </Typography>
+          )}
+          {mobile || (
+            <Typography variant="h6" className={classes.title}>
+              <Button
+                variant={btnStyle}
+                color="primary"
+                component={RouteLink}
+                to="/public"
+              >
+                Public Topics
+              </Button>
+            </Typography>
+          )}
+          {mobile || (
+            <Typography variant="h6" className={classes.title}>
+              <Button
+                variant={btnStyle}
+                color="primary"
+                component={RouteLink}
+                to="/help"
+              >
+                Help
+              </Button>
+            </Typography>
+          )}
+
           {auth.ok && (
             <RouteLink
               to={`/user/${auth.username}`}
@@ -177,7 +192,7 @@ export default function MenuAppBar({ auth }) {
               </Menu>
             </div>
           )}
-          {auth.ok || (
+          {mobile || auth.ok || (
             <Typography variant="h6" className={classes.title}>
               <Button
                 variant={btnStyle}
