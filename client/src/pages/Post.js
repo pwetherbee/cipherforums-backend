@@ -156,6 +156,7 @@ export default function Post() {
             variant="outlined"
           />
           <Button
+            disabled={!postCommentText.length}
             variant="contained"
             color="primary"
             onClick={handleSubmitComment}
