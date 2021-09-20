@@ -109,7 +109,7 @@ export default function MenuAppBar({ auth }) {
               to={`/user/${auth.username}`}
               style={{ textDecoration: "none" }}
             >
-              <Link underline="none">
+              <Link underline="hover">
                 <Typography color="primary" variant="h6">
                   @{auth.username}
                 </Typography>
