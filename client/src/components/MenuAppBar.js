@@ -16,6 +16,8 @@ import Menu from "@material-ui/core/Menu";
 import Button from "@material-ui/core/Button";
 import Link from "@material-ui/core/Link";
 import { Link as RouteLink } from "react-router-dom";
+import CreateSharpIcon from "@material-ui/icons/CreateSharp";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -87,19 +89,19 @@ export default function MenuAppBar({ auth }) {
               {/* <MenuIcon /> */}
             </IconButton>
           )}
-          {mobile || (
-            <Typography variant="h6" className={classes.title}>
-              <Button
-                variant="contained"
-                color="primary"
-                component={RouteLink}
-                to="/"
-              >
-                Home
-              </Button>
-              {/* <RouteLink to="/jskdfjsd">click me</RouteLink> */}
-            </Typography>
-          )}
+
+          <Typography variant="h6" className={classes.title}>
+            <Button
+              variant="contained"
+              color="primary"
+              component={RouteLink}
+              to="/"
+            >
+              Home
+            </Button>
+            {/* <RouteLink to="/jskdfjsd">click me</RouteLink> */}
+          </Typography>
+
           {mobile || (
             <Typography variant="h6" className={classes.title}>
               <Button
@@ -198,16 +200,19 @@ export default function MenuAppBar({ auth }) {
               </Menu>
             </div>
           )}
-          {mobile || Boolean(auth.ok) || (
+          {Boolean(auth.ok) || (
             <Typography variant="h6" className={classes.title}>
-              <Button
-                variant={btnStyle}
-                color="primary"
-                component={RouteLink}
-                to="/login"
-              >
-                Login / Signup
-              </Button>
+              {mobile || (
+                <Button
+                  variant={btnStyle}
+                  color="primary"
+                  component={RouteLink}
+                  to="/login"
+                >
+                  Login / Signup
+                </Button>
+              )}
+              {mobile && <CreateSharpIcon color="primary" />}
             </Typography>
           )}
           {/* <Typography variant="h6" className={classes.title}>
