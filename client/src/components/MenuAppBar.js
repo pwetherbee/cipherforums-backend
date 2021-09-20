@@ -150,6 +150,16 @@ export default function MenuAppBar({ auth }) {
                     My account
                   </Button>
                 </MenuItem>
+                <MenuItem>
+                  <Button
+                    variant={btnStyle}
+                    color="primary"
+                    component={Link}
+                    href={"/logout"}
+                  >
+                    Logout
+                  </Button>
+                </MenuItem>
               </Menu>
             </div>
           )}
