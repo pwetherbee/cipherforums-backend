@@ -75,13 +75,19 @@ export default function Post() {
     setSecret(secret);
   };
   const handleSubmitComment = async (e) => {
+    if (!postCommentText.length) {
+      setError(true);
+      setHelperText("Your comment has no text");
+      return;
+    }
     if (!secret) {
       setError(true);
       setHelperText("You must type a secret key above");
       return;
     }
     console.log(postCommentText.length);
-    if (!postCommentText?.length < 64) {
+    if (postCommentText.length > 64) {
+      console.log(postCommentText.length < 64);
       setError(true);
       setHelperText("Comment must be shorter than 64 characters");
       return;
