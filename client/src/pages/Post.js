@@ -56,8 +56,11 @@ export default function Post() {
   const [forumData, setForumData] = useState();
   const [comments, setComments] = useState();
   const [secret, setSecret] = useState();
+  const [error, setError] = useState(false);
+  const [helperText, setHelperText] = useState("");
   const [postCommentText, setPostCommentText] = useState("");
   useEffect(() => {
+    console.log("refreshing");
     fetch(`/api/threads/${postname}`)
       .then((res) => res.json())
       .then((data) => {
@@ -72,8 +75,11 @@ export default function Post() {
     setSecret(secret);
   };
   const handleSubmitComment = async (e) => {
+    if (!postCommentText?.length) {
+    }
     if (!secret) {
       alert("You must type a secret key above");
+      return;
     }
     console.log(forumData);
     // Encrypt comment
@@ -90,6 +96,10 @@ export default function Post() {
       }),
     });
     if (res.ok) {
+      console.log(comments);
+      // Render new comment
+      const newComment = await res.json();
+      setComments([...comments, newComment]);
       setPostCommentText("");
     }
   };
@@ -113,6 +123,8 @@ export default function Post() {
             <Comment comment={comment} secret={secret} />
           ))}
           <TextField
+            error={error}
+            helperText={helperText}
             className={classes.comment}
             id="outlined-textarea"
             label="Reply"

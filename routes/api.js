@@ -120,7 +120,12 @@ router.post("/threads/:tag", (req, res) => {
     if (err) throw err;
   });
   connection.end();
-  res.send("comment successfully added");
+  res.json({
+    author: req.session.username || "Anonymous",
+    forumID: commentData.forumID,
+    time: "just now",
+    text: commentData.text,
+  });
 });
 
 // SQl query to generate and return a new random thread
