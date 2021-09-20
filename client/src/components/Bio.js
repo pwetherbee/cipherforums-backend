@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
     // marginLeft: 30,
     marginTop: 30,
     // height: 200,
-    minWidth: 400,
+    minWidth: 300,
     padding: 5,
     display: "block",
   },
