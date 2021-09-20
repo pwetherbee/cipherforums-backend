@@ -12,6 +12,7 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
+import { useHistory } from "react-router";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -35,6 +36,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Login({ handleLogin }) {
   // console.log("handle login: ", handleLogin);
+  const history = useHistory();
   const classes = useStyles();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -60,6 +62,7 @@ export default function Login({ handleLogin }) {
     console.log(data);
     if (data.valid) {
       handleLogin(data.username);
+      history.push(data.redirect);
     }
     const res2 = await fetch("/api/login/status", {
       credentials: "include",
