@@ -43,25 +43,24 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function FollowContainer({ following, updateUser }) {
+export default function FollowContainer({ following, updateuser }) {
   const classes = useStyles();
   const history = useHistory();
 
   return (
-    <List className={classes.root} updateUser={updateUser}>
+    <List className={classes.root} updateUser={updateuser}>
       {following.map((user, i) => (
         <div>
           <ListItem
-            // onClick={(e) => {
-            //   e.preventDefault();
-            //   console.log("you clicked");
-            //   history.push(`/user/${user.username}`);
-            //   updateUser();
-            // }}
+            onClick={(e) => {
+              e.preventDefault();
+              history.push(`/user/${user.username}`);
+              updateuser();
+            }}
             key={`${user}_${i}`}
             button
-            component={RouteLink}
-            to={`/user/${user.username}`}
+            // component={RouteLink}
+            // to={`/user/${user.username}`}
             alignItems="flex-start"
           >
             <ListItemAvatar>
