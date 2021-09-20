@@ -61,7 +61,7 @@ export default function Login({ handleLogin }) {
     const data = await res.json();
     console.log(data);
     if (data.valid) {
-      handleLogin(data.username);
+      handleLogin(data.user);
       history.push(data.redirect);
     }
     const res2 = await fetch("/api/login/status", {

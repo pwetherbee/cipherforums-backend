@@ -55,6 +55,7 @@ export default function Post() {
   const [forumData, setForumData] = useState();
   const [comments, setComments] = useState();
   const [secret, setSecret] = useState();
+  const [postCommentText, setPostCommentText] = useState("");
   useEffect(() => {
     fetch(`/api/threads/${postname}`)
       .then((res) => res.json())
@@ -69,7 +70,19 @@ export default function Post() {
     console.log(secret);
     setSecret(secret);
   };
-
+  const handleSubmitComment = async (e) => {
+    const res = await fetch(`/api/threads/${postname}`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username: username,
+        password: password,
+      }),
+    });
+  };
   return (
     <CssBaseline>
       {forumData ? (
@@ -93,13 +106,19 @@ export default function Post() {
             className={classes.comment}
             id="outlined-textarea"
             label="Reply"
+            value={postCommentText}
+            onInput={(e) => setPostCommentText(e.target.value)}
             placeholder="Placeholder"
             multiline
             fullWidth
             variant="outlined"
           />
-          <Button variant="contained" color="primary">
-            Primary
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handleSubmitComment}
+          >
+            Submit Comment
           </Button>
         </Container>
       ) : (

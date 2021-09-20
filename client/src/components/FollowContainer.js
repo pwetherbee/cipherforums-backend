@@ -29,7 +29,8 @@ import ListItemText from "@material-ui/core/ListItemText";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
-import { RouteLink } from "react-router-dom";
+import { Link as RouteLink } from "react-router-dom";
+import { useHistory } from "react-router";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -42,14 +43,21 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function FollowContainer({ following }) {
+export default function FollowContainer({ following, updateUser }) {
   const classes = useStyles();
+  const history = useHistory();
 
   return (
-    <List className={classes.root}>
+    <List className={classes.root} updateUser={updateUser}>
       {following.map((user, i) => (
         <div>
           <ListItem
+            // onClick={(e) => {
+            //   e.preventDefault();
+            //   console.log("you clicked");
+            //   history.push(`/user/${user.username}`);
+            //   updateUser();
+            // }}
             key={`${user}_${i}`}
             button
             component={RouteLink}
