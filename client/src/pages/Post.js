@@ -75,12 +75,18 @@ export default function Post() {
     setSecret(secret);
   };
   const handleSubmitComment = async (e) => {
-    if (!postCommentText?.length) {
-    }
     if (!secret) {
-      alert("You must type a secret key above");
+      setError(true);
+      setHelperText("You must type a secret key above");
       return;
     }
+    console.log(postCommentText.length);
+    if (!postCommentText?.length < 64) {
+      setError(true);
+      setHelperText("Comment must be shorter than 64 characters");
+      return;
+    }
+
     console.log(forumData);
     // Encrypt comment
     const ciphertext = encrypt(postCommentText, secret);
@@ -96,11 +102,15 @@ export default function Post() {
       }),
     });
     if (res.ok) {
-      console.log(comments);
+      setError(false);
+      setHelperText("");
       // Render new comment
       const newComment = await res.json();
       setComments([...comments, newComment]);
       setPostCommentText("");
+    } else {
+      setError(true);
+      setHelperText("error posting comment");
     }
   };
   return (
@@ -129,7 +139,11 @@ export default function Post() {
             id="outlined-textarea"
             label="Reply"
             value={postCommentText}
-            onInput={(e) => setPostCommentText(e.target.value)}
+            onInput={(e) => {
+              setError(false);
+              setHelperText("");
+              setPostCommentText(e.target.value);
+            }}
             placeholder="Placeholder"
             multiline
             fullWidth
