@@ -29,7 +29,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
-import { Link } from "react-router-dom";
+import { RouteLink } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -52,15 +52,14 @@ export default function FollowContainer({ following }) {
           <ListItem
             key={`${user}_${i}`}
             button
-            component={"a"}
-            href={`/user/${user.username}`}
+            component={RouteLink}
+            to={`/user/${user.username}`}
             alignItems="flex-start"
           >
             <ListItemAvatar>
               <Avatar alt={user.username} src={"/static/images/avatar/1.jpg"} />
             </ListItemAvatar>
             <ListItemText
-              href="/"
               primary={user.username}
               secondary={
                 <React.Fragment>
