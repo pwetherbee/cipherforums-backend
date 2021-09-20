@@ -28,6 +28,7 @@ router.get("/:username", (req, res) => {
 router.get("/:username/info", (req, res) => {
   const username = req.params["username"];
   let info = {
+    exists: false,
     username: username,
     bio: "",
     createdPosts: [],
@@ -46,6 +47,10 @@ router.get("/:username/info", (req, res) => {
   `;
   connection.query(query, (err, rows) => {
     if (err) throw err;
+    if (!rows.length) {
+      res.send(JSON.stringify(info));
+      return;
+    }
     rows.forEach((row) => info.createdPosts.push(row));
     if (info.currUser) {
       res.send(JSON.stringify(info));

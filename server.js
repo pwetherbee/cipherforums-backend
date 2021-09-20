@@ -12,7 +12,7 @@ const loginRouter = require("./routes/login");
 const apiRouter = require("./routes/api");
 const userRouter = require("./routes/user");
 var cors = require("cors");
-process.env.NODE_ENV = "production";
+// process.env.NODE_ENV = "production";
 var app = express();
 app.use(cors());
 

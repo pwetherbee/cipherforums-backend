@@ -49,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Bio({ profile, currUser }) {
+export default function Bio({ profile, currUser, canFollow }) {
   const classes = useStyles();
   //   const [profile, setProfile] = useState(user);
   return (
@@ -68,9 +68,13 @@ export default function Bio({ profile, currUser }) {
               <Card className={classes.avi}>
                 <Typography gutterBottom variant="h5" component="h2">
                   @{profile?.username || "user not found"}
-                  <Button size="small" color="primary">
-                    Follow
-                  </Button>
+                  {canFollow ? (
+                    <Button size="small" color="primary">
+                      Follow
+                    </Button>
+                  ) : (
+                    ""
+                  )}
                   {profile?.loggedIn ? (
                     <Button size="small" color="primary">
                       edit

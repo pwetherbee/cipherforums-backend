@@ -45,7 +45,7 @@ export default function Profile() {
   const [obj, setObj] = useState({});
   const [tab, setTab] = useState(0);
 
-  useEffect(() => {
+  useEffect(async () => {
     fetch(`/api/user/${username}/info`)
       .then((res) => {
         return res.json();
@@ -95,18 +95,26 @@ export default function Profile() {
           <Container>
             <Grid container spacing={12}>
               <Grid item xs={6}>
-                <Bio profile={userData} />
+                <Bio
+                  profile={userData}
+                  canFollow={userData?.loggedIn && !userData?.isFollowing}
+                />
               </Grid>
               <div style={{ padding: 30 }}>
                 <Grid item xs={12}>
-                  <Button
-                    type="submit"
-                    variant="contained"
-                    color="primary"
-                    href="/create"
-                  >
-                    Create Forum
-                  </Button>
+                  {userData?.loggedIn && userData?.currUser ? (
+                    <Button
+                      type="submit"
+                      variant="contained"
+                      color="primary"
+                      href="/create"
+                    >
+                      Create Forum
+                    </Button>
+                  ) : (
+                    ""
+                  )}
+
                   <div style={{ paddingTop: 30 }}>
                     <SecretBox updateSecret={updateSecret} />
                   </div>
