@@ -33,7 +33,7 @@ export default function AutoGrid() {
         <Grid item xs={12} sm={6}>
           <Link href="/public">
             <Paper className={classes.paper}>
-              <LaptopChromebookSharpIcon style={{ fontSize: 200 }} />
+              <LaptopChromebookSharpIcon style={{ fontSize: "13vw" }} />
               <Typography>Visit the public forums</Typography>
             </Paper>
           </Link>
@@ -41,7 +41,7 @@ export default function AutoGrid() {
         <Grid item xs={12} sm={6}>
           <Link href="/signup">
             <Paper className={classes.paper}>
-              <ExitToAppIcon style={{ fontSize: 200 }} />
+              <ExitToAppIcon style={{ fontSize: "13vw" }} />
               <Typography>Signup</Typography>
             </Paper>
           </Link>
