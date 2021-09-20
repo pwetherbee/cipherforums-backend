@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useLayoutEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -31,11 +31,19 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function MenuAppBar({ auth }) {
-  const { innerWidth, innerHeight } = window;
+  const [mobile, setMobile] = useState(false);
+  useLayoutEffect(() => {
+    function updateSize() {
+      setMobile(window.innerWidth < 1000);
+    }
+    window.addEventListener("resize", updateSize);
+    updateSize();
+    return () => window.removeEventListener("resize", updateSize);
+  }, []);
+
+  // const { innerWidth, innerHeight } = window;
   console.log("Window dimensions are:");
-  const [mobile, setMobile] = useState(innerWidth < 1000);
   console.log(mobile);
-  console.log(innerWidth, innerHeight);
   const classes = useStyles();
   // const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -132,7 +140,7 @@ export default function MenuAppBar({ auth }) {
             </RouteLink>
           )}
 
-          {auth.ok && (
+          {Boolean(auth.ok) && (
             <div>
               <IconButton
                 aria-label="account of current user"
@@ -192,7 +200,7 @@ export default function MenuAppBar({ auth }) {
               </Menu>
             </div>
           )}
-          {mobile || auth.ok || (
+          {mobile || Boolean(auth.ok) || (
             <Typography variant="h6" className={classes.title}>
               <Button
                 variant={btnStyle}
