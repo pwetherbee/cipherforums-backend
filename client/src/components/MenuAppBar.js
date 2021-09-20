@@ -42,8 +42,6 @@ export default function MenuAppBar({ auth }) {
   }, []);
 
   // const { innerWidth, innerHeight } = window;
-  console.log("Window dimensions are:");
-  console.log(mobile);
   const classes = useStyles();
   // const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
