@@ -78,8 +78,8 @@ export default function Post() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        username: username,
-        password: password,
+        username: "username",
+        password: "password",
       }),
     });
   };
