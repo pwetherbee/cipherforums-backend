@@ -14,7 +14,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import Button from "@material-ui/core/Button";
 import Link from "@material-ui/core/Link";
-
+import { Link as RouteLink } from "react-router-dom";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -77,18 +77,19 @@ export default function MenuAppBar({ auth }) {
             <Button
               variant="contained"
               color="primary"
-              component={Link}
-              href="/home"
+              component={RouteLink}
+              to="/"
             >
               Home
             </Button>
+            {/* <RouteLink to="/jskdfjsd">click me</RouteLink> */}
           </Typography>
           <Typography variant="h6" className={classes.title}>
             <Button
               variant={btnStyle}
               color="primary"
-              component={Link}
-              href="/public"
+              component={RouteLink}
+              to="/public"
             >
               Public Forums
             </Button>
@@ -97,8 +98,8 @@ export default function MenuAppBar({ auth }) {
             <Button
               variant={btnStyle}
               color="primary"
-              component={Link}
-              href="/help"
+              component={RouteLink}
+              to="/help"
             >
               Help
             </Button>
@@ -134,8 +135,8 @@ export default function MenuAppBar({ auth }) {
                   <Button
                     variant={btnStyle}
                     color="primary"
-                    component={Link}
-                    href={`/user/${auth.username}`}
+                    component={RouteLink}
+                    to={`/user/${auth.username}`}
                   >
                     Profile
                   </Button>
@@ -144,8 +145,8 @@ export default function MenuAppBar({ auth }) {
                   <Button
                     variant={btnStyle}
                     color="primary"
-                    component={Link}
-                    href="/settings"
+                    component={RouteLink}
+                    to="/settings"
                   >
                     My account
                   </Button>
@@ -169,7 +170,8 @@ export default function MenuAppBar({ auth }) {
                 variant={btnStyle}
                 color="primary"
                 component={Link}
-                href="/login"
+                as={Link}
+                to="/login"
               >
                 Login / Signup
               </Button>
