@@ -44,6 +44,12 @@ const useStyles = makeStyles((theme) => ({
     marginTop: 30,
     marginBottom: 10,
   },
+  submitBox: {
+    display: "flex",
+    justifyContent: "space-between",
+    marginTop: 10,
+    marginBottom: 50,
+  },
 }));
 
 const message = `Truncation should be conditionally applicable on this long line of text
@@ -152,14 +158,17 @@ export default function Post() {
             fullWidth
             variant="outlined"
           />
-          <Button
-            disabled={!postCommentText.length}
-            variant="contained"
-            color="primary"
-            onClick={handleSubmitComment}
-          >
-            Submit Comment
-          </Button>
+          <Container className={classes.submitBox}>
+            <Button
+              disabled={!postCommentText.length}
+              variant="contained"
+              color="primary"
+              onClick={handleSubmitComment}
+            >
+              Submit Comment
+            </Button>
+            <SecretBox updateSecret={updateSecret} />
+          </Container>
         </Container>
       ) : (
         <LoadingIcon height={"30rem"} />
