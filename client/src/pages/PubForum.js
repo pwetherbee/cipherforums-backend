@@ -11,6 +11,7 @@ import SkipNextIcon from "@material-ui/icons/SkipNext";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
+import Button from "@material-ui/core/Button";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -18,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: 10,
     marginRight: 20,
     marginLeft: 20,
-    color: "#ffffff",
+    // color: "#ffffff",
   },
 
   title: {
@@ -60,6 +61,10 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "flex-end",
     marginTop: 10,
   },
+  create: {
+    marginTop: 10,
+    marginLeft: 10,
+  },
 }));
 
 export default function MediaControlCard() {
@@ -68,10 +73,15 @@ export default function MediaControlCard() {
 
   return (
     <Grid container spacing={1}>
-      <Grid item xs={12}>
+      <Grid item xs={12} sm={6}>
         <Typography className={classes.root} variant="h3">
           Business
         </Typography>
+      </Grid>
+      <Grid item xs={12} sm={6}>
+        <Button className={classes.create} variant="contained" color="primary">
+          Create public forum
+        </Button>
       </Grid>
       <Grid item xs={12} sm={6}>
         <Card className={classes.root}>

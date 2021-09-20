@@ -91,7 +91,7 @@ export default function MenuAppBar({ auth }) {
               component={RouteLink}
               to="/public"
             >
-              Public Forums
+              Public Topics
             </Button>
           </Typography>
           <Typography variant="h6" className={classes.title}>
