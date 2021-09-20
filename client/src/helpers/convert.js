@@ -236,8 +236,8 @@ function decrypt(text_hex, key) {
   try {
     const key_decimal = key_to_dec(key);
     return dec_to_text(text_hex, key_decimal);
-  } catch (e) {
-    return e;
+  } catch {
+    return text_hex;
   }
 }
 

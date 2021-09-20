@@ -104,6 +104,18 @@ export default function MenuAppBar({ auth }) {
               Help
             </Button>
           </Typography>
+          {auth.ok && (
+            <RouteLink
+              to={`/user/${auth.username}`}
+              style={{ textDecoration: "none" }}
+            >
+              <Link underline="none">
+                <Typography color="primary" variant="h6">
+                  @{auth.username}
+                </Typography>
+              </Link>
+            </RouteLink>
+          )}
 
           {auth.ok && (
             <div>
@@ -116,6 +128,7 @@ export default function MenuAppBar({ auth }) {
               >
                 <AccountCircle color="primary" />
               </IconButton>
+
               <Menu
                 id="menu-appbar"
                 anchorEl={anchorEl}
