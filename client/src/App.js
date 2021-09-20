@@ -88,7 +88,7 @@ const theme = createTheme({
 
 export default function App() {
   console.log("this is the home page");
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedUser, setLoggedUser] = useState({ ok: 0, username: null });
   useEffect(async () => {
     const res = await fetch("/api/login/status/", {
       credentials: "include",
@@ -99,20 +99,20 @@ export default function App() {
       return;
     }
     const data = await res.json();
-    setLoggedIn(data.ok);
+    setLoggedUser(data);
     console.log(data);
   }, []);
   const handleLogin = (username) => {
-    setLoggedIn(true);
+    // setLoggedIn(true);
   };
   const handleLogout = (username) => {
-    setLoggedIn = false;
+    // setLoggedIn = false;
   };
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Router>
-        <MenuAppBar auth={loggedIn} />
+        <MenuAppBar auth={loggedUser} />
         <Switch>
           <Route path="/user/:username">
             <User />

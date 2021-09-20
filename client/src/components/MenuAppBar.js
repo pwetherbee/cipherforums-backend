@@ -104,7 +104,7 @@ export default function MenuAppBar({ auth }) {
             </Button>
           </Typography>
 
-          {auth && (
+          {auth.ok && (
             <div>
               <IconButton
                 aria-label="account of current user"
@@ -135,7 +135,7 @@ export default function MenuAppBar({ auth }) {
               </Menu>
             </div>
           )}
-          {auth || (
+          {auth.ok || (
             <Typography variant="h6" className={classes.title}>
               <Button
                 variant={btnStyle}

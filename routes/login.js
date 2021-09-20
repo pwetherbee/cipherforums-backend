@@ -61,7 +61,7 @@ router.post("/", body("username").isAlphanumeric(), (req, res) => {
         JSON.stringify({
           message: "Correct password!",
           valid: true,
-          redirect: `../user/${req.session.username}`,
+          redirect: `/user/${req.session.username}`,
           user: req.session.username,
           timeout: req.session.cookie.maxAge,
         })
@@ -89,11 +89,11 @@ router.get("/status", function (req, res) {
   if (req.session.username) {
     // res.send(req.session.username);
     // res.status(400);
-    res.send(JSON.stringify({ ok: 1 }));
+    res.send(JSON.stringify({ ok: 1, username: req.session.username }));
   } else {
     // res.send("error");
     // res.status(200);
-    res.send(JSON.stringify({ ok: 0 }));
+    res.send(JSON.stringify({ ok: 0, username: null }));
   }
 });
 // const getUserID = function (username) {
