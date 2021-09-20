@@ -233,8 +233,16 @@ function text_to_dec(text, key) {
 }
 
 function decrypt(text_hex, key) {
-  const key_decimal = key_to_dec(key);
-  return dec_to_text(text_hex, key_decimal);
+  try {
+    const key_decimal = key_to_dec(key);
+    return dec_to_text(text_hex, key_decimal);
+  } catch (e) {
+    return e;
+  }
+}
+
+function encrypt(raw_text, raw_key) {
+  return text_to_dec(raw_text, raw_key);
 }
 
 function sleep(ms) {
@@ -242,4 +250,4 @@ function sleep(ms) {
 }
 
 // export { sha256, ascii_to_hexa, hex_to_dec, dec_to_hex, hex_to_text };
-export { dec_to_text, text_to_dec, key_to_dec, decrypt, sleep };
+export { dec_to_text, text_to_dec, key_to_dec, decrypt, sleep, encrypt };

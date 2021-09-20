@@ -86,11 +86,11 @@ export default function Profile() {
   const handleChangeTab = (e, newTab) => {
     setTab(newTab);
   };
-  const updateuser = () => {
-    console.log("update user called");
-    setUserData();
-    setNewUser(1);
-  };
+  // const updateuser = () => {
+  //   console.log("update user called");
+  //   setUserData();
+  //   setNewUser(1);
+  // };
   return (
     <React.Fragment>
       <CssBaseline />
@@ -170,7 +170,7 @@ export default function Profile() {
                     <FollowContainer
                       following={following}
                       secret={secret}
-                      updateUser={updateuser}
+                      // updateUser={updateuser}
                     />
                   ) : (
                     "This user isn't following anyone"

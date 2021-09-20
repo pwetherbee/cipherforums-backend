@@ -14,6 +14,7 @@ import SecretBox from "../components/SecretBox";
 import LoadingIcon from "../components/LoadingPageIcon";
 import { Comment } from "../components/Comment";
 import TextField from "@material-ui/core/TextField";
+import { encrypt } from "../helpers/convert";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -64,13 +65,19 @@ export default function Post() {
         setComments(data.comments);
         setForumData(data);
       });
-  }, []);
+  }, [postname]);
 
   const updateSecret = function (secret) {
     console.log(secret);
     setSecret(secret);
   };
   const handleSubmitComment = async (e) => {
+    if (!secret) {
+      alert("You must type a secret key above");
+    }
+    console.log(forumData);
+    // Encrypt comment
+    const ciphertext = encrypt(postCommentText, secret);
     const res = await fetch(`/api/threads/${postname}`, {
       method: "POST",
       headers: {
@@ -78,10 +85,13 @@ export default function Post() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        username: "username",
-        password: "password",
+        text: ciphertext,
+        forumID: forumData.id,
       }),
     });
+    if (res.ok) {
+      setPostCommentText("");
+    }
   };
   return (
     <CssBaseline>
