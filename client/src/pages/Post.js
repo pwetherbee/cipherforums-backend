@@ -60,18 +60,15 @@ export default function Post() {
   const [helperText, setHelperText] = useState("");
   const [postCommentText, setPostCommentText] = useState("");
   useEffect(() => {
-    console.log("refreshing");
     fetch(`/api/threads/${postname}`)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data.comments);
         setComments(data.comments);
         setForumData(data);
       });
   }, [postname]);
 
   const updateSecret = function (secret) {
-    console.log(secret);
     setSecret(secret);
   };
   const handleSubmitComment = async (e) => {
@@ -150,7 +147,7 @@ export default function Post() {
               setHelperText("");
               setPostCommentText(e.target.value);
             }}
-            placeholder="Placeholder"
+            placeholder="Enter your comment here"
             multiline
             fullWidth
             variant="outlined"
