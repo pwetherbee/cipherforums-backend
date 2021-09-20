@@ -17,6 +17,9 @@ import Button from "@material-ui/core/Button";
 import Link from "@material-ui/core/Link";
 import { Link as RouteLink } from "react-router-dom";
 import CreateSharpIcon from "@material-ui/icons/CreateSharp";
+import GavelSharpIcon from "@material-ui/icons/GavelSharp";
+import FlightTakeoffIcon from "@material-ui/icons/FlightTakeoff";
+import ComputerIcon from "@material-ui/icons/Computer";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -102,30 +105,29 @@ export default function MenuAppBar({ auth }) {
             {/* <RouteLink to="/jskdfjsd">click me</RouteLink> */}
           </Typography>
 
-          {mobile || (
-            <Typography variant="h6" className={classes.title}>
-              <Button
-                variant={btnStyle}
-                color="primary"
-                component={RouteLink}
-                to="/public"
-              >
-                Public Topics
-              </Button>
-            </Typography>
-          )}
-          {mobile || (
-            <Typography variant="h6" className={classes.title}>
-              <Button
-                variant={btnStyle}
-                color="primary"
-                component={RouteLink}
-                to="/help"
-              >
-                Help
-              </Button>
-            </Typography>
-          )}
+          <Typography variant="h6" className={classes.title}>
+            <Button
+              variant={btnStyle}
+              color="primary"
+              component={RouteLink}
+              to="/public"
+            >
+              {mobile || "Public Topics"}
+              {mobile && <GavelSharpIcon />}
+            </Button>
+          </Typography>
+
+          <Typography variant="h6" className={classes.title}>
+            <Button
+              variant={btnStyle}
+              color="primary"
+              component={RouteLink}
+              to="/help"
+            >
+              {mobile || "Help"}
+              {mobile && <ComputerIcon />}
+            </Button>
+          </Typography>
 
           {auth.ok && (
             <RouteLink
@@ -202,17 +204,15 @@ export default function MenuAppBar({ auth }) {
           )}
           {Boolean(auth.ok) || (
             <Typography variant="h6" className={classes.title}>
-              {mobile || (
-                <Button
-                  variant={btnStyle}
-                  color="primary"
-                  component={RouteLink}
-                  to="/login"
-                >
-                  Login / Signup
-                </Button>
-              )}
-              {mobile && <CreateSharpIcon color="primary" />}
+              <Button
+                variant={btnStyle}
+                color="primary"
+                component={RouteLink}
+                to="/login"
+              >
+                {mobile || "Login / Signup"}
+                {mobile && <CreateSharpIcon color="primary" />}
+              </Button>
             </Typography>
           )}
           {/* <Typography variant="h6" className={classes.title}>
