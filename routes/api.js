@@ -17,7 +17,7 @@ router.get("/threads/:tag", (req, res) => {
   SELECT Forums.id, Forums.url, Forums.creationDate, Forums.subtitle, Users.username FROM Forums
   LEFT JOIN Users
   ON Forums.authorID = Users.userID
-  WHERE Forums.url = "${urlTag}"
+  WHERE Forums.url = ${connection.escape(urlTag)}
   `;
   // Connect to database
   connection.connect();
@@ -82,7 +82,7 @@ router.get("/:username/created", (req, res) => {
   SELECT Forums.url, Forums.subtitle, Forums.creationDate, Users.username FROM Forums
   INNER JOIN Users
   ON Forums.authorID = Users.userID
-  WHERE Users.username = "${username}"
+  WHERE Users.username = ${connection.escape(username)}
   ORDER BY Forums.creationDate ASC
   `;
   connection.query(query, (err, rows) => {
@@ -111,9 +111,9 @@ router.post("/threads/:tag", (req, res) => {
   // console.log(req.session.userID);
   let query = `
   INSERT INTO Comments (forumID, authorID, commentText, postTime)
-  VALUES (${commentData.forumID}, ${req.session.userID || "NULL"}, "${
-    commentData.text
-  }", NOW())
+  VALUES (${connection.escape(commentData.forumID)}, ${
+    connection.escape(req.session.userID) || "NULL"
+  }, ${connection.escape(commentData.text)}, NOW())
   `;
   connection.connect();
   connection.query(query, function (err, rows, fields) {

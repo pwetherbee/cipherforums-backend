@@ -22,7 +22,11 @@ router.post("/", (req, res) => {
   //   `;
   const query = `
   INSERT INTO Following (userID, followingID)
-  VALUES (${req.session.userID}, (SELECT userID FROM Users WHERE username = "${data.username}"))
+  VALUES (${
+    req.session.userID
+  }, (SELECT userID FROM Users WHERE username = ${connection.escape(
+    data.username
+  )}))
   `;
   connection.query(query, (err) => {
     if (err) {
@@ -55,7 +59,9 @@ router.get("/list/:name", (req, res) => {
   SELECT Users.username FROM Following
   INNER JOIN Users
   ON Users.userID = Following.followingID
-  WHERE Following.userID = (SELECT userID FROM Users WHERE username = "${username}")
+  WHERE Following.userID = (SELECT userID FROM Users WHERE username = ${connection.escape(
+    username
+  )})
   `;
   connection.connect();
   connection.query(query, (err, rows) => {
