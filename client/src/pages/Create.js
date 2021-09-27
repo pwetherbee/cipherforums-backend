@@ -61,7 +61,7 @@ export default function Public() {
       body: JSON.stringify({
         title: values.title,
         subtitle: values.subtitle,
-        image: values.image,
+        img: values.image,
         key: values.key,
       }),
     });

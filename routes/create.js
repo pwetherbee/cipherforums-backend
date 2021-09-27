@@ -25,10 +25,6 @@ router.get("/demo", (req, res) => {
   // create template with either anon user or profile name and thread id
 });
 
-router.get("/forum", (req, res) => {
-  res.sendFile(path.join(__dirname, "../dist/titled_forum/index.html"));
-});
-
 router.post("/forum", (req, res) => {
   // console.log("logged in as ", req.session.username);
   if (!req.session.username) {
@@ -43,10 +39,10 @@ router.post("/forum", (req, res) => {
   let connection = SQLHelper.createConnection();
   connection.connect();
   let query = `
-      INSERT INTO Forums (url, subtitle, authorID, creationDate)
-    VALUES (${connection.escape(url)}, ${connection.escape(data.subtitle)}, ${
-    req.session.userID
-  }, NOW());
+      INSERT INTO Forums (url, subtitle, image, authorID, creationDate)
+    VALUES (${connection.escape(url)}, ${connection.escape(
+    data.subtitle
+  )}, ${connection.escape(data.img)}, ${req.session.userID}, NOW());
     `;
   console.log("making query");
   connection.query(query, function (err, rows, fields) {
@@ -61,13 +57,15 @@ router.post("/forum", (req, res) => {
     res.json({
       success: true,
       message: "success creating forum",
-      redirect: url,
+      redirect: `user/${req.session.username}/post/url`,
     });
   });
   connection.end();
 
   // res.send(JSON.stringify({ redirect: "ok" }));
 });
+
+router.post("/public", (req, res) => {});
 
 router.get("/user", (req, res) => {
   if (!req.session.username) {

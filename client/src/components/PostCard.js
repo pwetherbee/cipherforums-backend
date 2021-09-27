@@ -87,10 +87,10 @@ export default function PostCard({ data, secret }) {
           subheader={data.creationDate}
         />
         <CardMedia>
-          {data.img ? (
+          {data.image ? (
             <CardMedia
               className={classes.media}
-              image={data.img}
+              image={data.image}
               title="Paella dish"
             />
           ) : (

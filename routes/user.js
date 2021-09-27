@@ -44,7 +44,7 @@ router.get("/:username/info", (req, res) => {
   // Get bio, created posts, and following list from database
   const connection = SQLHelper.createConnection();
   const query = `
-  SELECT Forums.url, Forums.subtitle, Forums.creationDate, Users.username, Users.bio, Users.avi FROM Forums
+  SELECT Forums.url, Forums.subtitle, Forums.creationDate, Forums.image, Users.username, Users.bio, Users.avi FROM Forums
   RIGHT JOIN Users
   ON Forums.authorID = Users.userID
   WHERE Users.username = ${connection.escape(username)}
