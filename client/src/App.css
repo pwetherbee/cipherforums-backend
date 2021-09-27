@@ -25,7 +25,14 @@
 }
 
 .App-link {
-  color: #61dafb;
+  color: #80c5d8;
+}
+
+.animation-container div {
+  background: red;
+  width: 150px;
+  height: 150px;
+  border-radius: 10%;
 }
 
 @keyframes App-logo-spin {

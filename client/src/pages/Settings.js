@@ -22,6 +22,21 @@ const useStyles = makeStyles((theme) => ({
 }));
 export default function Public() {
   const classes = useStyles();
+  const onSubmit = async () => {
+    const res = await fetch("/user/settings", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        bio: "test bio",
+        avi: "test avi",
+      }),
+    });
+    const data = await res.json();
+    alert(data.message);
+  };
   return (
     <CssBaseline>
       <Container maxWidth="sm" className={classes.settingsContainer}>
@@ -58,6 +73,7 @@ export default function Public() {
           color="primary"
           size="large"
           startIcon={<SaveIcon />}
+          onClick={onSubmit}
         >
           Save
         </Button>
