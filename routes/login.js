@@ -27,7 +27,7 @@ router.post("/", body("username").isAlphanumeric(), (req, res) => {
   let connection = SQLHelper.createConnection();
   const query = `
   SELECT passwd, userID FROM Users
-  WHERE username = "${account.username}"
+  WHERE username = ${connection.escape(account.username)}
   LIMIT 1
   `;
   connection.connect((err) => {
