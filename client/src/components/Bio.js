@@ -66,30 +66,30 @@ export default function Bio({ profile, currUser, canFollow }) {
                   src={profile?.pic || "https://i.imgur.com/AD3MbBi.jpeg"}
                 />
               </Card>
-              <Card className={classes.avi}>
-                <Typography gutterBottom variant="h5" component="h2">
-                  @{profile?.username || "user not found"}
-                  {canFollow ? (
-                    <Button size="small" color="primary">
-                      Follow
-                    </Button>
-                  ) : (
-                    ""
-                  )}
-                  {profile?.loggedIn ? (
-                    <Button
-                      size="small"
-                      color="primary"
-                      component={RouteLink}
-                      to="/settings"
-                    >
-                      edit
-                    </Button>
-                  ) : (
-                    ""
-                  )}
-                </Typography>
-              </Card>
+              {/* <Card className={classes.avi}> */}
+              <Typography gutterBottom variant="h5" component="h2">
+                @{profile?.username || "user not found"}
+                {canFollow ? (
+                  <Button size="small" color="primary">
+                    Follow
+                  </Button>
+                ) : (
+                  ""
+                )}
+                {profile?.loggedIn ? (
+                  <Button
+                    size="small"
+                    color="primary"
+                    component={RouteLink}
+                    to="/settings"
+                  >
+                    edit
+                  </Button>
+                ) : (
+                  ""
+                )}
+              </Typography>
+              {/* </Card> */}
             </CardContent>
             <CardContent>
               <Typography variant="body2" color="textSecondary" component="p">
