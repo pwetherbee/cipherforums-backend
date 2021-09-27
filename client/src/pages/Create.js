@@ -35,7 +35,18 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Public() {
   const classes = useStyles();
-
+  const [values, setValues] = useState({
+    title: "",
+    subtitle: "",
+    image: "",
+    key: "",
+  });
+  const handleChange = (prop) => (event) => {
+    setValues({ ...values, [prop]: event.target.value });
+  };
+  const handleSubmit = async () => {
+    console.log(values);
+  };
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -56,6 +67,7 @@ export default function Public() {
                 placeholder=""
                 multiline
                 variant="outlined"
+                onChange={handleChange("title")}
               />
             </Grid>
             <Grid item xs={12}>
@@ -66,6 +78,7 @@ export default function Public() {
                 placeholder=""
                 multiline
                 variant="outlined"
+                onChange={handleChange("subtitle")}
               />
             </Grid>
             <Grid item xs={12}>
@@ -75,6 +88,7 @@ export default function Public() {
                 label="Image"
                 placeholder=""
                 variant="outlined"
+                onChange={handleChange("image")}
               />
             </Grid>
             <Grid item xs={12}>
@@ -85,6 +99,7 @@ export default function Public() {
                 placeholder=""
                 multiline
                 variant="outlined"
+                onChange={handleChange("key")}
               />
               <Grid item xs={12}>
                 <FormControlLabel
@@ -125,6 +140,7 @@ export default function Public() {
               variant="contained"
               color="primary"
               className={classes.submit}
+              onClick={handleSubmit}
             >
               Create
             </Button>
