@@ -11,6 +11,7 @@ import TextField from "@material-ui/core/TextField";
 import FormControl from "@material-ui/core/FormControl";
 import SaveIcon from "@material-ui/icons/Save";
 import { useState } from "react";
+import Switch from "@material-ui/core/Switch";
 
 const useStyles = makeStyles((theme) => ({
   settingsContainer: {
@@ -73,6 +74,16 @@ export default function Public() {
             onChange={(e) => setAvi(e.target.value)}
             className={classes.settingsItem}
           />
+        </FormControl>
+        <FormControl fullWidth>
+          <Typography
+            variant="body2"
+            gutterBottom
+            className={classes.settingsItem}
+          >
+            Darkmode
+          </Typography>
+          <Switch defaultChecked color="primary" />
         </FormControl>
         <Button
           className={classes.settingsItem}

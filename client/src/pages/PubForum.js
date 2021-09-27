@@ -12,6 +12,7 @@ import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
+import { Link as RouteLink } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -79,7 +80,13 @@ export default function MediaControlCard() {
         </Typography>
       </Grid>
       <Grid item xs={12} sm={6}>
-        <Button className={classes.create} variant="contained" color="primary">
+        <Button
+          className={classes.create}
+          variant="contained"
+          color="primary"
+          component={RouteLink}
+          to="/CreatePublic"
+        >
           Post to Business
         </Button>
       </Grid>
