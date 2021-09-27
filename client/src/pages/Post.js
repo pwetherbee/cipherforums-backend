@@ -21,7 +21,9 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     overflow: "hidden",
     padding: theme.spacing(0, 3),
+    wordBreak: "break-all",
   },
+
   paper: {
     maxWidth: 1200,
     margin: `${theme.spacing(1)}px auto`,

@@ -13,7 +13,9 @@ router.get("/:username", (req, res) => {
   const username = req.params["username"];
   const connection = SQLHelper.createConnection();
   connection.connect();
-  let query = `SELECT userID FROM Users WHERE username = "${username}"`;
+  let query = `SELECT userID FROM Users WHERE username = ${connection.escape(
+    username
+  )}`;
   connection.query(query, (err, rows) => {
     if (err) throw err;
     if (!rows[0]) {
@@ -45,7 +47,7 @@ router.get("/:username/info", (req, res) => {
   SELECT Forums.url, Forums.subtitle, Forums.creationDate, Users.username, Users.bio, Users.avi FROM Forums
   RIGHT JOIN Users
   ON Forums.authorID = Users.userID
-  WHERE Users.username = "${username}"
+  WHERE Users.username = ${connection.escape(username)}
   ORDER BY Forums.creationDate ASC
   `;
   connection.query(query, (err, rows) => {
@@ -67,9 +69,9 @@ router.get("/:username/info", (req, res) => {
     SELECT Count(Following.userID) FROM Following
     INNER JOIN Users
     ON Following.followingID = Users.userID
-    WHERE Users.username = "${username}" AND Following.userID = ${
-      req.session?.userID ? req.session.userID : null
-    }
+    WHERE Users.username = ${connection.escape(
+      username
+    )} AND Following.userID = ${req.session?.userID ? req.session.userID : null}
     `;
     connection.query(query2, (err, rows) => {
       if (err) throw err;
