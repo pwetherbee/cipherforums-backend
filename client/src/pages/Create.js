@@ -41,13 +41,32 @@ export default function Public() {
     subtitle: "",
     image: "",
     key: "",
+    withKey: true,
+    encryptTitle: false,
+    storeKey: true,
+    allowOtherStoreKey: true,
   });
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(values);
+    // make fetch request
+    const res = await fetch("/api/create/forum", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        title: values.title,
+        subtitle: values.subtitle,
+        image: values.image,
+        key: values.key,
+      }),
+    });
+    const data = await res.json();
+    alert(data.message);
   };
   return (
     <Container component="main" maxWidth="xs">

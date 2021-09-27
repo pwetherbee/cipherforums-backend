@@ -4,6 +4,7 @@ var router = express.Router();
 let SQLHelper = require("../helpers/sqlQueryHelper");
 const userRouter = require("./user");
 const loginRouter = require("./login");
+const createRouter = require("./create");
 router.use(express.json());
 
 // First forum created: StableBest-sellingNewt
@@ -152,5 +153,6 @@ router.put("/threads", (req, res) => {
 
 router.use("/user", userRouter);
 router.use("/login", loginRouter);
+router.use("/create", createRouter);
 
 module.exports = router;

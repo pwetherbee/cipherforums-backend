@@ -128,7 +128,7 @@ export default function MenuAppBar({ auth }) {
             </Button>
           </Typography>
 
-          {auth.ok && (
+          {auth.ok && !mobile && (
             <RouteLink
               to={`/user/${auth.username}`}
               style={{ textDecoration: "none" }}
