@@ -16,10 +16,9 @@ import Menu from "@material-ui/core/Menu";
 import Button from "@material-ui/core/Button";
 import Link from "@material-ui/core/Link";
 import { Link as RouteLink } from "react-router-dom";
-import CreateSharpIcon from "@material-ui/icons/CreateSharp";
-import GavelSharpIcon from "@material-ui/icons/GavelSharp";
-import FlightTakeoffIcon from "@material-ui/icons/FlightTakeoff";
-import ComputerIcon from "@material-ui/icons/Computer";
+import SupervisedUserCircleIcon from "@material-ui/icons/SupervisedUserCircle";
+import PublicIcon from "@material-ui/icons/Public";
+import HelpIcon from "@material-ui/icons/Help";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -113,7 +112,7 @@ export default function MenuAppBar({ auth }) {
               to="/public"
             >
               {mobile || "Public Topics"}
-              {mobile && <GavelSharpIcon />}
+              {mobile && <PublicIcon />}
             </Button>
           </Typography>
 
@@ -125,7 +124,7 @@ export default function MenuAppBar({ auth }) {
               to="/help"
             >
               {mobile || "Help"}
-              {mobile && <ComputerIcon />}
+              {mobile && <HelpIcon />}
             </Button>
           </Typography>
 
@@ -211,7 +210,7 @@ export default function MenuAppBar({ auth }) {
                 to="/login"
               >
                 {mobile || "Login / Signup"}
-                {mobile && <CreateSharpIcon color="primary" />}
+                {mobile && <SupervisedUserCircleIcon color="primary" />}
               </Button>
             </Typography>
           )}

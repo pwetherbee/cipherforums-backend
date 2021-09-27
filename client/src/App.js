@@ -27,7 +27,7 @@ import Help from "./pages/Help";
 import Home from "./pages/Home";
 import Search from "./pages/Search";
 import PubForum from "./pages/PubForum";
-import FramerTest from "./pages/FramerTest.jsx";
+import CreatePublic from "./pages/CreatePublic";
 
 // Components
 import MenuAppBar from "./components/MenuAppBar";
@@ -142,6 +142,9 @@ export default function App() {
           <Route path="/Help">
             <Help />
           </Route>
+          <Route path="/CreatePublic">
+            <CreatePublic />
+          </Route>
           <Route path="/Home">
             <Home />
           </Route>
@@ -150,9 +153,6 @@ export default function App() {
           </Route>
           <Route path="/PubForum">
             <PubForum />
-          </Route>
-          <Route path="/framer">
-            <FramerTest />
           </Route>
           <Route path="/">
             <Home />
