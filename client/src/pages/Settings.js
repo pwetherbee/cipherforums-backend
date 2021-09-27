@@ -67,7 +67,7 @@ export default function Public() {
         <FormControl fullWidth>
           <TextField
             id="outlined-basic"
-            label="Outlined"
+            label="link"
             variant="outlined"
             value={avi}
             onChange={(e) => setAvi(e.target.value)}
