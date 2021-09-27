@@ -95,20 +95,21 @@ router.post("/settings", (req, res) => {
   const connection = sqlQueryHelper.createConnection();
   const query = `
   UPDATE Users
-  ${bio ? `SET bio = ${bio}` : ""}
-  ${avi ? `SET avi = ${avi}` : ""}
+  SET
+  ${bio ? `bio = ${connection.escape(bio)},` : ""}
+  ${avi ? `avi = ${connection.escape(avi)}` : ""}
   WHERE
   userID = ${req.session.userID}
   `;
   connection.connect();
   connection.query(query, (err, rows) => {
     if (err) {
-      return res.send(403).json({
+      return res.status(403).json({
         success: false,
         message: "An error occured trying to update the database",
       });
     }
-    res.send({
+    return res.json({
       success: true,
       message: `Successfully updated profile ${req.session.username}`,
     });

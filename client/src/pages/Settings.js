@@ -10,6 +10,7 @@ import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import FormControl from "@material-ui/core/FormControl";
 import SaveIcon from "@material-ui/icons/Save";
+import { useState } from "react";
 
 const useStyles = makeStyles((theme) => ({
   settingsContainer: {
@@ -22,6 +23,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 export default function Public() {
   const classes = useStyles();
+  const [avi, setAvi] = useState("");
+  const [bio, setBio] = useState("");
   const onSubmit = async () => {
     const res = await fetch("/user/settings", {
       method: "POST",
@@ -30,8 +33,8 @@ export default function Public() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        bio: "test bio",
-        avi: "test avi",
+        bio: bio,
+        avi: avi,
       }),
     });
     const data = await res.json();
@@ -49,6 +52,8 @@ export default function Public() {
             label="bio"
             variant="outlined"
             className={classes.settingsItem}
+            value={bio}
+            onChange={(e) => setBio(e.target.value)}
             multiline
           />
         </FormControl>
@@ -64,6 +69,8 @@ export default function Public() {
             id="outlined-basic"
             label="Outlined"
             variant="outlined"
+            value={avi}
+            onChange={(e) => setAvi(e.target.value)}
             className={classes.settingsItem}
           />
         </FormControl>

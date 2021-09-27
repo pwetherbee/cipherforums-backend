@@ -62,7 +62,7 @@ export default function Bio({ profile, currUser, canFollow }) {
                 <img
                   className={classes.img}
                   alt="complex"
-                  src="https://i.imgur.com/AD3MbBi.jpeg"
+                  src={profile?.avi || "https://i.imgur.com/AD3MbBi.jpeg"}
                 />
               </Card>
               <Card className={classes.avi}>
