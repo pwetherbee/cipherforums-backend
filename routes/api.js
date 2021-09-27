@@ -15,7 +15,7 @@ router.get("/threads/:tag", (req, res) => {
   // Make sql query
   let connection = SQLHelper.createConnection();
   let query = `
-  SELECT Forums.id, Forums.url, Forums.creationDate, Forums.subtitle, Users.username FROM Forums
+  SELECT Forums.id, Forums.url, Forums.creationDate, Forums.subtitle, Forums.image, Users.username FROM Forums
   LEFT JOIN Users
   ON Forums.authorID = Users.userID
   WHERE Forums.url = ${connection.escape(urlTag)}
@@ -37,6 +37,7 @@ router.get("/threads/:tag", (req, res) => {
       title: rows[0].url,
       date: rows[0].creationDate,
       subtitle: rows[0].subtitle,
+      image: rows[0].image,
       comments: [],
     };
     query = `

@@ -71,6 +71,7 @@ export default function Post() {
     fetch(`/api/threads/${postname}`)
       .then((res) => res.json())
       .then((data) => {
+        console.log(forumData);
         setComments(data.comments);
         setForumData(data);
       });
@@ -97,8 +98,6 @@ export default function Post() {
       setHelperText("Comment must be shorter than 64 characters");
       return;
     }
-
-    console.log(forumData);
     // Encrypt comment
     const ciphertext = encrypt(postCommentText, secret);
     const res = await fetch(`/api/threads/${postname}`, {
@@ -135,6 +134,7 @@ export default function Post() {
             <Typography variant="h6" className={classes.titleElements}>
               {forumData?.title}
             </Typography>
+            {forumData?.image && <img src={forumData.image} />}
             <Typography variant="body2" className={classes.titleElements}>
               {forumData?.subtitle}
             </Typography>
