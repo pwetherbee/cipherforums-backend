@@ -10,6 +10,7 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { Paper } from "@material-ui/core";
 import LoadingIcon from "./LoadingPageIcon";
+import { Link as RouteLink } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -76,7 +77,12 @@ export default function Bio({ profile, currUser, canFollow }) {
                     ""
                   )}
                   {profile?.loggedIn ? (
-                    <Button size="small" color="primary">
+                    <Button
+                      size="small"
+                      color="primary"
+                      component={RouteLink}
+                      to="/settings"
+                    >
                       edit
                     </Button>
                   ) : (

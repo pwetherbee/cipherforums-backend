@@ -80,7 +80,7 @@ export default function MediaControlCard() {
       </Grid>
       <Grid item xs={12} sm={6}>
         <Button className={classes.create} variant="contained" color="primary">
-          Create public forum
+          Post to Business
         </Button>
       </Grid>
       <Grid item xs={12} sm={6}>
