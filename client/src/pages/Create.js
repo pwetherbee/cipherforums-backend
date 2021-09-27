@@ -11,6 +11,7 @@ import Box from "@material-ui/core/Box";
 import CreateSharpIcon from "@material-ui/icons/CreateSharp";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
+import { useState } from "react";
 import Container from "@material-ui/core/Container";
 
 const useStyles = makeStyles((theme) => ({
@@ -44,7 +45,8 @@ export default function Public() {
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
   };
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     console.log(values);
   };
   return (

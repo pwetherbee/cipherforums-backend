@@ -76,7 +76,7 @@ export default function Bio({ profile, currUser, canFollow }) {
                 ) : (
                   ""
                 )}
-                {profile?.loggedIn ? (
+                {currUser ? (
                   <Button
                     size="small"
                     color="primary"
