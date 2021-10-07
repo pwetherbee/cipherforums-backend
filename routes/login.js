@@ -13,7 +13,7 @@ router.use(express.json());
 //   res.sendFile(path.join(__dirname, "../dist/login/index.html"));
 // });
 
-router.post("/", body("username").isAlphanumeric(), (req, res) => {
+router.post("/", body("username"), (req, res) => {
   // TODO: Validate input
   const errors = validationResult(req);
   if (!errors.isEmpty()) {

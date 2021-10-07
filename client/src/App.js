@@ -136,7 +136,10 @@ export default function App() {
           <Route path="/create">
             <Create />
           </Route>
-          <Route path="/Public">
+          <Route path="/public/:topic">
+            <PubForum />
+          </Route>
+          <Route path="/public">
             <Public />
           </Route>
           <Route path="/Help">
@@ -151,9 +154,7 @@ export default function App() {
           <Route path="/Search">
             <Search />
           </Route>
-          <Route path="/PubForum">
-            <PubForum />
-          </Route>
+
           <Route path="/">
             <Home />
           </Route>

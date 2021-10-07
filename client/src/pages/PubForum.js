@@ -13,6 +13,7 @@ import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
 import { Link as RouteLink } from "react-router-dom";
+import { useParams } from "react-router";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -71,6 +72,8 @@ const useStyles = makeStyles((theme) => ({
 export default function MediaControlCard() {
   const classes = useStyles();
   const theme = useTheme();
+  let { topic } = useParams();
+  console.log(topic);
 
   return (
     <Grid container spacing={1}>
