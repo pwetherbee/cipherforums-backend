@@ -28,6 +28,7 @@ import Home from "./pages/Home";
 import Search from "./pages/Search";
 import PubForum from "./pages/PubForum";
 import CreatePublic from "./pages/CreatePublic";
+import Confirm from "./pages/Confirm";
 
 // Components
 import MenuAppBar from "./components/MenuAppBar";
@@ -153,6 +154,9 @@ export default function App() {
           </Route>
           <Route path="/Search">
             <Search />
+          </Route>
+          <Route path="/Confirm">
+            <Confirm />
           </Route>
 
           <Route path="/">

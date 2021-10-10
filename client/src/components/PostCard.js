@@ -13,7 +13,7 @@ import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import { green, red } from "@material-ui/core/colors";
 import FavoriteIcon from "@material-ui/icons/Favorite";
-import ShareIcon from "@material-ui/icons/Share";
+import DeleteForeverRoundedIcon from "@material-ui/icons/DeleteForeverRounded";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import MiniThread from "./MiniThread";
@@ -117,7 +117,7 @@ export default function PostCard({ data, secret }) {
           <FavoriteIcon />
         </IconButton>
         <IconButton color="primary" aria-label="share">
-          <ShareIcon />
+          <DeleteForeverRoundedIcon />
         </IconButton>
 
         <IconButton
