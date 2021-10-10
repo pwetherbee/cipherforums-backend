@@ -26,10 +26,10 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: 1200,
     marginBottom: "3%",
   },
-  media: {
-    height: 0,
-    paddingTop: "56.25%", // 16:9
-  },
+  // media: {
+  //   height: 0,
+  //   paddingTop: "56.25%", // 16:9
+  // },
   expand: {
     transform: "rotate(0deg)",
     marginLeft: "auto",
@@ -42,6 +42,18 @@ const useStyles = makeStyles((theme) => ({
   },
   avatar: {
     backgroundColor: green[500],
+  },
+  img: {
+    // paddingTop: "10%", // 16:9
+    // paddingBottom: "5%",
+    paddingLeft: "1%", // 16:9
+    // padding: "10%",
+    maxWidth: 250,
+    // maxHeight: 50,
+    // width: "10%",
+    // height: "20%",
+    // objectFit: "cover",
+    // maxHeight: 300,
   },
 }));
 
@@ -88,12 +100,9 @@ export default function PostCard({ data, secret }) {
         />
         <CardMedia>
           {data.image ? (
-            <CardMedia
-              className={classes.media}
-              image={data.image}
-              title="Paella dish"
-            />
+            <img className={classes.img} src={data.image}></img>
           ) : (
+            // <CardMedia className={classes.img} image={data.image} />
             <CardContent>
               <Typography variant="body2" color="textSecondary" component="p">
                 {data.subtitle}

@@ -43,7 +43,7 @@ export default function AutoGrid() {
     <div className={classes.root}>
       <Grid container spacing={4}>
         <Grid item xs={12} sm={3}>
-          <RouteLink to="/pubforum">
+          <RouteLink to="/public" component={Link}>
             {/* <RouteLink to="/public/business"> */}
             <Paper className={classes.paper}>
               <MonetizationOnOutlinedIcon style={{ fontSize: "13vw" }} />
@@ -52,7 +52,7 @@ export default function AutoGrid() {
           </RouteLink>
         </Grid>
         <Grid item xs={12} sm={3}>
-          <RouteLink to="/pubilc/images">
+          <RouteLink to="/pubilc/images" component={Link}>
             {/* <RouteLink to="/public/images"> */}
             <Paper className={classes.paper}>
               <CameraSharpIcon style={{ fontSize: "13vw" }} />
@@ -61,7 +61,7 @@ export default function AutoGrid() {
           </RouteLink>
         </Grid>
         <Grid item xs={12} sm={3}>
-          <RouteLink to="/pubilc/Politics">
+          <RouteLink to="/pubilc/Politics" component={Link}>
             {/* <RouteLink to="/public/politics"> */}
             <Paper className={classes.paper}>
               <GavelSharpIcon style={{ fontSize: "13vw" }} />
@@ -70,7 +70,7 @@ export default function AutoGrid() {
           </RouteLink>
         </Grid>
         <Grid item xs={12} sm={3}>
-          <RouteLink to="/pubilc/Technology">
+          <RouteLink to="/pubilc/Technology" component={Link}>
             {/* <RouteLink to="/public/technology"> */}
             <Paper className={classes.paper}>
               <ComputerIcon style={{ fontSize: "13vw" }} />
@@ -79,7 +79,7 @@ export default function AutoGrid() {
           </RouteLink>
         </Grid>
         <Grid item xs={12} sm={3}>
-          <RouteLink to="/public/News">
+          <RouteLink to="/public/News" component={Link}>
             {/* <RouteLink to="/public/news"> */}
             <Paper className={classes.paper}>
               <AnnouncementRoundedIcon style={{ fontSize: "13vw" }} />
@@ -88,7 +88,7 @@ export default function AutoGrid() {
           </RouteLink>
         </Grid>
         <Grid item xs={12} sm={3}>
-          <RouteLink to="/public/Gaming">
+          <RouteLink to="/public/Gaming" component={Link}>
             {/* <RouteLink to="/public/gaming"> */}
             <Paper className={classes.paper}>
               <GamesOutlinedIcon style={{ fontSize: "13vw" }} />
@@ -97,7 +97,7 @@ export default function AutoGrid() {
           </RouteLink>
         </Grid>
         <Grid item xs={12} sm={3}>
-          <RouteLink to="/public/Music">
+          <RouteLink to="/public/Music" component={Link}>
             {/* <RouteLink to="/public/music"> */}
             <Paper className={classes.paper}>
               <AlbumSharpIcon style={{ fontSize: "13vw" }} />
@@ -106,7 +106,7 @@ export default function AutoGrid() {
           </RouteLink>
         </Grid>
         <Grid item xs={12} sm={3}>
-          <RouteLink to="/public/Science">
+          <RouteLink to="/public/Science" component={Link}>
             {/* <RouteLink to="/public/science"> */}
             <Paper className={classes.paper}>
               <EcoRoundedIcon style={{ fontSize: "13vw" }} />
@@ -115,7 +115,7 @@ export default function AutoGrid() {
           </RouteLink>
         </Grid>
         <Grid item xs={12} sm={3}>
-          <RouteLink to="/public/Questions">
+          <RouteLink to="/public/Questions" component={Link}>
             {/* <RouteLink to="/public/questions"> */}
             <Paper className={classes.paper}>
               <HelpOutlineSharpIcon style={{ fontSize: "13vw" }} />
@@ -124,7 +124,7 @@ export default function AutoGrid() {
           </RouteLink>
         </Grid>
         <Grid item xs={12} sm={3}>
-          <RouteLink to="/public/Outdoors">
+          <RouteLink to="/public/Outdoors" component={Link}>
             {/* <RouteLink to="/public/outdoors"> */}
             <Paper className={classes.paper}>
               <FilterHdrIcon style={{ fontSize: "13vw" }} />
@@ -133,7 +133,7 @@ export default function AutoGrid() {
           </RouteLink>
         </Grid>
         <Grid item xs={12} sm={3}>
-          <RouteLink to="/public/Puzzles">
+          <RouteLink to="/public/Puzzles" component={Link}>
             {/* <RouteLink to="/public/puzzles"> */}
             <Paper className={classes.paper}>
               <ExtensionSharpIcon style={{ fontSize: "13vw" }} />
@@ -142,7 +142,7 @@ export default function AutoGrid() {
           </RouteLink>
         </Grid>
         <Grid item xs={12} sm={3}>
-          <RouteLink to="/public/Writing">
+          <RouteLink to="/public/Writing" component={Link}>
             {/* <RouteLink to="/public/witing"> */}
             <Paper className={classes.paper}>
               <CreateSharpIcon style={{ fontSize: "13vw" }} />
@@ -151,7 +151,7 @@ export default function AutoGrid() {
           </RouteLink>
         </Grid>
         <Grid item xs={12} sm={3}>
-          <RouteLink to="/public/">
+          <RouteLink to="/public/" component={Link}>
             {/* <RouteLink to="/public/travel"> */}
             <Paper className={classes.paper}>
               <FlightTakeoffIcon style={{ fontSize: "13vw" }} />
@@ -160,7 +160,7 @@ export default function AutoGrid() {
           </RouteLink>
         </Grid>
         <Grid item xs={12} sm={3}>
-          <RouteLink to="/public/Sports">
+          <RouteLink to="/public/Sports" component={Link}>
             {/* <RouteLink to="/public/sports"> */}
             <Paper className={classes.paper}>
               <SportsSharpIcon style={{ fontSize: "13vw" }} />
@@ -169,7 +169,7 @@ export default function AutoGrid() {
           </RouteLink>
         </Grid>
         <Grid item xs={12} sm={3}>
-          <RouteLink to="/public/Comedy">
+          <RouteLink to="/public/Comedy" component={Link}>
             {/* <RouteLink to="/public/comedy"> */}
             <Paper className={classes.paper}>
               <MoodSharpIcon style={{ fontSize: "13vw" }} />
