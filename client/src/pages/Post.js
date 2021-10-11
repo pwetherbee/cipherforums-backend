@@ -8,15 +8,15 @@ import Grid from "@material-ui/core/Grid";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import { useState } from "react";
-import { useParams, useRouteMatch } from "react-router";
+import { Route, useParams, useRouteMatch } from "react-router";
 import { CipherText } from "../components/CipherText";
 import SecretBox from "../components/SecretBox";
 import LoadingIcon from "../components/LoadingPageIcon";
 import { Comment } from "../components/Comment";
 import TextField from "@material-ui/core/TextField";
 import { encrypt } from "../helpers/convert";
-import { Link } from "react-router-dom";
-
+import { Link as RouteLink } from "react-router-dom";
+import { Link } from "@material-ui/core";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -54,7 +54,11 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: 50,
   },
 }));
-
+const linkStyle = {
+  margin: "1rem",
+  textDecoration: "none",
+  color: "blue",
+};
 const message = `Truncation should be conditionally applicable on this long line of text
  as this is a much longer line than what the container can support. `;
 
@@ -132,11 +136,19 @@ export default function Post() {
             <Typography variant="subtitle1" className={classes.titleElements}>
               Post to{" "}
               {
-                <Link to={`/public/${forumData.publicTopic}`}>
-                  {forumData.publicTopic}
-                </Link>
+                <RouteLink
+                  to={`/public/${forumData.publicTopic}`}
+                  style={linkStyle}
+                >
+                  <Link>{forumData.publicTopic}</Link>
+                </RouteLink>
               }{" "}
-              by @{forumData?.author}
+              by @
+              {
+                <RouteLink to={`/user/${forumData.author}`} style={linkStyle}>
+                  <Link>{forumData.author}</Link>
+                </RouteLink>
+              }
             </Typography>
             <Typography variant="h6" className={classes.titleElements}>
               {forumData?.title.slice(0, -5)}

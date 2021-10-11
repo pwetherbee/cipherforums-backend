@@ -101,9 +101,6 @@ export default function MenuAppBar({ auth }) {
               component={RouteLink}
               to="/"
             >
-              {/* <SvgIcon>
-                // tags in your svg file // ex: <path d="M81 1032 c-19 -9 " />
-              </SvgIcon> */}
               home
             </Button>
             {/* <RouteLink to="/jskdfjsd">click me</RouteLink> */}
