@@ -101,7 +101,7 @@ export default function MediaControlCard() {
         </Button>
       </Grid>
       {topicPosts.map((post, i) => (
-        <PublicPost key={i} details={post} />
+        <PublicPost key={i} details={post} topic={topic} />
       ))}
       {/* <Grid item xs={12} sm={6}>
         <Card className={classes.root}>

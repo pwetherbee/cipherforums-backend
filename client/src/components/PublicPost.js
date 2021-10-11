@@ -5,7 +5,7 @@ import {
   makeStyles,
   Typography,
 } from "@material-ui/core";
-import { Link } from "react-router-dom";
+import { Link as RouteLink } from "react-router-dom";
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -59,29 +59,31 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: 10,
   },
 }));
-export const PublicPost = ({ details }) => {
+export const PublicPost = ({ details, topic }) => {
   const classes = useStyles();
   console.log(details);
   return (
     <Grid item xs={12} sm={6} key={details.id}>
-      <Card className={classes.root}>
-        <div className={classes.details}>
-          <img
-            className={classes.img}
-            alt="complex"
-            src={details.image || "https://i.imgur.com/AD3MbBi.jpeg"}
-          />
-          <CardContent className={classes.content}>
-            <Typography variant="caption">{details.username}</Typography>
-            <Typography variant="body2">{details.url}</Typography>
-            <div className={classes.card__actions}>
-              <Typography className={classes.card__actions} variant="caption">
-                {details.numComments} comments
-              </Typography>
-            </div>
-          </CardContent>
-        </div>
-      </Card>
+      <RouteLink to={`/public/${topic}/${details.url}`}>
+        <Card className={classes.root}>
+          <div className={classes.details}>
+            <img
+              className={classes.img}
+              alt="complex"
+              src={details.image || "https://i.imgur.com/AD3MbBi.jpeg"}
+            />
+            <CardContent className={classes.content}>
+              <Typography variant="caption">{details.username}</Typography>
+              <Typography variant="body2">{details.url}</Typography>
+              <div className={classes.card__actions}>
+                <Typography className={classes.card__actions} variant="caption">
+                  {details.numComments} comments
+                </Typography>
+              </div>
+            </CardContent>
+          </div>
+        </Card>
+      </RouteLink>
     </Grid>
   );
 };

@@ -140,6 +140,9 @@ export default function App() {
           <Route path="/create">
             <Create />
           </Route>
+          <Route path="/public/:topic/:postname">
+            <Post />
+          </Route>
           <Route path="/public/:topic">
             <PubForum />
           </Route>
