@@ -19,6 +19,8 @@ import { Link as RouteLink } from "react-router-dom";
 import SupervisedUserCircleIcon from "@material-ui/icons/SupervisedUserCircle";
 import PublicIcon from "@material-ui/icons/Public";
 import HelpIcon from "@material-ui/icons/Help";
+import Icon from "@material-ui/core/Icon";
+import { SvgIcon } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -99,7 +101,10 @@ export default function MenuAppBar({ auth }) {
               component={RouteLink}
               to="/"
             >
-              Home
+              {/* <SvgIcon>
+                // tags in your svg file // ex: <path d="M81 1032 c-19 -9 " />
+              </SvgIcon> */}
+              home
             </Button>
             {/* <RouteLink to="/jskdfjsd">click me</RouteLink> */}
           </Typography>

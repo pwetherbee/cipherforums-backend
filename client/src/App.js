@@ -28,7 +28,7 @@ import Home from "./pages/Home";
 import Search from "./pages/Search";
 import PubForum from "./pages/PubForum";
 import CreatePublic from "./pages/CreatePublic";
-import Confirm from "./pages/Confirm";
+import Confirm from "./components/Confirm";
 
 // Components
 import MenuAppBar from "./components/MenuAppBar";

@@ -4,7 +4,6 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
-import DialogTitle from "@material-ui/core/DialogTitle";
 
 class AlertDialog extends React.Component {
   state = {
@@ -31,7 +30,7 @@ class AlertDialog extends React.Component {
     return (
       <div>
         {/* Button to trigger the opening of the dialog */}
-        <Button onClick={this.handleClickOpen}>Open alert dialog</Button>
+        <Button onClick={this.handleClickOpen}>Delete this</Button>
         {/* Dialog that is displayed if the state open is true */}
         <Dialog
           open={this.state.open}
@@ -39,20 +38,17 @@ class AlertDialog extends React.Component {
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
         >
-          <DialogTitle id="alert-dialog-title">
-            {"Successful Alert"}
-          </DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
-              You are successful in life!
+              Are you sure you want to delete?
             </DialogContentText>
           </DialogContent>
           <DialogActions>
             <Button onClick={this.handleDisagree} color="primary">
-              Disagree
+              Cancel
             </Button>
             <Button onClick={this.handleAgree} color="primary" autoFocus>
-              Agree
+              Delete
             </Button>
           </DialogActions>
         </Dialog>
