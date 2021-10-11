@@ -15,6 +15,7 @@ import LoadingIcon from "../components/LoadingPageIcon";
 import { Comment } from "../components/Comment";
 import TextField from "@material-ui/core/TextField";
 import { encrypt } from "../helpers/convert";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -71,7 +72,7 @@ export default function Post() {
     fetch(`/api/threads/${postname}`)
       .then((res) => res.json())
       .then((data) => {
-        console.log(forumData);
+        console.log(data);
         setComments(data.comments);
         setForumData(data);
       });
@@ -129,7 +130,13 @@ export default function Post() {
         <Container>
           <Paper className={classes.titleHolder}>
             <Typography variant="subtitle1" className={classes.titleElements}>
-              @{forumData?.author}
+              Post to{" "}
+              {
+                <Link to={`/public/${forumData.publicTopic}`}>
+                  {forumData.publicTopic}
+                </Link>
+              }{" "}
+              by @{forumData?.author}
             </Typography>
             <Typography variant="h6" className={classes.titleElements}>
               {forumData?.title}
