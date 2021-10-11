@@ -5,6 +5,7 @@ let SQLHelper = require("../helpers/sqlQueryHelper");
 const userRouter = require("./user");
 const loginRouter = require("./login");
 const createRouter = require("./create");
+const { body, validationResult } = require("express-validator");
 router.use(express.json());
 
 // First forum created: StableBest-sellingNewt
@@ -167,6 +168,40 @@ router.get("/public/:topic", async (req, res) => {
   connection.end();
   res.json(rows[0]);
 });
+
+router.post(
+  "/public/:topic",
+  body("title").isAscii().isLength({ min: 1, max: 250 }),
+  body("subtitle").isAscii().isLength({ min: 1, max: 250 }),
+  body("image").isAscii().isLength({ min: 5, max: 250 }),
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      console.log(errors);
+      return res.status(400).json({
+        success: false,
+        message: `invalid title, subtile, or image: ${errors.ErrorMessage}`,
+      });
+    }
+    let topic = req.params["topic"];
+    let data = req.body;
+    console.log(req.body, topic);
+
+    const connection = await SQLHelper.createConnection2();
+    const query = `
+  INSERT INTO Forums (url, authorID, subtitle, CreationDate, publicTopic, image)
+  VALUES (${connection.escape(data.title + "!" + idGen.generateHexID())},${
+      req.session.userID || 0
+    }, ${connection.escape(data.subtitle)}, NOW(), ${connection.escape(
+      topic
+    )}, ${connection.escape(data.image)})
+  `;
+    connection.connect();
+    const rows = await connection.execute(query);
+    connection.end();
+    return res.json({ success: true, message: "post successful", link: "" });
+  }
+);
 
 router.use("/user", userRouter);
 router.use("/login", loginRouter);

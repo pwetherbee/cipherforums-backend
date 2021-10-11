@@ -60,6 +60,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 export const PublicPost = ({ details }) => {
   const classes = useStyles();
+  console.log(details);
   return (
     <Grid item xs={12} sm={6} key={details.id}>
       <Card className={classes.root}>
