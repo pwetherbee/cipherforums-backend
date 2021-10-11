@@ -174,7 +174,7 @@ router.post(
   "/public/:topic",
   body("title").isAscii().isLength({ min: 1, max: 250 }),
   body("subtitle").isAscii().isLength({ min: 1, max: 250 }),
-  body("image").isAscii().isLength({ min: 5, max: 250 }),
+  body("image").isLength({ max: 250 }),
   async (req, res) => {
     if (!req.session.userID) {
       return res.status(403).json({
@@ -193,11 +193,11 @@ router.post(
     let topic = req.params["topic"];
     let data = req.body;
     console.log(req.body, topic);
-
+    const url = data.title + "!" + idGen.generateHexID();
     const connection = await SQLHelper.createConnection2();
     const query = `
   INSERT INTO Forums (url, authorID, subtitle, CreationDate, publicTopic, image)
-  VALUES (${connection.escape(data.title + "!" + idGen.generateHexID())},${
+  VALUES (${connection.escape(url)},${
       req.session.userID || 0
     }, ${connection.escape(data.subtitle)}, NOW(), ${connection.escape(
       topic
@@ -206,7 +206,7 @@ router.post(
     connection.connect();
     const rows = await connection.execute(query);
     connection.end();
-    return res.json({ success: true, message: "post successful", link: "" });
+    return res.json({ success: true, message: "post successful", url: url });
   }
 );
 

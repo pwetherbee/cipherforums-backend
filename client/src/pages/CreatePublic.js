@@ -12,7 +12,7 @@ import CreateSharpIcon from "@material-ui/icons/CreateSharp";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import { useParams } from "react-router";
+import { useHistory, useParams } from "react-router";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -36,6 +36,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Public() {
   const classes = useStyles();
+  const history = useHistory();
   const { topic } = useParams();
   const [values, setValues] = useState({
     title: "",
@@ -58,7 +59,12 @@ export default function Public() {
       body: JSON.stringify(values),
     });
     const data = await res.json();
-    alert(data.message);
+    if (data.success) {
+      console.log(data.message);
+      history.push(`/public/${topic}/${data.url}`);
+    } else {
+      alert(data.message);
+    }
   };
   return (
     <Container component="main" maxWidth="xs">
