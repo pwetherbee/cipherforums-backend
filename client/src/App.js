@@ -144,7 +144,7 @@ export default function App() {
             <Post />
           </Route>
           <Route path="/public/:topic">
-            <PubForum />
+            <PubForum auth={loggedUser} />
           </Route>
           <Route path="/public">
             <Public />
