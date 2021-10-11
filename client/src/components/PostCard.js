@@ -55,9 +55,14 @@ const useStyles = makeStyles((theme) => ({
     // objectFit: "cover",
     // maxHeight: 300,
   },
+  imgAVI: {
+    height: 50,
+    width: 50,
+  },
 }));
 
 export default function PostCard({ data, secret }) {
+  // console.log(data);
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
   const [forumData, setForumData] = React.useState();
@@ -87,14 +92,15 @@ export default function PostCard({ data, secret }) {
           avatar={
             <Avatar
               color={classes.red}
-              aria-label="recipe"
+              // aria-label="recipe"
               variant="rounded"
               className={classes.avatar}
             >
-              {data.username.slice(0, 1)}
+              {/* {data.username.slice(0, 1)} */}
+              <img src={data.avi} className={classes.imgAVI}></img>
             </Avatar>
           }
-          title={data.url}
+          title={data.url.slice(0, -4)}
           to={"/"}
           subheader={data.creationDate}
         />
@@ -113,9 +119,9 @@ export default function PostCard({ data, secret }) {
       </CardActionArea>
 
       <CardActions disableSpacing>
-        <IconButton color="primary" aria-label="add to favorites">
+        {/* <IconButton color="primary" aria-label="add to favorites">
           <FavoriteIcon />
-        </IconButton>
+        </IconButton> */}
         <IconButton color="primary" aria-label="share">
           <DeleteForeverRoundedIcon />
         </IconButton>
