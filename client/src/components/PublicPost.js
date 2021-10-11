@@ -73,8 +73,10 @@ export const PublicPost = ({ details, topic }) => {
               src={details.image || "https://i.imgur.com/AD3MbBi.jpeg"}
             />
             <CardContent className={classes.content}>
-              <Typography variant="caption">{details.username}</Typography>
-              <Typography variant="body2">{details.url}</Typography>
+              <Typography variant="caption">@{details.username}</Typography>
+              <Typography variant="body2">
+                {details.url.slice(0, -4)}
+              </Typography>
               <div className={classes.card__actions}>
                 <Typography className={classes.card__actions} variant="caption">
                   {details.numComments} comments
