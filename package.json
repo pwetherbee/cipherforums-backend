@@ -8,7 +8,6 @@
     "buildstart": "(cd client && npm run build) && (cd .. && npm start)"
   },
   "dependencies": {
-    "bcrypt": "^5.0.1",
     "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.5",
     "core-js": "^3.16.0",
