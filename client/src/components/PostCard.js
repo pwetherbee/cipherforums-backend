@@ -91,13 +91,16 @@ export default function PostCard({ data, secret }) {
         <CardHeader
           avatar={
             <Avatar
-              color={classes.red}
+              // color={classes.red}
               // aria-label="recipe"
               variant="rounded"
               className={classes.avatar}
             >
-              {/* {data.username.slice(0, 1)} */}
-              <img src={data.avi} className={classes.imgAVI}></img>
+              {data.avi ? (
+                <img src={data.avi} className={classes.imgAVI}></img>
+              ) : (
+                data.username.slice(0, 1)
+              )}
             </Avatar>
           }
           title={data.url.slice(0, -4)}
