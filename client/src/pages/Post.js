@@ -132,7 +132,7 @@ export default function Post() {
               @{forumData?.author}
             </Typography>
             <Typography variant="h6" className={classes.titleElements}>
-              {forumData?.title}
+              {forumData?.title.slice(0, -5)}
             </Typography>
             {forumData?.image && <img src={forumData.image} />}
             <Typography variant="body2" className={classes.titleElements}>

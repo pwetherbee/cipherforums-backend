@@ -103,7 +103,7 @@ export default function PostCard({ data, secret }) {
               )}
             </Avatar>
           }
-          title={data.url.slice(0, -4)}
+          title={data.url.slice(0, -5)}
           to={"/"}
           subheader={data.creationDate}
         />
