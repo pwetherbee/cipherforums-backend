@@ -83,6 +83,7 @@ export default function MediaControlCard() {
     setTopicPosts(data);
     console.log(data);
   }, []);
+  console.log("object");
   return (
     <Grid container spacing={1}>
       <Grid item xs={12} sm={6}>
