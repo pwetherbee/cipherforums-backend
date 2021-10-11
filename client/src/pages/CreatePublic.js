@@ -48,7 +48,17 @@ export default function Public() {
   // handle submit
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // submit request to web server
+    // make fetch request
+    const res = await fetch(`/api/public/${topic}`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(values),
+    });
+    const data = await res.json();
+    alert(data.message);
   };
   return (
     <Container component="main" maxWidth="xs">
