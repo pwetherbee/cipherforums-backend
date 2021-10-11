@@ -175,6 +175,12 @@ router.post(
   body("subtitle").isAscii().isLength({ min: 1, max: 250 }),
   body("image").isAscii().isLength({ min: 5, max: 250 }),
   async (req, res) => {
+    if (!req.session.userID) {
+      return res.status(403).json({
+        success: false,
+        message: "You must be logged in to post to a public forum",
+      });
+    }
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       console.log(errors);
