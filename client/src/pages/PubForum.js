@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
@@ -14,6 +14,7 @@ import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
 import { Link as RouteLink } from "react-router-dom";
 import { useParams } from "react-router";
+import { PublicPost } from "../components/PublicPost";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -73,8 +74,14 @@ export default function MediaControlCard() {
   const classes = useStyles();
   const theme = useTheme();
   let { topic } = useParams();
-  console.log(topic);
-
+  const [topicPosts, setTopicPosts] = useState([]);
+  // Load in all forums with the current topic
+  useEffect(async () => {
+    const res = await fetch(`/api/public/${topic}`);
+    const data = await res.json();
+    setTopicPosts(data);
+    console.log(data);
+  }, []);
   return (
     <Grid container spacing={1}>
       <Grid item xs={12} sm={6}>
@@ -88,12 +95,15 @@ export default function MediaControlCard() {
           variant="contained"
           color="primary"
           component={RouteLink}
-          to="/CreatePublic"
+          to={`/create/public/${topic}`}
         >
-          Post to Business
+          Post to {topic}
         </Button>
       </Grid>
-      <Grid item xs={12} sm={6}>
+      {topicPosts.map((post, i) => (
+        <PublicPost key={i} details={post} />
+      ))}
+      {/* <Grid item xs={12} sm={6}>
         <Card className={classes.root}>
           <div className={classes.details}>
             <img
@@ -114,7 +124,7 @@ export default function MediaControlCard() {
             </CardContent>
           </div>
         </Card>
-      </Grid>
+      </Grid> */}
     </Grid>
   );
 }

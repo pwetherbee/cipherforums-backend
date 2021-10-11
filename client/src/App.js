@@ -134,6 +134,9 @@ export default function App() {
           <Route path="/login">
             <Login handleLogin={handleLogin} />
           </Route>
+          <Route path="/create/public/:topic">
+            <CreatePublic />
+          </Route>
           <Route path="/create">
             <Create />
           </Route>
@@ -145,9 +148,6 @@ export default function App() {
           </Route>
           <Route path="/Help">
             <Help />
-          </Route>
-          <Route path="/CreatePublic">
-            <CreatePublic />
           </Route>
           <Route path="/Home">
             <Home />

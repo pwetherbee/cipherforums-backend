@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -12,6 +12,7 @@ import CreateSharpIcon from "@material-ui/icons/CreateSharp";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
+import { useParams } from "react-router";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -35,7 +36,20 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Public() {
   const classes = useStyles();
-
+  const { topic } = useParams();
+  const [values, setValues] = useState({
+    title: "",
+    subtitle: "",
+    image: "",
+  });
+  const handleChange = (props) => (e) => {
+    setValues({ ...values, [props]: e.target.value });
+  };
+  // handle submit
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    // submit request to web server
+  };
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -44,9 +58,9 @@ export default function Public() {
           <CreateSharpIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Create a public post
+          Post to {topic}
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} noValidate onSubmit={handleSubmit}>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={12}>
               <TextField
@@ -56,6 +70,8 @@ export default function Public() {
                 placeholder=""
                 multiline
                 variant="outlined"
+                value={values.title}
+                onChange={handleChange("title")}
               />
             </Grid>
             <Grid item xs={12}>
@@ -66,6 +82,8 @@ export default function Public() {
                 placeholder=""
                 multiline
                 variant="outlined"
+                value={values.subtitle}
+                onChange={handleChange("subtitle")}
               />
             </Grid>
             <Grid item xs={12}>
@@ -75,6 +93,8 @@ export default function Public() {
                 label="Image"
                 placeholder=""
                 variant="outlined"
+                value={values.image}
+                onChange={handleChange("image")}
               />
             </Grid>
             <Button

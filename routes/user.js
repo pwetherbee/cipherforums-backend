@@ -48,7 +48,7 @@ router.get("/:username/info", (req, res) => {
   RIGHT JOIN Users
   ON Forums.authorID = Users.userID
   WHERE Users.username = ${connection.escape(username)}
-  ORDER BY Forums.creationDate ASC
+  ORDER BY Forums.creationDate DESC
   `;
   connection.query(query, (err, rows) => {
     if (err) throw err;

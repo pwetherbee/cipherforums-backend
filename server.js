@@ -18,7 +18,7 @@ var cors = require("cors");
 
 var app = express();
 app.use(cors());
-
+console.log("run on http://localhost:4001/");
 //view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "pug");

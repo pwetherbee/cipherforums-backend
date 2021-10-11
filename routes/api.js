@@ -85,7 +85,7 @@ router.get("/:username/created", (req, res) => {
   INNER JOIN Users
   ON Forums.authorID = Users.userID
   WHERE Users.username = ${connection.escape(username)}
-  ORDER BY Forums.creationDate ASC
+  ORDER BY Forums.creationDate DESC
   `;
   connection.query(query, (err, rows) => {
     if (err) throw err;
@@ -150,6 +150,22 @@ router.put("/threads", (req, res) => {
       newID: urlID,
     })
   );
+});
+
+router.get("/public/:topic", async (req, res) => {
+  let topic = req.params["topic"];
+  const connection = await SQLHelper.createConnection2();
+  const query = `
+  SELECT Forums.id, Forums.url, Forums.creationDate, Forums.subtitle, Forums.image, Users.username, COUNT(Comments.commentID) as numComments FROM Forums
+  LEFT JOIN Comments ON Comments.forumID = Forums.id
+  LEFT JOIN Users ON Users.userID = Forums.authorID
+  WHERE Forums.publicTopic = ${connection.escape(topic)}
+  GROUP BY Forums.id
+  `;
+  connection.connect();
+  const rows = await connection.execute(query);
+  connection.end();
+  res.json(rows[0]);
 });
 
 router.use("/user", userRouter);
