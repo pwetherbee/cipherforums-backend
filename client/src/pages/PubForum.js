@@ -86,7 +86,7 @@ export default function MediaControlCard() {
     <Grid container spacing={1}>
       <Grid item xs={12} sm={6}>
         <Typography className={classes.root} variant="h3">
-          Business
+          {topic}
         </Typography>
       </Grid>
       <Grid item xs={12} sm={6}>

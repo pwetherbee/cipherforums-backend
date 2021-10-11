@@ -43,7 +43,7 @@ export default function AutoGrid() {
     <div className={classes.root}>
       <Grid container spacing={4}>
         <Grid item xs={12} sm={3}>
-          <RouteLink to="/public" component={Link}>
+          <RouteLink to="/public/Business" component={Link}>
             {/* <RouteLink to="/public/business"> */}
             <Paper className={classes.paper}>
               <MonetizationOnOutlinedIcon style={{ fontSize: "13vw" }} />
