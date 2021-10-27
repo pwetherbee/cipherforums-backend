@@ -53,6 +53,9 @@ const useStyles = makeStyles((theme) => ({
     marginTop: 10,
     marginBottom: 50,
   },
+  mainimg: {
+    maxWidth: 330,
+  },
 }));
 const linkStyle = {
   margin: "1rem",
@@ -153,7 +156,9 @@ export default function Post() {
             <Typography variant="h6" className={classes.titleElements}>
               {forumData?.title.slice(0, -5)}
             </Typography>
-            {forumData?.image && <img src={forumData.image} />}
+            {forumData?.image && (
+              <img className={classes.mainimg} src={forumData.image} />
+            )}
             <Typography variant="body2" className={classes.titleElements}>
               {forumData?.subtitle}
             </Typography>
