@@ -66,6 +66,22 @@ export default function Public() {
       alert(data.message);
     }
   };
+  const handleUploadFile = async (e) => {
+    const media = e.target.files[0];
+    const formdata = new FormData();
+    formdata.append("image", media);
+    console.log("file uploaded", e.target.files[0]);
+    const res = await fetch("https://api.imgur.com/3/image/", {
+      method: "POST",
+      headers: {
+        Authorization: "Client-ID 4d15a14d3b5d53b",
+      },
+      body: formdata,
+    });
+    const data = await res.json();
+    console.log(data);
+    setValues({ ...values, ["image"]: data.data.link });
+  };
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -110,6 +126,7 @@ export default function Public() {
                   id="file"
                   single
                   type="file"
+                  onChange={handleUploadFile}
                 />
               </Grid>
             </Grid>
