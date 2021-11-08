@@ -7,7 +7,7 @@ router.delete("/post", (req, res) => {
   const data = req.body;
   //   console.log("request made to delete", data);
   // validate session
-  if (!req.session.userID || data.authorID != req.session?.userID) {
+  if (!req.session.userID) {
     return res.send({ success: false, message: "user is not logged in" });
   }
   // create query session
@@ -22,7 +22,7 @@ router.delete("/post", (req, res) => {
   // delete forum from table where authorID == req.session.userID
   connection.query(query, (err, rows, field) => {
     if (err) {
-      return res.send({ success: true, message: "Successfully removed post" });
+      return res.send({ success: false, message: "Could not remove post" });
     }
     res.send({ success: true, message: "Successfully removed post" });
   });
