@@ -44,6 +44,7 @@ export default function Public() {
     image: "",
   });
   const handleChange = (props) => (e) => {
+    console.log(values);
     setValues({ ...values, [props]: e.target.value });
   };
   // handle submit
@@ -70,6 +71,7 @@ export default function Public() {
     const media = e.target.files[0];
     const formdata = new FormData();
     formdata.append("image", media);
+    console.log(media);
     const res = await fetch("https://api.imgur.com/3/image/", {
       method: "POST",
       headers: {
@@ -78,6 +80,7 @@ export default function Public() {
       body: formdata,
     });
     const data = await res.json();
+    console.log(data);
     setValues({ ...values, ["image"]: data.data.link });
   };
   return (
