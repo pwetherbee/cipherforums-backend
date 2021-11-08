@@ -41,13 +41,16 @@ const useStyles = makeStyles((theme) => ({
   avatar: {
     backgroundColor: green[500],
   },
+  theComment: {
+    overflowWrap: "anywhere",
+  },
 }));
 
 export const Comment = ({ comment, secret }) => {
   const classes = useStyles();
   return (
     <Paper className={classes.paper}>
-      <Grid container wrap="nowrap" spacing={2}>
+      <Grid container wrap="nowrap" spacing={1}>
         <Grid item>
           <Avatar className={classes.avatar} variant="rounded" color="green">
             {(comment.author || comment.username).slice(0, 1)}
@@ -64,7 +67,7 @@ export const Comment = ({ comment, secret }) => {
               Reply
             </Button>
           </Grid>
-          <Typography variant="body2">
+          <Typography className={classes.theComment} variant="body2">
             {CipherText(
               comment.text || comment.commentText,
               secret || "default_key"

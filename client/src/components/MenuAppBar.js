@@ -187,7 +187,7 @@ export default function MenuAppBar({ auth }) {
                     component={RouteLink}
                     to="/settings"
                   >
-                    My account
+                    Settings
                   </Button>
                 </MenuItem>
                 <MenuItem key={3}>

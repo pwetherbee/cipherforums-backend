@@ -54,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: 50,
   },
   mainimg: {
-    maxWidth: 330,
+    maxWidth: 300,
   },
 }));
 const linkStyle = {
