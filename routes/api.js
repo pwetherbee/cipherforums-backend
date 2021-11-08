@@ -5,6 +5,7 @@ let SQLHelper = require("../helpers/sqlQueryHelper");
 const userRouter = require("./user");
 const loginRouter = require("./login");
 const createRouter = require("./create");
+const deleteRouter = require("./delete");
 const { body, validationResult } = require("express-validator");
 router.use(express.json());
 
@@ -209,6 +210,8 @@ router.post(
     return res.json({ success: true, message: "post successful", url: url });
   }
 );
+
+router.post("/delete", deleteRouter);
 
 router.use("/user", userRouter);
 router.use("/login", loginRouter);
