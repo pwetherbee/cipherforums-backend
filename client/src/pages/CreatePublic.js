@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Public() {
   const classes = useStyles();
   const history = useHistory();
-  const [createBtnDisabled, setCreateBtnDisabled] = useState([true]);
+  const [createBtnDisabled, setCreateBtnDisabled] = useState([false]);
   const { topic } = useParams();
   const [values, setValues] = useState({
     title: "",
@@ -141,7 +141,7 @@ export default function Public() {
               variant="contained"
               color="primary"
               className={classes.submit}
-              disabled={createBtnDisabled}
+              loading={createBtnDisabled}
             >
               Create
             </Button>
