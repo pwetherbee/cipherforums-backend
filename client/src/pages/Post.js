@@ -17,6 +17,7 @@ import TextField from "@material-ui/core/TextField";
 import { encrypt } from "../helpers/convert";
 import { Link as RouteLink } from "react-router-dom";
 import { Link } from "@material-ui/core";
+import ConfirmDelete from "../components/ConfirmDelete";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -74,6 +75,8 @@ export default function Post() {
   const [secret, setSecret] = useState();
   const [error, setError] = useState(false);
   const [helperText, setHelperText] = useState("");
+  const [openConfirmDelete, setOpenConfirmDelete] = useState(false);
+  const [deleteCommentData, setDeleteCommentData] = useState({});
   const [postCommentText, setPostCommentText] = useState("");
   useEffect(() => {
     fetch(`/api/threads/${postname}`)
@@ -131,10 +134,44 @@ export default function Post() {
       setHelperText("error posting comment");
     }
   };
+  const handleDeleteComment = (data) => () => {
+    setOpenConfirmDelete(true);
+    setDeleteCommentData(data);
+  };
+  const handleDecision = (decision) => async () => {
+    if (decision === "agree") {
+      console.log("deleting comment");
+      console.log(deleteCommentData);
+      // make fetch to delete
+      const res = await fetch("/api/delete/comment", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ id: deleteCommentData }),
+      });
+      const data = await res.json();
+      if (!data.success) {
+        alert(data.message);
+      }
+    }
+    setOpenConfirmDelete(false);
+  };
+
+  const handleCloseConfirmDelete = () => {
+    setOpenConfirmDelete(false);
+  };
+
   return (
     <CssBaseline>
       {forumData ? (
         <Container>
+          <ConfirmDelete
+            open={openConfirmDelete}
+            handleDecision={handleDecision}
+            handleClose={handleCloseConfirmDelete}
+          />
           <Paper className={classes.titleHolder}>
             <Typography variant="subtitle1" className={classes.titleElements}>
               Post to{" "}
@@ -165,7 +202,11 @@ export default function Post() {
           </Paper>
           <SecretBox updateSecret={updateSecret} secret={secret} />
           {comments?.map((comment) => (
-            <Comment comment={comment} secret={secret} />
+            <Comment
+              comment={comment}
+              secret={secret}
+              handleDeleteComment={handleDeleteComment}
+            />
           ))}
           <TextField
             error={error}

@@ -105,7 +105,9 @@ export default function Profile() {
         body: JSON.stringify(deletePostData),
       });
       const data = await res.json();
-      console.log(data);
+      if (!data.success) {
+        alert(data.message);
+      }
     }
     setOpenConfirmDelete(false);
   };

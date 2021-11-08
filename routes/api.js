@@ -44,7 +44,7 @@ router.get("/threads/:tag", (req, res) => {
       comments: [],
     };
     query = `
-    SELECT Comments.postTime, Comments.commentText, Comments.forumID, Users.username FROM Comments
+    SELECT Comments.commentID, Comments.postTime, Comments.commentText, Comments.forumID, Users.username FROM Comments
     LEFT JOIN Users
     ON Comments.authorID = Users.userID
     WHERE forumID = ${id}
@@ -66,6 +66,7 @@ router.get("/threads/:tag", (req, res) => {
         // Generate comment for every row returned in SQL
 
         let comment = {
+          id: row.commentID,
           author: row.username || "Anonymous",
           time: row.postTime,
           text: row.commentText,

@@ -46,8 +46,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const Comment = ({ comment, secret }) => {
+export const Comment = ({ comment, secret, handleDeleteComment }) => {
   const classes = useStyles();
+  console.log(comment.id);
   return (
     <Paper className={classes.paper}>
       <Grid container wrap="nowrap" spacing={1}>
@@ -66,7 +67,11 @@ export const Comment = ({ comment, secret }) => {
             <Button variant="outlined" className={classes.reply}>
               Reply
             </Button>
-            <Button variant="outlined" className={classes.reply}>
+            <Button
+              variant="outlined"
+              className={classes.reply}
+              onClick={handleDeleteComment(comment.id)}
+            >
               Delete
             </Button>
           </Grid>

@@ -29,6 +29,29 @@ router.delete("/post", (req, res) => {
   // return success message
 });
 
-// router.post();
+router.post("/comment", (req, res) => {
+  console.log("deleting");
+  const data = req.body;
+  console.log(data);
+  if (!req.session.userID) {
+    return res.send({ success: false, message: "user is not logged in" });
+  }
+
+  let connection = SQLHelper.createConnection();
+
+  const query = `
+  DELETE FROM Comments WHERE commentID = ${connection.escape(
+    data.id
+  )} AND authorID = ${connection.escape(req.session.userID)}
+  `;
+  //   console.log(data.authorID, req.session.userID);
+  // delete forum from table where authorID == req.session.userID
+  connection.query(query, (err, rows, field) => {
+    if (err) {
+      return res.send({ success: false, message: "Could not remove comment" });
+    }
+    res.send({ success: true, message: "Successfully removed comment" });
+  });
+});
 
 module.exports = router;
