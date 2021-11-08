@@ -37,6 +37,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Public() {
   const classes = useStyles();
   const history = useHistory();
+  const [createBtnDisabled, setCreateBtnDisabled] = useState([true]);
   const { topic } = useParams();
   const [values, setValues] = useState({
     title: "",
@@ -72,6 +73,7 @@ export default function Public() {
     const formdata = new FormData();
     formdata.append("image", media);
     console.log(media);
+    setCreateBtnDisabled(true);
     const res = await fetch("https://api.imgur.com/3/image/", {
       method: "POST",
       headers: {
@@ -80,8 +82,10 @@ export default function Public() {
       body: formdata,
     });
     const data = await res.json();
+
     console.log(data);
     setValues({ ...values, ["image"]: data.data.link });
+    setCreateBtnDisabled(false);
   };
   return (
     <Container component="main" maxWidth="xs">
@@ -137,6 +141,7 @@ export default function Public() {
               variant="contained"
               color="primary"
               className={classes.submit}
+              disabled={createBtnDisabled}
             >
               Create
             </Button>
