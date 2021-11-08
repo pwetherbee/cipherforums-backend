@@ -67,6 +67,10 @@ export default function PostCard({ data, secret }) {
   const [expanded, setExpanded] = React.useState(false);
   const [forumData, setForumData] = React.useState();
 
+  const handleDelete = function (e) {
+    console.log(data.id);
+  };
+
   const handleExpandClick = () => {
     // check if data already exists
     if (!forumData) {
@@ -83,7 +87,7 @@ export default function PostCard({ data, secret }) {
   };
 
   return (
-    <Card className={classes.root}>
+    <Card className={classes.root} id={data.id}>
       <CardActionArea
         component={RouteLink}
         to={`/user/${data.username}/post/${data.url}`}
@@ -125,7 +129,7 @@ export default function PostCard({ data, secret }) {
         {/* <IconButton color="primary" aria-label="add to favorites">
           <FavoriteIcon />
         </IconButton> */}
-        <IconButton color="primary" aria-label="share">
+        <IconButton onClick={handleDelete} color="primary" aria-label="share">
           <DeleteForeverRoundedIcon />
         </IconButton>
 
