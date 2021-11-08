@@ -127,7 +127,7 @@ export default function Public() {
                   id="file"
                   single
                   type="file"
-                  onChange={handleUploadFile}
+                  onInput={handleUploadFile}
                 />
               </Grid>
             </Grid>
