@@ -5,9 +5,9 @@ router.use(express.json());
 
 router.delete("/post", (req, res) => {
   const data = req.body;
-  console.log("request made to delete", data);
+  //   console.log("request made to delete", data);
   // validate session
-  if (!req.session.userID || data.authorID != req.session.userID) {
+  if (!req.session.userID || data.authorID != req.session?.userID) {
     return res.send({ success: false, message: "user is not logged in" });
   }
   // create query session
@@ -29,6 +29,6 @@ router.delete("/post", (req, res) => {
   // return success message
 });
 
-router.post();
+// router.post();
 
 module.exports = router;
