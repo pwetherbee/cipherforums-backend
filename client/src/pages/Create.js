@@ -32,6 +32,9 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  input: {
+    backgroundColor: "red",
+  },
 }));
 
 export default function Public() {
@@ -103,7 +106,13 @@ export default function Public() {
               />
             </Grid>
             <Grid item xs={12}>
-              <input type="file" id="file"></input>
+              <input
+                accept="image/*"
+                className={classes.input}
+                id="file"
+                single
+                type="file"
+              />
             </Grid>
             <Grid item xs={12}>
               <TextField

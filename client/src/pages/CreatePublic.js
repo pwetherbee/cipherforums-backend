@@ -104,7 +104,13 @@ export default function Public() {
             </Grid>
             <Grid item xs={12}>
               <Grid item xs={12}>
-                <input type="file" id="file"></input>
+                <input
+                  accept="image/*"
+                  className={classes.input}
+                  id="file"
+                  single
+                  type="file"
+                />
               </Grid>
             </Grid>
             <Button

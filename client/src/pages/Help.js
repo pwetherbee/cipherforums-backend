@@ -172,22 +172,7 @@ export default function FullWidthGrid() {
             </Typography>
           </Paper>
         </Grid>
-        <Grid item xs={12}>
-          {/* <Paper className={classes.paper}>
-            <Typography variant="h4" gutterBottom>
-              * Disclaimer *
-            </Typography>
-            <Typography>
-              This website is not to be used for criminal activity. This website
-              should not be used to store password data, financial data, or any
-              sensitive records. While Xor encryption is strong in a vacuum,
-              government authorities or advanced cyber security professionals
-              could make use of keyloggers, surveillance, inference, endpoint
-              breaches, etc. to obtain sensitive information. While these
-              methods do require quite a bit of effort, they are not impossible.
-            </Typography>
-          </Paper> */}
-        </Grid>
+        <Grid item xs={12}></Grid>
       </Grid>
     </div>
   );
