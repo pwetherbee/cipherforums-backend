@@ -21,6 +21,7 @@ import PublicIcon from "@material-ui/icons/Public";
 import HelpIcon from "@material-ui/icons/Help";
 import Icon from "@material-ui/core/Icon";
 import { SvgIcon } from "@material-ui/core";
+import homeLogo from "../logo.svg";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -33,6 +34,10 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     flexGrow: 1,
+  },
+  logo: {
+    width: 40,
+    marginTop: 5,
   },
 }));
 
@@ -95,15 +100,9 @@ export default function MenuAppBar({ auth }) {
           )}
 
           <Typography variant="h6" className={classes.title}>
-            <Button
-              variant="contained"
-              color="primary"
-              component={RouteLink}
-              to="/"
-            >
-              home
+            <Button component={RouteLink} to="/">
+              <img className={classes.logo} src={homeLogo} />
             </Button>
-            {/* <RouteLink to="/jskdfjsd">click me</RouteLink> */}
           </Typography>
 
           <Typography variant="h6" className={classes.title}>
@@ -187,7 +186,7 @@ export default function MenuAppBar({ auth }) {
                     component={RouteLink}
                     to="/settings"
                   >
-                    My account
+                    Settings
                   </Button>
                 </MenuItem>
                 <MenuItem key={3}>
