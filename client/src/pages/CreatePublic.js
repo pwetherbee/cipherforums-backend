@@ -103,15 +103,9 @@ export default function Public() {
               />
             </Grid>
             <Grid item xs={12}>
-              <TextField
-                fullWidth
-                id="outlined-textarea"
-                label="Image"
-                placeholder=""
-                variant="outlined"
-                value={values.image}
-                onChange={handleChange("image")}
-              />
+              <Grid item xs={12}>
+                <input type="file" id="file"></input>
+              </Grid>
             </Grid>
             <Button
               type="submit"
