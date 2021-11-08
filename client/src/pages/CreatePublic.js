@@ -44,6 +44,7 @@ export default function Public() {
     image: "",
   });
   const handleChange = (props) => (e) => {
+    console.log(values);
     setValues({ ...values, [props]: e.target.value });
   };
   // handle submit
