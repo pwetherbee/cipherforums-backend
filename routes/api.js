@@ -211,7 +211,7 @@ router.post(
   }
 );
 
-router.post("/delete", deleteRouter);
+router.use("/delete", deleteRouter);
 
 router.use("/user", userRouter);
 router.use("/login", loginRouter);

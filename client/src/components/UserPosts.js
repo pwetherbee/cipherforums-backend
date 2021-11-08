@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function UserPosts({ posts, secret }) {
+export default function UserPosts({ posts, secret, onDelete }) {
   const classes = useStyles();
   //   const [createdPosts, setCreatedPosts] = useState(posts);
   return (
@@ -37,7 +37,12 @@ export default function UserPosts({ posts, secret }) {
       <Grid>
         {posts
           ? posts.map((post, i) => (
-              <PostCard key={i} secret={secret} data={post} />
+              <PostCard
+                key={i}
+                secret={secret}
+                data={post}
+                onDelete={onDelete}
+              />
             ))
           : "No Posts for this user"}
       </Grid>

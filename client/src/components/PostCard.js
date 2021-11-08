@@ -20,6 +20,11 @@ import MiniThread from "./MiniThread";
 import LoadingIcon from "./LoadingPageIcon";
 import { Link } from "@material-ui/core";
 import { Link as RouteLink } from "react-router-dom";
+import Button from "@material-ui/core/Button";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -61,14 +66,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function PostCard({ data, secret }) {
+export default function PostCard({ data, secret, onDelete }) {
   // console.log(data);
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
   const [forumData, setForumData] = React.useState();
 
   const handleDelete = function (e) {
-    console.log(data.id);
+    onDelete(data);
   };
 
   const handleExpandClick = () => {
