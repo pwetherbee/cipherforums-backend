@@ -26,6 +26,7 @@ import {
   useParams,
 } from "react-router-dom";
 import FollowContainer from "../components/FollowContainer";
+import ConfirmDelete from "../components/ConfirmDelete";
 // import Button from "@material-ui/core/Button";
 
 function TabPanel(props) {
@@ -37,6 +38,9 @@ export default function Profile() {
   let match = useRouteMatch();
   let { username } = useParams();
   // const classes = useStyles();
+  const [openConfirmDelete, setOpenConfirmDelete] = useState(false);
+  const [deletePostData, setDeletePostData] = useState({});
+
   const [createdPosts, setCreatedPosts] = useState([]);
   const [userData, setUserData] = useState();
   const [secret, setSecret] = useState({});
@@ -45,6 +49,7 @@ export default function Profile() {
   const [obj, setObj] = useState({});
   const [tab, setTab] = useState(0);
   const [newUser, setNewUser] = useState(null);
+
   useEffect(async () => {
     setTab(0);
     setUserData(null);
@@ -86,6 +91,33 @@ export default function Profile() {
   const handleChangeTab = (e, newTab) => {
     setTab(newTab);
   };
+
+  const handleDecision = (decision) => async () => {
+    if (decision === "agree") {
+      // make fetch to delete
+      const res = await fetch("/api/delete/post", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(deletePostData),
+      });
+      const data = await res.json();
+      console.log(data);
+    }
+    setOpenConfirmDelete(false);
+  };
+
+  const handleCloseConfirmDelete = () => {
+    setOpenConfirmDelete(false);
+  };
+
+  const handleClickDelete = (data) => {
+    setOpenConfirmDelete(true);
+    setDeletePostData(data);
+    console.log(data);
+  };
   // const updateuser = () => {
   //   console.log("update user called");
   //   setUserData();
@@ -104,7 +136,13 @@ export default function Profile() {
         {/* <Route exact path={`${match.path}/`}>
          
         </Route> */}
+
         <Container>
+          <ConfirmDelete
+            open={openConfirmDelete}
+            handleDecision={handleDecision}
+            handleClose={handleCloseConfirmDelete}
+          />
           <Grid container spacing={12}>
             <Grid item xs={6}>
               <Bio
@@ -149,7 +187,11 @@ export default function Profile() {
               <TabPanel value={tab} index={0}>
                 {userData ? (
                   createdPosts.length ? (
-                    <UserPosts secret={secret} posts={createdPosts} />
+                    <UserPosts
+                      secret={secret}
+                      posts={createdPosts}
+                      onDelete={handleClickDelete}
+                    />
                   ) : (
                     "This user hasn't made any posts yet"
                   )
