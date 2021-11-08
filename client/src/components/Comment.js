@@ -66,6 +66,9 @@ export const Comment = ({ comment, secret }) => {
             <Button variant="outlined" className={classes.reply}>
               Reply
             </Button>
+            <Button variant="outlined" className={classes.reply}>
+              Delete
+            </Button>
           </Grid>
           <Typography className={classes.theComment} variant="body2">
             {CipherText(
