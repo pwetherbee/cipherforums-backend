@@ -94,9 +94,10 @@ export default function Profile() {
 
   const handleDecision = (decision) => async () => {
     if (decision === "agree") {
+      console.log(deletePostData);
       // make fetch to delete
       const res = await fetch("/api/delete/post", {
-        method: "POST",
+        method: "DELETE",
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",

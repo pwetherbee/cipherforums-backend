@@ -3,22 +3,22 @@ let SQLHelper = require("../helpers/sqlQueryHelper");
 var router = express.Router();
 router.use(express.json());
 
-router.post("/post", (req, res) => {
-  const { data } = req.body;
+router.delete("/post", (req, res) => {
+  const data = req.body;
   console.log("request made to delete", data);
   // validate session
-  if (!req.session) {
-    console.log("user not logged in");
-    res.send({ success: false, message: "user is not logged in" });
+  if (!req.session.userID || data.authorID != req.session.userID) {
+    return res.send({ success: false, message: "user is not logged in" });
   }
   // create query session
   let connection = SQLHelper.createConnection();
 
   const query = `
-  DELETE FROM FORUMS WHERE id = ${connection.escape(
+  DELETE FROM Forums WHERE id = ${connection.escape(
     data.id
-  )} HAVING authorID = ${connection.escape(req.session.userID)}
+  )} AND authorID = ${connection.escape(req.session.userID)}
   `;
+  console.log(data.authorID, req.session.userID);
   // delete forum from table where authorID == req.session.userID
   connection.query(query, (err, rows, field) => {
     if (err) {
@@ -28,5 +28,7 @@ router.post("/post", (req, res) => {
   });
   // return success message
 });
+
+router.post();
 
 module.exports = router;
