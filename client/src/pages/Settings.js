@@ -58,22 +58,17 @@ export default function Public() {
             multiline
           />
         </FormControl>
-        <Typography
-          variant="body2"
-          gutterBottom
-          className={classes.settingsItem}
-        >
-          Enter a profile image link
+        <div>
+          <br></br>
+        </div>
+        <Typography variant="body2" gutterBottom>
+          Upload a profile
         </Typography>
         <FormControl fullWidth>
-          <TextField
-            id="outlined-basic"
-            label="link"
-            variant="outlined"
-            value={avi}
-            onChange={(e) => setAvi(e.target.value)}
-            className={classes.settingsItem}
-          />
+          <div>
+            <br></br>
+          </div>
+          <input type="file" id="file"></input>
         </FormControl>
         <FormControl fullWidth>
           <Typography

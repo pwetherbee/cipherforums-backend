@@ -29,6 +29,11 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 10,
     padding: 0,
   },
+  delete: {
+    marginLeft: 10,
+    fontSize: 10,
+    padding: 0,
+  },
   titleHolder: {
     maxWidth: 1500,
     marginTop: 25,
