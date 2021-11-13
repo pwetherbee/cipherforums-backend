@@ -29,10 +29,11 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     padding: theme.spacing(0),
     textAlign: "center",
-    color: theme.palette.text.secondary,
-    borderTopWidth: 3,
-    borderColor: theme.palette.text.secondary,
-    borderStyle: "solid",
+    color: theme.palette.background.default,
+    backgroundColor: theme.palette.text.secondary,
+    // borderTopWidth: 3,
+    // borderColor: theme.palette.text.secondary,
+    // borderStyle: "solid",
   },
 }));
 
