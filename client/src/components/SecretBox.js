@@ -28,6 +28,7 @@ export default function SecretBox({ updateSecret, secret }) {
     <form className={classes.root} noValidate autoComplete="off">
       <div>
         <TextField
+          transitionDuration={50}
           inputProps={{ spellCheck: "false" }}
           id="outlined-textarea"
           label="Secret Key"

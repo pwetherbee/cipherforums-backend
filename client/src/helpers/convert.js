@@ -244,9 +244,13 @@ function decrypt(text_hex, key, decryptType = "xor") {
     }
   } else if (decryptType === "aes") {
     let bytes = CryptoJS.AES.decrypt(text_hex, key);
-    console.log("", bytes);
-    let decrypt = bytes.toString(CryptoJS.enc.Utf8);
-    return decrypt;
+    let decrypt;
+    try {
+      decrypt = bytes.toString(CryptoJS.enc.Utf8);
+      return decrypt || sha256(bytes.words.join(""));
+    } catch {
+      return decrypt || sha256(bytes.words.join(""));
+    }
   } else {
     return "Error Could not decrypt";
   }

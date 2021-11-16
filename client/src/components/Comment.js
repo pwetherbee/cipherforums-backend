@@ -59,7 +59,6 @@ const useStyles = makeStyles((theme) => ({
 
 export const Comment = ({ comment, secret, handleDeleteComment }) => {
   const classes = useStyles();
-  console.log(comment.id);
   return (
     <Paper className={classes.paper}>
       <Grid container wrap="nowrap" spacing={1}>
@@ -74,7 +73,6 @@ export const Comment = ({ comment, secret, handleDeleteComment }) => {
               @{comment.author || comment.username}{" "}
             </Typography>
             <Typography variant="caption">{comment.time} </Typography>
-
             <Button variant="outlined" className={classes.reply}>
               Reply
             </Button>
@@ -92,7 +90,8 @@ export const Comment = ({ comment, secret, handleDeleteComment }) => {
           <Typography className={classes.theComment} variant="body2">
             {CipherText(
               comment.text || comment.commentText,
-              secret || "default_key"
+              secret || "default_key",
+              comment.encryptionType || "xor"
             )}
           </Typography>
         </Grid>

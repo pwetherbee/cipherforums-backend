@@ -78,6 +78,7 @@ export default function Post() {
   const [openConfirmDelete, setOpenConfirmDelete] = useState(false);
   const [deleteCommentData, setDeleteCommentData] = useState({});
   const [postCommentText, setPostCommentText] = useState("");
+  const [encType, setEncType] = useState("aes");
   useEffect(() => {
     fetch(`/api/threads/${postname}`)
       .then((res) => res.json())
@@ -111,11 +112,7 @@ export default function Post() {
     }
     // Encrypt comment
     console.log(postCommentText, secret);
-    const ciphertext = encrypt(postCommentText, secret, "aes");
-    console.log(ciphertext);
-    const result = decrypt(ciphertext, "sup", "aes");
-    console.log(result);
-    return;
+    const ciphertext = encrypt(postCommentText, secret, encType);
     const res = await fetch(`/api/threads/${postname}`, {
       method: "POST",
       headers: {
@@ -125,6 +122,7 @@ export default function Post() {
       body: JSON.stringify({
         text: ciphertext,
         forumID: forumData.id,
+        encType: encType,
       }),
     });
     if (res.ok) {
@@ -239,7 +237,7 @@ export default function Post() {
             >
               Submit Comment
             </Button>
-            <SecretBox updateSecret={updateSecret} secret={secret} />
+            {/* <SecretBox updateSecret={updateSecret} secret={secret} /> */}
           </Container>
         </Container>
       ) : (

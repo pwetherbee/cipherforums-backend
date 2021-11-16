@@ -44,7 +44,7 @@ router.get("/threads/:tag", (req, res) => {
       comments: [],
     };
     query = `
-    SELECT Comments.commentID, Comments.postTime, Comments.commentText, Comments.forumID, Users.username FROM Comments
+    SELECT Comments.commentID, Comments.postTime, Comments.commentText, Comments.forumID, Comments.encryptionType, Users.username FROM Comments
     LEFT JOIN Users
     ON Comments.authorID = Users.userID
     WHERE forumID = ${id}
@@ -71,6 +71,7 @@ router.get("/threads/:tag", (req, res) => {
           time: row.postTime,
           text: row.commentText,
           forumID: row.forumID,
+          encryptionType: row.encryptionType,
         };
         forum.comments.push(comment);
       });
@@ -116,10 +117,12 @@ router.post("/threads/:tag", (req, res) => {
   // Make SQL query to post new thread
   // console.log(req.session.userID);
   let query = `
-  INSERT INTO Comments (forumID, authorID, commentText, postTime)
+  INSERT INTO Comments (forumID, authorID, commentText, encryptionType, postTime)
   VALUES (${connection.escape(commentData.forumID)}, ${
     connection.escape(req.session.userID) || "NULL"
-  }, ${connection.escape(commentData.text)}, NOW())
+  }, ${connection.escape(commentData.text)}, ${connection.escape(
+    commentData.encType
+  )}, NOW())
   `;
   connection.connect();
   connection.query(query, function (err, rows, fields) {
@@ -131,6 +134,7 @@ router.post("/threads/:tag", (req, res) => {
     forumID: commentData.forumID,
     time: "just now",
     text: commentData.text,
+    encryptionType: commentData.encType,
   });
 });
 
