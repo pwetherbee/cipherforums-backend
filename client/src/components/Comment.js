@@ -29,6 +29,12 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 10,
     padding: 0,
   },
+  aes: {
+    fontSize: 10,
+    padding: 0,
+    backgroundColor: "yellow",
+    color: "black",
+  },
   delete: {
     marginLeft: 10,
     fontSize: 10,
@@ -79,6 +85,9 @@ export const Comment = ({ comment, secret, handleDeleteComment }) => {
             >
               Delete
             </Button>
+            {/* <Button variant="outlined" className={classes.aes}>
+              AES
+            </Button> */}
           </Grid>
           <Typography className={classes.theComment} variant="body2">
             {CipherText(
