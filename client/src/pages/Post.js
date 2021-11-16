@@ -14,7 +14,7 @@ import SecretBox from "../components/SecretBox";
 import LoadingIcon from "../components/LoadingPageIcon";
 import { Comment } from "../components/Comment";
 import TextField from "@material-ui/core/TextField";
-import { encrypt } from "../helpers/convert";
+import { decrypt, encrypt } from "../helpers/convert";
 import { Link as RouteLink } from "react-router-dom";
 import { Link } from "@material-ui/core";
 import ConfirmDelete from "../components/ConfirmDelete";
@@ -110,7 +110,12 @@ export default function Post() {
       return;
     }
     // Encrypt comment
-    const ciphertext = encrypt(postCommentText, secret);
+    console.log(postCommentText, secret);
+    const ciphertext = encrypt(postCommentText, secret, "aes");
+    console.log(ciphertext);
+    const result = decrypt(ciphertext, "sup", "aes");
+    console.log(result);
+    return;
     const res = await fetch(`/api/threads/${postname}`, {
       method: "POST",
       headers: {

@@ -1,4 +1,6 @@
 /* global BigInt */
+const CryptoJS = require("crypto-js");
+
 var sha256 = function sha256(ascii) {
   function rightRotate(value, amount) {
     return (value >>> amount) | (value << (32 - amount));
@@ -232,17 +234,36 @@ function text_to_dec(text, key) {
   return commentXorHex;
 }
 
-function decrypt(text_hex, key) {
-  try {
-    const key_decimal = key_to_dec(key);
-    return dec_to_text(text_hex, key_decimal);
-  } catch {
-    return text_hex;
+function decrypt(text_hex, key, decryptType = "xor") {
+  if (decryptType === "xor") {
+    try {
+      const key_decimal = key_to_dec(key);
+      return dec_to_text(text_hex, key_decimal);
+    } catch {
+      return text_hex;
+    }
+  } else if (decryptType === "aes") {
+    let bytes = CryptoJS.AES.decrypt(text_hex, key);
+    console.log("", bytes);
+    let decrypt = bytes.toString(CryptoJS.enc.Utf8);
+    return decrypt;
+  } else {
+    return "Error Could not decrypt";
   }
 }
 
-function encrypt(raw_text, raw_key) {
-  return text_to_dec(raw_text, raw_key);
+function encrypt(raw_text, raw_key, encryptType = "xor") {
+  // switch(encryptType){
+  //   case 'xor':
+
+  // }
+  if (encryptType === "xor") {
+    return text_to_dec(raw_text, raw_key);
+  } else if (encryptType === "aes") {
+    return CryptoJS.AES.encrypt(raw_text, raw_key).toString();
+  } else {
+    return "message not encrypted";
+  }
 }
 
 function sleep(ms) {
