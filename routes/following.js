@@ -10,9 +10,13 @@ router.use(express.json());
 // });
 
 router.post("/", (req, res) => {
-  const data = req.body;
-  if (!req.session.username || req.session.username == data?.username)
-    return res.status(401);
+  const { username } = req.body;
+  if (!req.session.username || req.session.username == username)
+    return res.status(401).json({
+      success: false,
+      message: "user is not logged in",
+    });
+
   const connection = SQLHelper.createConnection();
   connection.connect();
   //   const query = `
@@ -20,25 +24,36 @@ router.post("/", (req, res) => {
   //   INSERT INTO Following (userID, followingID)
   //   VALUES (${req.session.userID}, followID)
   //   `;
+  // console.log(username);
   const query = `
   INSERT INTO Following (userID, followingID)
   VALUES (${
     req.session.userID
-  }, (SELECT userID FROM Users WHERE username = ${connection.escape(
-    data.username
-  )}))
+  }, (SELECT userID FROM Users WHERE username = ${connection.escape(username)}))
   `;
+  // console.log("making query", username);
   connection.query(query, (err) => {
+    console.log(err);
     if (err) {
       if (err.code === "ER_DUP_ENTRY") {
-        return;
+        return res.status(400).json({
+          success: false,
+          message: "you are already following this user",
+        });
       } else {
-        throw err;
+        console.log(err);
+        return res.status(400).json({
+          success: false,
+          message: err,
+        });
       }
     }
+    connection.end();
+    res.json({
+      success: true,
+      message: "successfully followed this person",
+    });
   });
-  res.send(JSON.stringify({ response: "successfully followed this person" }));
-  connection.end();
 });
 
 router.get("/list/:name", (req, res) => {

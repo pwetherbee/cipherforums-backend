@@ -53,6 +53,28 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Bio({ profile, currUser, canFollow }) {
   const classes = useStyles();
+  const handleFollow = async () => {
+    const res = await fetch("/api/following", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username: profile?.username,
+      }),
+    });
+    if (!res || res.status !== 200) {
+      throw "error following";
+      return;
+    }
+    const data = await res.json();
+    if (!data.success) {
+      return alert(data.message);
+    }
+    alert(data.message);
+    canFollow = false;
+  };
   //   const [profile, setProfile] = useState(user);
   return (
     <React.Fragment>
@@ -89,13 +111,19 @@ export default function Bio({ profile, currUser, canFollow }) {
               {/* <Card className={classes.avi}> */}
               <Typography gutterBottom variant="h5" component="h2">
                 @{profile?.username || "user not found"}
-                {canFollow ? (
-                  <Button size="small" color="primary">
-                    Follow
-                  </Button>
-                ) : (
-                  ""
-                )}
+                {profile?.currUser ||
+                  (profile?.loggedIn &&
+                    (!profile?.isFollowing ? (
+                      <Button
+                        size="small"
+                        color="primary"
+                        onClick={handleFollow}
+                      >
+                        Follow
+                      </Button>
+                    ) : (
+                      "✔"
+                    )))}
                 {currUser ? (
                   <Button
                     size="small"
