@@ -28,12 +28,13 @@ const useStyles = makeStyles((theme) => ({
   },
   paper: {
     padding: theme.spacing(0),
+    margin: theme.spacing(0),
     textAlign: "center",
-    color: theme.palette.background.default,
-    backgroundColor: theme.palette.text.secondary,
-    // borderTopWidth: 3,
-    // borderColor: theme.palette.text.secondary,
-    // borderStyle: "solid",
+    color: theme.palette.primary.main,
+    backgroundColor: theme.palette.background.default,
+    borderWidth: 1,
+    borderColor: theme.palette.text.secondary,
+    borderStyle: "solid",
   },
 }));
 
