@@ -13,6 +13,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Modal from "@material-ui/core/Modal";
+import { useHistory } from "react-router";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -59,11 +60,41 @@ export default function Public() {
     confirmPassword: "",
     stayLoggedIn: false,
   });
+  const history = useHistory();
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
   };
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     // make fetch request to web server
+    const res = await fetch("/api/signup", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(values),
+    });
+    if (!res || res.status !== 200) {
+      throw "error signing up";
+      return;
+    }
+    const data = await res.json();
+    if (!data.success) {
+      return alert(data.message);
+    }
+    setOpen(true);
+    setTimeout(() => {
+      setOpen(false);
+      setValues({
+        username: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+        stayLoggedIn: false,
+      });
+      // redirect to login
+      history.push("/login");
+    }, 10 * 1000);
     // on confirmation redirect to confirm by email page
   };
   return (
@@ -142,16 +173,15 @@ export default function Public() {
               </Grid>
             </Grid>
             <Button
-              type="submit"
               fullWidth
               variant="contained"
               color="primary"
               className={classes.submit}
+              onClick={handleSubmit}
             >
               Sign Up
             </Button>
             <div>
-              <Button onClick={handleOpen}>Open modal</Button>
               <Modal
                 open={open}
                 onClose={handleClose}

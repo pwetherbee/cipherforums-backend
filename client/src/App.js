@@ -166,13 +166,12 @@ export default function App() {
           <Route path="/Confirm">
             <Confirm />
           </Route>
-          <Route path="/Verify">
+          <Route path="/Verify/:emailToken">
             <Verify />
           </Route>
           <Route path="/Fullscreen">
             <Fullscreen />
           </Route>
-
           <Route path="/">
             <Home />
           </Route>

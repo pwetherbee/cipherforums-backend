@@ -60,14 +60,14 @@ export default function Bio({ profile, currUser, canFollow }) {
         {profile?.username ? (
           <div>
             <CardContent className={classes.desc}>
-              <Card className={classes.avi}>
+              {/* <Card className={classes.avi}>
                 <img
                   className={classes.img}
                   alt="complex"
                   src={profile?.pic || "https://i.imgur.com/jlZySn6.jpeg"}
                 />
               </Card>
-              avatar=
+              avatar= */}
               {
                 <Avatar
                   // color={classes.red}

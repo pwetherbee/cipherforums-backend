@@ -4,6 +4,7 @@ var router = express.Router();
 let SQLHelper = require("../helpers/sqlQueryHelper");
 const userRouter = require("./user");
 const loginRouter = require("./login");
+const signupRouter = require("./signup");
 const createRouter = require("./create");
 const deleteRouter = require("./delete");
 const mailRouter = require("./mail");
@@ -221,6 +222,7 @@ router.use("/delete", deleteRouter);
 
 router.use("/user", userRouter);
 router.use("/login", loginRouter);
+router.use("/signup", signupRouter);
 router.use("/create", createRouter);
 router.use("/mail", mailRouter);
 
