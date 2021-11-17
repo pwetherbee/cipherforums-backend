@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -35,12 +35,20 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Public() {
   const classes = useStyles();
-  const values = useState({
+  const [values, setValues] = useState({
     username: "",
     email: "",
     password: "",
     confirmPassword: "",
+    stayLoggedIn: false,
   });
+  const handleChange = (prop) => (event) => {
+    setValues({ ...values, [prop]: event.target.value });
+  };
+  const handleSubmit = () => {
+    // make fetch request to web server
+    // on confirmation redirect to confirm by email page
+  };
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -63,6 +71,8 @@ export default function Public() {
                 id="username"
                 label="Username"
                 autoFocus
+                onChange={handleChange("username")}
+                value={values["username"]}
               />
             </Grid>
             <Grid item xs={12}>
@@ -74,6 +84,8 @@ export default function Public() {
                 label="Email Address"
                 name="email"
                 autoComplete="email"
+                onChange={handleChange("email")}
+                value={values["email"]}
               />
             </Grid>
             <Grid item xs={12}>
@@ -86,6 +98,8 @@ export default function Public() {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                onChange={handleChange("password")}
+                value={values["password"]}
               />
             </Grid>
             <Grid item xs={12}>
@@ -98,6 +112,8 @@ export default function Public() {
                 type="password"
                 id="confirmPassword"
                 autoComplete="current-password"
+                onChange={handleChange("confirmPassword")}
+                value={values["confirmPassword"]}
               />
               <Grid item xs={12}>
                 <FormControlLabel
