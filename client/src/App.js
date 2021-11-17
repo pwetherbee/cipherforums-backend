@@ -30,6 +30,7 @@ import PubForum from "./pages/PubForum";
 import CreatePublic from "./pages/CreatePublic";
 import Confirm from "./components/Confirm";
 import Verify from "./pages/Verify";
+import Fullscreen from "./components/Fullscreen";
 
 // Components
 import MenuAppBar from "./components/MenuAppBar";
@@ -167,6 +168,9 @@ export default function App() {
           </Route>
           <Route path="/Verify">
             <Verify />
+          </Route>
+          <Route path="/Fullscreen">
+            <Fullscreen />
           </Route>
 
           <Route path="/">
