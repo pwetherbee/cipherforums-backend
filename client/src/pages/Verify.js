@@ -12,6 +12,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 25,
     padding: 40,
     textAlign: "center",
+    backgroundColor: "black",
   },
   box: {
     fontSize: 30,
