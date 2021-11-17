@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(3, 0, 2),
   },
   input: {
-    backgroundColor: "red",
+    // backgroundColor: "red",
   },
 }));
 
@@ -84,6 +84,11 @@ export default function Public() {
         <form className={classes.form} noValidate>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={12}>
+              <Typography variant="comment">
+                * Titles and subtitles will not be encrypted *
+              </Typography>
+            </Grid>
+            <Grid item xs={12} sm={12}>
               <TextField
                 fullWidth
                 id="outlined-textarea"
@@ -115,7 +120,7 @@ export default function Public() {
               />
             </Grid>
             <Grid item xs={12}>
-              <TextField
+              {/* <TextField
                 fullWidth
                 id="outlined-textarea"
                 label="Key"
@@ -123,8 +128,8 @@ export default function Public() {
                 multiline
                 variant="outlined"
                 onChange={handleChange("key")}
-              />
-              <Grid item xs={12}>
+              /> */}
+              {/* <Grid item xs={12}>
                 <FormControlLabel
                   control={
                     <Checkbox value="key" color="primary" checked="checked" />
@@ -155,7 +160,7 @@ export default function Public() {
                   }
                   label="Allow key to be stored in other users keychain"
                 />
-              </Grid>
+              </Grid> */}
             </Grid>
             <Button
               type="submit"
