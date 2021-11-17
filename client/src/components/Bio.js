@@ -11,6 +11,7 @@ import Typography from "@material-ui/core/Typography";
 import { Paper } from "@material-ui/core";
 import LoadingIcon from "./LoadingPageIcon";
 import { Link as RouteLink } from "react-router-dom";
+import Avatar from "@material-ui/core/Avatar";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -66,6 +67,25 @@ export default function Bio({ profile, currUser, canFollow }) {
                   src={profile?.pic || "https://i.imgur.com/jlZySn6.jpeg"}
                 />
               </Card>
+              avatar=
+              {
+                <Avatar
+                  // color={classes.red}
+                  // aria-label="recipe"
+                  variant="rounded"
+                  className={classes.avatar}
+                >
+                  {profile?.pic ? (
+                    <img
+                      className={classes.img}
+                      alt="complex"
+                      src={profile.pic}
+                    />
+                  ) : (
+                    profile.username.slice(0, 1)
+                  )}
+                </Avatar>
+              }
               {/* <Card className={classes.avi}> */}
               <Typography gutterBottom variant="h5" component="h2">
                 @{profile?.username || "user not found"}

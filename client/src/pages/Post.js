@@ -18,6 +18,8 @@ import { decrypt, encrypt } from "../helpers/convert";
 import { Link as RouteLink } from "react-router-dom";
 import { Link } from "@material-ui/core";
 import ConfirmDelete from "../components/ConfirmDelete";
+import Switch from "@material-ui/core/Switch";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -56,6 +58,10 @@ const useStyles = makeStyles((theme) => ({
   },
   mainimg: {
     maxWidth: 300,
+  },
+  aesType: {
+    fontSize: 15,
+    color: theme.palette.other.primary,
   },
 }));
 const linkStyle = {
@@ -203,6 +209,10 @@ export default function Post() {
               {forumData?.subtitle}
             </Typography>
           </Paper>
+          <div style={{ display: "inline-flex", alignItems: "center" }}>
+            <Typography className={classes.aesType}>Using XOR</Typography>
+            <Switch color="secondary" />
+          </div>
           <SecretBox updateSecret={updateSecret} secret={secret} />
           {comments?.map((comment) => (
             <Comment
@@ -211,6 +221,7 @@ export default function Post() {
               handleDeleteComment={handleDeleteComment}
             />
           ))}
+
           <TextField
             error={error}
             helperText={helperText}

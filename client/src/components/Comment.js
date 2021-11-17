@@ -12,8 +12,8 @@ import { useParams, useRouteMatch } from "react-router";
 import { CipherText } from "../components/CipherText";
 import { green } from "@material-ui/core/colors";
 import SecretBox from "../components/SecretBox";
-import LoadingIcon from "../components/LoadingPageIcon";
-
+// import LoadingIcon from "../components/LoadingPageIcon";
+import VpnKeyIcon from "@material-ui/icons/VpnKey";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -32,11 +32,15 @@ const useStyles = makeStyles((theme) => ({
   aes: {
     fontSize: 10,
     padding: 0,
-    backgroundColor: "yellow",
-    color: "black",
+    backgroundColor: "black",
+    marginLeft: 5,
+  },
+  aesHolder: {
+    fontSize: 11.5,
+    color: "yellow",
   },
   delete: {
-    marginLeft: 10,
+    // marginLeft: 10,
     fontSize: 10,
     padding: 0,
   },
@@ -83,9 +87,12 @@ export const Comment = ({ comment, secret, handleDeleteComment }) => {
             >
               Delete
             </Button>
-            {/* <Button variant="outlined" className={classes.aes}>
-              AES
-            </Button> */}
+            <Button disabled="true" variant="outlined" className={classes.aes}>
+              <Typography className={classes.aesHolder}>AES</Typography>
+              <VpnKeyIcon
+                style={{ fontSize: "1vw", color: "yellow", marginLeft: "5" }}
+              />
+            </Button>
           </Grid>
           <Typography className={classes.theComment} variant="body2">
             {CipherText(

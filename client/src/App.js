@@ -46,7 +46,7 @@ const theme = createTheme({
       contrastText: "#121212",
     },
     secondary: {
-      main: "#008bec",
+      main: "#FFFF00",
       contrastText: "#ffffff",
     },
     background: {
@@ -58,6 +58,9 @@ const theme = createTheme({
       secondary: "#00ff1b",
       disabled: "#00ff1b",
       hint: "#00ff1b",
+    },
+    other: {
+      primary: "#FFFF00",
     },
     divider: "rgba(0,0,0,0.12)",
   },
