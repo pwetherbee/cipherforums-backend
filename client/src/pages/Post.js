@@ -61,7 +61,7 @@ const useStyles = makeStyles((theme) => ({
   },
   aesType: {
     fontSize: 15,
-    color: theme.palette.other.primary,
+    color: theme.palette.primary,
   },
 }));
 const linkStyle = {
@@ -218,9 +218,18 @@ export default function Post() {
             </Typography>
           </Paper>
           <div style={{ display: "inline-flex", alignItems: "center" }}>
-            <Typography className={classes.aesType}>
-              Using {encType.toLocaleUpperCase()}
-            </Typography>
+            {encType === "xor" ? (
+              <Typography className={classes.aesType}>
+                Using {encType.toLocaleUpperCase()}
+              </Typography>
+            ) : (
+              <Typography
+                className={classes.aesType}
+                style={{ color: "#FFFF00" }}
+              >
+                Using {encType.toLocaleUpperCase()}
+              </Typography>
+            )}
             <Switch
               checked={encChecked}
               onChange={handleChangeEnc}
