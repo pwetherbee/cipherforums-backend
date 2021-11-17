@@ -14,12 +14,12 @@ class EmailTool {
         pass: emailPassword, // generated ethereal password
       },
     });
-    const emailMessage = `Confirm you email at: http://localhost:3000/verify/${emailToken}`;
+    const emailMessage = `Confirm you email at: https://cipherforums.com/verify/${emailToken}`;
     const emailMarkup = `
         <body>
             <h1>Welcome to Cipherforums</h1>
             <h5>Confirm your email here:  </h5>
-            <a href = "http://localhost:3000/verify/${emailToken}">Confirm Email</a>
+            <a href = "http://cipherforums.com/verify/${emailToken}">Confirm Email</a>
         </body>
     `;
 
