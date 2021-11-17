@@ -85,6 +85,9 @@ export default function Post() {
   const [deleteCommentData, setDeleteCommentData] = useState({});
   const [postCommentText, setPostCommentText] = useState("");
   const [encType, setEncType] = useState("aes");
+
+  const [encChecked, setEncChecked] = useState(true);
+
   useEffect(() => {
     fetch(`/api/threads/${postname}`)
       .then((res) => res.json())
@@ -94,6 +97,11 @@ export default function Post() {
         setForumData(data);
       });
   }, [postname]);
+
+  const handleChangeEnc = (event) => {
+    setEncChecked(event.target.checked);
+    setEncType(event.target.checked ? "aes" : "xor");
+  };
 
   const updateSecret = function (secret) {
     setSecret(secret);
@@ -210,8 +218,15 @@ export default function Post() {
             </Typography>
           </Paper>
           <div style={{ display: "inline-flex", alignItems: "center" }}>
-            <Typography className={classes.aesType}>Using XOR</Typography>
-            <Switch color="secondary" />
+            <Typography className={classes.aesType}>
+              Using {encType.toLocaleUpperCase()}
+            </Typography>
+            <Switch
+              checked={encChecked}
+              onChange={handleChangeEnc}
+              inputProps={{ "aria-label": "controlled" }}
+              color="secondary"
+            />
           </div>
           <SecretBox updateSecret={updateSecret} secret={secret} />
           {comments?.map((comment) => (

@@ -87,12 +87,20 @@ export const Comment = ({ comment, secret, handleDeleteComment }) => {
             >
               Delete
             </Button>
-            <Button disabled="true" variant="outlined" className={classes.aes}>
-              <Typography className={classes.aesHolder}>AES</Typography>
-              <VpnKeyIcon
-                style={{ fontSize: "1vw", color: "yellow", marginLeft: "5" }}
-              />
-            </Button>
+            {comment.encryptionType === "aes" ? (
+              <Button
+                disabled="true"
+                variant="outlined"
+                className={classes.aes}
+              >
+                <Typography className={classes.aesHolder}>AES</Typography>
+                <VpnKeyIcon
+                  style={{ fontSize: "1vw", color: "yellow", marginLeft: "5" }}
+                />
+              </Button>
+            ) : (
+              ""
+            )}
           </Grid>
           <Typography className={classes.theComment} variant="body2">
             {CipherText(
