@@ -63,6 +63,10 @@ const useStyles = makeStyles((theme) => ({
 
 export const Comment = ({ comment, secret, handleDeleteComment }) => {
   const classes = useStyles();
+  const convertTimeToLocal = function (date) {
+    const time = new Date(date + " UTC");
+    return time.toString();
+  };
   return (
     <Paper className={classes.paper}>
       <Grid container wrap="nowrap" spacing={1}>
@@ -76,7 +80,9 @@ export const Comment = ({ comment, secret, handleDeleteComment }) => {
             <Typography variant="caption">
               @{comment.author || comment.username}{" "}
             </Typography>
-            <Typography variant="caption">{comment.time} </Typography>
+            <Typography variant="caption">
+              {convertTimeToLocal(comment.time)}{" "}
+            </Typography>
             <Button variant="outlined" className={classes.reply}>
               Reply
             </Button>

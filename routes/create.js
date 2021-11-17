@@ -1,5 +1,7 @@
 var express = require("express");
 const idGen = require("../helpers/generateRandomID");
+const jwt = require("jsonwebtoken");
+const mailHelper = require("../helpers/sendMail.js");
 let SQLHelper = require("../helpers/sqlQueryHelper");
 var router = express.Router();
 var path = require("path");

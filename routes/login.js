@@ -8,6 +8,7 @@ let SQLHelper = require("../helpers/sqlQueryHelper");
 let mySQL = require("mysql");
 // var cors = require("cors");
 router.use(express.json());
+require("dotenv").config();
 
 // router.get("/", (req, res) => {
 //   res.sendFile(path.join(__dirname, "../dist/login/index.html"));

@@ -2,39 +2,51 @@ var express = require("express");
 var router = express.Router();
 
 const nodemailer = require("nodemailer");
-
+const jwt = require("jsonwebtoken");
 var path = require("path");
 const { body, validationResult } = require("express-validator");
 const sessions = require("express-session");
 const bcrypt = require("bcryptjs");
 let SQLHelper = require("../helpers/sqlQueryHelper");
 let mySQL = require("mysql");
+
+const EMAILSECRET = "shhhhh";
 // var cors = require("cors");
 router.use(express.json());
 
 router.get("/send", async (req, res) => {
   // Generate test SMTP service account from ethereal.email
   // Only needed if you don't have a real mail account for testing
-  let testAccount = await nodemailer.createTestAccount();
-
+  console.log("token and decoded", token);
   // create reusable transporter object using the default SMTP transport
   let transporter = nodemailer.createTransport({
-    host: "smtp.ethereal.email",
-    port: 587,
-    secure: false, // true for 465, false for other ports
+    host: "mail.privateemail.com",
+    port: 465,
+    secure: true, // true for 465, false for other ports
     auth: {
-      user: testAccount.user, // generated ethereal user
-      pass: testAccount.pass, // generated ethereal password
+      user: "support@cipherforums.com", // generated ethereal user
+      pass: "theCreekRopeSwing$1", // generated ethereal password
     },
   });
+  var token = jwt.sign({ test: "helloworld" }, EMAILSECRET);
+
+  const emailMessage = `Confirm you email at: http://localhost:4001/api/mail/validate/${token}`;
+  const emailMarkup = `
+  <body>
+  <h1>Welcome to Cipherforums</h1>
+  <h5>Confirm your email here:  </h5>
+  <a href = "http://localhost:4001/api/mail/validate/${token}">Confirm Email</a>
+  </body>
+  
+  `;
 
   // send mail with defined transport object
   let info = await transporter.sendMail({
-    from: '"Fred Foo 👻" <foo@example.com>', // sender address
+    from: '"CipherForums" <support@cipherforums.com>', // sender address
     to: "hesexok125@idrct.com, baz@example.com", // list of receivers
     subject: "Cipherforums Confirmation Email", // Subject line
-    text: "Cipherforums Confirmation Email", // plain text body
-    html: "<b>Hello world?</b>", // html body
+    text: emailMessage, // plain text body
+    html: emailMarkup, // html body
   });
 
   console.log("Message sent: %s", info.messageId);
@@ -45,6 +57,12 @@ router.get("/send", async (req, res) => {
   console.log("Preview URL: %s", previewURL);
   res.send(previewURL);
   // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
+});
+
+router.get("/validate/:emailtoken", (req, res) => {
+  const { emailtoken } = req.params;
+  var decoded = jwt.verify(emailtoken, EMAILSECRET);
+  res.send(decoded);
 });
 
 module.exports = router;

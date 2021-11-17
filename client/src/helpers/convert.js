@@ -243,7 +243,7 @@ function decrypt(text_hex, key, decryptType = "xor") {
       return text_hex;
     }
   } else if (decryptType === "aes") {
-    let bytes = CryptoJS.AES.decrypt(text_hex, key);
+    let bytes = CryptoJS.AES.decrypt(text_hex, sha256(key));
     let decrypt;
     try {
       decrypt = bytes.toString(CryptoJS.enc.Utf8);
@@ -264,7 +264,7 @@ function encrypt(raw_text, raw_key, encryptType = "xor") {
   if (encryptType === "xor") {
     return text_to_dec(raw_text, raw_key);
   } else if (encryptType === "aes") {
-    return CryptoJS.AES.encrypt(raw_text, raw_key).toString();
+    return CryptoJS.AES.encrypt(raw_text, sha256(raw_key)).toString();
   } else {
     return "message not encrypted";
   }

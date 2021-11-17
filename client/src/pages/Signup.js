@@ -35,6 +35,12 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Public() {
   const classes = useStyles();
+  const values = useState({
+    username: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />

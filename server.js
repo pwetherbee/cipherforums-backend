@@ -11,6 +11,7 @@ var usersRouter = require("./routes/users");
 const loginRouter = require("./routes/login");
 const apiRouter = require("./routes/api");
 const userRouter = require("./routes/user");
+
 var cors = require("cors");
 process.env.NODE_ENV = "production";
 
@@ -33,7 +34,10 @@ let sess = session({
   resave: true,
   saveUninitialized: true,
   secret: "secret",
-  cookie: { maxAge: 60 * 60 * 1000, secure: app.get("env") === "production" },
+  cookie: {
+    maxAge: 30 * 60 * 60 * 1000,
+    secure: app.get("env") === "production",
+  },
 });
 if (app.get("env") === "production") {
   app.set("trust proxy", 1); // trust first proxy
