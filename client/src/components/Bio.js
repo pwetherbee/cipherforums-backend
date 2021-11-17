@@ -49,6 +49,11 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "space-between",
     padding: 10,
   },
+  avatar: {
+    width: 100,
+    height: 100,
+    backgroundColor: theme.palette.background.paper,
+  },
 }));
 
 export default function Bio({ profile, currUser, canFollow }) {

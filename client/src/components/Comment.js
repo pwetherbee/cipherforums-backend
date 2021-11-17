@@ -58,6 +58,7 @@ const useStyles = makeStyles((theme) => ({
   },
   theComment: {
     overflowWrap: "anywhere",
+    wordWrap: "break-word",
   },
 }));
 
