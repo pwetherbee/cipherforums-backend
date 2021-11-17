@@ -29,6 +29,7 @@ import Search from "./pages/Search";
 import PubForum from "./pages/PubForum";
 import CreatePublic from "./pages/CreatePublic";
 import Confirm from "./components/Confirm";
+import Verify from "./pages/Verify";
 
 // Components
 import MenuAppBar from "./components/MenuAppBar";
@@ -163,6 +164,9 @@ export default function App() {
           </Route>
           <Route path="/Confirm">
             <Confirm />
+          </Route>
+          <Route path="/Verify">
+            <Verify />
           </Route>
 
           <Route path="/">
