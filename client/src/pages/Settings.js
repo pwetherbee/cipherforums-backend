@@ -24,9 +24,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 export default function Public() {
   const classes = useStyles();
+  const [createBtnDisabled, setCreateBtnDisabled] = useState([false]);
   const [avi, setAvi] = useState("");
   const [bio, setBio] = useState("");
   const onSubmit = async () => {
+    console.log(avi, bio);
     const res = await fetch("/user/settings", {
       method: "POST",
       headers: {
@@ -40,6 +42,25 @@ export default function Public() {
     });
     const data = await res.json();
     alert(data.message);
+  };
+  const handleUploadFile = async (e) => {
+    const media = e.target.files[0];
+    const formdata = new FormData();
+    formdata.append("image", media);
+    console.log(media);
+    setCreateBtnDisabled(true);
+    const res = await fetch("https://api.imgur.com/3/image/", {
+      method: "POST",
+      headers: {
+        Authorization: "Client-ID 4d15a14d3b5d53b",
+      },
+      body: formdata,
+    });
+    const data = await res.json();
+
+    console.log(data);
+    setAvi(data.data.link);
+    setCreateBtnDisabled(false);
   };
   return (
     <CssBaseline>
@@ -68,7 +89,13 @@ export default function Public() {
           <div>
             <br></br>
           </div>
-          <input type="file" id="file"></input>
+          <input
+            accept="image/*"
+            id="file"
+            single
+            type="file"
+            onInput={handleUploadFile}
+          />
         </FormControl>
         <FormControl fullWidth>
           <Typography

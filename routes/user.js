@@ -96,14 +96,14 @@ router.post("/settings", (req, res) => {
   const query = `
   UPDATE Users
   SET
-  ${bio ? `bio = ${connection.escape(bio)},` : ""}
+  ${bio ? `bio = ${connection.escape(bio)}${avi ? "," : ""}` : ""}
   ${avi ? `avi = ${connection.escape(avi)}` : ""}
-  WHERE
-  userID = ${req.session.userID}
+  WHERE userID = ${req.session.userID}
   `;
   connection.connect();
   connection.query(query, (err, rows) => {
     if (err) {
+      console.log(err);
       return res.status(403).json({
         success: false,
         message: "An error occured trying to update the database",

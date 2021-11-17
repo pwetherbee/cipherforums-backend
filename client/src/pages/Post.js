@@ -84,9 +84,9 @@ export default function Post() {
   const [openConfirmDelete, setOpenConfirmDelete] = useState(false);
   const [deleteCommentData, setDeleteCommentData] = useState({});
   const [postCommentText, setPostCommentText] = useState("");
-  const [encType, setEncType] = useState("aes");
+  const [encType, setEncType] = useState("xor");
 
-  const [encChecked, setEncChecked] = useState(true);
+  const [encChecked, setEncChecked] = useState(false);
 
   useEffect(() => {
     fetch(`/api/threads/${postname}`)

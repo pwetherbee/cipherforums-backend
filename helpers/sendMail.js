@@ -19,7 +19,7 @@ class EmailTool {
         <body>
             <h1>Welcome to Cipherforums</h1>
             <h5>Confirm your email here:  </h5>
-            <a href = "http://cipherforums.com/verify/${emailToken}">Confirm Email</a>
+            <a href = "https://cipherforums.com/verify/${emailToken}">Confirm Email</a>
         </body>
     `;
 
