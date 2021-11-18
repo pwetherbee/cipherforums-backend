@@ -54,6 +54,10 @@ const useStyles = makeStyles((theme) => ({
     height: 100,
     backgroundColor: theme.palette.background.paper,
   },
+  usr: {
+    marginLeft: 20,
+    marginTop: 5,
+  },
 }));
 
 export default function Bio({ profile, currUser, canFollow }) {
@@ -114,34 +118,36 @@ export default function Bio({ profile, currUser, canFollow }) {
                 </Avatar>
               }
               {/* <Card className={classes.avi}> */}
-              <Typography gutterBottom variant="h5" component="h2">
-                @{profile?.username || "user not found"}
-                {profile?.currUser ||
-                  (profile?.loggedIn &&
-                    (!profile?.isFollowing ? (
-                      <Button
-                        size="small"
-                        color="primary"
-                        onClick={handleFollow}
-                      >
-                        Follow
-                      </Button>
-                    ) : (
-                      "✔"
-                    )))}
-                {currUser ? (
-                  <Button
-                    size="small"
-                    color="primary"
-                    component={RouteLink}
-                    to="/settings"
-                  >
-                    edit
-                  </Button>
-                ) : (
-                  ""
-                )}
-              </Typography>
+              <Paper className={classes.usr}>
+                <Typography gutterBottom variant="h5" component="h2">
+                  @{profile?.username || "user not found"}
+                  {profile?.currUser ||
+                    (profile?.loggedIn &&
+                      (!profile?.isFollowing ? (
+                        <Button
+                          size="small"
+                          color="primary"
+                          onClick={handleFollow}
+                        >
+                          Follow
+                        </Button>
+                      ) : (
+                        "✔"
+                      )))}
+                  {currUser ? (
+                    <Button
+                      size="small"
+                      color="primary"
+                      component={RouteLink}
+                      to="/settings"
+                    >
+                      edit
+                    </Button>
+                  ) : (
+                    ""
+                  )}
+                </Typography>
+              </Paper>
               {/* </Card> */}
             </CardContent>
             <CardContent>
