@@ -98,6 +98,12 @@ export default function Public() {
           />
         </FormControl>
         <FormControl fullWidth>
+          <div>
+            <br></br>
+          </div>
+          <Typography variant="comment">Max file size 20MB</Typography>
+        </FormControl>
+        <FormControl fullWidth>
           <Typography
             variant="body2"
             gutterBottom

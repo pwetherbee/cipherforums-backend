@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(3, 0, 2),
   },
   input: {
-    // backgroundColor: "red",
+    // backgroundColor: "blue",
   },
 }));
 
@@ -118,6 +118,9 @@ export default function Public() {
                 single
                 type="file"
               />
+            </Grid>
+            <Grid item xs={12}>
+              <Typography variant="comment">Max file size 20MB</Typography>
             </Grid>
             <Grid item xs={12}>
               {/* <TextField

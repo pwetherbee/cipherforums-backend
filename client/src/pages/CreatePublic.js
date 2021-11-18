@@ -134,6 +134,7 @@ export default function Public() {
                   onInput={handleUploadFile}
                 />
               </Grid>
+              <Typography variant="comment">Max file size 20MB</Typography>
             </Grid>
             {/* <LoadingButton
               type="submit"
