@@ -31,6 +31,7 @@ import CreatePublic from "./pages/CreatePublic";
 import Confirm from "./components/Confirm";
 import Verify from "./pages/Verify";
 import Fullscreen from "./components/Fullscreen";
+import Nft from "./pages/Nft";
 
 // Components
 import MenuAppBar from "./components/MenuAppBar";
@@ -172,6 +173,10 @@ export default function App() {
           <Route path="/Fullscreen">
             <Fullscreen />
           </Route>
+          <Route path="/Nft">
+            <Nft />
+          </Route>
+
           <Route path="/">
             <Home />
           </Route>
