@@ -1,62 +1,46 @@
 import React from "react";
-import { styled } from "@material-ui/core/styles";
-import { useState } from "react";
+import Box from "@material-ui/core/Box";
 import { makeStyles } from "@material-ui/core/styles";
-import Box from "@material-ui/core/box";
+import { styled } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
+
+
+const useStyles = makeStyles((theme) => ({
+  paper: {
+    marginTop: theme.spacing(8),
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  },
+  img:{
+    width: 555,
+    padding: 20,
+  }
+}));
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
   padding: theme.spacing(1),
-  textAlign: "center",
+  textAlign: 'center',
   color: theme.palette.text.secondary,
 }));
 
-function FormRow() {
-  return (
-    <React.Fragment>
-      <Grid item xs={4}>
-        <img src="https://i.imgur.com/TXe9weC.jpeg"></img>
-      </Grid>
-      <Grid item xs={4}>
-        <img src="https://i.imgur.com/TXe9weC.jpeg"></img>
-      </Grid>
-      <Grid item xs={4}>
-        <img src="https://i.imgur.com/TXe9weC.jpeg"></img>
-      </Grid>
-    </React.Fragment>
-  );
-}
-
-const useStyles = makeStyles((theme) => ({
-  item: {
-    marginTop: 10,
-  },
-  hold: {
-    width: 1400,
-    marginLeft: 18,
-    marginTop: 10,
-  },
-}));
-
-export default function NestedGrid() {
+export default function BasicGrid() {
   const classes = useStyles();
   return (
-    <Grid container spacing={1} className={classes.hold}>
-      <Grid container item spacing={12}>
-        <Typography variant="h3">Objkts</Typography>
+    <Box sx={{ flexGrow: 1 }}>
+      <Grid container spacing={0}>
+        <Grid item xs={4}>
+          <img className={classes.img} src="https://i.imgur.com/MYmm7E1.jpeg"></img>
+        </Grid>
+        <Grid item xs={4}>
+        <img className={classes.img} src="https://i.imgur.com/A3HI0Xm.jpeg"></img>
+        </Grid>
+        <Grid item xs={4}>
+        <img className={classes.img} src="https://i.imgur.com/MYmm7E1.jpeg"></img>
+        </Grid>
       </Grid>
-      <Grid container item spacing={3}>
-        <FormRow />
-      </Grid>
-      <Grid container item spacing={3}>
-        <FormRow />
-      </Grid>
-      <Grid container item spacing={3}>
-        <FormRow />
-      </Grid>
-    </Grid>
+    </Box>
   );
 }
