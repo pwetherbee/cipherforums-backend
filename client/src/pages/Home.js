@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
@@ -26,6 +26,9 @@ const useStyles = makeStyles((theme) => ({
 
 export default function AutoGrid() {
   const classes = useStyles();
+  useEffect(() => {
+    document.title = "Cipherforums";
+  });
 
   return (
     <div className={classes.root}>

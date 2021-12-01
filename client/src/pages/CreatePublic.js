@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -43,6 +43,9 @@ export default function Public() {
     title: "",
     subtitle: "",
     image: "",
+  });
+  useEffect(() => {
+    document.title = "Cipherforums | Create Public";
   });
   const handleChange = (props) => (e) => {
     console.log(values);

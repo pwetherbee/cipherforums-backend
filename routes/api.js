@@ -220,7 +220,6 @@ router.post(
 );
 
 router.use("/delete", deleteRouter);
-
 router.use("/user", userRouter);
 router.use("/login", loginRouter);
 router.use("/signup", signupRouter);
