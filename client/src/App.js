@@ -40,12 +40,15 @@ import "@fontsource/ibm-plex-mono";
 
 // import ibmPlexMono from "./fonts/IBMPlexMono-Bold.ttf";
 import { CssBaseline } from "@material-ui/core";
+import Footer from "./components/Footer";
+import ScrollToTop from "./components/ScrollToTop";
 
 const theme = createTheme({
   palette: {
     type: "dark",
     primary: {
       main: "#00e019",
+      // main: "#ffffff",
       contrastText: "#121212",
     },
     secondary: {
@@ -54,10 +57,14 @@ const theme = createTheme({
     },
     background: {
       default: "#121212",
-      paper: "#1c1c1c",
+      // paper: "#171717",
+      paper: "#121212",
     },
     text: {
-      primary: "#0aff00",
+      // primary: "#0aff00",
+      // secondary: "#00ff1b",
+
+      primary: "#00ff1b",
       secondary: "#00ff1b",
       disabled: "#00ff1b",
       hint: "#00ff1b",
@@ -121,67 +128,76 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
+      <Box
+        style={{
+          position: "relative",
+          minHeight: "150vh",
+          paddingBottom: "500px",
+        }}
+      >
+        <Router>
+          <MenuAppBar auth={loggedUser} />
+          <ScrollToTop />
+          <Switch>
+            <Route path="/user/:username">
+              <User />
+            </Route>
+            <Route path="/post/:title">
+              <Post />
+            </Route>
+            <Route path="/settings">
+              <Settings />
+            </Route>
+            <Route path="/signup">
+              <Signup />
+            </Route>
+            <Route path="/login">
+              <Login handleLogin={handleLogin} />
+            </Route>
+            <Route path="/create/public/:topic">
+              <CreatePublic />
+            </Route>
+            <Route path="/create">
+              <Create />
+            </Route>
+            <Route path="/public/:topic/:postname">
+              <Post />
+            </Route>
+            <Route path="/public/:topic">
+              <PubForum auth={loggedUser} />
+            </Route>
+            <Route path="/public">
+              <Public />
+            </Route>
+            <Route path="/Help">
+              <Help />
+            </Route>
+            <Route path="/Home">
+              <Home />
+            </Route>
+            <Route path="/Search">
+              <Search />
+            </Route>
+            <Route path="/Confirm">
+              <Confirm />
+            </Route>
+            <Route path="/Verify/:emailToken">
+              <Verify />
+            </Route>
+            <Route path="/Fullscreen">
+              <Fullscreen />
+            </Route>
+            <Route path="/Nft">
+              <Nft />
+            </Route>
 
-      <Router>
-        <MenuAppBar auth={loggedUser} />
-        <Switch>
-          <Route path="/user/:username">
-            <User />
-          </Route>
-          <Route path="/post/:title">
-            <Post />
-          </Route>
-          <Route path="/settings">
-            <Settings />
-          </Route>
-          <Route path="/signup">
-            <Signup />
-          </Route>
-          <Route path="/login">
-            <Login handleLogin={handleLogin} />
-          </Route>
-          <Route path="/create/public/:topic">
-            <CreatePublic />
-          </Route>
-          <Route path="/create">
-            <Create />
-          </Route>
-          <Route path="/public/:topic/:postname">
-            <Post />
-          </Route>
-          <Route path="/public/:topic">
-            <PubForum auth={loggedUser} />
-          </Route>
-          <Route path="/public">
-            <Public />
-          </Route>
-          <Route path="/Help">
-            <Help />
-          </Route>
-          <Route path="/Home">
-            <Home />
-          </Route>
-          <Route path="/Search">
-            <Search />
-          </Route>
-          <Route path="/Confirm">
-            <Confirm />
-          </Route>
-          <Route path="/Verify/:emailToken">
-            <Verify />
-          </Route>
-          <Route path="/Fullscreen">
-            <Fullscreen />
-          </Route>
-          <Route path="/Nft">
-            <Nft />
-          </Route>
-
-          <Route path="/">
-            <Home />
-          </Route>
-        </Switch>
-      </Router>
+            <Route path="/">
+              <Home />
+            </Route>
+          </Switch>
+          <Footer />
+        </Router>
+      </Box>
     </ThemeProvider>
   );
 }

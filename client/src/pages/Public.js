@@ -24,17 +24,21 @@ import { Link as RouteLink } from "react-router-dom";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    padding: 100,
+    padding: 80,
   },
   paper: {
     padding: theme.spacing(0),
     margin: theme.spacing(0),
+    // width: "400px",
+    // height: "400px",
     textAlign: "center",
     color: theme.palette.primary.main,
     backgroundColor: theme.palette.background.default,
-    borderWidth: 1,
+    borderWidth: 2,
+    borderRadius: "20px",
     borderColor: theme.palette.text.secondary,
     borderStyle: "solid",
+    verticalAlign: "middle",
   },
 }));
 

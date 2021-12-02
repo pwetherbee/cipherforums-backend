@@ -13,7 +13,7 @@ import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
 import { Link as RouteLink } from "react-router-dom";
-
+import Container from "@material-ui/core/Container";
 import { useParams } from "react-router";
 import { PublicPost } from "../components/PublicPost";
 
@@ -75,15 +75,16 @@ export default function MediaControlCard() {
   const classes = useStyles();
   const theme = useTheme();
   let { topic } = useParams();
+  console.log(topic);
+
   const [topicPosts, setTopicPosts] = useState([]);
   // Load in all forums with the current topic
   useEffect(async () => {
     const res = await fetch(`/api/public/${topic}`);
     const data = await res.json();
+    document.title = `Cipherforums | ${topic}`;
     setTopicPosts(data);
-    console.log(data);
   }, []);
-  console.log("object");
   return (
     <Grid container spacing={0}>
       <Grid item xs={12} sm={6}>
@@ -102,9 +103,22 @@ export default function MediaControlCard() {
           Post to {topic}
         </Button>
       </Grid>
-      {topicPosts.map((post, i) => (
-        <PublicPost key={i} details={post} topic={topic} />
-      ))}
+      {topicPosts.length ? (
+        topicPosts.map((post, i) => (
+          <PublicPost key={i} details={post} topic={topic} />
+        ))
+      ) : (
+        <Grid item xs={12}>
+          <br />
+          <br />
+          <br />
+          <div style={{ textAlign: "center" }}>
+            <Typography variant="h5">
+              There are no posts on {topic} yet. Make the first one!
+            </Typography>
+          </div>
+        </Grid>
+      )}
       {/* <Grid item xs={12} sm={6}>
         <Card className={classes.root}>
           <div className={classes.details}>
