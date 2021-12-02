@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
 export default function AutoGrid() {
   const classes = useStyles();
   const title = "cipherforums.com";
-  const subtitle = "The only cryptographically secure forum";
+  const subtitle = "A cryptographically secure forum";
   const [char, setChar] = useState("a");
   const [cipherTexts, setCipherTexts] = useState({
     title: {
