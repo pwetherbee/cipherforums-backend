@@ -51,139 +51,139 @@ export default function AutoGrid() {
     <div className={classes.root}>
       <Grid container spacing={4}>
         <Grid item xs={12} sm={3}>
-          <RouteLink to="/public/Business" component={Link}>
-            {/* <RouteLink to="/public/business"> */}
+          <Link to="/public/Business" component={RouteLink}>
+            {/* <Link to="/public/business"> */}
             <Paper className={classes.paper}>
               <MonetizationOnOutlinedIcon style={{ fontSize: "13vw" }} />
               <Typography>Business</Typography>
             </Paper>
-          </RouteLink>
+          </Link>
         </Grid>
         <Grid item xs={12} sm={3}>
-          <RouteLink to="/public/images" component={Link}>
-            {/* <RouteLink to="/public/images"> */}
+          <Link to="/public/images" component={RouteLink}>
+            {/* <Link to="/public/images"> */}
             <Paper className={classes.paper}>
               <CameraSharpIcon style={{ fontSize: "13vw" }} />
               <Typography>Images</Typography>
             </Paper>
-          </RouteLink>
+          </Link>
         </Grid>
         <Grid item xs={12} sm={3}>
-          <RouteLink to="/public/Politics" component={Link}>
-            {/* <RouteLink to="/public/politics"> */}
+          <Link to="/public/Politics" component={RouteLink}>
+            {/* <Link to="/public/politics"> */}
             <Paper className={classes.paper}>
               <GavelSharpIcon style={{ fontSize: "13vw" }} />
               <Typography>Politics</Typography>
             </Paper>
-          </RouteLink>
+          </Link>
         </Grid>
         <Grid item xs={12} sm={3}>
-          <RouteLink to="/public/Technology" component={Link}>
-            {/* <RouteLink to="/public/technology"> */}
+          <Link to="/public/Technology" component={RouteLink}>
+            {/* <Link to="/public/technology"> */}
             <Paper className={classes.paper}>
               <ComputerIcon style={{ fontSize: "13vw" }} />
               <Typography>Technology</Typography>
             </Paper>
-          </RouteLink>
+          </Link>
         </Grid>
         <Grid item xs={12} sm={3}>
-          <RouteLink to="/public/News" component={Link}>
-            {/* <RouteLink to="/public/news"> */}
+          <Link to="/public/News" component={RouteLink}>
+            {/* <Link to="/public/news"> */}
             <Paper className={classes.paper}>
               <AnnouncementRoundedIcon style={{ fontSize: "13vw" }} />
               <Typography>News</Typography>
             </Paper>
-          </RouteLink>
+          </Link>
         </Grid>
         <Grid item xs={12} sm={3}>
-          <RouteLink to="/public/Gaming" component={Link}>
-            {/* <RouteLink to="/public/gaming"> */}
+          <Link to="/public/Gaming" component={RouteLink}>
+            {/* <Link to="/public/gaming"> */}
             <Paper className={classes.paper}>
               <GamesOutlinedIcon style={{ fontSize: "13vw" }} />
               <Typography>Gaming</Typography>
             </Paper>
-          </RouteLink>
+          </Link>
         </Grid>
         <Grid item xs={12} sm={3}>
-          <RouteLink to="/public/Music" component={Link}>
-            {/* <RouteLink to="/public/music"> */}
+          <Link to="/public/Music" component={RouteLink}>
+            {/* <Link to="/public/music"> */}
             <Paper className={classes.paper}>
               <AlbumSharpIcon style={{ fontSize: "13vw" }} />
               <Typography>Music</Typography>
             </Paper>
-          </RouteLink>
+          </Link>
         </Grid>
         <Grid item xs={12} sm={3}>
-          <RouteLink to="/public/Science" component={Link}>
-            {/* <RouteLink to="/public/science"> */}
+          <Link to="/public/Science" component={RouteLink}>
+            {/* <Link to="/public/science"> */}
             <Paper className={classes.paper}>
               <EcoRoundedIcon style={{ fontSize: "13vw" }} />
               <Typography>Science</Typography>
             </Paper>
-          </RouteLink>
+          </Link>
         </Grid>
         <Grid item xs={12} sm={3}>
-          <RouteLink to="/public/Questions" component={Link}>
-            {/* <RouteLink to="/public/questions"> */}
+          <Link to="/public/Questions" component={RouteLink}>
+            {/* <Link to="/public/questions"> */}
             <Paper className={classes.paper}>
               <HelpOutlineSharpIcon style={{ fontSize: "13vw" }} />
               <Typography>Questions</Typography>
             </Paper>
-          </RouteLink>
+          </Link>
         </Grid>
         <Grid item xs={12} sm={3}>
-          <RouteLink to="/public/Outdoors" component={Link}>
-            {/* <RouteLink to="/public/outdoors"> */}
+          <Link to="/public/Outdoors" component={RouteLink}>
+            {/* <Link to="/public/outdoors"> */}
             <Paper className={classes.paper}>
               <FilterHdrIcon style={{ fontSize: "13vw" }} />
               <Typography>Outdoors</Typography>
             </Paper>
-          </RouteLink>
+          </Link>
         </Grid>
         <Grid item xs={12} sm={3}>
-          <RouteLink to="/public/Puzzles" component={Link}>
-            {/* <RouteLink to="/public/puzzles"> */}
+          <Link to="/public/Puzzles" component={RouteLink}>
+            {/* <Link to="/public/puzzles"> */}
             <Paper className={classes.paper}>
               <ExtensionSharpIcon style={{ fontSize: "13vw" }} />
               <Typography>Puzzles</Typography>
             </Paper>
-          </RouteLink>
+          </Link>
         </Grid>
         <Grid item xs={12} sm={3}>
-          <RouteLink to="/public/Writing" component={Link}>
-            {/* <RouteLink to="/public/witing"> */}
+          <Link to="/public/Writing" component={RouteLink}>
+            {/* <Link to="/public/witing"> */}
             <Paper className={classes.paper}>
               <CreateSharpIcon style={{ fontSize: "13vw" }} />
               <Typography>Writing</Typography>
             </Paper>
-          </RouteLink>
+          </Link>
         </Grid>
         <Grid item xs={12} sm={3}>
-          <RouteLink to="/public/" component={Link}>
-            {/* <RouteLink to="/public/travel"> */}
+          <Link to="/public/" component={RouteLink}>
+            {/* <Link to="/public/travel"> */}
             <Paper className={classes.paper}>
               <FlightTakeoffIcon style={{ fontSize: "13vw" }} />
               <Typography>Travel</Typography>
             </Paper>
-          </RouteLink>
+          </Link>
         </Grid>
         <Grid item xs={12} sm={3}>
-          <RouteLink to="/public/Sports" component={Link}>
-            {/* <RouteLink to="/public/sports"> */}
+          <Link to="/public/Sports" component={RouteLink}>
+            {/* <Link to="/public/sports"> */}
             <Paper className={classes.paper}>
               <SportsSharpIcon style={{ fontSize: "13vw" }} />
               <Typography>Sports</Typography>
             </Paper>
-          </RouteLink>
+          </Link>
         </Grid>
         <Grid item xs={12} sm={3}>
-          <RouteLink to="/public/Comedy" component={Link}>
-            {/* <RouteLink to="/public/comedy"> */}
+          <Link to="/public/Comedy" component={RouteLink}>
+            {/* <Link to="/public/comedy"> */}
             <Paper className={classes.paper}>
               <MoodSharpIcon style={{ fontSize: "13vw" }} />
               <Typography>Comedy</Typography>
             </Paper>
-          </RouteLink>
+          </Link>
         </Grid>
       </Grid>
     </div>

@@ -103,7 +103,6 @@ const theme = createTheme({
 // });
 
 export default function App() {
-  console.log("this is the home page");
   const [loggedUser, setLoggedUser] = useState({ ok: 0, username: null });
   const [logEvent, setLogEvent] = useState(null);
   useEffect(async () => {
@@ -117,7 +116,6 @@ export default function App() {
     }
     const data = await res.json();
     setLoggedUser(data);
-    console.log(data);
   }, []);
   const handleLogin = (username) => {
     setLoggedUser({ ok: 1, username: username });
