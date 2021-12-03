@@ -42,6 +42,7 @@ import "@fontsource/ibm-plex-mono";
 import { CssBaseline } from "@material-ui/core";
 import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
+import MatrixPage from "./pages/Matrix";
 
 const theme = createTheme({
   palette: {
@@ -190,7 +191,9 @@ export default function App() {
             <Route path="/Nft">
               <Nft />
             </Route>
-
+            <Route path="/matrix">
+              <MatrixPage />
+            </Route>
             <Route path="/">
               <Home />
             </Route>

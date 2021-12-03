@@ -1,4 +1,4 @@
-import { decrypt } from "../helpers/convert.js";
+import { decrypt, decryptMultiline } from "../helpers/convert.js";
 export const CipherText = (text, key, encryptionType) => {
-  return decrypt(text, key, encryptionType);
+  return decryptMultiline(text, key, encryptionType);
 };

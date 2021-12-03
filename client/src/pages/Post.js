@@ -14,7 +14,7 @@ import SecretBox from "../components/SecretBox";
 import LoadingIcon from "../components/LoadingPageIcon";
 import { Comment } from "../components/Comment";
 import TextField from "@material-ui/core/TextField";
-import { decrypt, encrypt } from "../helpers/convert";
+import { decrypt, encrypt, encryptMultiLine } from "../helpers/convert";
 import { Link as RouteLink } from "react-router-dom";
 import { Link } from "@material-ui/core";
 import ConfirmDelete from "../components/ConfirmDelete";
@@ -118,15 +118,15 @@ export default function Post() {
       return;
     }
     console.log(postCommentText.length);
-    if (postCommentText.length > 64) {
-      console.log(postCommentText.length < 64);
-      setError(true);
-      setHelperText("Comment must be shorter than 64 characters");
-      return;
-    }
+    // if (postCommentText.length > 64) {
+    //   console.log(postCommentText.length < 64);
+    //   setError(true);
+    //   setHelperText("Comment must be shorter than 64 characters");
+    //   return;
+    // }
     // Encrypt comment
     console.log(postCommentText, secret);
-    const ciphertext = encrypt(postCommentText, secret, encType);
+    const ciphertext = encryptMultiLine(postCommentText, secret, encType);
     const res = await fetch(`/api/threads/${postname}`, {
       method: "POST",
       headers: {

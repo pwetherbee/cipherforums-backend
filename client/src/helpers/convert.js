@@ -270,9 +270,137 @@ function encrypt(raw_text, raw_key, encryptType = "xor") {
   }
 }
 
+class Parser {
+  constructor(padTag, maxLength) {
+    if (padTag.length !== 2) {
+      throw "Pad Tag string must be of length 2";
+    }
+    this.padTag = padTag;
+    this.maxLength = maxLength;
+  }
+  splitText(text) {
+    text = this.escapePadding(text);
+    const chunks = [];
+    // loop through chars
+    let chunk = "";
+    let i = 0;
+    for (let char of text) {
+      chunk += char;
+      i++;
+      if (i >= this.maxLength) {
+        chunks.push(chunk);
+        chunk = "";
+        i = 0;
+      }
+    }
+
+    if (chunk.length) {
+      const lastChunks = this.pad(chunk);
+      lastChunks.forEach((lchunk) => chunks.push(lchunk));
+    }
+    return chunks;
+    // add text to chunk
+    // when we reach maxLength, add chunk to array
+    // return array
+  }
+  pad(text) {
+    // handle case where text + padTag is greater than 128 characters
+
+    const paddedChunks = [];
+    if ((text + this.padTag).length > this.maxLength) {
+      paddedChunks.push(`${text}${this.padTag[0]}`);
+      // add chunk with padding
+      paddedChunks.push(
+        `${this.padTag[1]}${this.generatePadding(this.maxLength - 1)}`
+      );
+    } else {
+      paddedChunks.push(
+        `${text}${this.padTag}${this.generatePadding(
+          this.maxLength - text.length - this.padTag.length
+        )}`
+      );
+    }
+    return paddedChunks;
+  }
+  generatePadding(len) {
+    let pad = "";
+    const characters =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    for (let i = 0; i < len; i++) {
+      // TODO: replace this insecure psuedorandom function with #crypto on node server instead
+      pad += characters.charAt(Math.random() * 62);
+    }
+    return pad;
+  }
+  isValid(text) {
+    return text.includes(this.padTag);
+  }
+  combine(chunkArray) {
+    return chunkArray.join("");
+  }
+  removePadding(text) {
+    return text.split(this.padTag)[0];
+  }
+  escapePadding(text) {
+    return text.split(this.padTag).join(``);
+  }
+  parseText(textArray) {
+    let text = "";
+    textArray.forEach((t) => (text += t));
+    return this.removePadding(text);
+  }
+}
+
+const parser = new Parser("&%", 64);
+
+/**
+ * @param {string} rawText - The text to be encrypted
+ * @param {string} rawKey - The key to encrypt with
+ * @param {string} encType - xor or aes - the type of encryption to use
+ */
+function encryptMultiLine(rawText, rawKey, encType) {
+  // split text into chunks
+  const textChunks = parser.splitText(rawText);
+  // encrypt each chunk
+  const encryptedChunks = textChunks.map((chunk) =>
+    encrypt(chunk, rawKey, encType)
+  );
+  // combine encrypted chunks with unique delimiter
+  return encryptedChunks.join("[newchunk]");
+}
+
+/**
+ * @param {string} cipherText - The text to be encrypted
+ * @param {string} rawKey - The key to encrypt with
+ * @param {string} encType - xor or aes - the type of encryption to use
+ */
+const decryptMultiline = function (cipherText, rawKey, encType) {
+  // split strings into paddedChunks
+  const cipherChunks = cipherText.split("[newchunk]");
+  // decrypt each chunk
+  const decryptedChunks = cipherChunks.map((chunk) =>
+    decrypt(chunk, rawKey, encType)
+  );
+  // remove padding
+  const strippedChunks = decryptedChunks.map((chunk) =>
+    parser.removePadding(chunk)
+  );
+  // join chunks into block of decrypted text
+  return strippedChunks.join("");
+};
+
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 // export { sha256, ascii_to_hexa, hex_to_dec, dec_to_hex, hex_to_text };
-export { dec_to_text, text_to_dec, key_to_dec, decrypt, sleep, encrypt };
+export {
+  dec_to_text,
+  text_to_dec,
+  key_to_dec,
+  decrypt,
+  sleep,
+  encrypt,
+  encryptMultiLine,
+  decryptMultiline,
+};

@@ -28,6 +28,9 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     backgroundColor: "#121212",
     marginBottom: 1,
+    border: "none",
+    // borderStyle: "solid",
+    // borderRadius: "10px",
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -36,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   logo: {
-    width: 70,
+    width: 50,
     marginTop: 0,
   },
 }));
