@@ -14,7 +14,8 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
   },
   img:{
-    width: 555,
+    width: 500,
+    minWidth: 320,
     padding: 20,
   }
 }));
@@ -29,15 +30,15 @@ const Item = styled(Paper)(({ theme }) => ({
 export default function BasicGrid() {
   const classes = useStyles();
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 0 }}>
       <Grid container spacing={0}>
-        <Grid item xs={4}>
+        <Grid item xs={12} sm={4}>
           <img className={classes.img} src="https://i.imgur.com/MYmm7E1.jpeg"></img>
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={12} sm={4}>
         <img className={classes.img} src="https://i.imgur.com/A3HI0Xm.jpeg"></img>
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={12} sm={4}>
         <img className={classes.img} src="https://i.imgur.com/MYmm7E1.jpeg"></img>
         </Grid>
       </Grid>
