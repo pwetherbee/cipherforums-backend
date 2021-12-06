@@ -32,6 +32,7 @@ export default function BasicGrid() {
     <Box sx={{ flexGrow: 0 }}>
       <Grid container spacing={0}>
         <Grid item xs={12} sm={4}>
+          s
           <img
             className={classes.img}
             src="https://i.imgur.com/MYmm7E1.jpeg"
