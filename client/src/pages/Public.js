@@ -60,7 +60,7 @@ export default function AutoGrid() {
           </Link>
         </Grid>
         <Grid item xs={12} sm={3}>
-          <Link to="/public/images" component={RouteLink}>
+          <Link to="/public/Images" component={RouteLink}>
             {/* <Link to="/public/images"> */}
             <Paper className={classes.paper}>
               <CameraSharpIcon style={{ fontSize: "13vw" }} />
@@ -159,7 +159,7 @@ export default function AutoGrid() {
           </Link>
         </Grid>
         <Grid item xs={12} sm={3}>
-          <Link to="/public/" component={RouteLink}>
+          <Link to="/public/Travel" component={RouteLink}>
             {/* <Link to="/public/travel"> */}
             <Paper className={classes.paper}>
               <FlightTakeoffIcon style={{ fontSize: "13vw" }} />
