@@ -79,7 +79,7 @@ export default function PostCard({ data, secret, onDelete }) {
   const handleExpandClick = () => {
     // check if data already exists
     if (!forumData) {
-      fetch(`/api/threads/${data.url}`)
+      fetch(`/api/threads/${data.publicTopic}/${data.url}`)
         .then((res) => {
           return res.json();
         })
@@ -87,6 +87,7 @@ export default function PostCard({ data, secret, onDelete }) {
           setForumData(result);
         });
     }
+    console.log(data);
     // load in data if not
     setExpanded(!expanded);
   };
@@ -95,7 +96,11 @@ export default function PostCard({ data, secret, onDelete }) {
     <Card className={classes.root} id={data.id}>
       <CardActionArea
         component={RouteLink}
-        to={`/@${data.username}/${data.url}`}
+        to={`/${
+          data.postType == "public"
+            ? `public/${data.publicTopic}`
+            : "@" + data.username
+        }/${data.url}`}
       >
         <CardHeader
           avatar={
@@ -112,7 +117,7 @@ export default function PostCard({ data, secret, onDelete }) {
               )}
             </Avatar>
           }
-          title={data.url.slice(0, -5)}
+          title={data.url.slice(0, -5) + " to " + data.publicTopic}
           to={"/"}
           subheader={data.creationDate}
         />

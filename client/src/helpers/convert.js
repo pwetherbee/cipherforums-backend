@@ -360,13 +360,17 @@ const parser = new Parser("&%", 64);
  */
 function encryptMultiLine(rawText, rawKey, encType) {
   // split text into chunks
-  const textChunks = parser.splitText(rawText);
-  // encrypt each chunk
-  const encryptedChunks = textChunks.map((chunk) =>
-    encrypt(chunk, rawKey, encType)
-  );
-  // combine encrypted chunks with unique delimiter
-  return encryptedChunks.join("[newchunk]");
+  if (encType === "xor") {
+    const textChunks = parser.splitText(rawText);
+    // encrypt each chunk
+    const encryptedChunks = textChunks.map((chunk) =>
+      encrypt(chunk, rawKey, encType)
+    );
+    // combine encrypted chunks with unique delimiter
+    return encryptedChunks.join("[newchunk]");
+  } else {
+    return CryptoJS.AES.encrypt(rawText, sha256(rawKey)).toString();
+  }
 }
 
 /**
@@ -375,18 +379,29 @@ function encryptMultiLine(rawText, rawKey, encType) {
  * @param {string} encType - xor or aes - the type of encryption to use
  */
 const decryptMultiline = function (cipherText, rawKey, encType) {
-  // split strings into paddedChunks
-  const cipherChunks = cipherText.split("[newchunk]");
-  // decrypt each chunk
-  const decryptedChunks = cipherChunks.map((chunk) =>
-    decrypt(chunk, rawKey, encType)
-  );
-  // remove padding
-  const strippedChunks = decryptedChunks.map((chunk) =>
-    parser.removePadding(chunk)
-  );
-  // join chunks into block of decrypted text
-  return strippedChunks.join("");
+  if (encType === "xor") {
+    // split strings into paddedChunks
+    const cipherChunks = cipherText.split("[newchunk]");
+    // decrypt each chunk
+    const decryptedChunks = cipherChunks.map((chunk) =>
+      decrypt(chunk, rawKey, encType)
+    );
+    // remove padding
+    const strippedChunks = decryptedChunks.map((chunk) =>
+      parser.removePadding(chunk)
+    );
+    // join chunks into block of decrypted text
+    return strippedChunks.join("");
+  } else {
+    let bytes = CryptoJS.AES.decrypt(cipherText, sha256(rawKey));
+    let decrypt;
+    try {
+      decrypt = bytes.toString(CryptoJS.enc.Utf8);
+      return decrypt || sha256(bytes.words.join(""));
+    } catch {
+      return decrypt || sha256(bytes.words.join(""));
+    }
+  }
 };
 
 function sleep(ms) {

@@ -16,7 +16,7 @@ import { Link as RouteLink } from "react-router-dom";
 import Container from "@material-ui/core/Container";
 import { useParams } from "react-router";
 import { PublicPost } from "../components/PublicPost";
-
+import LoadingIcon from "../components/LoadingPageIcon";
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -73,6 +73,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function MediaControlCard() {
   const classes = useStyles();
+  const [loading, setLoading] = useState(true);
   const theme = useTheme();
   let { topic } = useParams();
   console.log(topic);
@@ -84,9 +85,18 @@ export default function MediaControlCard() {
     const data = await res.json();
     document.title = `Cipherforums | ${topic}`;
     setTopicPosts(data);
+    setLoading(false);
   }, []);
   return (
-    <Grid container spacing={0}>
+    <Grid
+      container
+      spacing={0}
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
       <Grid item xs={12} sm={6}>
         <Typography className={classes.root} variant="h3">
           {topic}
@@ -103,7 +113,19 @@ export default function MediaControlCard() {
           Post to {topic}
         </Button>
       </Grid>
-      {topicPosts.length ? (
+      {loading ? (
+        <div
+          style={{
+            height: 500,
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <br />
+          <LoadingIcon style={{ position: "absolute", height: "30rem" }} />
+        </div>
+      ) : topicPosts.length ? (
         topicPosts.map((post, i) => (
           <PublicPost key={i} details={post} topic={topic} />
         ))
@@ -119,28 +141,6 @@ export default function MediaControlCard() {
           </div>
         </Grid>
       )}
-      {/* <Grid item xs={12} sm={6}>
-        <Card className={classes.root}>
-          <div className={classes.details}>
-            <img
-              className={classes.img}
-              alt="complex"
-              src="https://i.imgur.com/AD3MbBi.jpeg"
-            />
-            <CardContent className={classes.content}>
-              <Typography variant="caption">@username</Typography>
-              <Typography variant="body2">
-                1500s, when an unknown 1500s, when an unknown pp
-              </Typography>
-              <div className={classes.card__actions}>
-                <Typography className={classes.card__actions} variant="caption">
-                  100 comments
-                </Typography>
-              </div>
-            </CardContent>
-          </div>
-        </Card>
-      </Grid> */}
     </Grid>
   );
 }
