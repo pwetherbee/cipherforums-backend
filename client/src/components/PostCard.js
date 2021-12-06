@@ -95,7 +95,7 @@ export default function PostCard({ data, secret, onDelete }) {
     <Card className={classes.root} id={data.id}>
       <CardActionArea
         component={RouteLink}
-        to={`/user/${data.username}/post/${data.url}`}
+        to={`/@${data.username}/${data.url}`}
       >
         <CardHeader
           avatar={

@@ -43,6 +43,7 @@ export default function Public() {
     title: "",
     subtitle: "",
     image: "",
+    postType: "public",
   });
   useEffect(() => {
     document.title = "Cipherforums | Create Public";

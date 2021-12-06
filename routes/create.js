@@ -33,16 +33,21 @@ router.post("/forum", (req, res) => {
     return;
   }
   const data = req.body;
+  console.log(data);
   // TODO: Replace whitespace
   // TODO: Validate title
   const url = data.title + "!" + idGen.generateHexID();
   let connection = SQLHelper.createConnection();
   connection.connect();
   let query = `
-      INSERT INTO Forums (url, subtitle, image, authorID, creationDate)
+      INSERT INTO Forums (url, subtitle, image, authorID, creationDate, publicTopic, postType)
     VALUES (${connection.escape(url)}, ${connection.escape(
     data.subtitle
-  )}, ${connection.escape(data.img)}, ${req.session.userID}, NOW());
+  )}, ${connection.escape(data.img)}, ${
+    req.session.userID
+  }, NOW(), ${connection.escape(req.session.username)}, ${connection.escape(
+    data.postType
+  )});
     `;
   console.log("making query");
   connection.query(query, function (err, rows, fields) {

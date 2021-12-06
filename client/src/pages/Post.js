@@ -74,7 +74,7 @@ const message = `Truncation should be conditionally applicable on this long line
 
 export default function Post() {
   let match = useRouteMatch();
-  let { postname } = useParams();
+  let { topic, postname, username } = useParams();
   const classes = useStyles();
   const [forumData, setForumData] = useState();
   const [comments, setComments] = useState();
@@ -89,12 +89,16 @@ export default function Post() {
   const [encChecked, setEncChecked] = useState(false);
 
   useEffect(() => {
-    fetch(`/api/threads/${postname}`)
+    fetch(`/api/threads/${topic || username}/${postname}`)
       .then((res) => res.json())
       .then((data) => {
+        if (!data.success) {
+          // handle error in request
+        }
         console.log(data);
         setComments(data.comments);
         setForumData(data);
+        setSecret(data.publicTopic?.toLowerCase() || "");
       });
   }, [postname]);
 
@@ -117,7 +121,6 @@ export default function Post() {
       setHelperText("You must type a secret key above");
       return;
     }
-    console.log(postCommentText.length);
     // if (postCommentText.length > 64) {
     //   console.log(postCommentText.length < 64);
     //   setError(true);
@@ -127,7 +130,7 @@ export default function Post() {
     // Encrypt comment
     console.log(postCommentText, secret);
     const ciphertext = encryptMultiLine(postCommentText, secret, encType);
-    const res = await fetch(`/api/threads/${postname}`, {
+    const res = await fetch(`/api/threads/${topic || username}/${postname}`, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -194,7 +197,9 @@ export default function Post() {
               Post to{" "}
               {
                 <RouteLink
-                  to={`/public/${forumData.publicTopic}`}
+                  to={`/${forumData.postType == "public" ? "public/" : "@"}${
+                    forumData.publicTopic
+                  }`}
                   style={linkStyle}
                 >
                   <Link>{forumData.publicTopic}</Link>
@@ -202,7 +207,7 @@ export default function Post() {
               }{" "}
               by @
               {
-                <RouteLink to={`/user/${forumData.author}`} style={linkStyle}>
+                <RouteLink to={`/@${forumData.author}`} style={linkStyle}>
                   <Link>{forumData.author}</Link>
                 </RouteLink>
               }

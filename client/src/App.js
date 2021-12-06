@@ -138,8 +138,11 @@ export default function App() {
           <MenuAppBar auth={loggedUser} />
           <ScrollToTop />
           <Switch>
-            <Route path="/user/:username">
+            <Route exact path="/@:username">
               <User />
+            </Route>
+            <Route path="/@:username/:postname">
+              <Post />
             </Route>
             <Route path="/post/:title">
               <Post />

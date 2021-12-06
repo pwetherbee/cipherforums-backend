@@ -15,15 +15,17 @@ router.use(express.json());
 // First forum created: StableBest-sellingNewt
 
 // Get forum from url tag
-router.get("/threads/:tag", (req, res) => {
-  let urlTag = req.params["tag"];
+router.get("/threads/:topic/:tag", (req, res) => {
+  let { topic, tag } = req.params;
   // Make sql query
   let connection = SQLHelper.createConnection();
   let query = `
-  SELECT Forums.id, Forums.url, Forums.creationDate, Forums.subtitle, Forums.image, Forums.publicTopic, Users.username FROM Forums
+  SELECT Forums.id, Forums.url, Forums.creationDate, Forums.subtitle, Forums.image, Forums.publicTopic, Forums.postType, Users.username FROM Forums
   LEFT JOIN Users
   ON Forums.authorID = Users.userID
-  WHERE Forums.url = ${connection.escape(urlTag)}
+  WHERE Forums.url = ${connection.escape(
+    tag
+  )} AND Forums.publicTopic = ${connection.escape(topic.toLowerCase())}
   `;
   // Connect to database
   connection.connect();
@@ -44,6 +46,7 @@ router.get("/threads/:tag", (req, res) => {
       subtitle: rows[0].subtitle,
       publicTopic: rows[0].publicTopic,
       image: rows[0].image,
+      postType: rows[0].postType,
       comments: [],
     };
     query = `
@@ -106,8 +109,8 @@ router.get("/:username/created", (req, res) => {
 
 // Post comment on thread from url
 
-router.post("/threads/:tag", (req, res) => {
-  let urlID = req.params["tag"];
+router.post("/threads/:topic/:tag", (req, res) => {
+  let { tag, topic } = req.params;
   let connection = SQLHelper.createConnection();
   let commentData = req.body;
   if (!commentData) {
@@ -205,12 +208,12 @@ router.post(
     const url = data.title + "!" + idGen.generateHexID();
     const connection = await SQLHelper.createConnection2();
     const query = `
-  INSERT INTO Forums (url, authorID, subtitle, CreationDate, publicTopic, image)
+  INSERT INTO Forums (url, authorID, subtitle, CreationDate, publicTopic, image, postType)
   VALUES (${connection.escape(url)},${
       req.session.userID || 0
     }, ${connection.escape(data.subtitle)}, NOW(), ${connection.escape(
       topic
-    )}, ${connection.escape(data.image)})
+    )}, ${connection.escape(data.image)}, ${connection.escape(data.postType)})
   `;
     connection.connect();
     const rows = await connection.execute(query);

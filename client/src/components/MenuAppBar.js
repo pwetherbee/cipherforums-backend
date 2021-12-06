@@ -134,7 +134,7 @@ export default function MenuAppBar({ auth }) {
 
           {auth.ok && !mobile && (
             <RouteLink
-              to={`/user/${auth.username}`}
+              to={`/@${auth.username}`}
               style={{ textDecoration: "none" }}
             >
               <Link underline="hover">
@@ -177,7 +177,7 @@ export default function MenuAppBar({ auth }) {
                     variant={btnStyle}
                     color="primary"
                     component={RouteLink}
-                    to={`/user/${auth.username}`}
+                    to={`/@${auth.username}`}
                   >
                     Profile
                   </Button>

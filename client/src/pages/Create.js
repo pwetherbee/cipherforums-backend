@@ -13,6 +13,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import { useState } from "react";
 import Container from "@material-ui/core/Container";
+import { useParams } from "react-router";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -38,6 +39,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Public() {
+  let { topic } = useParams();
   const classes = useStyles();
   const [values, setValues] = useState({
     title: "",
@@ -66,6 +68,7 @@ export default function Public() {
         subtitle: values.subtitle,
         img: values.image,
         key: values.key,
+        postType: "self",
       }),
     });
     const data = await res.json();

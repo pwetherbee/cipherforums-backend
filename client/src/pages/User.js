@@ -132,9 +132,9 @@ export default function Profile() {
       {/* <MenuAppBar auth={userData?.loggedIn} /> */}
 
       <Switch>
-        <Route path={`${match.path}/post/:postname`}>
+        {/* <Route path={`${match.path}/post/:postname`}>
           <Post />
-        </Route>
+        </Route> */}
 
         {/* <Route exact path={`${match.path}/`}>
          
