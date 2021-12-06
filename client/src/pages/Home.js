@@ -49,6 +49,7 @@ export default function AutoGrid() {
   const classes = useStyles();
   const title = "cipherforums.com";
   const subtitle = "A cryptographically secure forum";
+  const encrypted1 = "blah";
   const [char, setChar] = useState("a");
   const [userKey, setUserKey] = useState("");
   const [toggle, setToggle] = useState(true);
