@@ -108,7 +108,7 @@ export default function Bio({ profile, currUser, canFollow }) {
                   square
                 ></ImageCircle>
               ) : (
-                profile.username.slice(0, 1)
+                <Avatar>{profile.username.slice(0, 2)}</Avatar>
               )}
 
               {/* <Card className={classes.avi}> */}

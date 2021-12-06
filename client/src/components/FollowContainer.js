@@ -60,7 +60,7 @@ export default function FollowContainer({ following }) {
 
             button
             component={RouteLink}
-            to={`/user/${user.username}`}
+            to={`/@${user.username}`}
             alignItems="flex-start"
           >
             <ListItemAvatar>

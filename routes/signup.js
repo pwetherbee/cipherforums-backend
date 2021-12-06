@@ -24,7 +24,7 @@ router.post(
     // Account validations
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).json({
+      return res.status(200).json({
         success: false,
         message: "Invalid username or email",
       });
