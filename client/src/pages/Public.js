@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.primary.main,
     backgroundColor: theme.palette.background.default,
     borderWidth: 2,
-    borderRadius: "20px",
+    borderRadius: 10,
     borderColor: theme.palette.text.secondary,
     borderStyle: "solid",
     verticalAlign: "middle",

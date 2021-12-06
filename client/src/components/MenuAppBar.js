@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
     // borderRadius: "10px",
   },
   menuButton: {
-    marginRight: theme.spacing(40),
+    marginRight: theme.spacing(20),
   },
   title: {
     flexGrow: 1,
