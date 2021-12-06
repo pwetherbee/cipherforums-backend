@@ -3,7 +3,7 @@ import Box from "@material-ui/core/Box";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
-import MoodSharpIcon from "@material-ui/icons/MoodSharp";
+import MoodSharpIcon from "@mui/icons-material/MoodSharp";
 import Link from "@material-ui/core/Link";
 import { Link as RouteLink } from "react-router-dom";
 import { useHistory, useParams } from "react-router";
