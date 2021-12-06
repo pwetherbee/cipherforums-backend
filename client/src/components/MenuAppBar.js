@@ -22,6 +22,10 @@ import HelpIcon from "@material-ui/icons/Help";
 import Icon from "@material-ui/core/Icon";
 import { SvgIcon } from "@material-ui/core";
 import homeLogo from "../logo.svg";
+import { styled, alpha } from "@mui/material/styles";
+import InputBase from "@mui/material/InputBase";
+import SearchIcon from "@mui/icons-material/Search";
+import { Divider } from "@mui/material";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -33,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
     // borderRadius: "10px",
   },
   menuButton: {
-    marginRight: theme.spacing(2),
+    marginRight: theme.spacing(40),
   },
   title: {
     flexGrow: 1,
@@ -41,6 +45,49 @@ const useStyles = makeStyles((theme) => ({
   logo: {
     width: 50,
     marginTop: 0,
+  },
+}));
+
+const Search = styled("div")(({ theme }) => ({
+  color: "#00e019",
+  position: "relative",
+  borderRadius: theme.shape.borderRadius,
+  backgroundColor: alpha("#121212", 0.15),
+  "&:hover": {
+    backgroundColor: alpha("#151515", 0.25),
+  },
+  marginLeft: 0,
+  width: "100%",
+  [theme.breakpoints.up("sm")]: {
+    marginLeft: theme.spacing(1),
+    width: "auto",
+  },
+}));
+
+const SearchIconWrapper = styled("div")(({ theme }) => ({
+  padding: theme.spacing(0, 2),
+  height: "100%",
+  position: "absolute",
+  pointerEvents: "none",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+}));
+
+const StyledInputBase = styled(InputBase)(({ theme }) => ({
+  color: "#00e019",
+  "& .MuiInputBase-input": {
+    padding: theme.spacing(1, 1, 1, 0),
+    // vertical padding + font size from searchIcon
+    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+    transition: theme.transitions.create("width"),
+    width: "100%",
+    [theme.breakpoints.up("sm")]: {
+      width: "12ch",
+      "&:focus": {
+        width: "20ch",
+      },
+    },
   },
 }));
 
@@ -73,7 +120,7 @@ export default function MenuAppBar({ auth }) {
     setAnchorEl(null);
   };
 
-  const btnStyle = "outlined";
+  const btnStyle = "";
 
   return (
     <div className={classes.root}>
@@ -102,10 +149,15 @@ export default function MenuAppBar({ auth }) {
             </IconButton>
           )}
 
-          <Typography variant="h6" className={classes.title}>
-            <Button component={RouteLink} to="/">
-              <img className={classes.logo} src={homeLogo} />
-            </Button>
+          <Typography
+            variant="subtitle1"
+            className={classes.title}
+            color="primary"
+            component={RouteLink}
+            to="/"
+          >
+            <img className={classes.logo} src={homeLogo} />
+            {/* <Button></Button> */}
           </Typography>
 
           <Typography variant="h6" className={classes.title}>
@@ -131,7 +183,15 @@ export default function MenuAppBar({ auth }) {
               {mobile && <HelpIcon />}
             </Button>
           </Typography>
-
+          <Search className={classes.title}>
+            <SearchIconWrapper>
+              <SearchIcon />
+            </SearchIconWrapper>
+            <StyledInputBase
+              placeholder="Search..."
+              inputProps={{ "aria-label": "search" }}
+            />
+          </Search>
           {auth.ok && !mobile && (
             <RouteLink
               to={`/@${auth.username}`}
@@ -152,7 +212,7 @@ export default function MenuAppBar({ auth }) {
                 aria-controls="menu-appbar"
                 aria-haspopup="true"
                 onClick={handleMenu}
-                color="inherit"
+                color="primary"
               >
                 <AccountCircle color="primary" />
               </IconButton>
@@ -172,35 +232,21 @@ export default function MenuAppBar({ auth }) {
                 open={open}
                 onClose={handleClose}
               >
-                <MenuItem key={1}>
-                  <Button
-                    variant={btnStyle}
-                    color="primary"
-                    component={RouteLink}
-                    to={`/@${auth.username}`}
-                  >
-                    Profile
-                  </Button>
+                <MenuItem
+                  key={1}
+                  component={RouteLink}
+                  to={`/@${auth.username}`}
+                  style={{ textAlign: "center" }}
+                >
+                  Profile
                 </MenuItem>
-                <MenuItem key={2}>
-                  <Button
-                    variant={btnStyle}
-                    color="primary"
-                    component={RouteLink}
-                    to="/settings"
-                  >
-                    Settings
-                  </Button>
+                <Divider />
+                <MenuItem key={2} component={RouteLink} to="/settings">
+                  Settings
                 </MenuItem>
-                <MenuItem key={3}>
-                  <Button
-                    variant={btnStyle}
-                    color="primary"
-                    component={Link}
-                    href={"/logout"}
-                  >
-                    Logout
-                  </Button>
+                <Divider />
+                <MenuItem key={3} component={Link} href={"/logout"}>
+                  Logout
                 </MenuItem>
               </Menu>
             </div>
