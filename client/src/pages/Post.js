@@ -194,7 +194,7 @@ export default function Post() {
           />
           <Paper className={classes.titleHolder}>
             <Typography variant="subtitle1" className={classes.titleElements}>
-              Post to{" "}
+              Post to
               {
                 <RouteLink
                   to={`/${forumData.postType == "public" ? "public/" : "@"}${
@@ -204,11 +204,11 @@ export default function Post() {
                 >
                   <Link>{forumData.publicTopic}</Link>
                 </RouteLink>
-              }{" "}
-              by @
+              }
+              by
               {
                 <RouteLink to={`/@${forumData.author}`} style={linkStyle}>
-                  <Link>{forumData.author}</Link>
+                  <Link>{"@" + forumData.author}</Link>
                 </RouteLink>
               }
             </Typography>
