@@ -31,9 +31,9 @@ export default function FullWidthGrid() {
             </Typography>
             <Typography>
               This website uses encryption and obfuscation to provide privacy,
-              scarcity, and secrecy to content. The goal of Cipherforums is to
+              scarcity, and secrecy for digital content. The goal of Cipherforums is to
               allow individuals to choose what degree of accessibility they
-              would like their social content on the internet to have. This is
+              would like their social content to have on the internet. This is
               achieved with the implementation of two different processes.
             </Typography>
           </Paper>
@@ -44,17 +44,21 @@ export default function FullWidthGrid() {
               XOR (logic gate)
             </Typography>
             <Typography gutterBottom>
-              Providing thorough obfuscation, or could be considered extremely
-              light “encryption”
+              Providing thorough obfuscation, to prevent ad targeting, online indexing, or censorship.
             </Typography>
             <Typography variant="h5" gutterBottom>
               AES (encryption)
             </Typography>
             <Typography gutterBottom>
-              Providing 256 bit military grade encryption
+              Providing 256 bit military grade encryption.
             </Typography>
           </Paper>
         </Grid>
+        <Paper className={classes.paper}>
+            <Typography>
+              All operations are done client side. Our code is open source and freely auditable and available  at ____________.
+            </Typography>
+          </Paper>
         <Grid item xs={12}>
           <Paper className={classes.paper}>
             <Typography variant="h3" gutterBottom>
@@ -81,7 +85,7 @@ export default function FullWidthGrid() {
               Example
             </Typography>
             <Typography>
-              Compare each digit with the digit of the string below it
+              Compare each digit with the digit below it.
             </Typography>
             <div>
               <br />
@@ -94,11 +98,11 @@ export default function FullWidthGrid() {
             </Typography>
           </Paper>
         </Grid>
-        <Grid item xs={12}>
+        {/* <Grid item xs={12}>
           <Paper className={classes.paper}>
             <Typography>* XOR JAVASCIPT DEMO *</Typography>
           </Paper>
-        </Grid>
+        </Grid> */}
         <Grid item xs={12}>
           <Paper className={classes.paper}>
             <Typography variant="h4" gutterBottom>
@@ -106,11 +110,9 @@ export default function FullWidthGrid() {
             </Typography>
             <Typography>
               Both messages and keys are contained in 256 bit chucks (equivalent
-              to 64 characters). Keys are derived through the SHA256 hash of the
-              input key text. (Search SHA256 to understand key derivation
-              better). Message chunks are padded with random letters to make
-              sure that their length always equals 64 characters, and are Xored
-              with the 64 character key (a SHA256 hash). This website converts
+              to 64 characters). Keys are derived using the SHA256 hash of the text entered into the key input field. Message chunks are padded with random letters to make
+              sure that their length always equals 64 characters, and are XORed
+              against the 64 character key (a SHA256 hash). This website converts
               the data to utf-8 text in the browser, but the data itself will
               always be strings of hex that are interpreted client side.
             </Typography>
@@ -118,9 +120,9 @@ export default function FullWidthGrid() {
               <br />
             </div>
             <Typography>
-              When text is entered, this text is converted into hex numbers, and
-              then XORed against the hex key to produce cipher hex. Doing this
-              enables cipher text to be public, and the original message can
+              When text is entered, all text is converted into hex numbers. The hex for the message is
+              XORed against the hex key to produce cipher hex. This cipher hex is the only thing sent to cipherforums servers, and is the only thing visable to search engines. Doing this
+              enables cipher text to be public, while the original message can
               only be recovered by XORing the cipher against its corresponding
               key.
             </Typography>
@@ -130,18 +132,13 @@ export default function FullWidthGrid() {
             <Typography>
               However, this process is not considered encryption. When a XOR key
               is repeated more than once, cryptographers can use consistencies
-              in the cipher text to derive the key. Because of this, the XOR
+              in the cipher text to derive the key, without knowing it beforehand. Because of this, the XOR
               technique is only considered obfuscation, meaning you are hiding
-              and obscuring the text, rather than encrypting it. Xor should be
-              used for information that needs to be hidden now, but ok if it is
-              discovered later. You are essentially creating a financial barrier
-              between the individual trying to decrypt your message, and the
-              original message. In order for this individual to retrieve the
+              and obscuring the text, not encrypting it. In order for this individual to retrieve the
               original message, they would have to use cryptanalysis, time,
               money, or all 3. This process creates an environment where your
               data is hidden by default, and work has to be done to retrieve the
-              original message. If encryption is your goal, you will want to use
-              AES.
+              original message. If strong data security is your goal, then AES is a much more suitable tool.
             </Typography>
           </Paper>
         </Grid>
@@ -152,10 +149,10 @@ export default function FullWidthGrid() {
             </Typography>
             <Typography>
               AES is a symmetric-key encryption technique developed by the
-              United States National Security Agency, and is military grade.
+              United States National Security Agency, and is considered to be military grade.
               With AES, you are thoroughly encrypting your data. AES is
               considered to be practically irreversible, and can be used to
-              encrypt sensitive information.
+              encrypt sensitive information. It should be noted however, that while encryption is an incredibly powerful tool, it still requires responsible key security.
             </Typography>
           </Paper>
         </Grid>
@@ -166,7 +163,7 @@ export default function FullWidthGrid() {
             </Typography>
             <Typography>
               On Cipherforums, using AES encryption will not change the user
-              experience much, but will allow for incredibly strong encryption.
+              experience much, but will do very different things to your data. While changing methods is the simple flip of a switch, XOR will obscure your data while AES will thoroughly encrypt it. These are two very different things.
               Direct messaging will always use AES, and user posts and comments
               can be AES encrypted if the user chooses to do so.
             </Typography>
