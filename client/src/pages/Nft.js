@@ -47,12 +47,15 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
   },
   info:{
-    textAlign: "center",
-    padding: 40,
+    textAlign: "left",
+    padding: 10,
+    paddingLeft: 20,
+    paddingTop: 40,
   },
   info2:{
-    textAlign: "center",
-    paddingBottom: 10,
+    textAlign: "left",
+    paddingLeft: 20,
+    paddingBottom: 40,
   }
 }));
 
