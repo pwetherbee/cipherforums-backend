@@ -101,6 +101,7 @@ export default function Public() {
         <Typography component="h1" variant="h5">
           Post to {topic}
         </Typography>
+        <Typography variant="comment">* Titles and subtitles are never encrypted *</Typography>
         <form className={classes.form} noValidate onSubmit={handleSubmit}>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={12}>

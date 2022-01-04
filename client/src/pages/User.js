@@ -186,46 +186,79 @@ export default function Profile() {
                 <Tab label="Following"></Tab>
               </Tabs>
             </Grid>
-            <Grid item xs={12}>
-              <TabPanel value={tab} index={0}>
-                {userData ? (
-                  createdPosts.length ? (
-                    <UserPosts
-                      secret={secret}
-                      posts={createdPosts}
-                      onDelete={handleClickDelete}
-                    />
-                  ) : (
-                    "This user hasn't made any posts yet"
-                  )
-                ) : (
-                  <LoadingIcon height={"30rem"} />
-                )}
-              </TabPanel>
-              <TabPanel value={tab} index={1}>
-                {comments.length ? (
-                  <CommentContainer comments={comments} secret={secret} />
-                ) : (
-                  "This user hasn't made any comments yet"
-                )}
-              </TabPanel>
-              <TabPanel value={tab} index={2}>
-                <Container>
-                  {following.length ? (
-                    <FollowContainer
-                      following={following}
-                      secret={secret}
-                      // updateUser={updateuser}
-                    />
-                  ) : (
-                    "This user isn't following anyone"
-                  )}
-                </Container>
-              </TabPanel>
-
-              {/* <UserPosts secret={secret} posts={createdPosts} /> */}
+            {/* <Grid container spacing={2}>
+            <Grid item xs={12} sm={6}>
+              saxasx
             </Grid>
-          </Grid>
+            <Grid item xs={12} sm={6}>
+              saxasx
+            </Grid>
+            </Grid> */}
+            <Grid container spacing={2}>
+            <Grid item xs={12} sm={6}>
+                <TabPanel value={tab} index={0}>
+                  {userData ? (
+                    createdPosts.length ? (
+                      <UserPosts
+                        secret={secret}
+                        posts={createdPosts}
+                        onDelete={handleClickDelete}
+                      />
+                    ) : (
+                      "This user hasn't made any posts yet"
+                    )
+                  ) : (
+                    <LoadingIcon height={"30rem"} />
+                  )}
+                </TabPanel>
+                </Grid>
+                {/* -------------------------------------- */}
+
+                {/* <Grid item xs={12} sm={6}>
+                <TabPanel value={tab} index={0}>
+                  {userData ? (
+                    createdPosts.length ? (
+                      <UserPosts
+                        secret={secret}
+                        posts={createdPosts}
+                        onDelete={handleClickDelete}
+                      />
+                    ) : (
+                      "This user hasn't made any posts yet"
+                    )
+                  ) : (
+                    <LoadingIcon height={"30rem"} />
+                  )}
+                </TabPanel>
+                </Grid> */}
+
+                {/* --------------------------------------- */}
+                </Grid>
+                <TabPanel value={tab} index={1}>
+                  {comments.length ? (
+                    <CommentContainer comments={comments} secret={secret} />
+                  ) : (
+                    "This user hasn't made any comments yet"
+                  )}
+                </TabPanel>
+                <TabPanel value={tab} index={2}>
+                  <Container>
+                    {following.length ? (
+                      <FollowContainer
+                        following={following}
+                        secret={secret}
+                        // updateUser={updateuser}
+                      />
+                    ) : (
+                      "This user isn't following anyone"
+                    )}
+                  </Container>
+                </TabPanel>
+
+                {/* <UserPosts secret={secret} posts={createdPosts} /> */}
+              </Grid>
+              
+          {/* </Grid> */}
         </Container>
       </Switch>
     </React.Fragment>

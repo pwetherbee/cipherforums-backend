@@ -31,6 +31,7 @@ import CreatePublic from "./pages/CreatePublic";
 import Confirm from "./components/Confirm";
 import Verify from "./pages/Verify";
 import Fullscreen from "./components/Fullscreen";
+import Nftdisplay from "./pages/Nftdisplay";
 import Nft from "./pages/Nft";
 
 // Components
@@ -189,7 +190,10 @@ export default function App() {
             <Route path="/Fullscreen">
               <Fullscreen />
             </Route>
-            <Route path="/Nft">
+            <Route path="/Nftdisplay">
+              <Nftdisplay />
+            </Route>
+            <Route path="/NFt">
               <Nft />
             </Route>
             <Route path="/matrix">
