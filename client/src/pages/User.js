@@ -185,7 +185,7 @@ export default function Profile() {
                 <Tab label="User Comments"></Tab>
                 <Tab label="Following"></Tab>
               </Tabs>
-            </Grid>
+            </Grid >
             {/* <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               saxasx
@@ -194,8 +194,6 @@ export default function Profile() {
               saxasx
             </Grid>
             </Grid> */}
-            <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
                 <TabPanel value={tab} index={0}>
                   {userData ? (
                     createdPosts.length ? (
@@ -211,7 +209,7 @@ export default function Profile() {
                     <LoadingIcon height={"30rem"} />
                   )}
                 </TabPanel>
-                </Grid>
+                {/* </Grid> */}
                 {/* -------------------------------------- */}
 
                 {/* <Grid item xs={12} sm={6}>
@@ -233,7 +231,6 @@ export default function Profile() {
                 </Grid> */}
 
                 {/* --------------------------------------- */}
-                </Grid>
                 <TabPanel value={tab} index={1}>
                   {comments.length ? (
                     <CommentContainer comments={comments} secret={secret} />

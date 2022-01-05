@@ -11,6 +11,12 @@ import PostCard from "./PostCard";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    width: "85vw",
+    display:"inline-flex",
+    flexWrap: "wrap",
+    textAlign:"center",
+    marginLeft:-50,
+    // overflowWrap: "break-word",
   },
   paper: {
     padding: theme.spacing(2),
@@ -26,7 +32,9 @@ const useStyles = makeStyles((theme) => ({
     display: "block",
     maxWidth: "100%",
     maxHeight: "100%",
+    padding: "10px",
   },
+
 }));
 
 export default function UserPosts({ posts, secret, onDelete }) {
@@ -34,7 +42,6 @@ export default function UserPosts({ posts, secret, onDelete }) {
   //   const [createdPosts, setCreatedPosts] = useState(posts);
   return (
     <div className={classes.root}>
-      <Grid>
         {posts
           ? posts.map((post, i) => (
               <PostCard
@@ -45,7 +52,6 @@ export default function UserPosts({ posts, secret, onDelete }) {
               />
             ))
           : "No Posts for this user"}
-      </Grid>
     </div>
   );
 }

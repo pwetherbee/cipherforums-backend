@@ -28,8 +28,11 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 1200,
+    maxWidth: "99vw",
     marginBottom: "3%",
+    padding: 10,
+    height:300,
+    margin:10,
   },
   // media: {
   //   height: 0,
@@ -53,9 +56,9 @@ const useStyles = makeStyles((theme) => ({
     // paddingBottom: "5%",
     paddingLeft: "1%", // 16:9
     // padding: "10%",
-    maxWidth: 250,
+    // maxWidth: 250,
     // maxHeight: 50,
-    // width: "10%",
+    width: "10vw",
     // height: "20%",
     // objectFit: "cover",
     // maxHeight: 300,
