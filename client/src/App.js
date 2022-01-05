@@ -77,7 +77,9 @@ const theme = createTheme({
     divider: "rgba(0,0,0,0.12)",
   },
   typography: {
-    fontFamily: "IBM Plex Mono, Monospace",
+    allVariants: {
+      fontFamily: "IBM Plex Mono",
+    },
   },
 });
 
