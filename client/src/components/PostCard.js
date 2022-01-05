@@ -25,13 +25,14 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
-
+import ImageCircle from "./ImageCircle";
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: "99vw",
     marginBottom: "3%",
     padding: 10,
     height:300,
+    width: 300,
     margin:10,
   },
   // media: {
@@ -58,7 +59,7 @@ const useStyles = makeStyles((theme) => ({
     // padding: "10%",
     // maxWidth: 250,
     // maxHeight: 50,
-    width: "10vw",
+    // width: "10vw",
     // height: "20%",
     // objectFit: "cover",
     // maxHeight: 300,
@@ -126,7 +127,13 @@ export default function PostCard({ data, secret, onDelete }) {
         />
         <CardMedia>
           {data.image ? (
-            <img className={classes.img} src={data.image}></img>
+                  <ImageCircle className={classes.imgcir}
+                  imageLink={data.image}
+                  size={200}
+                  alt={"error"}
+                  square
+                ></ImageCircle>
+            // <img className={classes.img} src={data.image}></img>
           ) : (
             // <CardMedia className={classes.img} image={data.image} />
             <CardContent>

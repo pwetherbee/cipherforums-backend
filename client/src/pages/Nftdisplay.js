@@ -67,7 +67,7 @@ export default function AutoGrid() {
   return (
     <div className={classes.root}>
       <Typography component="h1" variant="h4" className={classes.info}>
-      0xAb5801a7D398351b8bE11C439e05C5B3259aeC9B
+      tz1erY7SqRTAM6UmdwzfmQ48VqB6675uUrHH
         </Typography>
         <Typography component="h1" className={classes.info2}>
       There is currently no cipherforums account linked to this wallet.
