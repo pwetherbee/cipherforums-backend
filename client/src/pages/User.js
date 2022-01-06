@@ -140,20 +140,24 @@ export default function Profile() {
          
         </Route> */}
 
-        <Container>
+        <Grid container maxWidth="xl">
           <ConfirmDelete
             open={openConfirmDelete}
             handleDecision={handleDecision}
             handleClose={handleCloseConfirmDelete}
           />
-          <Grid container spacing={12}>
+          <Grid
+            container
+            spacing={1}
+            style={{ display: "flex", justifyContent: "center" }}
+          >
             <Grid item xs={6}>
               <Bio
                 profile={userData}
                 canFollow={userData?.loggedIn && !userData?.isFollowing}
               />
             </Grid>
-            <div style={{ padding: 30 }}>
+            <div>
               <Grid item xs={12}>
                 {userData?.loggedIn && userData?.currUser ? (
                   <Button
@@ -185,7 +189,7 @@ export default function Profile() {
                 <Tab label="User Comments"></Tab>
                 <Tab label="Following"></Tab>
               </Tabs>
-            </Grid >
+            </Grid>
             {/* <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               saxasx
@@ -194,69 +198,50 @@ export default function Profile() {
               saxasx
             </Grid>
             </Grid> */}
-                <TabPanel value={tab} index={0}>
-                  {userData ? (
-                    createdPosts.length ? (
-                      <UserPosts
-                        secret={secret}
-                        posts={createdPosts}
-                        onDelete={handleClickDelete}
-                      />
-                    ) : (
-                      "This user hasn't made any posts yet"
-                    )
-                  ) : (
-                    <LoadingIcon height={"30rem"} />
-                  )}
-                </TabPanel>
-                {/* </Grid> */}
-                {/* -------------------------------------- */}
+            <TabPanel value={tab} index={0}>
+              {userData ? (
+                createdPosts.length ? (
+                  <UserPosts
+                    secret={secret}
+                    posts={createdPosts}
+                    onDelete={handleClickDelete}
+                  />
+                ) : (
+                  "This user hasn't made any posts yet"
+                )
+              ) : (
+                <LoadingIcon height={"30rem"} />
+              )}
+            </TabPanel>
+            {/* </Grid> */}
+            {/* -------------------------------------- */}
+            {/* --------------------------------------- */}
+            <TabPanel value={tab} index={1}>
+              {comments.length ? (
+                <CommentContainer comments={comments} secret={secret} />
+              ) : (
+                "This user hasn't made any comments yet"
+              )}
+            </TabPanel>
+            <TabPanel value={tab} index={2}>
+              <Container>
+                {following.length ? (
+                  <FollowContainer
+                    following={following}
+                    secret={secret}
+                    // updateUser={updateuser}
+                  />
+                ) : (
+                  "This user isn't following anyone"
+                )}
+              </Container>
+            </TabPanel>
 
-                {/* <Grid item xs={12} sm={6}>
-                <TabPanel value={tab} index={0}>
-                  {userData ? (
-                    createdPosts.length ? (
-                      <UserPosts
-                        secret={secret}
-                        posts={createdPosts}
-                        onDelete={handleClickDelete}
-                      />
-                    ) : (
-                      "This user hasn't made any posts yet"
-                    )
-                  ) : (
-                    <LoadingIcon height={"30rem"} />
-                  )}
-                </TabPanel>
-                </Grid> */}
+            {/* <UserPosts secret={secret} posts={createdPosts} /> */}
+          </Grid>
 
-                {/* --------------------------------------- */}
-                <TabPanel value={tab} index={1}>
-                  {comments.length ? (
-                    <CommentContainer comments={comments} secret={secret} />
-                  ) : (
-                    "This user hasn't made any comments yet"
-                  )}
-                </TabPanel>
-                <TabPanel value={tab} index={2}>
-                  <Container>
-                    {following.length ? (
-                      <FollowContainer
-                        following={following}
-                        secret={secret}
-                        // updateUser={updateuser}
-                      />
-                    ) : (
-                      "This user isn't following anyone"
-                    )}
-                  </Container>
-                </TabPanel>
-
-                {/* <UserPosts secret={secret} posts={createdPosts} /> */}
-              </Grid>
-              
           {/* </Grid> */}
-        </Container>
+        </Grid>
       </Switch>
     </React.Fragment>
   );
