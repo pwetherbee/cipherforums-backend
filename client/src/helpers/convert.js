@@ -392,7 +392,7 @@ const decryptMultiline = function (cipherText, rawKey, encType) {
     );
     // join chunks into block of decrypted text
     return strippedChunks.join("");
-  } else {
+  } else if (encType === "aes") {
     let bytes = CryptoJS.AES.decrypt(cipherText, sha256(rawKey));
     let decrypt;
     try {
@@ -401,6 +401,8 @@ const decryptMultiline = function (cipherText, rawKey, encType) {
     } catch {
       return decrypt || sha256(bytes.words.join(""));
     }
+  } else {
+    return cipherText;
   }
 };
 

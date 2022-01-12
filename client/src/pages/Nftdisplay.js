@@ -83,10 +83,15 @@ export default function AutoGrid() {
         {nfts.map((nft) => (
           <Grid key={nft.id} item xs={12} sm={3}>
             <Paper className={classes.paper}>
-              <img
-                className={classes.img}
-                src={generateThumbnailCR(nft.display_uri)}
-              ></img>
+              <RouteLink
+                to={`/tz/nft/${nft.id}`}
+                style={{ textDecoration: "none" }}
+              >
+                <img
+                  className={classes.img}
+                  src={generateThumbnailCR(nft.display_uri)}
+                ></img>
+              </RouteLink>
             </Paper>
           </Grid>
         ))}

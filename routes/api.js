@@ -7,6 +7,7 @@ const loginRouter = require("./login");
 const signupRouter = require("./signup");
 const createRouter = require("./create");
 const deleteRouter = require("./delete");
+const commentsRouter = require("./comments");
 const followingRouter = require("./following");
 const mailRouter = require("./mail");
 const { body, validationResult } = require("express-validator");
@@ -228,6 +229,7 @@ router.use("/login", loginRouter);
 router.use("/signup", signupRouter);
 router.use("/create", createRouter);
 router.use("/following", followingRouter);
+router.use("/comments", commentsRouter);
 router.use("/mail", mailRouter);
 
 module.exports = router;
