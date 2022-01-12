@@ -57,11 +57,23 @@ export default function Public() {
   const [comments, setComments] = useState([]);
   const { id } = useParams();
   const handleDeleteComment = () => {};
-  const handleSubmitComment = () => {};
+  const handleSubmitComment = async () => {
+    const data = await query(`/api/comments?nftID=${id}&chainType=${"tz"}`, {
+      text: postCommentText,
+    });
+    if (!data.success) {
+      return alert(data.message);
+    }
+    setPostCommentText("");
+  };
   useEffect(async () => {
     const data = await fetchOBJKTDetails(id);
     console.log(data);
-    const comments = query(`/api/comments?nftID=${id}&chainType=${"tz"}`);
+    const commentData = await query(
+      `/api/comments?nftID=${id}&chainType=${"tz"}`
+    );
+    console.log(commentData);
+    setComments(commentData.data);
     setNFT(data);
     // query api for comments relating to nft
   }, []);
