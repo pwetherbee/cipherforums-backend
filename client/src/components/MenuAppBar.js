@@ -214,18 +214,6 @@ export default function MenuAppBar({ auth }) {
               inputProps={{ "aria-label": "search" }}
             />
           </Search>
-          {auth.ok && !mobile && (
-            <RouteLink
-              to={`/@${auth.username}`}
-              style={{ textDecoration: "none" }}
-            >
-              <Link underline="hover">
-                <Typography color="primary" variant="h6">
-                  @{auth.username}
-                </Typography>
-              </Link>
-            </RouteLink>
-          )}
 
           {wallet.address ? (
             <Typography variant="h6" className={classes.title}>
@@ -255,6 +243,18 @@ export default function MenuAppBar({ auth }) {
               </Button>
             </Typography>
           )}
+           {auth.ok && !mobile && (
+            <RouteLink
+              to={`/@${auth.username}`}
+              style={{ textDecoration: "none" }}
+            >
+              <Link underline="hover">
+                <Typography color="primary" variant="h6">
+                  @{auth.username}
+                </Typography>
+              </Link>
+            </RouteLink>
+          )}
           {Boolean(auth.ok) && (
             <div>
               <IconButton
@@ -266,6 +266,7 @@ export default function MenuAppBar({ auth }) {
               >
                 <AccountCircle color="primary" />
               </IconButton>
+
 
               <Menu
                 id="menu-appbar"

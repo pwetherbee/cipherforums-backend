@@ -10,6 +10,7 @@ import { Typography } from "@material-ui/core";
 import { useParams } from "react-router-dom";
 import { fetchOBJKTDetails, generateThumbnailCR } from "../helpers/hicdex.js";
 import { query } from "../helpers/api.js";
+import { ImageGroup, Image } from 'react-fullscreen-image'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -34,18 +35,27 @@ const useStyles = makeStyles((theme) => ({
     padding: 10,
   },
   img: {
-    paddingTop: 80,
-    height: "90vh",
+    paddingTop: 20,
+    height: "70vmin",
   },
+  
   footer: {
     display: "flex",
     justifyContent: "left",
+    marginTop: 20,
+    marginLeft: 20,
+    marginRight: 20,
   },
   address: {
     justifyContent: "left",
     // padding: 0,
     // paddingLeft: 20,
     minHeight: 1,
+  },
+  comment: {
+    marginTop: 30,
+    marginBottom: 10,
+    marginLeft: 20,
   },
 }));
 
@@ -67,6 +77,7 @@ export default function Public() {
   }, []);
   const classes = useStyles();
   return (
+    <Container>
     <Grid item xs={12} sm={12}>
       <Paper className={classes.paper}>
         <img
@@ -81,7 +92,7 @@ export default function Public() {
         <Typography variant="comment">{nft.description}</Typography>
       </Toolbar>
       <Toolbar className={classes.address}>
-        <Typography variant="comment">
+        <Typography className={classes.footer} variant="comment">
           by {nft.creator?.name || nft.creator?.address}
         </Typography>
       </Toolbar>
@@ -93,34 +104,36 @@ export default function Public() {
         />
       ))}
 
-      <TextField
-        error={error}
-        helperText={helperText}
-        className={classes.comment}
-        id="outlined-textarea"
-        label="Reply"
-        value={postCommentText}
-        onInput={(e) => {
-          setError(false);
-          setHelperText("");
-          setPostCommentText(e.target.value);
-        }}
-        placeholder="Enter your comment here"
-        multiline
-        fullWidth
-        variant="outlined"
-      />
-      <Container className={classes.submitBox}>
-        <Button
-          disabled={!postCommentText.length}
-          variant="contained"
-          color="primary"
-          onClick={handleSubmitComment}
-        >
-          Submit Comment
-        </Button>
-        {/* <SecretBox updateSecret={updateSecret} secret={secret} /> */}
-      </Container>
+
+          <TextField
+            error={error}
+            helperText={helperText}
+            className={classes.comment}
+            id="outlined-textarea"
+            label="Reply"
+            value={postCommentText}
+            onInput={(e) => {
+              setError(false);
+              setHelperText("");
+              setPostCommentText(e.target.value);
+            }}
+            placeholder="Enter your comment here"
+            multiline
+            fullWidth
+            variant="outlined"
+          />
+          <Container className={classes.submitBox}>
+            <Button
+              disabled={!postCommentText.length}
+              variant="contained"
+              color="primary"
+              onClick={handleSubmitComment}
+            >
+              Submit Comment
+            </Button>
+            {/* <SecretBox updateSecret={updateSecret} secret={secret} /> */}
+          </Container>
     </Grid>
+    </Container>
   );
 }
