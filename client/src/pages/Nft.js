@@ -59,6 +59,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
 export default function Public() {
   const [error, setError] = useState(false);
   const [helperText, setHelperText] = useState("");
@@ -76,6 +77,7 @@ export default function Public() {
     // query api for comments relating to nft
   }, []);
   const classes = useStyles();
+  // const gg = ("https://ipfs.io/ipfs/" +((nft.artifact_uri).split("//").slice(-1)[0]));
   return (
     <Container>
     <Grid item xs={12} sm={12}>
@@ -84,6 +86,11 @@ export default function Public() {
           className={classes.img}
           src={nft.display_uri && generateThumbnailCR(nft.display_uri)}
         />
+      </Paper>
+      <Paper className={classes.paper}>
+      <video width="750" height="500" controls >
+      <source src={"https://ipfs.io/ipfs/" +((nft.artifact_uri && generateThumbnailCR(nft.artifact_uri).split("/").slice(-1)[0]))} type="video/mp4"/>
+      </video>
       </Paper>
       <Toolbar className={classes.footer}>
         <Typography variant="h3">{nft.title}</Typography>
