@@ -1,6 +1,6 @@
 import { DAppClient } from "@airgap/beacon-sdk";
 
-const dAppClient = new DAppClient({ name: "Beacon Docs" });
+const dAppClient = new DAppClient({ name: "Wallet Sync" });
 
 const syncWallet = async function () {
   try {

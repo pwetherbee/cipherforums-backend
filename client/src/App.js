@@ -201,6 +201,7 @@ export default function App() {
             <Route path="/NFt">
               <Nft />
             </Route>
+
             <Route path="/matrix">
               <MatrixPage />
             </Route>
