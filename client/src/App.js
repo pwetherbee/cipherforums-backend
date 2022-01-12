@@ -192,7 +192,7 @@ export default function App() {
             <Route path="/Fullscreen">
               <Fullscreen />
             </Route>
-            <Route path="/Nftdisplay">
+            <Route path="/tz/:address">
               <Nftdisplay />
             </Route>
             <Route path="/NFt">

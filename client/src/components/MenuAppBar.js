@@ -26,6 +26,12 @@ import { styled, alpha } from "@mui/material/styles";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
 import { Divider } from "@mui/material";
+import {
+  syncWallet,
+  desyncWallet,
+  getActiveAccount,
+} from "../helpers/wallet.js";
+import { useEffect } from "react";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -93,6 +99,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export default function MenuAppBar({ auth }) {
   const [mobile, setMobile] = useState(false);
+  const [wallet, setWallet] = useState({});
   useLayoutEffect(() => {
     function updateSize() {
       setMobile(window.innerWidth < 1000);
@@ -102,6 +109,10 @@ export default function MenuAppBar({ auth }) {
     return () => window.removeEventListener("resize", updateSize);
   }, []);
 
+  useEffect(async () => {
+    const currAccount = await getActiveAccount();
+    setWallet(currAccount || {});
+  }, []);
   // const { innerWidth, innerHeight } = window;
   const classes = useStyles();
   // const [auth, setAuth] = React.useState(true);
@@ -118,6 +129,17 @@ export default function MenuAppBar({ auth }) {
 
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleSync = async () => {
+    const permissions = await syncWallet();
+    if (permissions) {
+      setWallet(permissions);
+    }
+  };
+  const handleUnsync = async () => {
+    desyncWallet();
+    setWallet({});
   };
 
   const btnStyle = "";
@@ -205,6 +227,34 @@ export default function MenuAppBar({ auth }) {
             </RouteLink>
           )}
 
+          {wallet.address ? (
+            <Typography variant="h6" className={classes.title}>
+              <Button
+                variant={btnStyle}
+                color="primary"
+                component={RouteLink}
+                to={`/tz/${wallet.address}`}
+              >
+                {mobile || wallet.address}
+                {mobile && <HelpIcon />}
+              </Button>
+            </Typography>
+          ) : (
+            <Typography variant="h6" className={classes.title}>
+              <Button variant={btnStyle} color="primary" onClick={handleSync}>
+                {mobile || "Sync"}
+                {mobile && <HelpIcon />}
+              </Button>
+            </Typography>
+          )}
+          {wallet.address && (
+            <Typography variant="h6" className={classes.title}>
+              <Button variant={btnStyle} color="primary" onClick={handleUnsync}>
+                {mobile || "Unsync"}
+                {mobile && <HelpIcon />}
+              </Button>
+            </Typography>
+          )}
           {Boolean(auth.ok) && (
             <div>
               <IconButton

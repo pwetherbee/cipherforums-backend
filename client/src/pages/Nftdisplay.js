@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
@@ -19,7 +19,8 @@ import AlbumSharpIcon from "@material-ui/icons/AlbumSharp";
 import AnnouncementRoundedIcon from "@material-ui/icons/AnnouncementRounded";
 import EcoRoundedIcon from "@material-ui/icons/EcoRounded";
 import Link from "@material-ui/core/Link";
-import { Link as RouteLink } from "react-router-dom";
+import { Link as RouteLink, useParams } from "react-router-dom";
+import { fetchCreatedOBJKTs, generateThumbnailCR } from "../helpers/hicdex.js";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -43,132 +44,52 @@ const useStyles = makeStyles((theme) => ({
     verticalAlign: "middle",
     padding: 10,
   },
-  img:{
+  img: {
     width: "100%",
   },
-  info:{
+  info: {
     textAlign: "left",
     padding: 10,
     paddingLeft: 20,
     paddingTop: 40,
   },
-  info2:{
+  info2: {
     textAlign: "left",
     paddingLeft: 20,
     paddingBottom: 40,
-  }
+  },
 }));
 
 export default function AutoGrid() {
+  let { address } = useParams();
+  const [nfts, setNfts] = useState([]);
   const classes = useStyles();
-  useEffect(() => {
+  useEffect(async () => {
     document.title = "Cipherforums | Public Topics";
-  });
+    const created = await fetchCreatedOBJKTs(address);
+    console.log(created);
+    console.log(generateThumbnailCR(created[0].display_uri));
+    setNfts(created);
+  }, []);
   return (
     <div className={classes.root}>
       <Typography component="h1" variant="h4" className={classes.info}>
-      tz1erY7SqRTAM6UmdwzfmQ48VqB6675uUrHH
-        </Typography>
-        <Typography component="h1" className={classes.info2}>
-      There is currently no cipherforums account linked to this wallet.
-        </Typography>
+        {address}
+      </Typography>
+      <Typography component="h1" className={classes.info2}>
+        There is currently no cipherforums account linked to this wallet.
+      </Typography>
       <Grid container spacing={4}>
-        <Grid item xs={12} sm={3}>
+        {nfts.map((nft) => (
+          <Grid key={nft.id} item xs={12} sm={3}>
             <Paper className={classes.paper}>
-            <img
-            className={classes.img}
-            src="https://i.imgur.com/MYmm7E1.jpeg"
-          ></img>
+              <img
+                className={classes.img}
+                src={generateThumbnailCR(nft.display_uri)}
+              ></img>
             </Paper>
-        </Grid>
-        <Grid item xs={12} sm={3}>
-            <Paper className={classes.paper}>
-            <img
-            className={classes.img}
-            src="https://i.imgur.com/A3HI0Xm.jpeg"
-          ></img>
-            </Paper>
-        </Grid>
-        <Grid item xs={12} sm={3}>
-            <Paper className={classes.paper}>
-            <img
-            className={classes.img}
-            src="https://i.imgur.com/MYmm7E1.jpeg"
-          ></img>
-            </Paper>
-        </Grid>
-        <Grid item xs={12} sm={3}>
-            <Paper className={classes.paper}>
-            <img
-            className={classes.img}
-            src="https://i.imgur.com/MYmm7E1.jpeg"
-          ></img>
-            </Paper>
-        </Grid>
-        <Grid item xs={12} sm={3}>
-            <Paper className={classes.paper}>
-            <img
-            className={classes.img}
-            src="https://i.imgur.com/MYmm7E1.jpeg"
-          ></img>
-            </Paper>
-        </Grid>
-        <Grid item xs={12} sm={3}>
-            <Paper className={classes.paper}>
-            <img
-            className={classes.img}
-            src="https://i.imgur.com/MYmm7E1.jpeg"
-          ></img>
-            </Paper>
-        </Grid>
-        <Grid item xs={12} sm={3}>
-            <Paper className={classes.paper}>
-            <img
-            className={classes.img}
-            src="https://i.imgur.com/MYmm7E1.jpeg"
-          ></img>
-            </Paper>
-        </Grid>
-        <Grid item xs={12} sm={3}>
-            <Paper className={classes.paper}>
-            <img
-            className={classes.img}
-            src="https://i.imgur.com/MYmm7E1.jpeg"
-          ></img>
-            </Paper>
-        </Grid>
-        <Grid item xs={12} sm={3}>
-            <Paper className={classes.paper}>
-            <img
-            className={classes.img}
-            src="https://i.imgur.com/MYmm7E1.jpeg"
-          ></img>
-            </Paper>
-        </Grid>
-        <Grid item xs={12} sm={3}>
-            <Paper className={classes.paper}>
-            <img
-            className={classes.img}
-            src="https://i.imgur.com/MYmm7E1.jpeg"
-          ></img>
-            </Paper>
-        </Grid>
-        <Grid item xs={12} sm={3}>
-            <Paper className={classes.paper}>
-            <img
-            className={classes.img}
-            src="https://i.imgur.com/MYmm7E1.jpeg"
-          ></img>
-            </Paper>
-        </Grid>
-        <Grid item xs={12} sm={3}>
-            <Paper className={classes.paper}>
-            <img
-            className={classes.img}
-            src="https://i.imgur.com/MYmm7E1.jpeg"
-          ></img>
-            </Paper>
-        </Grid>
+          </Grid>
+        ))}
       </Grid>
     </div>
   );
