@@ -2,25 +2,13 @@ import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
-import FilterHdrIcon from "@material-ui/icons/FilterHdr";
-import { Typography } from "@material-ui/core";
-import MonetizationOnOutlinedIcon from "@material-ui/icons/MonetizationOnOutlined";
-import CameraSharpIcon from "@material-ui/icons/CameraSharp";
-import GavelSharpIcon from "@material-ui/icons/GavelSharp";
-import FlightTakeoffIcon from "@material-ui/icons/FlightTakeoff";
-import ComputerIcon from "@material-ui/icons/Computer";
-import ExtensionSharpIcon from "@material-ui/icons/ExtensionSharp";
-import CreateSharpIcon from "@material-ui/icons/CreateSharp";
-import SportsSharpIcon from "@material-ui/icons/SportsSharp";
-import MoodSharpIcon from "@material-ui/icons/MoodSharp";
-import HelpOutlineSharpIcon from "@material-ui/icons/HelpOutlineSharp";
-import GamesOutlinedIcon from "@material-ui/icons/GamesOutlined";
-import AlbumSharpIcon from "@material-ui/icons/AlbumSharp";
-import AnnouncementRoundedIcon from "@material-ui/icons/AnnouncementRounded";
-import EcoRoundedIcon from "@material-ui/icons/EcoRounded";
-import Link from "@material-ui/core/Link";
+import { Button, Typography } from "@material-ui/core";
 import { Link as RouteLink, useParams } from "react-router-dom";
-import { fetchCreatedOBJKTs, generateThumbnailCR } from "../helpers/hicdex.js";
+import {
+  fetchCollectedOBJKTs,
+  fetchCreatedOBJKTs,
+  generateThumbnailCR,
+} from "../helpers/hicdex.js";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -61,16 +49,29 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const displayTypes = ["created", "collected"];
+
 export default function AutoGrid() {
   let { address } = useParams();
-  const [nfts, setNfts] = useState([]);
+  const [nfts, setNFTs] = useState([]);
+  const [collectedNFTs, setCollectedNFTs] = useState([]);
+  const [createdNFTs, setCreatedNFTs] = useState([]);
+  const [display, setDisplay] = useState("created");
+  const toggleDisplay = async () => {
+    setDisplay(display == "created" ? "collected" : "created");
+    if (!collectedNFTs.length) {
+      const collected = await fetchCollectedOBJKTs(address);
+      setCollectedNFTs(collected);
+    }
+    console.log(display);
+  };
+
   const classes = useStyles();
   useEffect(async () => {
-    document.title = "Cipherforums | Public Topics";
+    document.title = `Cipherforums | ${address}`;
     const created = await fetchCreatedOBJKTs(address);
     console.log(created);
-    console.log(generateThumbnailCR(created[0].display_uri));
-    setNfts(created);
+    setCreatedNFTs(created);
   }, [address]);
   return (
     <div className={classes.root}>
@@ -80,22 +81,42 @@ export default function AutoGrid() {
       <Typography component="h1" className={classes.info2}>
         There is currently no cipherforums account linked to this wallet.
       </Typography>
+      <Button onClick={toggleDisplay}>
+        View {display == "created" ? "Collected" : "Created"}
+      </Button>
       <Grid container spacing={4}>
-        {nfts.map((nft) => (
-          <Grid key={nft.id} item xs={12} sm={3}>
-            <Paper className={classes.paper}>
-              <RouteLink
-                to={`/tz/nft/${nft.id}`}
-                style={{ textDecoration: "none" }}
-              >
-                <img
-                  className={classes.img}
-                  src={generateThumbnailCR(nft.display_uri)}
-                ></img>
-              </RouteLink>
-            </Paper>
-          </Grid>
-        ))}
+        {display == "created" &&
+          createdNFTs.map((createdNFTs) => (
+            <Grid key={createdNFTs.id} item xs={12} sm={3}>
+              <Paper className={classes.paper}>
+                <RouteLink
+                  to={`/tz/nft/${createdNFTs.id}`}
+                  style={{ textDecoration: "none" }}
+                >
+                  <img
+                    className={classes.img}
+                    src={generateThumbnailCR(createdNFTs.display_uri)}
+                  ></img>
+                </RouteLink>
+              </Paper>
+            </Grid>
+          ))}
+        {display == "collected" &&
+          collectedNFTs.map((collectedNFTs) => (
+            <Grid key={collectedNFTs.token.id} item xs={12} sm={3}>
+              <Paper className={classes.paper}>
+                <RouteLink
+                  to={`/tz/nft/${collectedNFTs.token.id}`}
+                  style={{ textDecoration: "none" }}
+                >
+                  <img
+                    className={classes.img}
+                    src={generateThumbnailCR(collectedNFTs.token.display_uri)}
+                  ></img>
+                </RouteLink>
+              </Paper>
+            </Grid>
+          ))}
       </Grid>
     </div>
   );
