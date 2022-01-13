@@ -1388,6 +1388,11 @@
   "resolved" "https://registry.npmjs.org/@fontsource/ibm-plex-mono/-/ibm-plex-mono-4.5.1.tgz"
   "version" "4.5.1"
 
+"@google/model-viewer@^1.10.0":
+  "integrity" "sha512-Ytucq6pZwL8MAOag4g3cJjhV6SkxF1OnonqJHw29/OCOKoooUPvpbtZs3zv37umm+R7by9G2kwdT8ZeSK5vt4g=="
+  "resolved" "https://registry.npmjs.org/@google/model-viewer/-/model-viewer-1.10.0.tgz"
+  "version" "1.10.0"
+
 "@hapi/address@2.x.x":
   "integrity" "sha512-QD1PhQk+s31P1ixsX0H0Suoupp3VMXzIVMSwobR3F3MSUO2YCV0B7xqLcUw/Bh8yuvd3LhpyqLQWTNcRmp6IdQ=="
   "resolved" "https://registry.npmjs.org/@hapi/address/-/address-2.1.4.tgz"

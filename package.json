@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@airgap/beacon-sdk": "^2.3.9",
+    "@google/model-viewer": "^1.10.0",
     "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.5",
     "core-js": "^3.16.0",

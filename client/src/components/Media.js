@@ -2,6 +2,7 @@ import { generateThumbnailCR } from "../helpers/hicdex.js";
 import { makeStyles } from "@material-ui/core/styles";
 import { useState } from "react";
 import LoadingIcon from "./LoadingPageIcon.js";
+import "@google/model-viewer";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -17,6 +18,19 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: 20,
     height: "70vmin",
     width: "70vmin",
+    border: "none",
+  },
+  canvas: {
+    paddingTop: 20,
+    height: "500px",
+    width: "500px",
+    border: "none",
+  },
+  modelHold: {
+    // backgroundColor: "red",
+    paddingTop: 20,
+    height: "500px",
+    width: "500px",
     border: "none",
   },
 }));
@@ -66,6 +80,23 @@ function Media(props) {
           title="html-embed"
           src={nft.artifact_uri && generateThumbnailCR(nft.artifact_uri)}
         ></iframe>
+      )}
+      {nft.mime?.startsWith("model") && (
+        <div className={classes.modelHold}>
+          <model-viewer
+            className={classes.model}
+            onLoad={() => setLoading(false)}
+            src={nft.artifact_uri && generateThumbnailCR(nft.artifact_uri)}
+            autoplay="true"
+            auto-rotate="true"
+            data-js-focus-visible="true"
+            interaction-prompt="none"
+            ar="true"
+            ar-modes="webxr scene-viewer quick-look"
+            camera-controls="true"
+            ar-status="not-presenting"
+          ></model-viewer>
+        </div>
       )}
     </div>
   );
