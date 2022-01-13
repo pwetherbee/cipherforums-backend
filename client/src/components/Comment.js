@@ -82,7 +82,7 @@ export const Comment = ({ comment, secret, handleDeleteComment }) => {
               @{comment.author || comment.username}{" "}
             </Typography>
             <Typography variant="caption">
-              {convertTimeToLocal(comment.time)}{" "}
+              {convertTimeToLocal(comment.time || comment.postTime)}{" "}
             </Typography>
             <Button variant="outlined" className={classes.reply}>
               Reply
@@ -90,7 +90,7 @@ export const Comment = ({ comment, secret, handleDeleteComment }) => {
             <Button
               variant="outlined"
               className={classes.reply}
-              onClick={handleDeleteComment(comment.id)}
+              onClick={handleDeleteComment(comment.id || comment.commentID)}
             >
               Delete
             </Button>

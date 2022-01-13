@@ -27,6 +27,7 @@ import {
 } from "react-router-dom";
 import FollowContainer from "../components/FollowContainer";
 import ConfirmDelete from "../components/ConfirmDelete";
+import LikedNFTs from "../components/LikedNFTs";
 // import Button from "@material-ui/core/Button";
 
 function TabPanel(props) {
@@ -161,14 +162,14 @@ export default function Profile() {
               <Grid item xs={12}>
                 {userData?.loggedIn && userData?.currUser ? (
                   <div style={{ paddingTop: 50 }}>
-                  <Button
-                    type="submit"
-                    variant="contained"
-                    color="primary"
-                    href="/create"
-                  >
-                    Create Forum
-                  </Button>
+                    <Button
+                      type="submit"
+                      variant="contained"
+                      color="primary"
+                      href="/create"
+                    >
+                      Create Forum
+                    </Button>
                   </div>
                 ) : (
                   ""
@@ -190,6 +191,7 @@ export default function Profile() {
                 <Tab label="Created Posts"></Tab>
                 <Tab label="User Comments"></Tab>
                 <Tab label="Following"></Tab>
+                <Tab label="Liked NFTs"></Tab>
               </Tabs>
             </Grid>
             {/* <Grid container spacing={2}>
@@ -237,6 +239,9 @@ export default function Profile() {
                   "This user isn't following anyone"
                 )}
               </Container>
+            </TabPanel>
+            <TabPanel value={tab} index={3}>
+              <LikedNFTs />
             </TabPanel>
 
             {/* <UserPosts secret={secret} posts={createdPosts} /> */}

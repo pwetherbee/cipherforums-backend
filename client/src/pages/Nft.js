@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
-import { Container, Button } from "@material-ui/core";
+import { Container, Button, IconButton } from "@material-ui/core";
+import Divider from "@mui/material/Divider";
 import Toolbar from "@material-ui/core/Toolbar";
 import { Comment } from "../components/Comment";
 import TextField from "@material-ui/core/TextField";
@@ -11,6 +12,9 @@ import { useParams } from "react-router-dom";
 import { fetchOBJKTDetails, generateThumbnailCR } from "../helpers/hicdex.js";
 import { query } from "../helpers/api.js";
 import Media from "../components/Media";
+import ConfirmDelete from "../components/ConfirmDelete";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -65,9 +69,34 @@ export default function Public() {
   const [helperText, setHelperText] = useState("");
   const [nft, setNFT] = useState({});
   const [postCommentText, setPostCommentText] = useState("");
+  const [isLiked, setIsLiked] = useState(false);
   const [comments, setComments] = useState([]);
   const { id } = useParams();
-  const handleDeleteComment = () => {};
+  const [openConfirmDelete, setOpenConfirmDelete] = useState(false);
+  const [deleteCommentData, setDeleteCommentData] = useState({});
+  const handleToggleLike = async () => {
+    // make fetch request
+    if (!isLiked) {
+      const data = await query(`/api/likes?nftID=${id}&chainType=${"tz"}`, {
+        displayURI: nft.display_uri,
+      });
+      if (data.success) {
+        setIsLiked(true);
+      }
+    } else {
+      const res = await fetch(`/api/likes?nftID=${id}&chainType=${"tz"}`, {
+        method: "DELETE",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await res.json();
+      if (data.success) {
+        setIsLiked(false);
+      }
+    }
+  };
   const handleSubmitComment = async () => {
     const data = await query(`/api/comments?nftID=${id}&chainType=${"tz"}`, {
       text: postCommentText,
@@ -78,6 +107,11 @@ export default function Public() {
     setPostCommentText("");
   };
   useEffect(async () => {
+    const likeStatus = await query(
+      `/api/likes/check?nftID=${id}&chainType=${"tz"}`
+    );
+    console.log(likeStatus);
+    setIsLiked(likeStatus.isLiked);
     const data = await fetchOBJKTDetails(id);
     console.log(data);
     const commentData = await query(
@@ -90,24 +124,68 @@ export default function Public() {
     // query api for comments relating to nft
   }, []);
   const classes = useStyles();
-  // const gg = ("https://ipfs.io/ipfs/" +((nft.artifact_uri).split("//").slice(-1)[0]));
+
+  const handleDeleteComment = (data) => () => {
+    console.log(data);
+    setOpenConfirmDelete(true);
+    setDeleteCommentData(data);
+  };
+  const handleDecision = (decision) => async () => {
+    if (decision === "agree") {
+      console.log("deleting comment");
+      console.log(deleteCommentData);
+      // make fetch to delete
+      const res = await fetch("/api/comments", {
+        method: "DELETE",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ id: deleteCommentData }),
+      });
+      const data = await res.json();
+      if (!data.success) {
+        alert(data.message);
+      }
+    }
+    setOpenConfirmDelete(false);
+  };
+
+  const handleCloseConfirmDelete = () => {
+    setOpenConfirmDelete(false);
+  };
   return (
     <Container>
+      <ConfirmDelete
+        open={openConfirmDelete}
+        handleDecision={handleDecision}
+        handleClose={handleCloseConfirmDelete}
+      />
       <Grid item xs={12} sm={12}>
         <Paper className={classes.paper}>
           <Media nft={nft}></Media>
         </Paper>
         <Toolbar className={classes.footer}>
-          <Typography variant="h3">{nft.title}</Typography>
+          <Typography variant="h5">{nft.title}</Typography>
+          <IconButton disabled={!nft.display_uri} onClick={handleToggleLike}>
+            {isLiked ? <FavoriteIcon /> : <FavoriteBorderIcon />}
+          </IconButton>
         </Toolbar>
         <Toolbar className={classes.footer}>
-          <Typography variant="comment">{nft.description}</Typography>
+          <Typography variant="subtitle1">{nft.description}</Typography>
         </Toolbar>
         <Toolbar className={classes.address}>
-          <Typography className={classes.footer} variant="comment">
+          <Typography className={classes.footer} variant="subtitle2">
             by {nft.creator?.name || nft.creator?.address}
           </Typography>
         </Toolbar>
+        <br />
+        <br />
+        <Divider></Divider>
+        <Toolbar className={classes.address}>
+          <Typography className={classes.footer}>Comments</Typography>
+        </Toolbar>
+
         {comments?.map((comment, i) => (
           <Comment
             key={i}
