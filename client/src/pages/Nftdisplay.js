@@ -71,7 +71,7 @@ export default function AutoGrid() {
     console.log(created);
     console.log(generateThumbnailCR(created[0].display_uri));
     setNfts(created);
-  }, []);
+  }, [address]);
   return (
     <div className={classes.root}>
       <Typography component="h1" variant="h4" className={classes.info}>
