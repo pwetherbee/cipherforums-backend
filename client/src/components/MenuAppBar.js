@@ -142,7 +142,7 @@ export default function MenuAppBar({ auth }) {
     setWallet({});
   };
 
-  const btnStyle = "";
+  const btnStyle = "text";
 
   return (
     <div className={classes.root}>
@@ -159,7 +159,7 @@ export default function MenuAppBar({ auth }) {
         />
       </FormGroup> */}
       <AppBar position="static">
-        <Toolbar className={classes.root} >
+        <Toolbar className={classes.root}>
           {!mobile && (
             <IconButton
               edge="start"
@@ -210,7 +210,6 @@ export default function MenuAppBar({ auth }) {
               <SearchIcon />
             </SearchIconWrapper>
             <StyledInputBase
-              
               placeholder="Search..."
               inputProps={{ "aria-label": "search" }}
             />
@@ -244,7 +243,7 @@ export default function MenuAppBar({ auth }) {
               </Button>
             </Typography>
           )}
-           {auth.ok && !mobile && (
+          {auth.ok && !mobile && (
             <RouteLink
               to={`/@${auth.username}`}
               style={{ textDecoration: "none" }}
@@ -267,7 +266,6 @@ export default function MenuAppBar({ auth }) {
               >
                 <AccountCircle color="primary" />
               </IconButton>
-
 
               <Menu
                 id="menu-appbar"

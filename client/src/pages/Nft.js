@@ -10,7 +10,7 @@ import { Typography } from "@material-ui/core";
 import { useParams } from "react-router-dom";
 import { fetchOBJKTDetails, generateThumbnailCR } from "../helpers/hicdex.js";
 import { query } from "../helpers/api.js";
-import { ImageGroup, Image } from "react-fullscreen-image";
+import Media from "../components/Media";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -32,6 +32,7 @@ const useStyles = makeStyles((theme) => ({
     // borderColor: theme.palette.text.secondary,
     // borderStyle: "solid",
     verticalAlign: "middle",
+    height: "70vmin",
     padding: 10,
   },
   img: {
@@ -93,18 +94,7 @@ export default function Public() {
     <Container>
       <Grid item xs={12} sm={12}>
         <Paper className={classes.paper}>
-          <img
-            className={classes.img}
-            src={nft.display_uri && generateThumbnailCR(nft.display_uri)}
-          />
-        </Paper>
-        <Paper className={classes.paper}>
-          <video width="750" height="500" controls>
-            <source
-              src={nft.artifact_uri && generateThumbnailCR(nft.artifact_uri)}
-              type="video/mp4"
-            />
-          </video>
+          <Media nft={nft}></Media>
         </Paper>
         <Toolbar className={classes.footer}>
           <Typography variant="h3">{nft.title}</Typography>
@@ -117,8 +107,9 @@ export default function Public() {
             by {nft.creator?.name || nft.creator?.address}
           </Typography>
         </Toolbar>
-        {comments?.map((comment) => (
+        {comments?.map((comment, i) => (
           <Comment
+            key={i}
             comment={comment}
             secret={null}
             handleDeleteComment={handleDeleteComment}
