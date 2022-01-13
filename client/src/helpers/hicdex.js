@@ -206,7 +206,9 @@ async function fetchCollectedOBJKTs(address) {
   if (errors) {
     console.error(errors);
   }
-  const result = data.hic_et_nunc_token_holder;
+  const result = data.hic_et_nunc_token_holder.filter(
+    (holder) => holder.token.creator.address !== address
+  );
   // console.log({ result });
   return result;
 }

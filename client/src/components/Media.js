@@ -1,6 +1,6 @@
 import { generateThumbnailCR } from "../helpers/hicdex.js";
 import { makeStyles } from "@material-ui/core/styles";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import LoadingIcon from "./LoadingPageIcon.js";
 import "@google/model-viewer";
 const useStyles = makeStyles((theme) => ({
@@ -36,7 +36,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 function Media(props) {
   const { nft } = props;
-
+  useEffect(() => {
+    if (nft.mime?.startsWith("model")) {
+      setLoading(false);
+    }
+  }, [nft]);
   const [loading, setLoading] = useState(true);
   // figure out the media type
   const classes = useStyles();
@@ -58,7 +62,7 @@ function Media(props) {
       )}
       {nft.mime?.startsWith("video") && (
         <video
-          onLoad={() => setLoading(false)}
+          onLoadStart={() => setLoading(false)}
           width="750"
           height="500"
           controls
