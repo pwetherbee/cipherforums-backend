@@ -36,9 +36,9 @@ import { useEffect } from "react";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    backgroundColor: "#121212",
     marginBottom: 1,
     border: "none",
+    backgroundColor: "#000000",
     // borderStyle: "solid",
     // borderRadius: "10px",
   },
@@ -159,7 +159,7 @@ export default function MenuAppBar({ auth }) {
         />
       </FormGroup> */}
       <AppBar position="static">
-        <Toolbar className={classes.root}>
+        <Toolbar className={classes.root} >
           {!mobile && (
             <IconButton
               edge="start"
@@ -210,6 +210,7 @@ export default function MenuAppBar({ auth }) {
               <SearchIcon />
             </SearchIconWrapper>
             <StyledInputBase
+              
               placeholder="Search..."
               inputProps={{ "aria-label": "search" }}
             />

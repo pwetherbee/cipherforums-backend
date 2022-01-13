@@ -45,6 +45,10 @@ import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
 import MatrixPage from "./pages/Matrix";
 
+
+// --------------------------
+// green theme
+
 const theme = createTheme({
   palette: {
     type: "dark",
@@ -82,6 +86,47 @@ const theme = createTheme({
     },
   },
 });
+
+// --------------------------
+// b&w theme
+
+// const theme = createTheme({
+//   palette: {
+//     type: "light",
+//     primary: {
+//       main: "#ffffff",
+//       // main: "#ffffff",
+//       contrastText: "#121212",
+//     },
+//     secondary: {
+//       main: "#76ff03",
+//       contrastText: "#ffffff",
+//     },
+//     background: {
+//       default: "#000000",
+//       // paper: "#171717",
+//       paper: "#000000",
+//     },
+//     text: {
+//       // primary: "#0aff00",
+//       // secondary: "#00ff1b",
+
+//       primary: "#ffffff",
+//       secondary: "#ffffff",
+//       disabled: "#00ff1b",
+//       hint: "#00ff1b",
+//     },
+//     other: {
+//       primary: "#FFFF00",
+//     },
+//     divider: "rgba(0,0,0,0.12)",
+//   },
+//   typography: {
+//     allVariants: {
+//       fontFamily: "IBM Plex Mono",
+//     },
+//   },
+// });
 
 // const theme = createTheme({
 //   palette: {
