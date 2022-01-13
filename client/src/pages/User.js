@@ -160,6 +160,7 @@ export default function Profile() {
             <div>
               <Grid item xs={12}>
                 {userData?.loggedIn && userData?.currUser ? (
+                  <div style={{ paddingTop: 50 }}>
                   <Button
                     type="submit"
                     variant="contained"
@@ -168,6 +169,7 @@ export default function Profile() {
                   >
                     Create Forum
                   </Button>
+                  </div>
                 ) : (
                   ""
                 )}

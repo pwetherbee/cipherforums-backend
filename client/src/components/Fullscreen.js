@@ -42,7 +42,10 @@ export default function BasicModal() {
 
   return (
     <div>
-      <Button onClick={handleOpen}>Open modal</Button>
+      <Button onClick={handleOpen}><img
+            className={classes.desc}
+            src="https://i.imgur.com/jlZySn6.jpeg"
+          ></img></Button>
       <Modal
         open={open}
         onClose={handleClose}

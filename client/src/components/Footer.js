@@ -51,7 +51,7 @@ const Footer = () => {
           </Grid>
           <Grid xs={12}>
             <WhiteText align="center">
-              Cipherforums.com © Copyright 2021. All Rights Reserved.
+              Cipherforums.com © Copyright 2022. All Rights Reserved.
             </WhiteText>
           </Grid>
         </Grid>

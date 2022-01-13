@@ -36,9 +36,9 @@ import { useEffect } from "react";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    backgroundColor: "#121212",
     marginBottom: 1,
     border: "none",
+    backgroundColor: "#000000",
     // borderStyle: "solid",
     // borderRadius: "10px",
   },
@@ -159,7 +159,7 @@ export default function MenuAppBar({ auth }) {
         />
       </FormGroup> */}
       <AppBar position="static">
-        <Toolbar className={classes.root}>
+        <Toolbar className={classes.root} >
           {!mobile && (
             <IconButton
               edge="start"
@@ -210,22 +210,11 @@ export default function MenuAppBar({ auth }) {
               <SearchIcon />
             </SearchIconWrapper>
             <StyledInputBase
+              
               placeholder="Search..."
               inputProps={{ "aria-label": "search" }}
             />
           </Search>
-          {auth.ok && !mobile && (
-            <RouteLink
-              to={`/@${auth.username}`}
-              style={{ textDecoration: "none" }}
-            >
-              <Link underline="hover">
-                <Typography color="primary" variant="h6">
-                  @{auth.username}
-                </Typography>
-              </Link>
-            </RouteLink>
-          )}
 
           {wallet.address ? (
             <Typography variant="h6" className={classes.title}>
@@ -255,6 +244,18 @@ export default function MenuAppBar({ auth }) {
               </Button>
             </Typography>
           )}
+           {auth.ok && !mobile && (
+            <RouteLink
+              to={`/@${auth.username}`}
+              style={{ textDecoration: "none" }}
+            >
+              <Link underline="hover">
+                <Typography color="primary" variant="h6">
+                  @{auth.username}
+                </Typography>
+              </Link>
+            </RouteLink>
+          )}
           {Boolean(auth.ok) && (
             <div>
               <IconButton
@@ -266,6 +267,7 @@ export default function MenuAppBar({ auth }) {
               >
                 <AccountCircle color="primary" />
               </IconButton>
+
 
               <Menu
                 id="menu-appbar"

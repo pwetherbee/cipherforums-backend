@@ -52,6 +52,7 @@ const useStyles = makeStyles((theme) => ({
     padding: 10,
     paddingLeft: 20,
     paddingTop: 40,
+    overflowWrap: "anywhere",
   },
   info2: {
     textAlign: "left",

@@ -32,9 +32,10 @@ const useStyles = makeStyles((theme) => ({
 
     marginBottom: "3%",
     padding: 10,
-    height: 300,
+    height: 350,
     width: "100%",
     margin: 10,
+    textAlign: "left",
   },
   // media: {
   //   height: 0,
@@ -69,6 +70,11 @@ const useStyles = makeStyles((theme) => ({
     height: 50,
     width: 50,
   },
+  imgcir:{
+    marginLeft: 140,
+  },
+  delete:{
+  }
 }));
 
 export default function PostCard({ data, secret, onDelete }) {
@@ -126,12 +132,11 @@ export default function PostCard({ data, secret, onDelete }) {
           to={"/"}
           subheader={data.creationDate}
         />
-        <CardMedia>
+        <CardMedia className={classes.imgcir}>
           {data.image ? (
             <ImageCircle
-              className={classes.imgcir}
               imageLink={data.image}
-              size={200}
+              size={180}
               alt={"error"}
               square
             ></ImageCircle>
@@ -144,6 +149,7 @@ export default function PostCard({ data, secret, onDelete }) {
               </Typography>
             </CardContent>
           )}
+          <br></br>
         </CardMedia>
       </CardActionArea>
 
@@ -151,11 +157,11 @@ export default function PostCard({ data, secret, onDelete }) {
         {/* <IconButton color="primary" aria-label="add to favorites">
           <FavoriteIcon />
         </IconButton> */}
-        <IconButton onClick={handleDelete} color="primary" aria-label="share">
+        <IconButton onClick={handleDelete} color="primary" aria-label="share" className={classes.delete}>
           <DeleteForeverRoundedIcon />
         </IconButton>
 
-        <IconButton
+        {/* <IconButton
           color="primary"
           className={clsx(classes.expand, {
             [classes.expandOpen]: expanded,
@@ -165,15 +171,15 @@ export default function PostCard({ data, secret, onDelete }) {
           aria-label="show more"
         >
           <ExpandMoreIcon />
-        </IconButton>
+        </IconButton> */}
       </CardActions>
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
+      {/* <Collapse in={expanded} timeout="auto" unmountOnExit>
         {forumData?.comments ? (
           <MiniThread secret={secret} comments={forumData?.comments || []} />
         ) : (
           <LoadingIcon height={"10rem"} />
         )}
-      </Collapse>
+      </Collapse> */}
     </Card>
   );
 }
