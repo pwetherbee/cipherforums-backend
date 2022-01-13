@@ -27,6 +27,11 @@ router.get("/check", (req, res) => {
         success: true,
         isLiked: true,
       });
+    } else {
+      return res.json({
+        success: true,
+        isLiked: false,
+      });
     }
   });
 });
