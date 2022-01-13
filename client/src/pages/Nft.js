@@ -86,6 +86,7 @@ export default function Public() {
     console.log(commentData);
     setComments(commentData.data);
     setNFT(data);
+    document.title = `Cipherforums | ${data.title}`;
     // query api for comments relating to nft
   }, []);
   const classes = useStyles();
