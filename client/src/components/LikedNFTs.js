@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
     padding: 10,
   },
   img: {
-    width: "80%",
+    width: "50%",
   },
   info: {
     textAlign: "left",

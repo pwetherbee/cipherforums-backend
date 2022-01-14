@@ -15,6 +15,7 @@ import Media from "../components/Media";
 import ConfirmDelete from "../components/ConfirmDelete";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import { Link as RouteLink } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -175,9 +176,14 @@ export default function Public() {
           <Typography variant="subtitle1">{nft.description}</Typography>
         </Toolbar>
         <Toolbar className={classes.address}>
-          <Typography className={classes.footer} variant="subtitle2">
-            by {nft.creator?.name || nft.creator?.address}
-          </Typography>
+          <RouteLink
+            to={`/tz/${nft.creator?.address}`}
+            style={{ textDecoration: "none" }}
+          >
+            <Typography className={classes.footer} variant="subtitle2">
+              by {nft.creator?.name || nft.creator?.address}
+            </Typography>
+          </RouteLink>
         </Toolbar>
         <br />
         <br />
