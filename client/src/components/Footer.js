@@ -49,7 +49,7 @@ const Footer = () => {
               Contact Us
             </WhiteText>
           </Grid>
-          <Grid xs={12}>
+          <Grid item xs={12}>
             <WhiteText align="center">
               Cipherforums.com © Copyright 2022. All Rights Reserved.
             </WhiteText>

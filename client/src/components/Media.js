@@ -3,16 +3,17 @@ import { makeStyles } from "@material-ui/core/styles";
 import { useState, useEffect } from "react";
 import LoadingIcon from "./LoadingPageIcon.js";
 import Container from "@material-ui/core/Container";
+import LinearProgress from "@material-ui/core/LinearProgress";
 import "@google/model-viewer";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    paddingTop: 20,
     // padding: 80,
-    width: "99%",
-    paddingLeft: "1%",
+    width: "100%",
+    paddingBottom: 20,
   },
   img: {
-    paddingTop: 20,
     height: "70vmin",
   },
   iframe: {
@@ -37,6 +38,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 function Media(props) {
   const { nft } = props;
+  console.log(nft);
   useEffect(() => {
     if (nft.mime?.startsWith("model")) {
       setLoading(false);
@@ -46,7 +48,7 @@ function Media(props) {
   // figure out the media type
   const classes = useStyles();
   return (
-    <div>
+    <div className={classes.root}>
       {loading && (
         <div
           style={{
@@ -55,10 +57,25 @@ function Media(props) {
             right: 0,
             marginLeft: "auto",
             marginRight: "auto",
-            marginTop: "30vh",
+            height: "70vmin",
+            width: "70vmin",
+            backgroundImage: `url(${
+              nft.display_uri && generateThumbnailCR(nft.display_uri)
+            })`,
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+            backgroundSize: "cover",
           }}
         >
-          <LoadingIcon />
+          <LinearProgress style={{ width: "70vmin" }} />
+          <div
+            style={{
+              filter: "blur(5px)",
+              height: "70vmin",
+              width: "70vmin",
+              background: "rgba(0,0,0, 0.3)",
+            }}
+          ></div>
         </div>
       )}
       {nft.mime?.startsWith("video") && (

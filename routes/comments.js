@@ -76,12 +76,14 @@ router.delete("/", (req, res) => {
   `;
   //   console.log(data.authorID, req.session.userID);
   // delete forum from table where authorID == req.session.userID
+  connection.connect();
   connection.query(query, (err, rows, field) => {
     if (err) {
       return res.send({ success: false, message: "Could not remove comment" });
     }
     res.send({ success: true, message: "Successfully removed comment" });
   });
+  connection.end();
 });
 
 module.exports = router;
