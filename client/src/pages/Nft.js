@@ -22,7 +22,7 @@ import Tab from "@material-ui/core/Tab";
 import Alert from "@mui/material/Alert";
 import Stack from "@mui/material/Stack";
 import { getHistory } from "../helpers/objkt";
-
+import Stack from "@mui/material/Stack";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -173,6 +173,9 @@ export default function Public() {
   const fetchObjectHistory = async () => {
     const data = await fetchOBJKTDetails(id);
     const objktHistory = getHistory(data);
+    setNftHistory(objktHistory);
+    setNftOwners(data.token_holders);
+    console.log(data);
   };
 
   const handleDeleteComment = (data) => () => {
@@ -300,7 +303,13 @@ export default function Public() {
           </Container>
         </TabPanel>
         <TabPanel value={tab} index={1}>
-          OWNERS DEMO TEXT
+          <Stack>
+            {nftOwners.map((owner, i) => (
+              <div key={i}>
+                {owner.quantity} {owner.holder.name || owner.holder.address}{" "}
+              </div>
+            ))}
+          </Stack>
         </TabPanel>
         <TabPanel value={tab} index={2}>
           <Stack sx={{ width: "100%" }} spacing={2}>
