@@ -149,7 +149,7 @@ export default function Profile() {
           />
           <Grid
             container
-            spacing={1}
+            spacing={0}
             style={{ display: "flex", justifyContent: "center" }}
           >
             <Grid item xs={6}>
