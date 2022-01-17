@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
-import { Container, Button, IconButton, Box } from "@material-ui/core";
+import { Container, Button, IconButton } from "@material-ui/core";
 import Divider from "@mui/material/Divider";
 import Toolbar from "@material-ui/core/Toolbar";
 import { Comment } from "../components/Comment";
@@ -41,31 +41,35 @@ const useStyles = makeStyles((theme) => ({
     // borderStyle: "solid",
     verticalAlign: "middle",
     height: "70vmin",
-    padding: 10,
-    marginBottom: 40,
+    // padding: 10,
   },
   img: {
     paddingTop: 20,
     height: "70vmin",
   },
-
+  title: {
+    display: "flex",
+    justifyContent: "left",
+    marginTop: 80,
+    marginLeft: 20,
+    marginRight: 20,
+    color: theme.palette.primary.main,
+  },
   footer: {
     display: "flex",
     justifyContent: "left",
     // marginTop: 20,
     marginLeft: 20,
     marginRight: 20,
-    // marginTop: 20,
     color: theme.palette.primary.main,
   },
-
   address: {
     justifyContent: "left",
     // padding: 0,
     // paddingLeft: 20,
     minHeight: 1,
     marginTop: 20,
-    marginLeft: 10,
+    // marginLeft: 10,
   },
   comment: {
     marginTop: 30,
@@ -74,8 +78,8 @@ const useStyles = makeStyles((theme) => ({
   },
   linked: {
     color: theme.palette.primary.main,
-    // marginLeft: 30,
-    // marginTop: 20,
+    marginLeft: 30,
+    marginTop: 20,
   },
 }));
 function TabPanel(props) {
@@ -182,13 +186,7 @@ export default function Public() {
   const handleCloseConfirmDelete = () => {
     setOpenConfirmDelete(false);
   };
-  if (!nft || !likeCount)
-    return (
-      <div>
-        <div style={{ marginTop: "20%" }}></div>
-        <LoadingIcon />
-      </div>
-    );
+  if (!nft || !likeCount) return <LoadingIcon />;
   return (
     <Container>
       <ConfirmDelete
@@ -197,16 +195,14 @@ export default function Public() {
         handleClose={handleCloseConfirmDelete}
       />
       <Grid item xs={12} sm={12}>
-        <Box className={classes.paper}>
+        <Paper className={classes.paper}>
           <Media nft={nft}></Media>
-        </Box>
-        <Toolbar className={classes.footer}>
+        </Paper>
+        <Toolbar className={classes.title}>
           <Typography variant="h5">{nft.title}</Typography>
         </Toolbar>
         <Toolbar className={classes.footer}>
-          <Typography variant="body" style={{ whiteSpace: "pre-line" }}>
-            {nft.description}
-          </Typography>
+          <Typography variant="subtitle1">{nft.description}</Typography>
         </Toolbar>
         <Toolbar className={classes.address}>
           <RouteLink
@@ -218,18 +214,13 @@ export default function Public() {
             </Typography>
           </RouteLink>
         </Toolbar>
-
-        <Toolbar className={classes.footer}>
-          <IconButton
-            className={classes.linked}
-            disabled={!nft.display_uri}
-            onClick={handleToggleLike}
-          >
-            {isLiked ? <FavoriteIcon /> : <FavoriteBorderIcon />}
-          </IconButton>
-          <Typography>{likeCount}</Typography>
-        </Toolbar>
-
+        <IconButton
+          className={classes.linked}
+          disabled={!nft.display_uri}
+          onClick={handleToggleLike}
+        >
+          {isLiked ? <FavoriteIcon /> : <FavoriteBorderIcon />}
+        </IconButton>
         <br />
         <br />
 

@@ -28,11 +28,11 @@ const useStyles = makeStyles((theme) => ({
     width: "500px",
     border: "none",
   },
-  modelHold: {
+  model: {
     // backgroundColor: "red",
     paddingTop: 20,
-    height: "500px",
-    width: "500px",
+    height: "800px",
+    width: "800px",
     border: "none",
   },
 }));
@@ -108,6 +108,11 @@ function Media(props) {
           <Container>
             <model-viewer
               className={classes.model}
+              style={{
+                width: "80vmin",
+                height: "80vmin",
+                margin: "auto",
+              }}
               onLoad={() => setLoading(false)}
               src={nft.artifact_uri && generateThumbnailCR(nft.artifact_uri)}
               autoplay="true"
