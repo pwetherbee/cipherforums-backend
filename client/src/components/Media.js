@@ -38,7 +38,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 function Media(props) {
   const { nft } = props;
-  console.log(nft);
   useEffect(() => {
     if (nft.mime?.startsWith("model")) {
       setLoading(false);
