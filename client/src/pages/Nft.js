@@ -21,6 +21,7 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Alert from "@mui/material/Alert";
 import Stack from "@mui/material/Stack";
+import { getHistory } from "../helpers/objkt";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -83,8 +84,13 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: 30,
     marginTop: 20,
   },
-  alert: {
-    color: "black",
+  addr: {
+    textAlign: "center",
+    color: theme.palette.primary.alert1,
+    listStyleType: "none",
+  },
+  colors: {
+    backgroundColor: "red",
   },
 }));
 function TabPanel(props) {
@@ -96,6 +102,8 @@ export default function Public() {
   const [error, setError] = useState(false);
   const [helperText, setHelperText] = useState("");
   const [nft, setNFT] = useState({});
+  const [nftOwners, setNftOwners] = useState([]);
+  const [nftHistory, setNftHistory] = useState([]);
   const [postCommentText, setPostCommentText] = useState("");
   const [isLiked, setIsLiked] = useState(false);
   const [comments, setComments] = useState([]);
@@ -147,7 +155,6 @@ export default function Public() {
     );
     setIsLiked(likeStatus.isLiked);
     const data = await fetchOBJKTDetails(id);
-    console.log(data);
     const commentData = await query(
       `/api/comments?nftID=${id}&chainType=${"tz"}`
     );
@@ -159,18 +166,21 @@ export default function Public() {
     setNFT(data);
     document.title = `Cipherforums | ${data.title}`;
     // query api for comments relating to nft
+    await fetchObjectHistory();
   }, []);
   const classes = useStyles();
 
+  const fetchObjectHistory = async () => {
+    const data = await fetchOBJKTDetails(id);
+    const objktHistory = getHistory(data);
+  };
+
   const handleDeleteComment = (data) => () => {
-    console.log(data);
     setOpenConfirmDelete(true);
     setDeleteCommentData(data);
   };
   const handleDecision = (decision) => async () => {
     if (decision === "agree") {
-      console.log("deleting comment");
-      console.log(deleteCommentData);
       // make fetch to delete
       const res = await fetch("/api/comments", {
         method: "DELETE",
@@ -207,7 +217,9 @@ export default function Public() {
           <Typography variant="h5">{nft.title}</Typography>
         </Toolbar>
         <Toolbar className={classes.footer}>
-          <Typography variant="subtitle1">{nft.description}</Typography>
+          <Typography variant="body1" style={{ whiteSpace: "pre-line" }}>
+            {nft.description}
+          </Typography>
         </Toolbar>
         <Toolbar className={classes.address}>
           <RouteLink
@@ -292,12 +304,23 @@ export default function Public() {
         </TabPanel>
         <TabPanel value={tab} index={2}>
           <Stack sx={{ width: "100%" }} spacing={2}>
-            <Alert calssName={classes.alert} severity="info">
-              This is an info alert — check it out!
+            <Alert variant="filled" severity="info">
+              This is a warning alert — check it out!
             </Alert>
-            <Alert calssName={classes.alert} severity="success">
-              This is a success alert — check it out!
+            <Alert variant="filled" severity="success">
+              This is a warning alert — check it out!
             </Alert>
+            {/* <ul className={classes.addr}>
+              <div className={classes.colors}>
+                <li>erfhuoyef</li>
+              </div>
+              <li>erfhuoyef</li>
+              <li>erfhuoyef</li>
+              <li>erfhuoyef</li>
+              <li>erfhuoyef</li>
+              <li>erfhuoyef</li>
+              <li>erfhuoyef</li>
+            </ul> */}
           </Stack>
         </TabPanel>
       </Grid>
