@@ -12,6 +12,8 @@ import { useParams, useRouteMatch } from "react-router";
 import { CipherText } from "../components/CipherText";
 import { green } from "@material-ui/core/colors";
 import SecretBox from "../components/SecretBox";
+import { Link as RouteLink } from "react-router-dom";
+import { Link } from "@material-ui/core";
 // import LoadingIcon from "../components/LoadingPageIcon";
 import VpnKeyIcon from "@material-ui/icons/VpnKey";
 const useStyles = makeStyles((theme) => ({
@@ -60,6 +62,12 @@ const useStyles = makeStyles((theme) => ({
     overflowWrap: "anywhere",
     wordWrap: "break-word",
   },
+  link: {
+    margin: "1rem",
+    textDecoration: "none",
+
+    color: "blue",
+  },
 }));
 
 export const Comment = ({ comment, secret, handleDeleteComment }) => {
@@ -78,9 +86,14 @@ export const Comment = ({ comment, secret, handleDeleteComment }) => {
         </Grid>
         <Grid item xs>
           <Grid>
-            <Typography variant="caption">
-              @{comment.author || comment.username}{" "}
-            </Typography>
+            {
+              <RouteLink
+                to={`/@${comment.author || comment.username}`}
+                className={classes.link}
+              >
+                <Link> @{comment.author || comment.username} </Link>
+              </RouteLink>
+            }
             <Typography variant="caption">
               {convertTimeToLocal(comment.time || comment.postTime)}{" "}
             </Typography>

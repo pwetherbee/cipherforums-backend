@@ -20,6 +20,7 @@ router.get("/check", (req, res) => {
     `;
   connection.query(query, (err, rows, field) => {
     if (err) {
+      connection.end();
       return res.send({ success: false, message: "Could not check likes" });
     }
     if (rows.length) {
@@ -34,6 +35,36 @@ router.get("/check", (req, res) => {
       });
     }
   });
+  connection.end();
+});
+
+router.get("/count", (req, res) => {
+  const { nftID, chainType } = req.query;
+  if (!nftID || !chainType)
+    return res.status(401).json({
+      success: false,
+      message: "nftID and chainType required",
+    });
+
+  const connection = SQLHelper.createConnection();
+  const query = `
+  SELECT COUNT(*) AS numLikes FROM Likes
+  WHERE nftID = ${connection.escape(nftID)}
+  AND chainType = ${connection.escape(chainType)}
+  `;
+  connection.connect();
+  connection.query(query, (err, result) => {
+    if (err) {
+      connection.end();
+      throw err;
+    } else {
+      return res.json({
+        success: true,
+        count: result[0].numLikes,
+      });
+    }
+  });
+  connection.end();
 });
 
 router.get("/", (req, res) => {
@@ -57,6 +88,7 @@ router.get("/", (req, res) => {
   `;
   connection.query(query, (err, result) => {
     if (err) {
+      connection.end();
       throw err;
     } else {
       res.status(200).json({
@@ -110,6 +142,7 @@ router.delete("/", (req, res) => {
     }
     res.send({ success: true, message: "Successfully removed comment" });
   });
+  connection.end();
 });
 
 module.exports = router;

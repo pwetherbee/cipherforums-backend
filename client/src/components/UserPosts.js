@@ -44,13 +44,8 @@ export default function UserPosts({ posts, secret, onDelete }) {
       <Grid container spacing={2}>
         {posts
           ? posts.map((post, i) => (
-              <Grid item xs={12} md={6} lg={4}>
-                <PostCard
-                  key={i}
-                  secret={secret}
-                  data={post}
-                  onDelete={onDelete}
-                />
+              <Grid key={i} item xs={12} md={6} lg={4}>
+                <PostCard secret={secret} data={post} onDelete={onDelete} />
               </Grid>
             ))
           : "No Posts for this user"}
