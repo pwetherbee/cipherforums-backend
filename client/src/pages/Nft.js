@@ -51,6 +51,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: 20,
     marginLeft: 20,
     marginRight: 20,
+    color: theme.palette.primary.main,
   },
   address: {
     justifyContent: "left",
@@ -62,6 +63,11 @@ const useStyles = makeStyles((theme) => ({
     marginTop: 30,
     marginBottom: 10,
     marginLeft: 20,
+  },
+  linked: {
+    color: theme.palette.primary.main,
+    marginLeft: 30,
+    marginTop: 20,
   },
 }));
 
@@ -168,9 +174,6 @@ export default function Public() {
         </Paper>
         <Toolbar className={classes.footer}>
           <Typography variant="h5">{nft.title}</Typography>
-          <IconButton disabled={!nft.display_uri} onClick={handleToggleLike}>
-            {isLiked ? <FavoriteIcon /> : <FavoriteBorderIcon />}
-          </IconButton>
         </Toolbar>
         <Toolbar className={classes.footer}>
           <Typography variant="subtitle1">{nft.description}</Typography>
@@ -178,13 +181,20 @@ export default function Public() {
         <Toolbar className={classes.address}>
           <RouteLink
             to={`/tz/${nft.creator?.address}`}
-            style={{ textDecoration: "none" }}
+            style={{ textDecoration: "none", color: "white" }}
           >
             <Typography className={classes.footer} variant="subtitle2">
               by {nft.creator?.name || nft.creator?.address}
             </Typography>
           </RouteLink>
         </Toolbar>
+        <IconButton
+          className={classes.linked}
+          disabled={!nft.display_uri}
+          onClick={handleToggleLike}
+        >
+          {isLiked ? <FavoriteIcon /> : <FavoriteBorderIcon />}
+        </IconButton>
         <br />
         <br />
         <Divider></Divider>
