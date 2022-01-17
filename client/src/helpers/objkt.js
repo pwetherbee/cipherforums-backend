@@ -8,6 +8,6 @@ function parseTransaction(transaction) {
   if (transaction.buyer) {
     return { type: "trade", ...transaction };
   } else {
-    return { type: "swap", ...transaction };
+    return { type: "list", ...transaction };
   }
 }

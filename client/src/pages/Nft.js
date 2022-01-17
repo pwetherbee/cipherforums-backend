@@ -22,6 +22,9 @@ import Tab from "@material-ui/core/Tab";
 import Alert from "@mui/material/Alert";
 import Stack from "@mui/material/Stack";
 import { getHistory } from "../helpers/objkt";
+import { Box } from "@mui/material";
+import HistoryList from "../components/HistoryList";
+import HistoryGrid from "../components/HistoryGrid";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -81,7 +84,6 @@ const useStyles = makeStyles((theme) => ({
   linked: {
     color: theme.palette.primary.main,
     marginLeft: 30,
-    marginTop: 20,
   },
   addr: {
     textAlign: "center",
@@ -151,6 +153,7 @@ export default function Public() {
     const likeStatus = await query(
       `/api/likes/check?nftID=${id}&chainType=${"tz"}`
     );
+    console.log("is liked: ", likeStatus);
     setIsLiked(likeStatus.isLiked);
     const data = await fetchOBJKTDetails(id);
     const commentData = await query(
@@ -202,7 +205,13 @@ export default function Public() {
   const handleCloseConfirmDelete = () => {
     setOpenConfirmDelete(false);
   };
-  if (!nft || !likeCount) return <LoadingIcon />;
+  if (!nft || likeCount === null)
+    return (
+      <div>
+        <div style={{ marginTop: "20%" }}></div>
+        <LoadingIcon />
+      </div>
+    );
   return (
     <Container>
       <ConfirmDelete
@@ -211,9 +220,9 @@ export default function Public() {
         handleClose={handleCloseConfirmDelete}
       />
       <Grid item xs={12} sm={12}>
-        <Paper className={classes.paper}>
+        <Box className={classes.paper}>
           <Media nft={nft}></Media>
-        </Paper>
+        </Box>
         <Toolbar className={classes.title}>
           <Typography variant="h5">{nft.title}</Typography>
         </Toolbar>
@@ -232,13 +241,17 @@ export default function Public() {
             </Typography>
           </RouteLink>
         </Toolbar>
-        <IconButton
-          className={classes.linked}
-          disabled={!nft.display_uri}
-          onClick={handleToggleLike}
-        >
-          {isLiked ? <FavoriteIcon /> : <FavoriteBorderIcon />}
-        </IconButton>
+        <Toolbar>
+          <IconButton
+            className={classes.linked}
+            disabled={!nft.display_uri}
+            onClick={handleToggleLike}
+          >
+            {isLiked ? <FavoriteIcon /> : <FavoriteBorderIcon />}
+          </IconButton>
+          <Typography>{likeCount}</Typography>
+        </Toolbar>
+
         <br />
         <br />
 
@@ -310,25 +323,35 @@ export default function Public() {
           </Stack>
         </TabPanel>
         <TabPanel value={tab} index={2}>
-          <Stack sx={{ width: "100%" }} spacing={2}>
-            <Alert variant="outlined" severity="info">
-              <Typography className={classes.alertText}>fafnas</Typography>
-            </Alert>
-            <Alert variant="outlined" severity="success">
-              <Typography className={classes.alertText}>fafnas</Typography>
-            </Alert>
-            {/* <ul className={classes.addr}>
-              <div className={classes.colors}>
-                <li>erfhuoyef</li>
+          <br />
+          <HistoryGrid data={nftHistory} />
+          {/* <Stack sx={{ width: "100%" }} spacing={2}>
+            {nftHistory.map((t, i) => (
+              <div>
+                {t.type == "swap" ? (
+                  <Alert variant="outlined" severity="info">
+                    <Typography className={classes.alertText}>
+                      {t.amount} items listed by{" "}
+                      {t.creator.name || t.creator.address} for{" "}
+                      {t.price / 1000000} tez at{" "}
+                      {new Date(t.timestamp).toLocaleTimeString()} on{" "}
+                      {new Date(t.timestamp).toLocaleDateString()}
+                    </Typography>
+                  </Alert>
+                ) : (
+                  <Alert variant="outlined" severity="success">
+                    <Typography className={classes.alertText}>
+                      {t.amount} items sold {t.seller.name || t.seller.address}{" "}
+                      to {t.buyer.name || t.buyer.address} for{" "}
+                      {t.swap.price / 1000000} tez at{" "}
+                      {new Date(t.timestamp).toLocaleTimeString()} on{" "}
+                      {new Date(t.timestamp).toLocaleDateString()}
+                    </Typography>
+                  </Alert>
+                )}
               </div>
-              <li>erfhuoyef</li>
-              <li>erfhuoyef</li>
-              <li>erfhuoyef</li>
-              <li>erfhuoyef</li>
-              <li>erfhuoyef</li>
-              <li>erfhuoyef</li>
-            </ul> */}
-          </Stack>
+            ))}
+          </Stack> */}
         </TabPanel>
       </Grid>
     </Container>
