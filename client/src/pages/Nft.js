@@ -22,7 +22,6 @@ import Tab from "@material-ui/core/Tab";
 import Alert from "@mui/material/Alert";
 import Stack from "@mui/material/Stack";
 import { getHistory } from "../helpers/objkt";
-import Stack from "@mui/material/Stack";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -86,11 +85,10 @@ const useStyles = makeStyles((theme) => ({
   },
   addr: {
     textAlign: "center",
-    color: theme.palette.primary.alert1,
     listStyleType: "none",
   },
-  colors: {
-    backgroundColor: "red",
+  alertText: {
+    color: theme.palette.primary.main,
   },
 }));
 function TabPanel(props) {
@@ -290,7 +288,7 @@ export default function Public() {
             fullWidth
             variant="outlined"
           />
-          <Container calssName={classes.submitBox}>
+          <Container className={classes.submitBox}>
             <Button
               disabled={!postCommentText.length}
               variant="contained"
@@ -313,11 +311,11 @@ export default function Public() {
         </TabPanel>
         <TabPanel value={tab} index={2}>
           <Stack sx={{ width: "100%" }} spacing={2}>
-            <Alert variant="filled" severity="info">
-              This is a warning alert — check it out!
+            <Alert variant="outlined" severity="info">
+              <Typography className={classes.alertText}>fafnas</Typography>
             </Alert>
-            <Alert variant="filled" severity="success">
-              This is a warning alert — check it out!
+            <Alert variant="outlined" severity="success">
+              <Typography className={classes.alertText}>fafnas</Typography>
             </Alert>
             {/* <ul className={classes.addr}>
               <div className={classes.colors}>
