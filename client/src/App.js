@@ -45,11 +45,54 @@ import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
 import MatrixPage from "./pages/Matrix";
 
+// mui theme
+import {
+  createTheme as createThemeMui,
+  ThemeProvider as ThemeProviderMui,
+} from "@mui/material/styles";
 
 // --------------------------
 // green theme
 
 const theme = createTheme({
+  palette: {
+    type: "dark",
+    primary: {
+      main: "#00e019",
+      // main: "#ffffff",
+      contrastText: "#121212",
+    },
+    secondary: {
+      main: "#FFFF00",
+      contrastText: "#ffffff",
+    },
+    background: {
+      default: "#121212",
+      // paper: "#171717",
+      paper: "#121212",
+    },
+    text: {
+      // primary: "#0aff00",
+      // secondary: "#00ff1b",
+
+      primary: "#00ff1b",
+      secondary: "#00ff1b",
+      disabled: "#00ff1b",
+      hint: "#00ff1b",
+    },
+    other: {
+      primary: "#FFFF00",
+    },
+    divider: "rgba(0,0,0,0.12)",
+  },
+  typography: {
+    allVariants: {
+      fontFamily: "IBM Plex Mono",
+    },
+  },
+});
+
+const themeMui = createThemeMui({
   palette: {
     type: "dark",
     primary: {
@@ -173,90 +216,92 @@ export default function App() {
     // setLoggedIn = false;
   };
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <Box
-        style={{
-          position: "relative",
-          minHeight: "150vh",
-          paddingBottom: "500px",
-        }}
-      >
-        <Router>
-          <MenuAppBar auth={loggedUser} />
-          <ScrollToTop />
-          <Switch>
-            <Route exact path="/@:username">
-              <User />
-            </Route>
-            <Route path="/@:username/:postname">
-              <Post />
-            </Route>
-            <Route path="/post/:title">
-              <Post />
-            </Route>
-            <Route path="/settings">
-              <Settings />
-            </Route>
-            <Route path="/signup">
-              <Signup />
-            </Route>
-            <Route path="/login">
-              <Login handleLogin={handleLogin} />
-            </Route>
-            <Route path="/create/public/:topic">
-              <CreatePublic />
-            </Route>
-            <Route path="/create">
-              <Create />
-            </Route>
-            <Route path="/public/:topic/:postname">
-              <Post />
-            </Route>
-            <Route path="/public/:topic">
-              <PubForum auth={loggedUser} />
-            </Route>
-            <Route path="/public">
-              <Public />
-            </Route>
-            <Route path="/Help">
-              <Help />
-            </Route>
-            <Route path="/Home">
-              <Home />
-            </Route>
-            <Route path="/Search">
-              <Search />
-            </Route>
-            <Route path="/Confirm">
-              <Confirm />
-            </Route>
-            <Route path="/Verify/:emailToken">
-              <Verify />
-            </Route>
-            <Route path="/Fullscreen">
-              <Fullscreen />
-            </Route>
-            <Route exact path="/tz/:address">
-              <Nftdisplay />
-            </Route>
-            <Route path="/tz/nft/:id">
-              <Nft />
-            </Route>
-            <Route path="/NFt">
-              <Nft />
-            </Route>
+    <ThemeProviderMui theme={themeMui}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Box
+          style={{
+            position: "relative",
+            minHeight: "150vh",
+            paddingBottom: "500px",
+          }}
+        >
+          <Router>
+            <MenuAppBar auth={loggedUser} />
+            <ScrollToTop />
+            <Switch>
+              <Route exact path="/@:username">
+                <User />
+              </Route>
+              <Route path="/@:username/:postname">
+                <Post />
+              </Route>
+              <Route path="/post/:title">
+                <Post />
+              </Route>
+              <Route path="/settings">
+                <Settings />
+              </Route>
+              <Route path="/signup">
+                <Signup />
+              </Route>
+              <Route path="/login">
+                <Login handleLogin={handleLogin} />
+              </Route>
+              <Route path="/create/public/:topic">
+                <CreatePublic />
+              </Route>
+              <Route path="/create">
+                <Create />
+              </Route>
+              <Route path="/public/:topic/:postname">
+                <Post />
+              </Route>
+              <Route path="/public/:topic">
+                <PubForum auth={loggedUser} />
+              </Route>
+              <Route path="/public">
+                <Public />
+              </Route>
+              <Route path="/Help">
+                <Help />
+              </Route>
+              <Route path="/Home">
+                <Home />
+              </Route>
+              <Route path="/Search">
+                <Search />
+              </Route>
+              <Route path="/Confirm">
+                <Confirm />
+              </Route>
+              <Route path="/Verify/:emailToken">
+                <Verify />
+              </Route>
+              <Route path="/Fullscreen">
+                <Fullscreen />
+              </Route>
+              <Route exact path="/tz/:address">
+                <Nftdisplay />
+              </Route>
+              <Route path="/tz/nft/:id">
+                <Nft />
+              </Route>
+              <Route path="/NFt">
+                <Nft />
+              </Route>
 
-            <Route path="/matrix">
-              <MatrixPage />
-            </Route>
-            <Route path="/">
-              <Home />
-            </Route>
-          </Switch>
-          <Footer />
-        </Router>
-      </Box>
-    </ThemeProvider>
+              <Route path="/matrix">
+                <MatrixPage />
+              </Route>
+              <Route path="/">
+                <Home />
+              </Route>
+            </Switch>
+            <Footer />
+          </Router>
+        </Box>
+      </ThemeProvider>
+    </ThemeProviderMui>
   );
 }

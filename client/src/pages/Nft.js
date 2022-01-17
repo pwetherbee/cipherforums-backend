@@ -19,6 +19,8 @@ import { Link as RouteLink } from "react-router-dom";
 import LoadingIcon from "../components/LoadingPageIcon";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
+import Alert from "@mui/material/Alert";
+import Stack from "@mui/material/Stack";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -80,6 +82,9 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.primary.main,
     marginLeft: 30,
     marginTop: 20,
+  },
+  alert: {
+    color: "black",
   },
 }));
 function TabPanel(props) {
@@ -270,7 +275,7 @@ export default function Public() {
             fullWidth
             variant="outlined"
           />
-          <Container className={classes.submitBox}>
+          <Container calssName={classes.submitBox}>
             <Button
               disabled={!postCommentText.length}
               variant="contained"
@@ -286,7 +291,14 @@ export default function Public() {
           OWNERS DEMO TEXT
         </TabPanel>
         <TabPanel value={tab} index={2}>
-          HISTORY DEMO TEXT
+          <Stack sx={{ width: "100%" }} spacing={2}>
+            <Alert calssName={classes.alert} severity="info">
+              This is an info alert — check it out!
+            </Alert>
+            <Alert calssName={classes.alert} severity="success">
+              This is a success alert — check it out!
+            </Alert>
+          </Stack>
         </TabPanel>
       </Grid>
     </Container>
