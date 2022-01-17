@@ -2,6 +2,7 @@ import { generateThumbnailCR } from "../helpers/hicdex.js";
 import { makeStyles } from "@material-ui/core/styles";
 import { useState, useEffect } from "react";
 import LoadingIcon from "./LoadingPageIcon.js";
+import Container from "@material-ui/core/Container";
 import "@google/model-viewer";
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -87,19 +88,21 @@ function Media(props) {
       )}
       {nft.mime?.startsWith("model") && (
         <div className={classes.modelHold}>
-          <model-viewer
-            className={classes.model}
-            onLoad={() => setLoading(false)}
-            src={nft.artifact_uri && generateThumbnailCR(nft.artifact_uri)}
-            autoplay="true"
-            auto-rotate="true"
-            data-js-focus-visible="true"
-            interaction-prompt="none"
-            ar="true"
-            ar-modes="webxr scene-viewer quick-look"
-            camera-controls="true"
-            ar-status="not-presenting"
-          ></model-viewer>
+          <Container>
+            <model-viewer
+              className={classes.model}
+              onLoad={() => setLoading(false)}
+              src={nft.artifact_uri && generateThumbnailCR(nft.artifact_uri)}
+              autoplay="true"
+              auto-rotate="true"
+              data-js-focus-visible="true"
+              interaction-prompt="none"
+              ar="true"
+              ar-modes="webxr scene-viewer quick-look"
+              camera-controls="true"
+              ar-status="not-presenting"
+            ></model-viewer>
+          </Container>
         </div>
       )}
     </div>

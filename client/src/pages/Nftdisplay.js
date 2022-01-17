@@ -84,7 +84,7 @@ export default function AutoGrid() {
       <Button onClick={toggleDisplay}>
         View {display == "created" ? "Collected" : "Created"}
       </Button>
-      <Grid container spacing={4}>
+      <Grid container spacing={0}>
         {display == "created" &&
           createdNFTs.map((createdNFTs) => (
             <Grid key={createdNFTs.id} item xs={12} sm={3}>

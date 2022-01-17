@@ -61,6 +61,8 @@ const useStyles = makeStyles((theme) => ({
     // padding: 0,
     // paddingLeft: 20,
     minHeight: 1,
+    marginTop: 20,
+    marginLeft: 10,
   },
   comment: {
     marginTop: 30,
@@ -229,48 +231,56 @@ export default function Public() {
           </Tabs>
         </Grid>
 
-        <Divider></Divider>
-        <Toolbar className={classes.address}>
-          <Typography className={classes.footer}>Comments</Typography>
-        </Toolbar>
+        <TabPanel value={tab} index={0}>
+          <Divider></Divider>
+          <Toolbar className={classes.address}>
+            <Typography className={classes.footer}>Comments</Typography>
+          </Toolbar>
 
-        {comments?.map((comment, i) => (
-          <Comment
-            key={i}
-            comment={comment}
-            secret={null}
-            handleDeleteComment={handleDeleteComment}
+          {comments?.map((comment, i) => (
+            <Comment
+              key={i}
+              comment={comment}
+              secret={null}
+              handleDeleteComment={handleDeleteComment}
+            />
+          ))}
+
+          <TextField
+            error={error}
+            helperText={helperText}
+            className={classes.comment}
+            id="outlined-textarea"
+            label="Reply"
+            value={postCommentText}
+            onInput={(e) => {
+              setError(false);
+              setHelperText("");
+              setPostCommentText(e.target.value);
+            }}
+            placeholder="Enter your comment here"
+            multiline
+            fullWidth
+            variant="outlined"
           />
-        ))}
-
-        <TextField
-          error={error}
-          helperText={helperText}
-          className={classes.comment}
-          id="outlined-textarea"
-          label="Reply"
-          value={postCommentText}
-          onInput={(e) => {
-            setError(false);
-            setHelperText("");
-            setPostCommentText(e.target.value);
-          }}
-          placeholder="Enter your comment here"
-          multiline
-          fullWidth
-          variant="outlined"
-        />
-        <Container className={classes.submitBox}>
-          <Button
-            disabled={!postCommentText.length}
-            variant="contained"
-            color="primary"
-            onClick={handleSubmitComment}
-          >
-            Submit Comment
-          </Button>
-          {/* <SecretBox updateSecret={updateSecret} secret={secret} /> */}
-        </Container>
+          <Container className={classes.submitBox}>
+            <Button
+              disabled={!postCommentText.length}
+              variant="contained"
+              color="primary"
+              onClick={handleSubmitComment}
+            >
+              Submit Comment
+            </Button>
+            {/* <SecretBox updateSecret={updateSecret} secret={secret} /> */}
+          </Container>
+        </TabPanel>
+        <TabPanel value={tab} index={1}>
+          OWNERS DEMO TEXT
+        </TabPanel>
+        <TabPanel value={tab} index={2}>
+          HISTORY DEMO TEXT
+        </TabPanel>
       </Grid>
     </Container>
   );
