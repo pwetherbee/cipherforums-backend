@@ -2,16 +2,17 @@ import { generateThumbnailCR } from "../helpers/hicdex.js";
 import { makeStyles } from "@material-ui/core/styles";
 import { useState, useEffect } from "react";
 import LoadingIcon from "./LoadingPageIcon.js";
+import LinearProgress from "@material-ui/core/LinearProgress";
 import "@google/model-viewer";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    paddingTop: 20,
     // padding: 80,
-    width: "99%",
-    paddingLeft: "1%",
+    width: "100%",
+    paddingBottom: 20,
   },
   img: {
-    paddingTop: 20,
     height: "70vmin",
   },
   iframe: {
@@ -45,7 +46,7 @@ function Media(props) {
   // figure out the media type
   const classes = useStyles();
   return (
-    <div>
+    <div className={classes.root}>
       {loading && (
         <div
           style={{
@@ -54,10 +55,15 @@ function Media(props) {
             right: 0,
             marginLeft: "auto",
             marginRight: "auto",
-            marginTop: "30vh",
+            width: "70vmin",
           }}
         >
-          <LoadingIcon />
+          <LinearProgress style={{ width: "70vmin" }} />
+          <img
+            className={classes.img}
+            style={{ filter: "blur(2px)" }}
+            src={nft.display_uri && generateThumbnailCR(nft.display_uri)}
+          />
         </div>
       )}
       {nft.mime?.startsWith("video") && (

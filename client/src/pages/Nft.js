@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
-import { Container, Button, IconButton } from "@material-ui/core";
+import { Container, Button, IconButton, Box } from "@material-ui/core";
 import Divider from "@mui/material/Divider";
 import Toolbar from "@material-ui/core/Toolbar";
 import { Comment } from "../components/Comment";
@@ -42,6 +42,7 @@ const useStyles = makeStyles((theme) => ({
     verticalAlign: "middle",
     height: "70vmin",
     padding: 10,
+    marginBottom: 40,
   },
   img: {
     paddingTop: 20,
@@ -177,7 +178,13 @@ export default function Public() {
   const handleCloseConfirmDelete = () => {
     setOpenConfirmDelete(false);
   };
-  if (!nft || !likeCount) return <LoadingIcon />;
+  if (!nft || !likeCount)
+    return (
+      <div>
+        <div style={{ marginTop: "20%" }}></div>
+        <LoadingIcon />
+      </div>
+    );
   return (
     <Container>
       <ConfirmDelete
@@ -186,9 +193,9 @@ export default function Public() {
         handleClose={handleCloseConfirmDelete}
       />
       <Grid item xs={12} sm={12}>
-        <Paper className={classes.paper}>
+        <Box className={classes.paper}>
           <Media nft={nft}></Media>
-        </Paper>
+        </Box>
         <Toolbar className={classes.footer}>
           <Typography variant="h5">{nft.title}</Typography>
         </Toolbar>
