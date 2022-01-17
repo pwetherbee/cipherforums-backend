@@ -55,8 +55,10 @@ const useStyles = makeStyles((theme) => ({
     // marginTop: 20,
     marginLeft: 20,
     marginRight: 20,
+    // marginTop: 20,
     color: theme.palette.primary.main,
   },
+
   address: {
     justifyContent: "left",
     // padding: 0,
@@ -70,8 +72,8 @@ const useStyles = makeStyles((theme) => ({
   },
   linked: {
     color: theme.palette.primary.main,
-    marginLeft: 30,
-    marginTop: 20,
+    // marginLeft: 30,
+    // marginTop: 20,
   },
 }));
 function TabPanel(props) {
@@ -200,7 +202,9 @@ export default function Public() {
           <Typography variant="h5">{nft.title}</Typography>
         </Toolbar>
         <Toolbar className={classes.footer}>
-          <Typography variant="subtitle1">{nft.description}</Typography>
+          <Typography variant="body" style={{ whiteSpace: "pre-line" }}>
+            {nft.description}
+          </Typography>
         </Toolbar>
         <Toolbar className={classes.address}>
           <RouteLink
@@ -212,13 +216,18 @@ export default function Public() {
             </Typography>
           </RouteLink>
         </Toolbar>
-        <IconButton
-          className={classes.linked}
-          disabled={!nft.display_uri}
-          onClick={handleToggleLike}
-        >
-          {isLiked ? <FavoriteIcon /> : <FavoriteBorderIcon />}
-        </IconButton>
+
+        <Toolbar className={classes.footer}>
+          <IconButton
+            className={classes.linked}
+            disabled={!nft.display_uri}
+            onClick={handleToggleLike}
+          >
+            {isLiked ? <FavoriteIcon /> : <FavoriteBorderIcon />}
+          </IconButton>
+          <Typography>{likeCount}</Typography>
+        </Toolbar>
+
         <br />
         <br />
 

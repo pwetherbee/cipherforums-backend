@@ -37,6 +37,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 function Media(props) {
   const { nft } = props;
+  console.log(nft);
   useEffect(() => {
     if (nft.mime?.startsWith("model")) {
       setLoading(false);
@@ -55,15 +56,25 @@ function Media(props) {
             right: 0,
             marginLeft: "auto",
             marginRight: "auto",
+            height: "70vmin",
             width: "70vmin",
+            backgroundImage: `url(${
+              nft.display_uri && generateThumbnailCR(nft.display_uri)
+            })`,
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+            backgroundSize: "cover",
           }}
         >
           <LinearProgress style={{ width: "70vmin" }} />
-          <img
-            className={classes.img}
-            style={{ filter: "blur(2px)" }}
-            src={nft.display_uri && generateThumbnailCR(nft.display_uri)}
-          />
+          <div
+            style={{
+              filter: "blur(5px)",
+              height: "70vmin",
+              width: "70vmin",
+              background: "rgba(0,0,0, 0.3)",
+            }}
+          ></div>
         </div>
       )}
       {nft.mime?.startsWith("video") && (
