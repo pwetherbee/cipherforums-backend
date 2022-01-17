@@ -70,11 +70,10 @@ const useStyles = makeStyles((theme) => ({
     height: 50,
     width: 50,
   },
-  imgcir:{
+  imgcir: {
     marginLeft: 140,
   },
-  delete:{
-  }
+  delete: {},
 }));
 
 export default function PostCard({ data, secret, onDelete }) {
@@ -157,7 +156,12 @@ export default function PostCard({ data, secret, onDelete }) {
         {/* <IconButton color="primary" aria-label="add to favorites">
           <FavoriteIcon />
         </IconButton> */}
-        <IconButton onClick={handleDelete} color="primary" aria-label="share" className={classes.delete}>
+        <IconButton
+          onClick={handleDelete}
+          color="primary"
+          aria-label="share"
+          className={classes.delete}
+        >
           <DeleteForeverRoundedIcon />
         </IconButton>
 
