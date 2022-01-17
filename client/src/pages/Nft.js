@@ -16,6 +16,7 @@ import ConfirmDelete from "../components/ConfirmDelete";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { Link as RouteLink } from "react-router-dom";
+import LoadingIcon from "../components/LoadingPageIcon";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -72,6 +73,7 @@ export default function Public() {
   const [postCommentText, setPostCommentText] = useState("");
   const [isLiked, setIsLiked] = useState(false);
   const [comments, setComments] = useState([]);
+  const [likeCount, setLikeCount] = useState(0);
   const { id } = useParams();
   const [openConfirmDelete, setOpenConfirmDelete] = useState(false);
   const [deleteCommentData, setDeleteCommentData] = useState({});
@@ -83,6 +85,7 @@ export default function Public() {
       });
       if (data.success) {
         setIsLiked(true);
+        setLikeCount(likeCount + 1);
       }
     } else {
       const res = await fetch(`/api/likes?nftID=${id}&chainType=${"tz"}`, {
@@ -95,6 +98,7 @@ export default function Public() {
       const data = await res.json();
       if (data.success) {
         setIsLiked(false);
+        setLikeCount(likeCount - 1);
       }
     }
   };
@@ -111,14 +115,16 @@ export default function Public() {
     const likeStatus = await query(
       `/api/likes/check?nftID=${id}&chainType=${"tz"}`
     );
-    console.log(likeStatus);
     setIsLiked(likeStatus.isLiked);
     const data = await fetchOBJKTDetails(id);
     console.log(data);
     const commentData = await query(
       `/api/comments?nftID=${id}&chainType=${"tz"}`
     );
-    console.log(commentData);
+    const { count } = await query(
+      `/api/likes/count?nftID=${id}&chainType=${"tz"}`
+    );
+    setLikeCount(count);
     setComments(commentData.data);
     setNFT(data);
     document.title = `Cipherforums | ${data.title}`;
@@ -155,6 +161,7 @@ export default function Public() {
   const handleCloseConfirmDelete = () => {
     setOpenConfirmDelete(false);
   };
+  if (!nft || !likeCount) return <LoadingIcon />;
   return (
     <Container>
       <ConfirmDelete
@@ -171,6 +178,7 @@ export default function Public() {
           <IconButton disabled={!nft.display_uri} onClick={handleToggleLike}>
             {isLiked ? <FavoriteIcon /> : <FavoriteBorderIcon />}
           </IconButton>
+          <Typography>{likeCount}</Typography>
         </Toolbar>
         <Toolbar className={classes.footer}>
           <Typography variant="subtitle1">{nft.description}</Typography>
