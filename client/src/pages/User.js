@@ -152,7 +152,7 @@ export default function Profile() {
             spacing={0}
             style={{ display: "flex", justifyContent: "center" }}
           >
-            <Grid item xs={6}>
+            <Grid item xs={12}>
               <Bio
                 profile={userData}
                 canFollow={userData?.loggedIn && !userData?.isFollowing}
@@ -161,7 +161,7 @@ export default function Profile() {
             <div>
               <Grid item xs={12}>
                 {userData?.loggedIn && userData?.currUser ? (
-                  <div style={{ paddingTop: 50 }}>
+                  <div style={{ paddingBottom: 20 }}>
                     <Button
                       type="submit"
                       variant="contained"

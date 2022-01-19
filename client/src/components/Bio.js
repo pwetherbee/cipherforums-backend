@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     maxWidth: 1800,
     // marginLeft: 30,
-    marginTop: 30,
+    // marginTop: 30,
     // height: 200,
     minWidth: 300,
     padding: 5,
@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
   desc: {
     display: "inline-flex",
     justifyContent: "space-between",
-    padding: 10,
+    // padding: 10,
   },
   avatar: {
     width: 100,
@@ -56,8 +56,10 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
   },
   usr: {
-    marginLeft: 20,
-    marginTop: 5,
+    display: "inline-flex",
+    marginTop: 10,
+    // padding: 10,
+    marginLeft: 50,
   },
 }));
 
@@ -110,49 +112,46 @@ export default function Bio({ profile, currUser, canFollow }) {
               ) : (
                 <Avatar>{profile.username.slice(0, 2)}</Avatar>
               )}
+              <CardContent>
+                <Typography variant="body2" color="textSecondary" component="p">
+                  {profile?.bio || "this user has no bio"}
+                </Typography>
+              </CardContent>
 
               {/* <Card className={classes.avi}> */}
-              <Paper className={classes.usr}>
-                <Typography gutterBottom variant="h5" component="h2">
-                  @{profile?.username || "user not found"}
-                  {profile?.currUser ||
-                    (profile?.loggedIn &&
-                      (!profile?.isFollowing ? (
-                        <Button
-                          size="small"
-                          color="primary"
-                          onClick={handleFollow}
-                        >
-                          Follow
-                        </Button>
-                      ) : (
-                        "✔"
-                      )))}
-                  {currUser ? (
-                    <Button
-                      size="small"
-                      color="primary"
-                      component={RouteLink}
-                      to="/settings"
-                    >
-                      edit
-                    </Button>
-                  ) : (
-                    ""
-                  )}
-                </Typography>
-              </Paper>
+
               {/* </Card> */}
-            </CardContent>
-            <CardContent>
-              <Typography variant="body2" color="textSecondary" component="p">
-                {profile?.bio || "this user has no bio"}
-              </Typography>
             </CardContent>
           </div>
         ) : (
           <LoadingIcon height={"10rem"} />
         )}
+      </Paper>
+      <Paper className={classes.usr}>
+        <Typography gutterBottom variant="h5" component="h2">
+          @{profile?.username || "user not found"}
+          {profile?.currUser ||
+            (profile?.loggedIn &&
+              (!profile?.isFollowing ? (
+                <Button size="small" color="primary" onClick={handleFollow}>
+                  Follow
+                </Button>
+              ) : (
+                "✔"
+              )))}
+          {currUser ? (
+            <Button
+              size="small"
+              color="primary"
+              component={RouteLink}
+              to="/settings"
+            >
+              edit
+            </Button>
+          ) : (
+            ""
+          )}
+        </Typography>
       </Paper>
     </React.Fragment>
   );

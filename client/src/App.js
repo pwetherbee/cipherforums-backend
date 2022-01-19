@@ -137,25 +137,25 @@ const themeMui = createThemeMui({
 //   palette: {
 //     type: "light",
 //     primary: {
-//       main: "#ffffff",
+//       main: "#000000",
 //       // main: "#ffffff",
 //       contrastText: "#121212",
 //     },
 //     secondary: {
 //       main: "#76ff03",
-//       contrastText: "#ffffff",
+//       contrastText: "#000000",
 //     },
 //     background: {
-//       default: "#000000",
+//       default: "#ffffff",
 //       // paper: "#171717",
-//       paper: "#000000",
+//       paper: "#ffffff",
 //     },
 //     text: {
 //       // primary: "#0aff00",
 //       // secondary: "#00ff1b",
 
-//       primary: "#ffffff",
-//       secondary: "#ffffff",
+//       primary: "#000000",
+//       secondary: "#000000",
 //       disabled: "#00ff1b",
 //       hint: "#00ff1b",
 //     },
