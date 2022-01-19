@@ -18,11 +18,11 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     maxWidth: 1600,
-    marginLeft: 30,
+    marginLeft: 0,
     marginTop: 30,
     // height: 200,
     minWidth: 300,
-    padding: 5,
+    // padding: 5,
     display: "block",
   },
   paper: {
@@ -50,16 +50,16 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "space-between",
     // padding: 10,
   },
-  avatar: {
-    width: 100,
-    height: 100,
-    backgroundColor: theme.palette.background.paper,
-  },
+  // avatar: {
+  //   width: 100,
+  //   height: 100,
+  //   backgroundColor: theme.palette.background.paper,
+  // },
   usr: {
     display: "inline-flex",
     // marginTop: 10,
     // padding: 10,
-    marginLeft: 50,
+    marginLeft: 20,
   },
 }));
 
