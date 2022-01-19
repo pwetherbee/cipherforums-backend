@@ -14,12 +14,12 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: 20,
   },
   img: {
-    height: "70vmin",
+    height: "75vmin",
   },
   iframe: {
     paddingTop: 20,
-    height: "70vmin",
-    width: "70vmin",
+    height: "75vmin",
+    width: "75vmin",
     border: "none",
   },
   canvas: {
@@ -108,8 +108,8 @@ function Media(props) {
             <model-viewer
               className={classes.model}
               style={{
-                width: "80vmin",
-                height: "80vmin",
+                width: "75vmin",
+                height: "75vmin",
                 margin: "auto",
               }}
               onLoad={() => setLoading(false)}
