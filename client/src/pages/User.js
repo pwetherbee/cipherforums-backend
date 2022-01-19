@@ -49,6 +49,7 @@ export default function Profile() {
   const [following, setFollowing] = useState([]);
   const [obj, setObj] = useState({});
   const [tab, setTab] = useState(0);
+  const [tab2, setTab2] = useState(0);
   const [newUser, setNewUser] = useState(null);
 
   useEffect(async () => {
@@ -241,18 +242,20 @@ export default function Profile() {
               </Container>
             </TabPanel>
             <TabPanel value={tab} index={3}>
-              <Tabs
-                value={tab}
-                onChange={handleChangeTab}
-                indicatorColor="primary"
-                textColor="primary"
-                centered
-              >
-                <Tab label="Liked NFTs"></Tab>
-                <Tab label="ETH"></Tab>
-                <Tab label="TZ"></Tab>
-              </Tabs>
-              <LikedNFTs />
+              <TabPanel value={tab} index={3}>
+                <Tabs
+                  value={tab2}
+                  onChange={handleChangeTab}
+                  indicatorColor="primary"
+                  textColor="primary"
+                  centered
+                >
+                  <Tab label="Liked NFTs"></Tab>
+                  <Tab label="ETH"></Tab>
+                  <Tab label="TZ"></Tab>
+                </Tabs>
+                <LikedNFTs />
+              </TabPanel>
             </TabPanel>
 
             {/* <UserPosts secret={secret} posts={createdPosts} /> */}

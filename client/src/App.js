@@ -32,6 +32,7 @@ import Confirm from "./components/Confirm";
 import Verify from "./pages/Verify";
 import Fullscreen from "./components/Fullscreen";
 import Nftdisplay from "./pages/Nftdisplay";
+import NftExplore from "./pages/NftExplore";
 import Nft from "./pages/Nft";
 
 // Components
