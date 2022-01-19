@@ -191,7 +191,7 @@ export default function Profile() {
                 <Tab label="Created Posts"></Tab>
                 <Tab label="User Comments"></Tab>
                 <Tab label="Following"></Tab>
-                <Tab label="Liked NFTs"></Tab>
+                <Tab label="NFT"></Tab>
               </Tabs>
             </Grid>
             {/* <Grid container spacing={2}>
@@ -241,6 +241,17 @@ export default function Profile() {
               </Container>
             </TabPanel>
             <TabPanel value={tab} index={3}>
+              <Tabs
+                value={tab}
+                onChange={handleChangeTab}
+                indicatorColor="primary"
+                textColor="primary"
+                centered
+              >
+                <Tab label="Liked NFTs"></Tab>
+                <Tab label="ETH"></Tab>
+                <Tab label="TZ"></Tab>
+              </Tabs>
               <LikedNFTs />
             </TabPanel>
 

@@ -4,6 +4,8 @@ import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import { Button, Typography } from "@material-ui/core";
 import { Link as RouteLink, useParams } from "react-router-dom";
+import Tabs from "@material-ui/core/Tabs";
+import Tab from "@material-ui/core/Tab";
 import {
   fetchCollectedOBJKTs,
   fetchCreatedOBJKTs,
@@ -57,6 +59,10 @@ export default function AutoGrid() {
   const [collectedNFTs, setCollectedNFTs] = useState([]);
   const [createdNFTs, setCreatedNFTs] = useState([]);
   const [display, setDisplay] = useState("created");
+  const [tab, setTab] = useState(0);
+  const handleChangeTab = (e, newTab) => {
+    setTab(newTab);
+  };
   const toggleDisplay = async () => {
     setDisplay(display == "created" ? "collected" : "created");
     if (!collectedNFTs.length) {
@@ -81,6 +87,16 @@ export default function AutoGrid() {
       <Typography component="h1" className={classes.info2}>
         There is currently no cipherforums account linked to this wallet.
       </Typography>
+      <Tabs
+        value={tab}
+        onChange={handleChangeTab}
+        indicatorColor="primary"
+        textColor="primary"
+        centered
+      >
+        <Tab label="Created"></Tab>
+        <Tab label="Collected"></Tab>
+      </Tabs>
       <Button onClick={toggleDisplay}>
         View {display == "created" ? "Collected" : "Created"}
       </Button>
