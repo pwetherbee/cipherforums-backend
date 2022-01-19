@@ -249,16 +249,9 @@ export default function MenuAppBar({ auth }) {
             </Typography>
           )}
           {auth.ok && !mobile && (
-            <RouteLink
-              to={`/@${auth.username}`}
-              style={{ textDecoration: "none" }}
-            >
-              <Link underline="hover">
-                <Typography color="primary" variant="h6">
-                  @{auth.username}
-                </Typography>
-              </Link>
-            </RouteLink>
+            <Typography color="primary" variant="h6">
+              @{auth.username}
+            </Typography>
           )}
           {Boolean(auth.ok) && (
             <div>
@@ -288,7 +281,7 @@ export default function MenuAppBar({ auth }) {
                 open={open}
                 onClose={handleClose}
               >
-                {/* <MenuItem
+                <MenuItem
                   key={1}
                   component={RouteLink}
                   to={`/@${auth.username}`}
@@ -296,7 +289,7 @@ export default function MenuAppBar({ auth }) {
                 >
                   Profile
                 </MenuItem>
-                <Divider /> */}
+                <Divider />
                 <MenuItem key={2} component={RouteLink} to="/settings">
                   Settings
                 </MenuItem>

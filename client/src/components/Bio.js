@@ -13,6 +13,8 @@ import LoadingIcon from "./LoadingPageIcon";
 import { Link as RouteLink } from "react-router-dom";
 import Avatar from "@material-ui/core/Avatar";
 import ImageCircle from "./ImageCircle";
+import TwitterIcon from "@material-ui/icons/Twitter";
+import LanguageIcon from "@material-ui/icons/Language";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -57,9 +59,24 @@ const useStyles = makeStyles((theme) => ({
   // },
   usr: {
     display: "inline-flex",
-    // marginTop: 10,
+    // marginTop: 10,y
+
     // padding: 10,
     marginLeft: 20,
+  },
+  follow: {
+    marginLeft: 20,
+  },
+  icon: {
+    margin: 5,
+    marginLeft: 10,
+  },
+  icon2: {
+    margin: 5,
+    marginLeft: 0,
+  },
+  check: {
+    marginTop: 5,
   },
 }));
 
@@ -139,11 +156,23 @@ export default function Bio({ profile, currUser, canFollow }) {
           {profile?.currUser ||
             (profile?.loggedIn &&
               (!profile?.isFollowing ? (
-                <Button size="small" color="primary" onClick={handleFollow}>
+                <Button
+                  className={classes.follow}
+                  size="small"
+                  color="primary"
+                  onClick={handleFollow}
+                >
                   Follow
                 </Button>
               ) : (
-                "✔"
+                <Typography
+                  className={classes.check}
+                  gutterBottom
+                  variant="h5"
+                  component="h2"
+                >
+                  ✔
+                </Typography>
               )))}
           {currUser ? (
             <Button
@@ -158,6 +187,8 @@ export default function Bio({ profile, currUser, canFollow }) {
             ""
           )}
         </Typography>
+        <TwitterIcon className={classes.icon} />
+        <LanguageIcon className={classes.icon2} />
       </Grid>
     </React.Fragment>
   );
