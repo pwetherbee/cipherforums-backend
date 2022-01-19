@@ -48,13 +48,14 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     flexGrow: 1,
+    color: theme.palette.primary.main,
   },
   logo: {
     width: 50,
     marginTop: 0,
   },
   menu: {
-    marginTop: 50,
+    marginTop: 60,
   },
 }));
 

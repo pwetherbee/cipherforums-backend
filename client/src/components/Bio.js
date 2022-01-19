@@ -8,7 +8,7 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import { Paper } from "@material-ui/core";
+import { Grid, Paper } from "@material-ui/core";
 import LoadingIcon from "./LoadingPageIcon";
 import { Link as RouteLink } from "react-router-dom";
 import Avatar from "@material-ui/core/Avatar";
@@ -17,9 +17,9 @@ import ImageCircle from "./ImageCircle";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    maxWidth: 1800,
-    // marginLeft: 30,
-    // marginTop: 30,
+    maxWidth: 1600,
+    marginLeft: 30,
+    marginTop: 30,
     // height: 200,
     minWidth: 300,
     padding: 5,
@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
   avi: {
     display: "inline-flex",
     justifyContent: "space-between",
-    marginRight: 20,
+    // marginRight: 20,
   },
   desc: {
     display: "inline-flex",
@@ -57,7 +57,7 @@ const useStyles = makeStyles((theme) => ({
   },
   usr: {
     display: "inline-flex",
-    marginTop: 10,
+    // marginTop: 10,
     // padding: 10,
     marginLeft: 50,
   },
@@ -90,11 +90,12 @@ export default function Bio({ profile, currUser, canFollow }) {
   //   const [profile, setProfile] = useState(user);
   return (
     <React.Fragment>
-      <Paper className={classes.root}>
+      <Grid item xs={12} className={classes.root}>
         {profile?.username ? (
           <div>
-            <CardContent className={classes.desc}>
-              {/* <Card className={classes.avi}>
+            <Grid item xs={12}>
+              <CardContent className={classes.desc}>
+                {/* <Card className={classes.avi}>
                 <img
                   className={classes.img}
                   alt="complex"
@@ -102,32 +103,37 @@ export default function Bio({ profile, currUser, canFollow }) {
                 />
               </Card>
               avatar= */}
-              {profile?.pic ? (
-                <ImageCircle
-                  imageLink={profile.pic}
-                  size={150}
-                  alt={profile.username}
-                  square
-                ></ImageCircle>
-              ) : (
-                <Avatar>{profile.username.slice(0, 2)}</Avatar>
-              )}
-              <CardContent>
-                <Typography variant="body2" color="textSecondary" component="p">
-                  {profile?.bio || "this user has no bio"}
-                </Typography>
+                {profile?.pic ? (
+                  <ImageCircle
+                    imageLink={profile.pic}
+                    size={150}
+                    alt={profile.username}
+                    square
+                  ></ImageCircle>
+                ) : (
+                  <Avatar>{profile.username.slice(0, 2)}</Avatar>
+                )}
+                <CardContent>
+                  <Typography
+                    variant="body2"
+                    color="textSecondary"
+                    component="p"
+                  >
+                    {profile?.bio || "this user has no bio"}
+                  </Typography>
+                </CardContent>
+
+                {/* <Card className={classes.avi}> */}
+
+                {/* </Card> */}
               </CardContent>
-
-              {/* <Card className={classes.avi}> */}
-
-              {/* </Card> */}
-            </CardContent>
+            </Grid>
           </div>
         ) : (
           <LoadingIcon height={"10rem"} />
         )}
-      </Paper>
-      <Paper className={classes.usr}>
+      </Grid>
+      <Grid item xs={12} className={classes.usr}>
         <Typography gutterBottom variant="h5" component="h2">
           @{profile?.username || "user not found"}
           {profile?.currUser ||
@@ -152,7 +158,7 @@ export default function Bio({ profile, currUser, canFollow }) {
             ""
           )}
         </Typography>
-      </Paper>
+      </Grid>
     </React.Fragment>
   );
 }

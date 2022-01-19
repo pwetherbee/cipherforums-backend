@@ -140,7 +140,7 @@ const themeMui = createThemeMui({
 //     primary: {
 //       main: "#000000",
 //       // main: "#ffffff",
-//       contrastText: "#121212",
+//       contrastText: "#ffffff",
 //     },
 //     secondary: {
 //       main: "#76ff03",

@@ -31,6 +31,7 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     minHeight: "100vh",
     wordBreak: "break-word",
+    color: theme.palette.text.secondary,
   },
   div: {
     padding: theme.spacing(2),
