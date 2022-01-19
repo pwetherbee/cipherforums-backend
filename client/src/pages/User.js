@@ -175,9 +175,9 @@ export default function Profile() {
                   ""
                 )}
 
-                <div style={{ paddingTop: 30 }}>
+                {/* <div style={{ paddingTop: 30 }}>
                   <SecretBox updateSecret={updateSecret} />
-                </div>
+                </div> */}
               </Grid>
             </div>
             <Grid item xs={12}>
