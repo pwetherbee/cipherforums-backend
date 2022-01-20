@@ -66,6 +66,7 @@ export default function AutoGrid() {
   const [display, setDisplay] = useState("created");
   const [tab, setTab] = useState(0);
   const toggleDisplay = async () => {
+    //TODO: migrate to tab change function
     setDisplay(display == "created" ? "collected" : "created");
     if (!collectedNFTs.length) {
       const collected = await fetchCollectedOBJKTs(address);
@@ -76,6 +77,7 @@ export default function AutoGrid() {
 
   const handleChangeTab = (e, newTab) => {
     setTab(newTab);
+    toggleDisplay();
   };
 
   const classes = useStyles();
@@ -93,9 +95,6 @@ export default function AutoGrid() {
       <Typography variant="subtitle1" className={classes.info2}>
         There is currently no cipherforums account linked to this wallet.
       </Typography>
-      <Button onClick={toggleDisplay}>
-        View {display == "created" ? "Collected" : "Created"}
-      </Button>
       <Grid item xs={12}>
         <Tabs
           value={tab}
