@@ -242,20 +242,18 @@ export default function Profile() {
               </Container>
             </TabPanel>
             <TabPanel value={tab} index={3}>
-              <TabPanel value={tab} index={3}>
-                <Tabs
-                  value={tab2}
-                  onChange={handleChangeTab}
-                  indicatorColor="primary"
-                  textColor="primary"
-                  centered
-                >
-                  <Tab label="Liked NFTs"></Tab>
-                  <Tab label="ETH"></Tab>
-                  <Tab label="TZ"></Tab>
-                </Tabs>
-                <LikedNFTs />
-              </TabPanel>
+              <Tabs
+                value={tab2}
+                onChange={handleChangeTab}
+                indicatorColor="primary"
+                textColor="primary"
+                centered
+              >
+                <Tab label="Liked NFTs"></Tab>
+                <Tab label="ETH"></Tab>
+                <Tab label="TZ"></Tab>
+              </Tabs>
+              <LikedNFTs />
             </TabPanel>
 
             {/* <UserPosts secret={secret} posts={createdPosts} /> */}
