@@ -66,12 +66,12 @@ export default function Public() {
     <CssBaseline>
       <Container maxWidth="sm" className={classes.settingsContainer}>
         <Typography variant="body2" gutterBottom>
-          Enter a bio
+          Bio
         </Typography>
         <FormControl fullWidth>
           <TextField
             id="outlined-basic"
-            label="bio"
+            label="Enter a profile bio here"
             variant="outlined"
             className={classes.settingsItem}
             value={bio}

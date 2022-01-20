@@ -87,12 +87,6 @@ export default function AutoGrid() {
   }, [address]);
   return (
     <div className={classes.root}>
-      <Typography component="h1" variant="h4" className={classes.info}>
-        {address}
-      </Typography>
-      <Typography component="h1" className={classes.info2}>
-        There is currently no cipherforums account linked to this wallet.
-      </Typography>
       <Button onClick={toggleDisplay}>
         View {display == "created" ? "Collected" : "Created"}
       </Button>

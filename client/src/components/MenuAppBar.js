@@ -38,7 +38,8 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     marginBottom: 1,
     border: "none",
-    backgroundColor: "#000000",
+    backgroundColor: theme.palette.primary.contrastText,
+    // backgroundColor: "#000000",
     // borderStyle: "solid",
     // borderRadius: "10px",
   },
@@ -47,10 +48,14 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     flexGrow: 1,
+    color: theme.palette.primary.main,
   },
   logo: {
     width: 50,
     marginTop: 0,
+  },
+  menu: {
+    marginTop: 60,
   },
 }));
 
@@ -244,16 +249,9 @@ export default function MenuAppBar({ auth }) {
             </Typography>
           )}
           {auth.ok && !mobile && (
-            <RouteLink
-              to={`/@${auth.username}`}
-              style={{ textDecoration: "none" }}
-            >
-              <Link underline="hover">
-                <Typography color="primary" variant="h6">
-                  @{auth.username}
-                </Typography>
-              </Link>
-            </RouteLink>
+            <Typography color="primary" variant="h6">
+              @{auth.username}
+            </Typography>
           )}
           {Boolean(auth.ok) && (
             <div>
@@ -269,6 +267,7 @@ export default function MenuAppBar({ auth }) {
 
               <Menu
                 id="menu-appbar"
+                className={classes.menu}
                 anchorEl={anchorEl}
                 anchorOrigin={{
                   vertical: "top",

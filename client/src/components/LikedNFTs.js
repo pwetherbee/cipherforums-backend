@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
     padding: 10,
   },
   img: {
-    width: "50%",
+    width: "100%",
   },
   info: {
     textAlign: "left",
@@ -58,9 +58,9 @@ function LikedNFTs() {
   }, []);
   console.log(NFTs.length);
   return (
-    <div>
+    <Grid container spacing={0}>
       {NFTs.map((nft, i) => (
-        <Grid key={nft.nftID} item xs={12} sm={12}>
+        <Grid item xs={12} sm={3}>
           <Paper className={classes.paper}>
             <RouteLink
               to={`/tz/nft/${nft.nftID}`}
@@ -74,7 +74,7 @@ function LikedNFTs() {
           </Paper>
         </Grid>
       ))}
-    </div>
+    </Grid>
   );
 }
 

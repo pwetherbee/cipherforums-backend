@@ -49,6 +49,7 @@ export default function Profile() {
   const [following, setFollowing] = useState([]);
   const [obj, setObj] = useState({});
   const [tab, setTab] = useState(0);
+  const [tab2, setTab2] = useState(0);
   const [newUser, setNewUser] = useState(null);
 
   useEffect(async () => {
@@ -152,7 +153,7 @@ export default function Profile() {
             spacing={0}
             style={{ display: "flex", justifyContent: "center" }}
           >
-            <Grid item xs={6}>
+            <Grid item xs={9}>
               <Bio
                 profile={userData}
                 canFollow={userData?.loggedIn && !userData?.isFollowing}
@@ -161,7 +162,7 @@ export default function Profile() {
             <div>
               <Grid item xs={12}>
                 {userData?.loggedIn && userData?.currUser ? (
-                  <div style={{ paddingTop: 50 }}>
+                  <div style={{ paddingLeft: 20, paddingTop: 20 }}>
                     <Button
                       type="submit"
                       variant="contained"
@@ -175,9 +176,9 @@ export default function Profile() {
                   ""
                 )}
 
-                <div style={{ paddingTop: 30 }}>
+                {/* <div style={{ paddingTop: 30 }}>
                   <SecretBox updateSecret={updateSecret} />
-                </div>
+                </div> */}
               </Grid>
             </div>
             <Grid item xs={12}>
@@ -191,7 +192,7 @@ export default function Profile() {
                 <Tab label="Created Posts"></Tab>
                 <Tab label="User Comments"></Tab>
                 <Tab label="Following"></Tab>
-                <Tab label="Liked NFTs"></Tab>
+                <Tab label="NFT"></Tab>
               </Tabs>
             </Grid>
             {/* <Grid container spacing={2}>
@@ -241,6 +242,17 @@ export default function Profile() {
               </Container>
             </TabPanel>
             <TabPanel value={tab} index={3}>
+              <Tabs
+                value={tab2}
+                onChange={handleChangeTab}
+                indicatorColor="primary"
+                textColor="primary"
+                centered
+              >
+                <Tab label="Liked NFTs"></Tab>
+                <Tab label="ETH"></Tab>
+                <Tab label="TZ"></Tab>
+              </Tabs>
               <LikedNFTs />
             </TabPanel>
 

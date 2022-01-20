@@ -14,6 +14,7 @@ import Link from "@material-ui/core/Link";
 import { Link as RouteLink } from "react-router-dom";
 import LaptopChromebookSharpIcon from "@material-ui/icons/LaptopChromebookSharp";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import HubIcon from "@material-ui/icons/DeviceHub";
 import homeLogo from "../logo.svg";
 import { encrypt, decrypt } from "../helpers/convert.js";
 import "../snowflakes.css";
@@ -30,6 +31,7 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     minHeight: "100vh",
     wordBreak: "break-word",
+    color: theme.palette.text.secondary,
   },
   div: {
     padding: theme.spacing(2),
@@ -182,7 +184,7 @@ export default function AutoGrid() {
           <br />
 
           <Grid container spacing={4}>
-            <Grid item xs={12} sm={6} align="center">
+            <Grid item xs={12} sm={4} align="center">
               <Link to="/public" component={RouteLink}>
                 <div className={classes.div}>
                   <LaptopChromebookSharpIcon style={{ fontSize: "15vw" }} />
@@ -191,11 +193,19 @@ export default function AutoGrid() {
               </Link>
             </Grid>
 
-            <Grid item xs={12} sm={6} align="center">
+            <Grid item xs={12} sm={4} align="center">
               <Link to="/signup" component={RouteLink}>
                 <div className={classes.div}>
                   <ExitToAppIcon style={{ fontSize: "15vw" }} />
                   <Typography>Signup</Typography>
+                </div>
+              </Link>
+            </Grid>
+            <Grid item xs={12} sm={4} align="center">
+              <Link to="/NftExplore" component={RouteLink}>
+                <div className={classes.div}>
+                  <HubIcon style={{ fontSize: "15vw" }} />
+                  <Typography>Blockchain Tokens</Typography>
                 </div>
               </Link>
             </Grid>
