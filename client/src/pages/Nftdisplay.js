@@ -87,10 +87,10 @@ export default function AutoGrid() {
   }, [address]);
   return (
     <div className={classes.root}>
-      <Typography component="h1" variant="h4" className={classes.info}>
+      <Typography variant="h4" className={classes.info}>
         {address}
       </Typography>
-      <Typography component="h1" className={classes.info2}>
+      <Typography variant="subtitle1" className={classes.info2}>
         There is currently no cipherforums account linked to this wallet.
       </Typography>
       <Button onClick={toggleDisplay}>
@@ -107,40 +107,45 @@ export default function AutoGrid() {
           <Tab label="Created"></Tab>
           <Tab label="Collected"></Tab>
         </Tabs>
-      </Grid>
-      <Grid container spacing={0}>
-        {display == "created" &&
-          createdNFTs.map((createdNFTs) => (
-            <Grid key={createdNFTs.id} item xs={12} sm={3}>
-              <Paper className={classes.paper}>
-                <RouteLink
-                  to={`/tz/nft/${createdNFTs.id}`}
-                  style={{ textDecoration: "none" }}
-                >
-                  <img
-                    className={classes.img}
-                    src={generateThumbnailCR(createdNFTs.display_uri)}
-                  ></img>
-                </RouteLink>
-              </Paper>
-            </Grid>
-          ))}
-        {display == "collected" &&
-          collectedNFTs.map((collectedNFTs) => (
-            <Grid key={collectedNFTs.token.id} item xs={12} sm={3}>
-              <Paper className={classes.paper}>
-                <RouteLink
-                  to={`/tz/nft/${collectedNFTs.token.id}`}
-                  style={{ textDecoration: "none" }}
-                >
-                  <img
-                    className={classes.img}
-                    src={generateThumbnailCR(collectedNFTs.token.display_uri)}
-                  ></img>
-                </RouteLink>
-              </Paper>
-            </Grid>
-          ))}
+        <TabPanel value={tab} index={0}>
+          <Grid container spacing={0}>
+            {createdNFTs.map((createdNFTs) => (
+              <Grid key={createdNFTs.id} item xs={12} sm={3}>
+                <Paper className={classes.paper}>
+                  <RouteLink
+                    to={`/tz/nft/${createdNFTs.id}`}
+                    style={{ textDecoration: "none" }}
+                  >
+                    <img
+                      className={classes.img}
+                      src={generateThumbnailCR(createdNFTs.display_uri)}
+                    ></img>
+                  </RouteLink>
+                </Paper>
+              </Grid>
+            ))}
+          </Grid>
+        </TabPanel>
+
+        <TabPanel value={tab} index={1}>
+          <Grid container spacing={0}>
+            {collectedNFTs.map((collectedNFTs) => (
+              <Grid key={collectedNFTs.token.id} item xs={12} sm={3}>
+                <Paper className={classes.paper}>
+                  <RouteLink
+                    to={`/tz/nft/${collectedNFTs.token.id}`}
+                    style={{ textDecoration: "none" }}
+                  >
+                    <img
+                      className={classes.img}
+                      src={generateThumbnailCR(collectedNFTs.token.display_uri)}
+                    ></img>
+                  </RouteLink>
+                </Paper>
+              </Grid>
+            ))}
+          </Grid>
+        </TabPanel>
       </Grid>
     </div>
   );

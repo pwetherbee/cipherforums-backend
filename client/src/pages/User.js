@@ -94,6 +94,10 @@ export default function Profile() {
     setTab(newTab);
   };
 
+  const handleChangeTab2 = (e, newTab) => {
+    setTab2(newTab);
+  };
+
   const handleDecision = (decision) => async () => {
     if (decision === "agree") {
       console.log(deletePostData);
@@ -244,7 +248,7 @@ export default function Profile() {
             <TabPanel value={tab} index={3}>
               <Tabs
                 value={tab2}
-                onChange={handleChangeTab}
+                onChange={handleChangeTab2}
                 indicatorColor="primary"
                 textColor="primary"
                 centered
@@ -253,7 +257,15 @@ export default function Profile() {
                 <Tab label="ETH"></Tab>
                 <Tab label="TZ"></Tab>
               </Tabs>
-              <LikedNFTs />
+              <TabPanel value={tab2} index={0}>
+                <LikedNFTs />
+              </TabPanel>
+              <TabPanel value={tab2} index={1}>
+                panel 2
+              </TabPanel>
+              <TabPanel value={tab2} index={2}>
+                panel 3
+              </TabPanel>
             </TabPanel>
 
             {/* <UserPosts secret={secret} posts={createdPosts} /> */}
