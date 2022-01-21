@@ -34,6 +34,7 @@ import Fullscreen from "./components/Fullscreen";
 import Nftdisplay from "./pages/Nftdisplay";
 import NftExplore from "./pages/NftExplore";
 import Nft from "./pages/Nft";
+import Feed from "./pages/Feed";
 
 // Components
 import MenuAppBar from "./components/MenuAppBar";
@@ -290,6 +291,9 @@ export default function App() {
               </Route>
               <Route path="/NFt">
                 <Nft />
+              </Route>
+              <Route path="/Feed">
+                <Feed />
               </Route>
 
               <Route path="/matrix">
