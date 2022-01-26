@@ -38,6 +38,7 @@ const useStyles = makeStyles((theme) => ({
     // borderStyle: "solid",
     verticalAlign: "middle",
     padding: 10,
+    maxHeight: 400,
   },
   img: {
     width: "100%",
