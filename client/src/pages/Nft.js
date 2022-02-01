@@ -153,7 +153,7 @@ export default function Public() {
     const likeStatus = await query(
       `/api/likes/check?nftID=${id}&chainType=${"tz"}`
     );
-    console.log("is liked: ", likeStatus);
+    // console.log("is liked: ", likeStatus);
     setIsLiked(likeStatus.isLiked);
     const data = await fetchOBJKTDetails(id);
     const commentData = await query(
