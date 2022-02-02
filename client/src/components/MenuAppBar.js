@@ -19,11 +19,15 @@ import { Link as RouteLink } from "react-router-dom";
 import SupervisedUserCircleIcon from "@material-ui/icons/SupervisedUserCircle";
 import PublicIcon from "@material-ui/icons/Public";
 import HelpIcon from "@material-ui/icons/Help";
+import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
+import SyncIcon from "@mui/icons-material/Sync";
+import SyncDisabledIcon from "@mui/icons-material/SyncDisabled";
+import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import Icon from "@material-ui/core/Icon";
 import { SvgIcon } from "@material-ui/core";
 import homeLogo from "../logo.svg";
 
-import { Divider } from "@mui/material";
+import { Box, Divider } from "@mui/material";
 import {
   syncWallet,
   desyncWallet,
@@ -166,8 +170,8 @@ export default function MenuAppBar({ auth }) {
               {mobile && <HelpIcon />}
             </Button>
           </Typography>
-          <SearchBar className={classes.title} />
-
+          {mobile || <SearchBar className={classes.title} />}
+          {mobile || <Box sx={{ width: 100 }}></Box>}
           {wallet.address ? (
             <Typography variant="h6" className={classes.title}>
               <Button
@@ -177,14 +181,15 @@ export default function MenuAppBar({ auth }) {
                 to={`/tz/${wallet.address}`}
               >
                 {mobile || wallet.address}
-                {mobile && <HelpIcon />}
+                {mobile && <MonetizationOnIcon />}
               </Button>
             </Typography>
           ) : (
             <Typography variant="h6" className={classes.title}>
               <Button variant={btnStyle} color="primary" onClick={handleSync}>
                 {mobile || "Sync"}
-                {mobile && <HelpIcon />}
+                {/* {mobile && } */}
+                <SyncIcon />
               </Button>
             </Typography>
           )}
@@ -192,7 +197,7 @@ export default function MenuAppBar({ auth }) {
             <Typography variant="h6" className={classes.title}>
               <Button variant={btnStyle} color="primary" onClick={handleUnsync}>
                 {mobile || "Unsync"}
-                {mobile && <HelpIcon />}
+                <SyncDisabledIcon />
               </Button>
             </Typography>
           )}

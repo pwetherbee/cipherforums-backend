@@ -125,7 +125,7 @@ export default function Profile() {
   const handleClickDelete = (data) => {
     setOpenConfirmDelete(true);
     setDeletePostData(data);
-    console.log(data);
+    // console.log(data);
   };
   // const updateuser = () => {
   //   console.log("update user called");
