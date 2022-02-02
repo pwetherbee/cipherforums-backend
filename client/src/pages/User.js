@@ -216,7 +216,7 @@ export default function Profile() {
                     onDelete={handleClickDelete}
                   />
                 ) : (
-                  "This user hasn't made any posts yet"
+                  "user hasn't made any posts yet"
                 )
               ) : (
                 <LoadingIcon height={"30rem"} />

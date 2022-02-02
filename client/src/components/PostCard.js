@@ -26,16 +26,20 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import ImageCircle from "./ImageCircle";
+import Stack from "@mui/material/Stack";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 const useStyles = makeStyles((theme) => ({
   root: {
     // maxWidth: "99vw",
 
     marginBottom: "3%",
     padding: 10,
-    height: 350,
+    // height: 350,
     width: "100%",
     margin: 10,
     textAlign: "left",
+    border: "1px solid",
+    borderColor: theme.palette.primary.main3,
   },
   // media: {
   //   height: 0,
@@ -103,87 +107,91 @@ export default function PostCard({ data, secret, onDelete }) {
   };
 
   return (
+    // <Card className={classes.root} id={data.id}>
+    //   <CardActionArea
+    //     component={RouteLink}
+    //     to={`/${
+    //       data.postType == "public"
+    //         ? `public/${data.publicTopic}`
+    //         : "@" + data.username
+    //     }/${data.url}`}
+    //   >
+    //     <CardHeader
+    //       title={data.url.slice(0, -5) + " to " + data.publicTopic}
+    //       to={"/"}
+    //       subheader={data.creationDate}
+    //     />
+    //     <CardMedia className={classes.imgcir}>
+    //       {data.image ? (
+    //         <ImageCircle
+    //           imageLink={data.image}
+    //           size={180}
+    //           alt={"error"}
+    //           square
+    //         ></ImageCircle>
+    //       ) : (
+    //         <CardContent>
+    //           <Typography variant="body2" color="textSecondary" component="p">
+    //             {data.subtitle}
+    //           </Typography>
+    //         </CardContent>
+    //       )}
+    //       <br></br>
+    //     </CardMedia>
+    //   </CardActionArea>
+
+    //   <CardActions disableSpacing>
+    //     <IconButton
+    //       onClick={handleDelete}
+    //       color="primary"
+    //       aria-label="share"
+    //       className={classes.delete}
+    //     >
+    //       <DeleteForeverRoundedIcon />
+    //     </IconButton>
+    //   </CardActions>
+    // </Card>
+
     <Card className={classes.root} id={data.id}>
-      <CardActionArea
-        component={RouteLink}
-        to={`/${
-          data.postType == "public"
-            ? `public/${data.publicTopic}`
-            : "@" + data.username
-        }/${data.url}`}
-      >
-        <CardHeader
-          avatar={
-            <Avatar
-              // color={classes.red}
-              // aria-label="recipe"
-              variant="rounded"
-              className={classes.avatar}
-            >
-              {data.avi ? (
-                <img src={data.avi} className={classes.imgAVI}></img>
-              ) : (
-                data.username.slice(0, 1)
-              )}
-            </Avatar>
-          }
-          title={data.url.slice(0, -5) + " to " + data.publicTopic}
-          to={"/"}
-          subheader={data.creationDate}
-        />
-        <CardMedia className={classes.imgcir}>
-          {data.image ? (
-            <ImageCircle
-              imageLink={data.image}
-              size={180}
-              alt={"error"}
-              square
-            ></ImageCircle>
-          ) : (
-            // <img className={classes.img} src={data.image}></img>
-            // <CardMedia className={classes.img} image={data.image} />
-            <CardContent>
-              <Typography variant="body2" color="textSecondary" component="p">
-                {data.subtitle}
-              </Typography>
-            </CardContent>
-          )}
-          <br></br>
-        </CardMedia>
-      </CardActionArea>
-
-      <CardActions disableSpacing>
-        {/* <IconButton color="primary" aria-label="add to favorites">
-          <FavoriteIcon />
-        </IconButton> */}
-        <IconButton
-          onClick={handleDelete}
-          color="primary"
-          aria-label="share"
-          className={classes.delete}
-        >
-          <DeleteForeverRoundedIcon />
-        </IconButton>
-
-        {/* <IconButton
-          color="primary"
-          className={clsx(classes.expand, {
-            [classes.expandOpen]: expanded,
-          })}
-          onClick={handleExpandClick}
-          aria-expanded={expanded}
-          aria-label="show more"
-        >
-          <ExpandMoreIcon />
-        </IconButton> */}
-      </CardActions>
-      {/* <Collapse in={expanded} timeout="auto" unmountOnExit>
-        {forumData?.comments ? (
-          <MiniThread secret={secret} comments={forumData?.comments || []} />
-        ) : (
-          <LoadingIcon height={"10rem"} />
-        )}
-      </Collapse> */}
+      {/* <div className={classes.details}> */}
+      <Stack spacing={1} direction="row">
+        <div className={classes.img}>
+          <ImageCircle
+            imageLink={data.image || "https://i.imgur.com/AD3MbBi.jpeg"}
+            size={150}
+            square
+          ></ImageCircle>
+        </div>
+        {/* <img
+    className={classes.img}
+    alt="complex"
+    src={details.image || "https://i.imgur.com/AD3MbBi.jpeg"}
+  /> */}
+        <Stack spacing={1} direction="column" justifyContent="space-between">
+          <Stack spacing={1} direction="row" padding={1}>
+            {/* <CardContent className={classes.content}> */}
+            <Typography variant="caption">@{data.username}</Typography>
+            <Typography variant="body2" className={classes.type}>
+              {data.url.slice(0, -5)}
+            </Typography>
+            {/* </CardContent> */}
+          </Stack>
+          {/* </div> */}
+          <Stack
+            direction="row"
+            justifyContent="flex-start"
+            alignItems="flex-end"
+            spacing={1}
+            padding={1}
+          >
+            <FavoriteBorderIcon></FavoriteBorderIcon>
+            {/* <FavoriteIcon></FavoriteIcon> */}
+            <Typography className={classes.card__actions} variant="caption">
+              {data.numComments} comments
+            </Typography>
+          </Stack>
+        </Stack>
+      </Stack>
     </Card>
   );
 }

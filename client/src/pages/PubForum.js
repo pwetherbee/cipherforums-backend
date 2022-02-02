@@ -17,6 +17,7 @@ import Container from "@material-ui/core/Container";
 import { useParams } from "react-router";
 import { PublicPost } from "../components/PublicPost";
 import LoadingIcon from "../components/LoadingPageIcon";
+import Stack from "@mui/material/Stack";
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -66,7 +67,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: 10,
   },
   create: {
-    marginTop: 10,
+    marginTop: 30,
     marginLeft: 10,
   },
 }));
@@ -93,8 +94,8 @@ export default function MediaControlCard() {
       spacing={0}
       style={{
         display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
+        justifyContent: "left",
+        alignItems: "left",
       }}
     >
       <Grid item xs={12} sm={6}>

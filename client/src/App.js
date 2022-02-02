@@ -61,7 +61,8 @@ const theme = createTheme({
     type: "dark",
     primary: {
       main: "#00e019",
-      // main: "#ffffff",
+      main2: "#ffffff",
+      main3: "#006600",
       contrastText: "#121212",
     },
     secondary: {
@@ -70,6 +71,7 @@ const theme = createTheme({
     },
     background: {
       default: "#121212",
+      // default: "#000000",
       // paper: "#171717",
       paper: "#121212",
     },
