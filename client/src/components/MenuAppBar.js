@@ -22,9 +22,7 @@ import HelpIcon from "@material-ui/icons/Help";
 import Icon from "@material-ui/core/Icon";
 import { SvgIcon } from "@material-ui/core";
 import homeLogo from "../logo.svg";
-import { styled, alpha } from "@mui/material/styles";
-import InputBase from "@mui/material/InputBase";
-import SearchIcon from "@mui/icons-material/Search";
+
 import { Divider } from "@mui/material";
 import {
   syncWallet,
@@ -32,6 +30,7 @@ import {
   getActiveAccount,
 } from "../helpers/wallet.js";
 import { useEffect } from "react";
+import SearchBar from "./SearchBar";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -56,49 +55,6 @@ const useStyles = makeStyles((theme) => ({
   },
   menu: {
     marginTop: 60,
-  },
-}));
-
-const Search = styled("div")(({ theme }) => ({
-  color: "#00e019",
-  position: "relative",
-  borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha("#121212", 0.15),
-  "&:hover": {
-    backgroundColor: alpha("#151515", 0.25),
-  },
-  marginLeft: 0,
-  width: "100%",
-  [theme.breakpoints.up("sm")]: {
-    marginLeft: theme.spacing(1),
-    width: "auto",
-  },
-}));
-
-const SearchIconWrapper = styled("div")(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: "100%",
-  position: "absolute",
-  pointerEvents: "none",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-}));
-
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: "#00e019",
-  "& .MuiInputBase-input": {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create("width"),
-    width: "100%",
-    [theme.breakpoints.up("sm")]: {
-      width: "12ch",
-      "&:focus": {
-        width: "20ch",
-      },
-    },
   },
 }));
 
@@ -210,15 +166,7 @@ export default function MenuAppBar({ auth }) {
               {mobile && <HelpIcon />}
             </Button>
           </Typography>
-          <Search className={classes.title}>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search..."
-              inputProps={{ "aria-label": "search" }}
-            />
-          </Search>
+          <SearchBar className={classes.title} />
 
           {wallet.address ? (
             <Typography variant="h6" className={classes.title}>
