@@ -33,12 +33,18 @@ import { useHistory } from "react-router";
 import Grid from "@mui/material/Grid";
 import { Link as RouteLink } from "react-router-dom";
 import { Link } from "@material-ui/core";
+import Stack from "@mui/material/Stack";
+import ImageCircle from "./ImageCircle";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
     maxWidth: "36ch",
     backgroundColor: theme.palette.background.paper,
+  },
+  holder: {
+    border: "1px solid",
+    borderColor: theme.palette.primary.main3,
   },
   inline: {
     display: "inline",
@@ -54,12 +60,36 @@ export default function FollowContainer({ following }) {
   const history = useHistory();
 
   return (
-    <Grid>
+    <Grid container spacing={2}>
       {following.map((user, i) => (
-        <Grid item key={`${user}_${i}`}>
+        <Grid
+          item
+          xs={12}
+          md={6}
+          lg={6}
+          className={classes.holder}
+          key={`${user}_${i}`}
+        >
           <RouteLink to={`/@${user.username}`} style={linkStyle}>
             <Link>
-              <Typography>{user.username}</Typography>
+              <Stack spacing={1} direction="column">
+                <Stack spacing={1} direction="row">
+                  {user?.avi ? (
+                    <ImageCircle
+                      imageLink={user.avi}
+                      size={50}
+                      alt={user.username}
+                      square
+                    ></ImageCircle>
+                  ) : (
+                    <Avatar>{user.username.slice(0, 2)}</Avatar>
+                  )}
+                  <Typography>{user.username}</Typography>
+                </Stack>
+                <Stack spacing={1}>
+                  <Typography>{user.bio}</Typography>
+                </Stack>
+              </Stack>
             </Link>
           </RouteLink>
         </Grid>
