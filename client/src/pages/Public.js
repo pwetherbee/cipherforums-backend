@@ -18,6 +18,7 @@ import GamesOutlinedIcon from "@material-ui/icons/GamesOutlined";
 import AlbumSharpIcon from "@material-ui/icons/AlbumSharp";
 import AnnouncementRoundedIcon from "@material-ui/icons/AnnouncementRounded";
 import EcoRoundedIcon from "@material-ui/icons/EcoRounded";
+import FormatPaintIcon from "@material-ui/icons/FormatPaint";
 import Link from "@material-ui/core/Link";
 import { Link as RouteLink } from "react-router-dom";
 
@@ -169,6 +170,15 @@ export default function AutoGrid() {
             <Paper className={classes.paper}>
               <FlightTakeoffIcon className={classes.icon} />
               <Typography>Travel</Typography>
+            </Paper>
+          </Link>
+        </Grid>
+        <Grid item xs={12} sm={3}>
+          <Link to="/public/Art" component={RouteLink}>
+            {/* <Link to="/public/travel"> */}
+            <Paper className={classes.paper}>
+              <EcoRoundedIcon className={classes.icon} />
+              <Typography>Art</Typography>
             </Paper>
           </Link>
         </Grid>

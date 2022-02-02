@@ -35,6 +35,7 @@ import Nftdisplay from "./pages/Nftdisplay";
 import NftExplore from "./pages/NftExplore";
 import Nft from "./pages/Nft";
 import Feed from "./pages/Feed";
+import FourZero from "./pages/FourZero";
 
 // Components
 import MenuAppBar from "./components/MenuAppBar";
@@ -300,10 +301,12 @@ export default function App() {
               <Route path="/matrix">
                 <MatrixPage />
               </Route>
+              <Route path="*">
+                <FourZero />
+              </Route>
               <Route exact path="/">
                 <Home />
               </Route>
-              <Route path="*">404</Route>
             </Switch>
             <Footer />
           </Router>

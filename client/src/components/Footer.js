@@ -33,8 +33,7 @@ const Footer = () => {
           <Grid item xs={12} sm={6}>
             <Container>
               <WhiteText variant="h6">
-                A forum designed with a novel, cryptographically secure
-                communication platform.
+                A forum designed for cryptographically secure communication.
               </WhiteText>
               <WhiteText variant="subtitle1">
                 This website uses encryption and obfuscation to provide privacy,
