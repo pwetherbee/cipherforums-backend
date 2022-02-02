@@ -297,13 +297,13 @@ export default function App() {
               <Route path="/Feed">
                 <Feed />
               </Route>
-
               <Route path="/matrix">
                 <MatrixPage />
               </Route>
-              <Route path="/">
+              <Route exact path="/">
                 <Home />
               </Route>
+              <Route path="*">404</Route>
             </Switch>
             <Footer />
           </Router>
