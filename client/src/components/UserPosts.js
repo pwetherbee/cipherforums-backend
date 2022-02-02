@@ -44,32 +44,47 @@ const useStyles = makeStyles((theme) => ({
 
 export default function UserPosts({ posts, secret, onDelete }) {
   const classes = useStyles();
-
+  const [value, setValue] = useState("grid");
+  const handleChange = (e) => {
+    setValue(e.target.value);
+  };
   //   const [createdPosts, setCreatedPosts] = useState(posts);
   return (
     <div className={classes.root}>
-      <Box sx={{ display: "flex", justifyContent: "center" }}>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
         <FormControl>
-          <FormLabel id="demo-row-radio-buttons-group-label">View</FormLabel>
           <RadioGroup
             row
             aria-labelledby="demo-row-radio-buttons-group-label"
             name="row-radio-buttons-group"
+            value={value}
+            onChange={handleChange}
           >
-            <FormControlLabel value="Grid" control={<Radio />} label="Grid" />
-            <FormControlLabel value="List" control={<Radio />} label="List" />
+            <FormControlLabel value="grid" control={<Radio />} label="Grid" />
+            <FormControlLabel value="list" control={<Radio />} label="List" />
           </RadioGroup>
         </FormControl>
       </Box>
       <Grid container spacing={2}>
         {posts
           ? posts.map((post, i) => (
-              <Grid key={i} item xs={12} md={6} lg={4}>
+              <Grid
+                key={i}
+                item
+                xs={12}
+                md={value == "list" ? 12 : 6}
+                xl={value == "list" ? 12 : 4}
+              >
                 <PostCard secret={secret} data={post} onDelete={onDelete} />
               </Grid>
             ))
           : "No Posts for this user"}
-      </Grid>{" "}
+      </Grid>
     </div>
   );
 }
