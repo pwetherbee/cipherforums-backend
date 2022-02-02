@@ -208,21 +208,19 @@ export default function Profile() {
             </Grid>
             </Grid> */}
             <TabPanel value={tab} index={0}>
-              <Box sx={{ width: "90vw" }}>
-                {userData ? (
-                  createdPosts.length ? (
-                    <UserPosts
-                      secret={secret}
-                      posts={createdPosts}
-                      onDelete={handleClickDelete}
-                    />
-                  ) : (
-                    "user hasn't made any posts yet"
-                  )
+              {userData ? (
+                createdPosts.length ? (
+                  <UserPosts
+                    secret={secret}
+                    posts={createdPosts}
+                    onDelete={handleClickDelete}
+                  />
                 ) : (
-                  <LoadingIcon height={"30rem"} />
-                )}
-              </Box>
+                  "user hasn't made any posts yet"
+                )
+              ) : (
+                <LoadingIcon height={"30rem"} />
+              )}
             </TabPanel>
             {/* </Grid> */}
             {/* -------------------------------------- */}

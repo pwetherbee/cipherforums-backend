@@ -17,7 +17,7 @@ import { Box, Stack } from "@mui/material";
 const useStyles = makeStyles((theme) => ({
   root: {
     // flexGrow: 1,
-    width: "98%",
+    width: "90vw",
     // display: "inline-flex",
     // flexWrap: "wrap",
     // textAlign: "center",
