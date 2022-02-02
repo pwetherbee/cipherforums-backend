@@ -77,7 +77,7 @@ export default function UserPosts({ posts, secret, onDelete }) {
                 key={i}
                 item
                 xs={12}
-                md={value == "list" ? 12 : 6}
+                md={value == "list" ? 12 : 4}
                 xl={value == "list" ? 12 : 4}
               >
                 <PostCard secret={secret} data={post} onDelete={onDelete} />
