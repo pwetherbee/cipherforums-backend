@@ -7,9 +7,12 @@ import MenuItem from "@mui/material/MenuItem";
 import Popper from "@mui/material/Popper";
 import Box from "@mui/material/Box";
 import Fade from "@mui/material/Fade";
-import { ClickAwayListener, Paper } from "@mui/material";
+import { ClickAwayListener, Paper, Stack, Typography } from "@mui/material";
 import { useState } from "react";
 import { query } from "../helpers/api";
+import { Link } from "react-router-dom";
+import { Link as MUILink } from "@mui/material";
+import LoadingIcon from "./LoadingPageIcon";
 
 const Search = styled("div")(({ theme }) => ({
   color: "#00e019",
@@ -63,6 +66,7 @@ const MyPopper = ({ isOpen, clickAwayHandler, anchorEl, children }) => (
 const SearchBar = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [results, setResults] = useState([]);
+  const [loading, setLoading] = useState(false);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -76,13 +80,23 @@ const SearchBar = () => {
     setAnchorEl(e.currentTarget);
   };
   const handleInput = async (e) => {
+    setResults([]);
+    setLoading(true);
     console.log(e.target.value);
-    if (!e.target.value) return;
+    if (!e.target.value?.length) {
+      setLoading(false);
+
+      return;
+    }
+    // send request to api with search in query
     const data = await query(`/api/search?value=${e.target.value}`);
     if (data.success) {
       setResults(data.results);
     }
-    // send request to api with search in query
+    setLoading(false);
+  };
+  const handleClear = () => {
+    setAnchorEl(null);
   };
   const id = open ? "simple-popper" : undefined;
   return (
@@ -94,7 +108,7 @@ const SearchBar = () => {
           </SearchIconWrapper>
           <StyledInputBase
             onInput={handleInput}
-            placeholder="Search..."
+            placeholder="Search Users..."
             inputProps={{ "aria-label": "search" }}
           />
         </Search>
@@ -104,10 +118,32 @@ const SearchBar = () => {
             {...{ clickAwayHandler, isOpen: open }}
             anchorEl={anchorEl}
           >
-            <Paper className="popper">
-              {results.map((res) => (
-                <div>{res.username}</div>
-              ))}
+            <Paper
+              className="popper"
+              sx={{ minWidth: 200, padding: 1, border: "1px solid" }}
+            >
+              <Typography>Results</Typography>
+              <Stack spacing={1}>
+                {loading && <LoadingIcon />}
+                {results.map((res) => (
+                  <Box
+                    sx={{
+                      padding: 1,
+                      "&:hover": {
+                        backgroundColor: "#003300",
+                      },
+                    }}
+                  >
+                    <MUILink
+                      component={Link}
+                      to={`/@${res.username}`}
+                      onClick={handleClear}
+                    >
+                      <Box sx={{}}>{res.username}</Box>
+                    </MUILink>
+                  </Box>
+                ))}
+              </Stack>
             </Paper>
           </MyPopper>
         )}

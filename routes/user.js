@@ -63,7 +63,7 @@ router.get("/:username/info", (req, res) => {
     rows.forEach((row) => row.url && info.createdPosts.push(row));
     if (info.currUser) {
       res.send(JSON.stringify(info));
-      return;
+      return connection.end();
     }
     const query2 = `
     SELECT Count(Following.userID) FROM Following
@@ -78,6 +78,7 @@ router.get("/:username/info", (req, res) => {
       // console.log(rows[0]["Count(Following.userID)"]);
       info.isFollowing = rows[0]["Count(Following.userID)"];
       res.send(JSON.stringify(info));
+      connection.end();
     });
   });
 });
@@ -104,6 +105,7 @@ router.post("/settings", (req, res) => {
   connection.query(query, (err, rows) => {
     if (err) {
       console.log(err);
+
       return res.status(403).json({
         success: false,
         message: "An error occured trying to update the database",
@@ -114,6 +116,7 @@ router.post("/settings", (req, res) => {
       message: `Successfully updated profile ${req.session.username}`,
     });
   });
+  connection.end();
 });
 
 router.use("/:id/thread", threadRouter);
