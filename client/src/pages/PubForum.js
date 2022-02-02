@@ -118,6 +118,7 @@ export default function MediaControlCard() {
         <div
           style={{
             height: 500,
+            width: "100%",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
