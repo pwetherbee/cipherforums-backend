@@ -45,6 +45,8 @@ const useStyles = makeStyles((theme) => ({
   },
   icon: {
     fontSize: "8vw",
+    height: 300,
+    padding: 0,
   },
 }));
 
