@@ -1,3 +1,4 @@
+import React, { useEffect } from "react";
 import {
   Card,
   CardContent,
@@ -11,6 +12,11 @@ import { Link } from "@material-ui/core";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import ImageCircle from "./ImageCircle";
+import Box from "@mui/material/Box";
+import Modal from "@mui/material/Modal";
+import CloseIcon from "@mui/icons-material/Close";
+import Button from "@material-ui/core/Button";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     // display: "flex",
@@ -65,6 +71,22 @@ const useStyles = makeStyles((theme) => ({
     height: "5rem",
     overflowY: "hidden",
   },
+  desc: {
+    // width: 1200,
+    // margin: "auto",
+    height: "70vh",
+    display: "block",
+    marginLeft: "auto",
+    marginRight: "auto",
+    marginTop: "10vh",
+    // width: "70%",
+  },
+  icon: {
+    position: "absolute",
+    right: 50,
+    top: 50,
+    transform: "scale(1.8)",
+  },
 }));
 const linkStyle = {
   margin: "1rem",
@@ -74,67 +96,85 @@ const linkStyle = {
 export const PublicPost = ({ details, topic }) => {
   const classes = useStyles();
   console.log(details);
+
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   return (
     <Grid item xs={12} sm={6} key={details.id}>
-      <RouteLink to={`/public/${topic}/${details.url}`} style={linkStyle}>
-        <Link>
-          <Card className={classes.root}>
-            {/* <div className={classes.details}> */}
-            <Stack spacing={1} direction="row">
-              <div className={classes.img}>
-                <ImageCircle
-                  imageLink={details.image || "https://i.imgur.com/Ck4MLYV.jpg"}
-                  size={150}
-                  square
-                ></ImageCircle>
-              </div>
-              {/* <img
+      <Card className={classes.root}>
+        {/* <div className={classes.details}> */}
+        <Stack spacing={1} direction="row">
+          <div className={classes.img}>
+            <Button onClick={handleOpen}>
+              <ImageCircle
+                imageLink={details.image || "https://i.imgur.com/Ck4MLYV.jpg"}
+                size={150}
+                square
+              ></ImageCircle>
+            </Button>
+            <Modal
+              open={open}
+              onClose={handleClose}
+              aria-labelledby="modal-modal-title"
+              aria-describedby="modal-modal-description"
+            >
+              <Box>
+                <div onClick={handleClose}>
+                  <CloseIcon className={classes.icon} />
+                </div>
+                <img className={classes.desc} src={details.image} />
+              </Box>
+            </Modal>
+          </div>
+          {/* <img
                 className={classes.img}
                 alt="complex"
                 src={details.image || "https://i.imgur.com/AD3MbBi.jpeg"}
               /> */}
-              <Stack
-                spacing={1}
-                direction="column"
-                justifyContent="space-between"
-                paddingLeft={1}
+          <Stack
+            spacing={1}
+            direction="column"
+            justifyContent="space-between"
+            paddingLeft={1}
+          >
+            <Stack spacing={1} direction="row" padding={1}>
+              {/* <CardContent className={classes.content}> */}
+              <RouteLink to={`/@${details.username}`} style={linkStyle}>
+                <Link>
+                  <Typography variant="body1">@{details.username}</Typography>
+                </Link>
+              </RouteLink>
+              <RouteLink
+                to={`/public/${topic}/${details.url}`}
+                style={linkStyle}
               >
-                <Stack spacing={1} direction="row" padding={1}>
-                  {/* <CardContent className={classes.content}> */}
-                  <RouteLink to={`/@${details.username}`} style={linkStyle}>
-                    <Link>
-                      <Typography variant="caption">
-                        @{details.username}
-                      </Typography>
-                    </Link>
-                  </RouteLink>
-                  <Typography variant="body2" className={classes.type}>
+                <Link>
+                  <Typography variant="body1" className={classes.type}>
                     {details.url.slice(0, -5)}
                   </Typography>
-                  {/* </CardContent> */}
-                </Stack>
-                {/* </div> */}
-                <Stack
-                  direction="row"
-                  justifyContent="flex-start"
-                  alignItems="flex-end"
-                  spacing={1}
-                  padding={1}
-                >
-                  <FavoriteBorderIcon></FavoriteBorderIcon>
-                  {/* <FavoriteIcon></FavoriteIcon> */}
-                  <Typography
-                    className={classes.card__actions}
-                    variant="caption"
-                  >
-                    {details.numComments} comments
-                  </Typography>
-                </Stack>
-              </Stack>
+                </Link>
+              </RouteLink>
+              {/* </CardContent> */}
             </Stack>
-          </Card>
-        </Link>
-      </RouteLink>
+            {/* </div> */}
+            <Stack
+              direction="row"
+              justifyContent="flex-start"
+              alignItems="flex-end"
+              spacing={1}
+              padding={1}
+            >
+              <FavoriteBorderIcon></FavoriteBorderIcon>
+              {/* <FavoriteIcon></FavoriteIcon> */}
+              <Typography className={classes.card__actions} variant="caption">
+                {details.numComments} comments
+              </Typography>
+            </Stack>
+          </Stack>
+        </Stack>
+      </Card>
     </Grid>
   );
 };
