@@ -18,7 +18,7 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import MiniThread from "./MiniThread";
 import LoadingIcon from "./LoadingPageIcon";
-import { Link } from "@material-ui/core";
+import { Grid, Link, Toolbar } from "@material-ui/core";
 import { Link as RouteLink } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
@@ -28,6 +28,7 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import ImageCircle from "./ImageCircle";
 import Stack from "@mui/material/Stack";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import Box from "@mui/material/Box";
 const useStyles = makeStyles((theme) => ({
   root: {
     // maxWidth: "99vw",
@@ -35,7 +36,6 @@ const useStyles = makeStyles((theme) => ({
     // marginBottom: "3%",
     padding: 10,
     // height: 350,
-    width: "100%",
     margin: 10,
     textAlign: "left",
     border: "1px solid",
@@ -78,6 +78,9 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: 140,
   },
   delete: {},
+  card__actions: {
+    marginLeft: 20,
+  },
 }));
 const linkStyle = {
   margin: "1rem",
@@ -156,63 +159,65 @@ export default function PostCard({ data, secret, onDelete }) {
     //     </IconButton>
     //   </CardActions>
     // </Card>
-    <RouteLink to={`/@${data.username}/${data.url}`} style={linkStyle}>
-      <Link>
-        <Card className={classes.root} id={data.id}>
-          {/* <div className={classes.details}> */}
-          <Stack spacing={1} direction="row">
-            <div className={classes.img}>
-              <ImageCircle
-                imageLink={data.image || "https://i.imgur.com/Ck4MLYV.jpg"}
-                size={150}
-                square
-              ></ImageCircle>
-            </div>
-            {/* <img
-    className={classes.img}
-    alt="complex"
-    src={details.image || "https://i.imgur.com/AD3MbBi.jpeg"}
-  /> */}
-            <Stack
-              spacing={1}
-              direction="column"
-              justifyContent="space-between"
-            >
-              <Stack spacing={1} direction="row" padding={1}>
-                {/* <CardContent className={classes.content}> */}
-                {/* <Typography variant="caption">@{data.username}</Typography> */}
-                <Typography variant="body2" className={classes.type}>
-                  {data.url.slice(0, -5)}
-                </Typography>
-                {/* </CardContent> */}
-              </Stack>
-              {/* </div> */}
-              <Stack
-                direction="row"
-                justifyContent="flex-start"
-                alignItems="flex-end"
-                spacing={1}
-                padding={1}
+    <Card className={classes.root} id={data.id}>
+      <Box sx={4}>
+        {/* <div className={classes.details}> */}
+        <Stack spacing={1} direction="row">
+          <RouteLink to={`/@${data.username}/${data.url}`} style={linkStyle}>
+            <Link>
+              <div className={classes.img}>
+                <ImageCircle
+                  imageLink={data.image || "https://i.imgur.com/Ck4MLYV.jpg"}
+                  size={150}
+                  square
+                ></ImageCircle>
+              </div>
+            </Link>
+          </RouteLink>
+          {/* </Stack> */}
+          <Stack spacing={1} direction="column" justifyContent="space-between">
+            <Stack spacing={1} direction="row" padding={1}>
+              {/* <CardContent className={classes.content}> */}
+              {/* <Typography variant="caption">@{data.username}</Typography> */}
+              <RouteLink
+                to={`/@${data.username}/${data.url}`}
+                style={linkStyle}
               >
-                <DeleteForeverRoundedIcon
+                <Link>
+                  <Typography variant="body2" className={classes.type}>
+                    {data.url.slice(0, -5)}
+                  </Typography>
+                </Link>
+              </RouteLink>
+              {/* </CardContent> */}
+            </Stack>
+            {/* </div> */}
+            <Stack
+              direction="row"
+              justifyContent="flex-start"
+              alignItems="flex-end"
+              spacing={0}
+              padding={0}
+            >
+              <Toolbar>
+                <IconButton
                   onClick={handleDelete}
                   color="primary"
                   aria-label="share"
-                  // className={classes.delete}
-                />
-                {/* <DeleteForeverRoundedIcon /> */}
-                {/* </IconButton> */}
-
+                  className={classes.delete}
+                >
+                  <DeleteForeverRoundedIcon />
+                </IconButton>
                 <FavoriteBorderIcon></FavoriteBorderIcon>
                 {/* <FavoriteIcon></FavoriteIcon> */}
                 <Typography className={classes.card__actions} variant="caption">
                   {data.numComments} comments
                 </Typography>
-              </Stack>
+              </Toolbar>
             </Stack>
           </Stack>
-        </Card>
-      </Link>
-    </RouteLink>
+        </Stack>
+      </Box>
+    </Card>
   );
 }

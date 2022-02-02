@@ -3,7 +3,6 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import { useEffect, useState } from "react";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
-import { Box } from "@material-ui/core";
 import { createTheme } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/styles";
 import { CommentContainer } from "../components/CommentContainer";
@@ -17,6 +16,7 @@ import SecretBox from "../components/SecretBox";
 import LoadingIcon from "../components/LoadingPageIcon";
 import { makeStyles } from "@material-ui/core/styles";
 import Post from "./Post";
+import Box from "@mui/material/Box";
 import {
   BrowserRouter as Router,
   Switch,
