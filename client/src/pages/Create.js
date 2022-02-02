@@ -13,7 +13,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import { useState } from "react";
 import Container from "@material-ui/core/Container";
-import { useParams } from "react-router";
+import { useParams, useHistory } from "react-router";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -40,6 +40,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Public() {
   let { topic } = useParams();
+  const history = useHistory();
   const classes = useStyles();
   const [values, setValues] = useState({
     title: "",
@@ -72,6 +73,10 @@ export default function Public() {
       }),
     });
     const data = await res.json();
+    console.log(data);
+    if (data.success) {
+      return history.push(data.url);
+    }
     alert(data.message);
   };
   return (

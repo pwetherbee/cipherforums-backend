@@ -31,15 +31,15 @@ router.post("/", body("username"), (req, res) => {
   WHERE username = ${connection.escape(account.username)}
   LIMIT 1
   `;
-  connection.connect((err) => {
-    if (err) {
-      console.log(err);
-      throw "cant connect to database";
-      return;
-    } else {
-      console.log("connected to the database correctly");
-    }
-  });
+  // connection.connect((err) => {
+  //   if (err) {
+  //     console.log(err);
+  //     throw "cant connect to database";
+  //     return;
+  //   } else {
+  //     console.log("connected to the database correctly");
+  //   }
+  // });
   connection.query(query, function (err, rows, fields) {
     if (err) throw err;
 

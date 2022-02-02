@@ -33,7 +33,7 @@ router.post("/forum", (req, res) => {
     return;
   }
   const data = req.body;
-  console.log(data);
+  // console.log(data);
   // TODO: Replace whitespace
   // TODO: Validate title
   const url = data.title + "!" + idGen.generateHexID();
@@ -49,9 +49,8 @@ router.post("/forum", (req, res) => {
     data.postType
   )});
     `;
-  console.log("making query");
+
   connection.query(query, function (err, rows, fields) {
-    console.log("query made");
     if (err) {
       throw err;
       return res
@@ -62,7 +61,7 @@ router.post("/forum", (req, res) => {
     res.json({
       success: true,
       message: "success creating forum",
-      redirect: `user/${req.session.username}/post/url`,
+      url: `@${req.session.username}/${url}`,
     });
   });
   connection.end();

@@ -12,11 +12,11 @@ router.get("/:username", (req, res) => {
   // TODO: Make sure profile is in database
   const username = req.params["username"];
   const connection = SQLHelper.createConnection();
-  connection.connect();
+
   let query = `SELECT userID FROM Users WHERE username = ${connection.escape(
     username
   )}`;
-  connection.connect();
+  // connection.connect();
   connection.query(query, (err, rows) => {
     if (err) throw err;
     if (!rows[0]) {
@@ -51,20 +51,20 @@ router.get("/:username/info", (req, res) => {
   WHERE Users.username = ${connection.escape(username)}
   ORDER BY Forums.creationDate DESC
   `;
-  connection.connect();
+  // connection.connect();
   connection.query(query, (err, rows) => {
     if (err) throw err;
     if (!rows.length) {
       res.send(JSON.stringify(info));
       return;
     }
-    console.log(rows[0].bio);
+
     info.bio = rows[0].bio;
     info.pic = rows[0].avi;
-    console.log(rows[0]);
+
     rows.forEach((row) => row.url && info.createdPosts.push(row));
     if (info.currUser) {
-      res.send(JSON.stringify(info));
+      return res.send(JSON.stringify(info));
     }
     const query2 = `
     SELECT Count(Following.userID) FROM Following
@@ -90,10 +90,7 @@ router.post("/settings", (req, res) => {
       .status(403)
       .json({ success: false, message: "User is not logged in" });
   }
-  console.log(req.body);
   const { bio, avi } = req.body;
-  console.log(bio);
-  console.log(avi);
   const connection = sqlQueryHelper.createConnection();
   const query = `
   UPDATE Users
@@ -102,7 +99,7 @@ router.post("/settings", (req, res) => {
   ${avi ? `avi = ${connection.escape(avi)}` : ""}
   WHERE userID = ${req.session.userID}
   `;
-  connection.connect();
+  // connection.connect();
   connection.query(query, (err, rows) => {
     if (err) {
       console.log(err);

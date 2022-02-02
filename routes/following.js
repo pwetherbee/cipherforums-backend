@@ -78,11 +78,12 @@ router.get("/list/:name", (req, res) => {
     username
   )})
   `;
-  connection.connect();
+  // connection.connect();
   connection.query(query, (err, rows) => {
     if (err) throw err;
     res.send(JSON.stringify({ following: rows }));
   });
+  connection.end();
   //   res.send(`here is the users following list for user ${req.session.username}`);
 });
 
