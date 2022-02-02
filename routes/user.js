@@ -16,6 +16,7 @@ router.get("/:username", (req, res) => {
   let query = `SELECT userID FROM Users WHERE username = ${connection.escape(
     username
   )}`;
+  connection.connect();
   connection.query(query, (err, rows) => {
     if (err) throw err;
     if (!rows[0]) {
@@ -50,6 +51,7 @@ router.get("/:username/info", (req, res) => {
   WHERE Users.username = ${connection.escape(username)}
   ORDER BY Forums.creationDate DESC
   `;
+  connection.connect();
   connection.query(query, (err, rows) => {
     if (err) throw err;
     if (!rows.length) {
@@ -63,7 +65,6 @@ router.get("/:username/info", (req, res) => {
     rows.forEach((row) => row.url && info.createdPosts.push(row));
     if (info.currUser) {
       res.send(JSON.stringify(info));
-      return connection.end();
     }
     const query2 = `
     SELECT Count(Following.userID) FROM Following
