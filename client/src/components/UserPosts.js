@@ -7,6 +7,12 @@ import Typography from "@material-ui/core/Typography";
 import ButtonBase from "@material-ui/core/ButtonBase";
 // import Post from "./Post-OLD";
 import PostCard from "./PostCard";
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormControl from "@mui/material/FormControl";
+import FormLabel from "@mui/material/FormLabel";
+import { Box, Stack } from "@mui/material";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -38,13 +44,27 @@ const useStyles = makeStyles((theme) => ({
 
 export default function UserPosts({ posts, secret, onDelete }) {
   const classes = useStyles();
+
   //   const [createdPosts, setCreatedPosts] = useState(posts);
   return (
     <div className={classes.root}>
+      <Box sx={{ display: "flex", justifyContent: "center" }}>
+        <FormControl>
+          <FormLabel id="demo-row-radio-buttons-group-label">View</FormLabel>
+          <RadioGroup
+            row
+            aria-labelledby="demo-row-radio-buttons-group-label"
+            name="row-radio-buttons-group"
+          >
+            <FormControlLabel value="Grid" control={<Radio />} label="Grid" />
+            <FormControlLabel value="List" control={<Radio />} label="List" />
+          </RadioGroup>
+        </FormControl>
+      </Box>
       <Grid container spacing={2}>
         {posts
           ? posts.map((post, i) => (
-              <Grid key={i} item xs={12} md={6} lg={6}>
+              <Grid key={i} item xs={12} md={6} lg={4}>
                 <PostCard secret={secret} data={post} onDelete={onDelete} />
               </Grid>
             ))
