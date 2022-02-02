@@ -5,15 +5,20 @@ import {
   makeStyles,
   Typography,
 } from "@material-ui/core";
+import Stack from "@mui/material/Stack";
 import { Link as RouteLink } from "react-router-dom";
 import { Link } from "@material-ui/core";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import ImageCircle from "./ImageCircle";
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: "flex",
+    // display: "flex",
     marginTop: 10,
     marginRight: 20,
     marginLeft: 20,
-
+    border: "1px solid",
+    borderColor: theme.palette.primary.main3,
     // color: "#ffffff",
   },
   title: {
@@ -28,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
     // flex: "1 0 auto",
     overflowWrap: "break-word",
     color: "primary",
-    padding: 14,
+    // padding: 5,
   },
   cover: {
     width: 151,
@@ -44,20 +49,21 @@ const useStyles = makeStyles((theme) => ({
     width: 38,
   },
   img: {
-    maxHeight: 150,
-    maxWidth: 180,
-    minHeight: 50,
-    padding: 0,
+    padding: 10,
+    width: 150,
   },
   card__actions: {
-    display: "flex",
-    alignContent: "flex-end",
-    justifyContent: "flex-end",
     marginTop: 10,
   },
   create: {
     marginTop: 10,
     marginLeft: 10,
+  },
+  type: {
+    overflowWrap: "break-word",
+    width: "100%",
+    height: "5rem",
+    overflowY: "hidden",
   },
 }));
 const linkStyle = {
@@ -73,27 +79,55 @@ export const PublicPost = ({ details, topic }) => {
       <RouteLink to={`/public/${topic}/${details.url}`} style={linkStyle}>
         <Link>
           <Card className={classes.root}>
-            <div className={classes.details}>
-              <img
+            {/* <div className={classes.details}> */}
+            <Stack spacing={1} direction="row">
+              <div className={classes.img}>
+                <ImageCircle
+                  imageLink={
+                    details.image || "https://i.imgur.com/AD3MbBi.jpeg"
+                  }
+                  size={150}
+                  square
+                ></ImageCircle>
+              </div>
+              {/* <img
                 className={classes.img}
                 alt="complex"
                 src={details.image || "https://i.imgur.com/AD3MbBi.jpeg"}
-              />
-              <CardContent className={classes.content}>
-                <Typography variant="caption">@{details.username}</Typography>
-                <Typography variant="body2">
-                  {details.url.slice(0, -5)}
-                </Typography>
-                <div className={classes.card__actions}>
+              /> */}
+              <Stack
+                spacing={1}
+                direction="column"
+                justifyContent="space-between"
+                paddingLeft={1}
+              >
+                <Stack spacing={1} direction="row" padding={1}>
+                  {/* <CardContent className={classes.content}> */}
+                  <Typography variant="caption">@{details.username}</Typography>
+                  <Typography variant="body2" className={classes.type}>
+                    {details.url.slice(0, -5)}
+                  </Typography>
+                  {/* </CardContent> */}
+                </Stack>
+                {/* </div> */}
+                <Stack
+                  direction="row"
+                  justifyContent="flex-start"
+                  alignItems="flex-end"
+                  spacing={1}
+                  padding={1}
+                >
+                  <FavoriteBorderIcon></FavoriteBorderIcon>
+                  {/* <FavoriteIcon></FavoriteIcon> */}
                   <Typography
                     className={classes.card__actions}
                     variant="caption"
                   >
                     {details.numComments} comments
                   </Typography>
-                </div>
-              </CardContent>
-            </div>
+                </Stack>
+              </Stack>
+            </Stack>
           </Card>
         </Link>
       </RouteLink>

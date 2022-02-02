@@ -10,30 +10,30 @@ import PostCard from "./PostCard";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    flexGrow: 1,
-    width: "85vw",
-    display: "inline-flex",
-    flexWrap: "wrap",
-    textAlign: "center",
+    // flexGrow: 1,
+    width: "98%",
+    // display: "inline-flex",
+    // flexWrap: "wrap",
+    // textAlign: "center",
     // marginLeft: -50,
     // overflowWrap: "break-word",
   },
-  paper: {
-    padding: theme.spacing(2),
-    margin: "auto",
-    maxWidth: 500,
-  },
-  image: {
-    width: 128,
-    height: 128,
-  },
-  img: {
-    margin: "auto",
-    display: "block",
-    maxWidth: "100%",
-    maxHeight: "100%",
-    padding: "10px",
-  },
+  // paper: {
+  //   padding: theme.spacing(2),
+  //   margin: "auto",
+  //   maxWidth: 500,
+  // },
+  // image: {
+  //   width: 128,
+  //   height: 128,
+  // },
+  // img: {
+  //   margin: "auto",
+  //   display: "block",
+  //   maxWidth: "100%",
+  //   maxHeight: "100%",
+  //   padding: "10px",
+  // },
 }));
 
 export default function UserPosts({ posts, secret, onDelete }) {
@@ -44,12 +44,13 @@ export default function UserPosts({ posts, secret, onDelete }) {
       <Grid container spacing={2}>
         {posts
           ? posts.map((post, i) => (
-              <Grid key={i} item xs={12} md={6} lg={4}>
+              <Grid key={i} item xs={12} md={6} lg={6}>
                 <PostCard secret={secret} data={post} onDelete={onDelete} />
               </Grid>
             ))
           : "No Posts for this user"}
       </Grid>
+      //{" "}
     </div>
   );
 }

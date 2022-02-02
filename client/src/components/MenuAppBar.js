@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     flexGrow: 1,
-    color: theme.palette.primary.main,
+    color: theme.palette.primary.contrastText,
   },
   logo: {
     width: 50,
