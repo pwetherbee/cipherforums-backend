@@ -194,7 +194,15 @@ export default function PostCard({ data, secret, onDelete }) {
                 spacing={1}
                 padding={1}
               >
-                <DeleteForeverRoundedIcon></DeleteForeverRoundedIcon>
+                <IconButton
+                  onClick={handleDelete}
+                  color="primary"
+                  aria-label="share"
+                  // className={classes.delete}
+                >
+                  <DeleteForeverRoundedIcon />
+                </IconButton>
+
                 <FavoriteBorderIcon></FavoriteBorderIcon>
                 {/* <FavoriteIcon></FavoriteIcon> */}
                 <Typography className={classes.card__actions} variant="caption">
