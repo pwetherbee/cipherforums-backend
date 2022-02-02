@@ -13,6 +13,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import { Box, Stack } from "@mui/material";
+import PostCardNew from "./PostCardNew";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -50,7 +51,7 @@ export default function UserPosts({ posts, secret, onDelete }) {
   };
   //   const [createdPosts, setCreatedPosts] = useState(posts);
   return (
-    <div className={classes.root}>
+    <div className={classes.root} sx={{ width: "90vw" }}>
       <Box
         sx={{
           display: "flex",
