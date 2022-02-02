@@ -10,6 +10,7 @@ const deleteRouter = require("./delete");
 const commentsRouter = require("./comments");
 const followingRouter = require("./following");
 const likesRouter = require("./likes");
+const searchRouter = require("./search");
 const mailRouter = require("./mail");
 const { body, validationResult } = require("express-validator");
 router.use(express.json());
@@ -233,5 +234,6 @@ router.use("/following", followingRouter);
 router.use("/comments", commentsRouter);
 router.use("/mail", mailRouter);
 router.use("/likes", likesRouter);
+router.use("/search", searchRouter);
 
 module.exports = router;
