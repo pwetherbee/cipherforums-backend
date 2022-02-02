@@ -87,11 +87,11 @@ const useStyles = makeStyles((theme) => ({
   desc: {
     // width: 1200,
     // margin: "auto",
-    height: "70vh",
+    height: "60vh",
     display: "block",
     marginLeft: "auto",
     marginRight: "auto",
-    marginTop: "10vh",
+    marginTop: "15vh",
     // width: "70%",
   },
   icon: {
