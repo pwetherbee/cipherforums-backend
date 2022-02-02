@@ -19,6 +19,10 @@ import { Link as RouteLink } from "react-router-dom";
 import { Link } from "@material-ui/core";
 import ConfirmDelete from "../components/ConfirmDelete";
 import Switch from "@material-ui/core/Switch";
+import Stack from "@mui/material/Stack";
+import Box from "@mui/material/Box";
+import Modal from "@mui/material/Modal";
+import CloseIcon from "@mui/icons-material/Close";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -29,8 +33,8 @@ const useStyles = makeStyles((theme) => ({
   },
 
   paper: {
-    maxWidth: 1200,
-    margin: `${theme.spacing(1)}px auto`,
+    // maxWidth: 200,
+    // margin: `${theme.spacing(1)}px auto`,
     padding: theme.spacing(2),
   },
   reply: {
@@ -38,13 +42,14 @@ const useStyles = makeStyles((theme) => ({
     padding: 0,
   },
   titleHolder: {
-    maxWidth: 1500,
-    marginTop: 25,
-    padding: 20,
-    marginBottom: 50,
+    // maxWidth: 1500,
+    marginTop: 0,
+    paddingBottom: 20,
+    // marginBottom: 40,
   },
   titleElements: {
-    padding: 5,
+    marginTop: 10,
+    // padding: 5,
   },
   comment: {
     marginTop: 30,
@@ -57,11 +62,47 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: 50,
   },
   mainimg: {
-    maxWidth: 300,
+    width: "100%",
+    // marginLeft: 300,
+  },
+  imgDiv: {
+    // maxWidth: 1000,
+    // margin: "auto",
+    textAlign: "center",
+    margin: "auto",
+    width: "50%",
+    marginTop: 40,
+  },
+  imgDiv2: {
+    // maxWidth: 1000,
+    // margin: "auto",
+    margin: "auto",
+    width: "50%",
+    marginTop: 50,
+  },
+  desc: {
+    // width: 1200,
+    // margin: "auto",
+    height: "90vh",
+    display: "block",
+    marginLeft: "auto",
+    marginRight: "auto",
+    marginTop: 40,
+    // width: "70%",
   },
   aesType: {
     fontSize: 15,
     color: theme.palette.primary,
+  },
+  holder: {
+    // width: 1600,
+    marginLeft: 100,
+  },
+  icon: {
+    position: "absolute",
+    right: 30,
+    top: 30,
+    transform: "scale(1.8)",
   },
 }));
 const linkStyle = {
@@ -85,6 +126,10 @@ export default function Post() {
   const [deleteCommentData, setDeleteCommentData] = useState({});
   const [postCommentText, setPostCommentText] = useState("");
   const [encType, setEncType] = useState("xor");
+
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   const [encChecked, setEncChecked] = useState(false);
 
@@ -186,100 +231,128 @@ export default function Post() {
   return (
     <CssBaseline>
       {forumData ? (
-        <Container>
-          <ConfirmDelete
-            open={openConfirmDelete}
-            handleDecision={handleDecision}
-            handleClose={handleCloseConfirmDelete}
-          />
-          <Paper className={classes.titleHolder}>
-            <Typography variant="subtitle1" className={classes.titleElements}>
-              Post to
-              {
-                <RouteLink
-                  to={`/${forumData.postType == "public" ? "public/" : "@"}${
-                    forumData.publicTopic
-                  }`}
-                  style={linkStyle}
+        <Grid container>
+          <Stack direction="column" className={classes.holder}>
+            <Stack>
+              <ConfirmDelete
+                open={openConfirmDelete}
+                handleDecision={handleDecision}
+                handleClose={handleCloseConfirmDelete}
+              />
+              <Paper className={classes.titleHolder}>
+                <Typography variant="h3" className={classes.titleElements}>
+                  {forumData?.title.slice(0, -5)}
+                </Typography>
+                <Typography variant="body2" className={classes.titleElements}>
+                  {forumData?.subtitle}
+                </Typography>
+                {forumData?.image && (
+                  <div className={classes.imgDiv}>
+                    <Button onClick={handleOpen}>
+                      <img className={classes.mainimg} src={forumData.image} />
+                    </Button>
+                    <Modal
+                      open={open}
+                      onClose={handleClose}
+                      aria-labelledby="modal-modal-title"
+                      aria-describedby="modal-modal-description"
+                    >
+                      <Box>
+                        <div onClick={handleClose}>
+                          <CloseIcon className={classes.icon} />
+                        </div>
+                        <img className={classes.desc} src={forumData.image} />
+                      </Box>
+                    </Modal>
+                  </div>
+                )}
+                <Typography
+                  variant="subtitle1"
+                  className={classes.titleElements}
                 >
-                  <Link>{forumData.publicTopic}</Link>
-                </RouteLink>
-              }
-              by
-              {
-                <RouteLink to={`/@${forumData.author}`} style={linkStyle}>
-                  <Link>{"@" + forumData.author}</Link>
-                </RouteLink>
-              }
-            </Typography>
-            <Typography variant="h6" className={classes.titleElements}>
-              {forumData?.title.slice(0, -5)}
-            </Typography>
-            {forumData?.image && (
-              <img className={classes.mainimg} src={forumData.image} />
-            )}
-            <Typography variant="body2" className={classes.titleElements}>
-              {forumData?.subtitle}
-            </Typography>
-          </Paper>
-          <div style={{ display: "inline-flex", alignItems: "center" }}>
-            {encType === "xor" ? (
-              <Typography className={classes.aesType}>
-                Using {encType.toLocaleUpperCase()}
-              </Typography>
-            ) : (
-              <Typography
-                className={classes.aesType}
-                style={{ color: "#FFFF00" }}
-              >
-                Using {encType.toLocaleUpperCase()}
-              </Typography>
-            )}
-            <Switch
-              checked={encChecked}
-              onChange={handleChangeEnc}
-              inputProps={{ "aria-label": "controlled" }}
-              color="secondary"
-            />
-          </div>
-          <SecretBox updateSecret={updateSecret} secret={secret} />
-          {comments?.map((comment) => (
-            <Comment
-              comment={comment}
-              secret={secret}
-              handleDeleteComment={handleDeleteComment}
-            />
-          ))}
+                  Post to
+                  {
+                    <RouteLink
+                      to={`/${
+                        forumData.postType == "public" ? "public/" : "@"
+                      }${forumData.publicTopic}`}
+                      style={linkStyle}
+                    >
+                      <Link>{forumData.publicTopic}</Link>
+                    </RouteLink>
+                  }
+                  by
+                  {
+                    <RouteLink to={`/@${forumData.author}`} style={linkStyle}>
+                      <Link>{"@" + forumData.author}</Link>
+                    </RouteLink>
+                  }
+                </Typography>
+              </Paper>
+            </Stack>
+            <Stack>
+              <div style={{ display: "inline-flex", alignItems: "center" }}>
+                {encType === "xor" ? (
+                  <Typography className={classes.aesType}>
+                    Using {encType.toLocaleUpperCase()}
+                  </Typography>
+                ) : (
+                  <Typography
+                    className={classes.aesType}
+                    style={{ color: "#FFFF00" }}
+                  >
+                    Using {encType.toLocaleUpperCase()}
+                  </Typography>
+                )}
+                <Switch
+                  checked={encChecked}
+                  onChange={handleChangeEnc}
+                  inputProps={{ "aria-label": "controlled" }}
+                  color="secondary"
+                />
+              </div>
+              <Stack>
+                <SecretBox updateSecret={updateSecret} secret={secret} />
+                {comments?.map((comment) => (
+                  <Comment
+                    comment={comment}
+                    secret={secret}
+                    handleDeleteComment={handleDeleteComment}
+                  />
+                ))}
 
-          <TextField
-            error={error}
-            helperText={helperText}
-            className={classes.comment}
-            id="outlined-textarea"
-            label="Reply"
-            value={postCommentText}
-            onInput={(e) => {
-              setError(false);
-              setHelperText("");
-              setPostCommentText(e.target.value);
-            }}
-            placeholder="Enter your comment here"
-            multiline
-            fullWidth
-            variant="outlined"
-          />
-          <Container className={classes.submitBox}>
-            <Button
-              disabled={!postCommentText.length}
-              variant="contained"
-              color="primary"
-              onClick={handleSubmitComment}
-            >
-              Submit Comment
-            </Button>
-            {/* <SecretBox updateSecret={updateSecret} secret={secret} /> */}
-          </Container>
-        </Container>
+                <TextField
+                  error={error}
+                  helperText={helperText}
+                  className={classes.comment}
+                  id="outlined-textarea"
+                  label="Reply"
+                  value={postCommentText}
+                  onInput={(e) => {
+                    setError(false);
+                    setHelperText("");
+                    setPostCommentText(e.target.value);
+                  }}
+                  placeholder="Enter your comment here"
+                  multiline
+                  fullWidth
+                  variant="outlined"
+                />
+              </Stack>
+              <Container className={classes.submitBox}>
+                <Button
+                  disabled={!postCommentText.length}
+                  variant="contained"
+                  color="primary"
+                  onClick={handleSubmitComment}
+                >
+                  Submit Comment
+                </Button>
+                {/* <SecretBox updateSecret={updateSecret} secret={secret} /> */}
+              </Container>
+            </Stack>
+          </Stack>
+        </Grid>
       ) : (
         <LoadingIcon height={"30rem"} />
       )}

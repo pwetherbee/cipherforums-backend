@@ -16,6 +16,8 @@ import { Link as RouteLink } from "react-router-dom";
 import { Link } from "@material-ui/core";
 // import LoadingIcon from "../components/LoadingPageIcon";
 import VpnKeyIcon from "@material-ui/icons/VpnKey";
+import Stack from "@mui/material/Stack";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -23,9 +25,9 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(0, 3),
   },
   paper: {
-    maxWidth: 1200,
-    margin: `${theme.spacing(1)}px auto`,
-    padding: theme.spacing(2),
+    // maxWidth: 1200,
+    // margin: `${theme.spacing(1)}px auto`,
+    padding: theme.spacing(1.5),
   },
   reply: {
     fontSize: 10,
@@ -77,7 +79,7 @@ export const Comment = ({ comment, secret, handleDeleteComment }) => {
     return time.toString();
   };
   return (
-    <Paper className={classes.paper}>
+    <Stack className={classes.paper}>
       <Grid container wrap="nowrap" spacing={1}>
         <Grid item>
           <Avatar className={classes.avatar} variant="rounded" color="green">
@@ -131,6 +133,6 @@ export const Comment = ({ comment, secret, handleDeleteComment }) => {
           </Typography>
         </Grid>
       </Grid>
-    </Paper>
+    </Stack>
   );
 };

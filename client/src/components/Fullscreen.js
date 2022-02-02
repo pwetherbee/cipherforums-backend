@@ -4,6 +4,7 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Modal from "@material-ui/core/Modal";
 import { makeStyles } from "@material-ui/core/styles";
+import CloseIcon from "@mui/icons-material/Close";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -19,20 +20,25 @@ const useStyles = makeStyles((theme) => ({
 const style = {
   position: "absolute",
   top: "5%",
-  left: "5%",
-  display: "inline-flex",
+  // left: "5%",
+  // display: "inline-flex",
   // marginLeft: "auto",
   // marginRight: "auto",
   justifyContent: "space-around",
   outline: "none",
   // left: "50%",
   // transform: "translate(-50%, -50%)",
-  width: "90%",
+  width: "100%",
   // bgcolor: "background.paper",
   // border: "2px solid #000",
   boxShadow: 24,
   p: 4,
 };
+
+// const style = {
+//   margin: "auto",
+//   width: "50%",
+// };
 
 export default function BasicModal() {
   const [open, setOpen] = React.useState(false);
@@ -42,10 +48,12 @@ export default function BasicModal() {
 
   return (
     <div>
-      <Button onClick={handleOpen}><img
-            className={classes.desc}
-            src="https://i.imgur.com/jlZySn6.jpeg"
-          ></img></Button>
+      <Button onClick={handleOpen}>
+        <img
+          className={classes.desc}
+          src="https://i.imgur.com/jlZySn6.jpeg"
+        ></img>
+      </Button>
       <Modal
         open={open}
         onClose={handleClose}
@@ -53,6 +61,9 @@ export default function BasicModal() {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
+          <div onClick={handleClose}>
+            <CloseIcon />
+          </div>
           <img
             className={classes.desc}
             src="https://i.imgur.com/jlZySn6.jpeg"
