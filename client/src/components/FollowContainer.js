@@ -29,8 +29,10 @@ import ListItemText from "@material-ui/core/ListItemText";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
-import { Link as RouteLink } from "react-router-dom";
 import { useHistory } from "react-router";
+import Grid from "@mui/material/Grid";
+import { Link as RouteLink } from "react-router-dom";
+import { Link } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -42,49 +44,66 @@ const useStyles = makeStyles((theme) => ({
     display: "inline",
   },
 }));
-
+const linkStyle = {
+  margin: "1rem",
+  textDecoration: "none",
+  color: "blue",
+};
 export default function FollowContainer({ following }) {
   const classes = useStyles();
   const history = useHistory();
 
   return (
-    <List className={classes.root}>
+    <Grid>
       {following.map((user, i) => (
-        <div key={`${user}_${i}`}>
-          <ListItem
-            // onClick={(e) => {
-            //   e.preventDefault();
-            //   history.push(`/user/${user.username}`);
-            //   updateuser();
-            // }}
+        <Grid item key={`${user}_${i}`}>
+          <RouteLink to={`/@${user.username}`} style={linkStyle}>
+            <Link>
+              <Typography>{user.username}</Typography>
+            </Link>
+          </RouteLink>
+        </Grid>
 
-            button
-            component={RouteLink}
-            to={`/@${user.username}`}
-            alignItems="flex-start"
-          >
-            <ListItemAvatar>
-              <Avatar alt={user.username} src={"/static/images/avatar/1.jpg"} />
-            </ListItemAvatar>
-            <ListItemText
-              primary={user.username}
-              secondary={
-                <React.Fragment>
-                  <Typography
-                    component="span"
-                    variant="body2"
-                    className={classes.inline}
-                    color="textPrimary"
-                  >
-                    {user.bio}
-                  </Typography>
-                </React.Fragment>
-              }
-            />
-          </ListItem>
-          <Divider variant="inset" component="li" />
-        </div>
+        // <div key={`${user}_${i}`}>
+        //   <Typography
+        //     component={RouteLink}
+        //     to={`/@${user.username}`}
+        //   ></Typography>
+
+        //   <ListItem
+        //     // onClick={(e) => {
+        //     //   e.preventDefault();
+        //     //   history.push(`/user/${user.username}`);
+        //     //   updateuser();
+        //     // }}
+
+        //     button
+        //     component={RouteLink}
+        //     to={`/@${user.username}`}
+        //     alignItems="flex-start"
+        //   >
+        //     <ListItemAvatar>
+        //       <Avatar alt={user.username} src={"/static/images/avatar/1.jpg"} />
+        //     </ListItemAvatar>
+        //     <ListItemText
+        //       primary={user.username}
+        //       secondary={
+        //         <React.Fragment>
+        //           <Typography
+        //             component="span"
+        //             variant="body2"
+        //             className={classes.inline}
+        //             color="textPrimary"
+        //           >
+        //             {user.bio}
+        //           </Typography>
+        //         </React.Fragment>
+        //       }
+        //     />
+        //   </ListItem>
+        //   <Divider variant="inset" component="li" />
+        // </div>
       ))}
-    </List>
+    </Grid>
   );
 }
