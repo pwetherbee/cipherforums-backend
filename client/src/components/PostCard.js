@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
-import CardMedia from "@material-ui/core/CardMedia";
+import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
 import CardActionArea from "@material-ui/core/CardActionArea";
@@ -171,6 +171,11 @@ export default function PostCard({ data, secret, onDelete }) {
                   size={150}
                   square
                 ></ImageCircle>
+                {/* <CardMedia
+                  component="img"
+                  height="300"
+                  image={data.image || "https://i.imgur.com/Ck4MLYV.jpg"}
+                /> */}
               </div>
             </Link>
           </RouteLink>
