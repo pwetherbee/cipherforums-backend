@@ -301,11 +301,11 @@ export default function App() {
               <Route path="/matrix">
                 <MatrixPage />
               </Route>
-              <Route path="*">
-                <FourZero />
-              </Route>
               <Route exact path="/">
                 <Home />
+              </Route>
+              <Route path="*">
+                <FourZero />
               </Route>
             </Switch>
             <Footer />
