@@ -49,6 +49,9 @@ const useStyles = makeStyles((theme) => ({
   inline: {
     display: "inline",
   },
+  top: {
+    paddingTop: 30,
+  },
 }));
 const linkStyle = {
   margin: "1rem",
@@ -60,7 +63,7 @@ export default function FollowContainer({ following }) {
   const history = useHistory();
 
   return (
-    <Grid container spacing={2}>
+    <Grid container spacing={2} className={classes.top}>
       {following.map((user, i) => (
         <Grid
           item

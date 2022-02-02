@@ -261,10 +261,34 @@ export default function Profile() {
                 <LikedNFTs />
               </TabPanel>
               <TabPanel value={tab2} index={1}>
-                panel 2
+                <TabPanel value={tab} index={3}>
+                  <Tabs
+                    value={tab2}
+                    onChange={handleChangeTab2}
+                    indicatorColor="primary"
+                    textColor="primary"
+                    centered
+                  >
+                    <Tab label="Liked"></Tab>
+                    <Tab label="Created"></Tab>
+                    <Tab label="Collected"></Tab>
+                  </Tabs>
+                </TabPanel>
               </TabPanel>
               <TabPanel value={tab2} index={2}>
-                panel 3
+                <TabPanel value={tab} index={3}>
+                  <Tabs
+                    value={tab2}
+                    onChange={handleChangeTab2}
+                    indicatorColor="primary"
+                    textColor="primary"
+                    centered
+                  >
+                    <Tab label="Liked"></Tab>
+                    <Tab label="Created"></Tab>
+                    <Tab label="Collected"></Tab>
+                  </Tabs>
+                </TabPanel>
               </TabPanel>
             </TabPanel>
 

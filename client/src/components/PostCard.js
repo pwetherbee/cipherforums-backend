@@ -163,7 +163,7 @@ export default function PostCard({ data, secret, onDelete }) {
           <Stack spacing={1} direction="row">
             <div className={classes.img}>
               <ImageCircle
-                imageLink={data.image || "https://i.imgur.com/AD3MbBi.jpeg"}
+                imageLink={data.image || "https://i.imgur.com/Ck4MLYV.jpg"}
                 size={150}
                 square
               ></ImageCircle>

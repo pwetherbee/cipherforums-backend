@@ -69,8 +69,7 @@ export default function UserPosts({ posts, secret, onDelete }) {
               </Grid>
             ))
           : "No Posts for this user"}
-      </Grid>
-      //{" "}
+      </Grid>{" "}
     </div>
   );
 }
