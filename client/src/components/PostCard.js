@@ -118,11 +118,11 @@ export default function PostCard({ data, secret, onDelete }) {
     // <Card className={classes.root} id={data.id}>
     //   <CardActionArea
     //     component={RouteLink}
-    //     to={`/${
-    //       data.postType == "public"
-    //         ? `public/${data.publicTopic}`
-    //         : "@" + data.username
-    //     }/${data.url}`}
+    // to={`/${
+    //   data.postType == "public"
+    //     ? `public/${data.publicTopic}`
+    //     : "@" + data.username
+    // }/${data.url}`}
     //   >
     //     <CardHeader
     //       title={data.url.slice(0, -5) + " to " + data.publicTopic}
@@ -163,7 +163,14 @@ export default function PostCard({ data, secret, onDelete }) {
       <Box sx={4}>
         {/* <div className={classes.details}> */}
         <Stack spacing={1} direction="row">
-          <RouteLink to={`/@${data.username}/${data.url}`} style={linkStyle}>
+          <RouteLink
+            to={`/${
+              data.postType == "public"
+                ? `public/${data.publicTopic}`
+                : "@" + data.username
+            }/${data.url}`}
+            style={linkStyle}
+          >
             <Link>
               <div className={classes.img}>
                 <ImageCircle
@@ -185,7 +192,11 @@ export default function PostCard({ data, secret, onDelete }) {
               {/* <CardContent className={classes.content}> */}
               {/* <Typography variant="caption">@{data.username}</Typography> */}
               <RouteLink
-                to={`/@${data.username}/${data.url}`}
+                to={`/${
+                  data.postType == "public"
+                    ? `public/${data.publicTopic}`
+                    : "@" + data.username
+                }/${data.url}`}
                 style={linkStyle}
               >
                 <Link>
