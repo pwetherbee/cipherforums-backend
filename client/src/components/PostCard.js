@@ -29,6 +29,9 @@ import ImageCircle from "./ImageCircle";
 import Stack from "@mui/material/Stack";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import Box from "@mui/material/Box";
+import Modal from "@mui/material/Modal";
+import CloseIcon from "@mui/icons-material/Close";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     // maxWidth: "99vw",
@@ -81,6 +84,22 @@ const useStyles = makeStyles((theme) => ({
   card__actions: {
     marginLeft: 20,
   },
+  desc: {
+    // width: 1200,
+    // margin: "auto",
+    height: "70vh",
+    display: "block",
+    marginLeft: "auto",
+    marginRight: "auto",
+    marginTop: "10vh",
+    // width: "70%",
+  },
+  icon: {
+    position: "absolute",
+    right: 50,
+    top: 50,
+    transform: "scale(1.8)",
+  },
 }));
 const linkStyle = {
   margin: "1rem",
@@ -113,6 +132,10 @@ export default function PostCard({ data, secret, onDelete }) {
     // load in data if not
     setExpanded(!expanded);
   };
+
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   return (
     // <Card className={classes.root} id={data.id}>
@@ -163,29 +186,28 @@ export default function PostCard({ data, secret, onDelete }) {
       <Box sx={4}>
         {/* <div className={classes.details}> */}
         <Stack spacing={1} direction="row">
-          <RouteLink
-            to={`/${
-              data.postType == "public"
-                ? `public/${data.publicTopic}`
-                : "@" + data.username
-            }/${data.url}`}
-            style={linkStyle}
-          >
-            <Link>
-              <div className={classes.img}>
-                <ImageCircle
-                  imageLink={data.image || "https://i.imgur.com/Ck4MLYV.jpg"}
-                  size={150}
-                  square
-                ></ImageCircle>
-                {/* <CardMedia
-                  component="img"
-                  height="300"
-                  image={data.image || "https://i.imgur.com/Ck4MLYV.jpg"}
-                /> */}
-              </div>
-            </Link>
-          </RouteLink>
+          <div className={classes.img}>
+            <Button onClick={handleOpen}>
+              <ImageCircle
+                imageLink={data.image || "https://i.imgur.com/Ck4MLYV.jpg"}
+                size={150}
+                square
+              ></ImageCircle>
+            </Button>
+            <Modal
+              open={open}
+              onClose={handleClose}
+              aria-labelledby="modal-modal-title"
+              aria-describedby="modal-modal-description"
+            >
+              <Box>
+                <div onClick={handleClose}>
+                  <CloseIcon className={classes.icon} />
+                </div>
+                <img className={classes.desc} src={data.image} />
+              </Box>
+            </Modal>
+          </div>
           {/* </Stack> */}
           <Stack spacing={1} direction="column" justifyContent="space-between">
             <Stack spacing={1} direction="row" padding={1}>
@@ -226,9 +248,23 @@ export default function PostCard({ data, secret, onDelete }) {
                 </IconButton>
                 <FavoriteBorderIcon></FavoriteBorderIcon>
                 {/* <FavoriteIcon></FavoriteIcon> */}
-                <Typography className={classes.card__actions} variant="caption">
-                  {data.numComments} comments
-                </Typography>
+                <RouteLink
+                  to={`/${
+                    data.postType == "public"
+                      ? `public/${data.publicTopic}`
+                      : "@" + data.username
+                  }/${data.url}`}
+                  style={linkStyle}
+                >
+                  <Link>
+                    <Typography
+                      className={classes.card__actions}
+                      variant="caption"
+                    >
+                      {data.numComments} comments
+                    </Typography>
+                  </Link>
+                </RouteLink>
               </Toolbar>
             </Stack>
           </Stack>

@@ -49,6 +49,7 @@ export default function UserPosts({ posts, secret, onDelete }) {
   const handleChange = (e) => {
     setValue(e.target.value);
   };
+
   //   const [createdPosts, setCreatedPosts] = useState(posts);
   return (
     <div className={classes.root} sx={{ width: "90vw" }}>
