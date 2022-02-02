@@ -79,6 +79,11 @@ const useStyles = makeStyles((theme) => ({
   },
   delete: {},
 }));
+const linkStyle = {
+  margin: "1rem",
+  textDecoration: "none",
+  color: "blue",
+};
 
 export default function PostCard({ data, secret, onDelete }) {
   // console.log(data);
@@ -151,47 +156,54 @@ export default function PostCard({ data, secret, onDelete }) {
     //     </IconButton>
     //   </CardActions>
     // </Card>
-
-    <Card className={classes.root} id={data.id}>
-      {/* <div className={classes.details}> */}
-      <Stack spacing={1} direction="row">
-        <div className={classes.img}>
-          <ImageCircle
-            imageLink={data.image || "https://i.imgur.com/AD3MbBi.jpeg"}
-            size={150}
-            square
-          ></ImageCircle>
-        </div>
-        {/* <img
+    <RouteLink to={`/@${data.username}/${data.url}`} style={linkStyle}>
+      <Link>
+        <Card className={classes.root} id={data.id}>
+          {/* <div className={classes.details}> */}
+          <Stack spacing={1} direction="row">
+            <div className={classes.img}>
+              <ImageCircle
+                imageLink={data.image || "https://i.imgur.com/AD3MbBi.jpeg"}
+                size={150}
+                square
+              ></ImageCircle>
+            </div>
+            {/* <img
     className={classes.img}
     alt="complex"
     src={details.image || "https://i.imgur.com/AD3MbBi.jpeg"}
   /> */}
-        <Stack spacing={1} direction="column" justifyContent="space-between">
-          <Stack spacing={1} direction="row" padding={1}>
-            {/* <CardContent className={classes.content}> */}
-            <Typography variant="caption">@{data.username}</Typography>
-            <Typography variant="body2" className={classes.type}>
-              {data.url.slice(0, -5)}
-            </Typography>
-            {/* </CardContent> */}
+            <Stack
+              spacing={1}
+              direction="column"
+              justifyContent="space-between"
+            >
+              <Stack spacing={1} direction="row" padding={1}>
+                {/* <CardContent className={classes.content}> */}
+                {/* <Typography variant="caption">@{data.username}</Typography> */}
+                <Typography variant="body2" className={classes.type}>
+                  {data.url.slice(0, -5)}
+                </Typography>
+                {/* </CardContent> */}
+              </Stack>
+              {/* </div> */}
+              <Stack
+                direction="row"
+                justifyContent="flex-start"
+                alignItems="flex-end"
+                spacing={1}
+                padding={1}
+              >
+                <FavoriteBorderIcon></FavoriteBorderIcon>
+                {/* <FavoriteIcon></FavoriteIcon> */}
+                <Typography className={classes.card__actions} variant="caption">
+                  {data.numComments} comments
+                </Typography>
+              </Stack>
+            </Stack>
           </Stack>
-          {/* </div> */}
-          <Stack
-            direction="row"
-            justifyContent="flex-start"
-            alignItems="flex-end"
-            spacing={1}
-            padding={1}
-          >
-            <FavoriteBorderIcon></FavoriteBorderIcon>
-            {/* <FavoriteIcon></FavoriteIcon> */}
-            <Typography className={classes.card__actions} variant="caption">
-              {data.numComments} comments
-            </Typography>
-          </Stack>
-        </Stack>
-      </Stack>
-    </Card>
+        </Card>
+      </Link>
+    </RouteLink>
   );
 }

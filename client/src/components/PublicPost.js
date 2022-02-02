@@ -103,7 +103,13 @@ export const PublicPost = ({ details, topic }) => {
               >
                 <Stack spacing={1} direction="row" padding={1}>
                   {/* <CardContent className={classes.content}> */}
-                  <Typography variant="caption">@{details.username}</Typography>
+                  <RouteLink to={`/@${details.username}`} style={linkStyle}>
+                    <Link>
+                      <Typography variant="caption">
+                        @{details.username}
+                      </Typography>
+                    </Link>
+                  </RouteLink>
                   <Typography variant="body2" className={classes.type}>
                     {details.url.slice(0, -5)}
                   </Typography>
