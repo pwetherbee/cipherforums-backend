@@ -71,7 +71,7 @@ router.get("/list/:name", (req, res) => {
 
   const connection = SQLHelper.createConnection();
   const query = `
-  SELECT Users.username FROM Following
+  SELECT Users.username, Users.bio, Users.avi FROM Following
   INNER JOIN Users
   ON Users.userID = Following.followingID
   WHERE Following.userID = (SELECT userID FROM Users WHERE username = ${connection.escape(
