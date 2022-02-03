@@ -141,11 +141,22 @@ export default function Post() {
           // handle error in request
         }
         console.log(data);
-        setComments(data.comments);
         setForumData(data);
+        setComments(data.comments);
         setSecret(data.publicTopic?.toLowerCase() || "");
       });
   }, [postname]);
+
+  useEffect(() => {
+    if (!comments) return;
+    let interval = setInterval(() => {
+      setSecret(Math.floor(10 ** 8 * Math.random()).toString(16));
+    }, 40);
+    setTimeout(() => {
+      clearInterval(interval);
+      setSecret(forumData.publicTopic?.toLowerCase() || "");
+    }, 500);
+  }, [comments]);
 
   const handleChangeEnc = (event) => {
     setEncChecked(event.target.checked);
@@ -313,10 +324,12 @@ export default function Post() {
               </div>
               <Stack>
                 <SecretBox updateSecret={updateSecret} secret={secret} />
-                {comments?.map((comment) => (
+                {comments?.map((comment, i) => (
                   <Comment
+                    key={i}
                     comment={comment}
                     secret={secret}
+                    delay={i}
                     handleDeleteComment={handleDeleteComment}
                   />
                 ))}

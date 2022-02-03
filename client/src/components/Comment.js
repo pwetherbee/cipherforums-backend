@@ -72,12 +72,22 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const Comment = ({ comment, secret, handleDeleteComment }) => {
+export const Comment = ({ comment, secret, handleDeleteComment, delay }) => {
   const classes = useStyles();
   const convertTimeToLocal = function (date) {
     const time = new Date(date + " UTC");
     return time.toString();
   };
+  const [delayedSecret, setDelayedSecret] = useState("");
+  useEffect(() => {
+    setTimeout(
+      () => {
+        setDelayedSecret(secret);
+      },
+      delay ? 50 * delay : 0
+    );
+  }, [secret]);
+
   return (
     <Stack className={classes.paper}>
       <Grid container wrap="nowrap" spacing={1}>
@@ -111,7 +121,7 @@ export const Comment = ({ comment, secret, handleDeleteComment }) => {
             </Button>
             {comment.encryptionType === "aes" ? (
               <Button
-                disabled="true"
+                disabled={true}
                 variant="outlined"
                 className={classes.aes}
               >
@@ -127,7 +137,7 @@ export const Comment = ({ comment, secret, handleDeleteComment }) => {
           <Typography className={classes.theComment} variant="body2">
             {CipherText(
               comment.text || comment.commentText,
-              secret || "default_key",
+              delayedSecret || "default_key",
               comment.encryptionType || "xor"
             )}
           </Typography>

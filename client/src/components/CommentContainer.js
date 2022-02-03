@@ -8,8 +8,8 @@ export const CommentContainer = ({ comments, secret, onDelete }) => {
     <Grid>
       {/* Comments by this user
       <MiniThread comments={comments} secret={secret} /> */}
-      {comments?.map((comment) => (
-        <Comment comment={comment} secret={secret} />
+      {comments?.map((comment, i) => (
+        <Comment key={i} comment={comment} secret={secret} />
       ))}
     </Grid>
   );
