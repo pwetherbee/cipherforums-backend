@@ -15,6 +15,9 @@ import Avatar from "@material-ui/core/Avatar";
 import ImageCircle from "./ImageCircle";
 import TwitterIcon from "@material-ui/icons/Twitter";
 import LanguageIcon from "@material-ui/icons/Language";
+import Box from "@mui/material/Box";
+import Modal from "@mui/material/Modal";
+import CloseIcon from "@mui/icons-material/Close";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -78,6 +81,22 @@ const useStyles = makeStyles((theme) => ({
   check: {
     marginTop: 5,
   },
+  desc2: {
+    // width: 1200,
+    // margin: "auto",
+    height: "60vh",
+    display: "block",
+    marginLeft: "auto",
+    marginRight: "auto",
+    marginTop: "15vh",
+    // width: "70%",
+  },
+  iconb: {
+    position: "absolute",
+    right: 50,
+    top: 50,
+    transform: "scale(1.8)",
+  },
 }));
 
 export default function Bio({ profile, currUser, canFollow }) {
@@ -104,6 +123,10 @@ export default function Bio({ profile, currUser, canFollow }) {
     alert(data.message);
     canFollow = false;
   };
+
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   //   const [profile, setProfile] = useState(user);
   return (
     <React.Fragment>
@@ -121,12 +144,29 @@ export default function Bio({ profile, currUser, canFollow }) {
               </Card>
               avatar= */}
                 {profile?.pic ? (
-                  <ImageCircle
-                    imageLink={profile.pic}
-                    size={150}
-                    alt={profile.username}
-                    square
-                  ></ImageCircle>
+                  <div>
+                    <Button onClick={handleOpen}>
+                      <ImageCircle
+                        imageLink={profile.pic}
+                        size={150}
+                        alt={profile.username}
+                        square
+                      ></ImageCircle>
+                    </Button>
+                    <Modal
+                      open={open}
+                      onClose={handleClose}
+                      aria-labelledby="modal-modal-title"
+                      aria-describedby="modal-modal-description"
+                    >
+                      <Box>
+                        <div onClick={handleClose}>
+                          <CloseIcon className={classes.iconb} />
+                        </div>
+                        <img className={classes.desc2} src={profile.pic} />
+                      </Box>
+                    </Modal>
+                  </div>
                 ) : (
                   <Avatar>{profile.username.slice(0, 2)}</Avatar>
                 )}
