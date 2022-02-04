@@ -95,6 +95,7 @@ router.get("/:username/posts", async (req, res) => {
   LEFT JOIN Users ON Users.userID = Forums.authorID
   WHERE Users.username = ${connection.escape(username)}
   GROUP BY Forums.id
+  ORDER BY Forums.creationDate DESC
   `;
   const rows = await connection.execute(query);
   connection.end();

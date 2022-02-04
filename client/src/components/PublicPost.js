@@ -96,7 +96,7 @@ const linkStyle = {
 };
 export const PublicPost = ({ details, topic }) => {
   const classes = useStyles();
-  console.log(details);
+  // console.log(details);
 
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);

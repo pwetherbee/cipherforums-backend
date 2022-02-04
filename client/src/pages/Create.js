@@ -73,7 +73,7 @@ export default function Public() {
       }),
     });
     const data = await res.json();
-    console.log(data);
+    // console.log(data);
     if (data.success) {
       return history.push(data.url);
     }

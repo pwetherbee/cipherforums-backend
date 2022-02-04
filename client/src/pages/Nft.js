@@ -176,7 +176,7 @@ export default function Public() {
     const objktHistory = getHistory(data);
     setNftHistory(objktHistory);
     setNftOwners(data.token_holders);
-    console.log(data);
+    // console.log(data);
   };
 
   const handleDeleteComment = (data) => () => {

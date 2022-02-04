@@ -49,7 +49,7 @@ export default function Public() {
     document.title = "Cipherforums | Create Public";
   });
   const handleChange = (props) => (e) => {
-    console.log(values);
+    // console.log(values);
     setValues({ ...values, [props]: e.target.value });
   };
   // handle submit
@@ -66,7 +66,7 @@ export default function Public() {
     });
     const data = await res.json();
     if (data.success) {
-      console.log(data.message);
+      // console.log(data.message);
       history.push(`/public/${topic}/${data.url}`);
     } else {
       alert(data.message);
@@ -76,7 +76,7 @@ export default function Public() {
     const media = e.target.files[0];
     const formdata = new FormData();
     formdata.append("image", media);
-    console.log(media);
+    // console.log(media);
     setCreateBtnDisabled(true);
     const res = await fetch("https://api.imgur.com/3/image/", {
       method: "POST",
@@ -87,7 +87,7 @@ export default function Public() {
     });
     const data = await res.json();
 
-    console.log(data);
+    // console.log(data);
     setValues({ ...values, ["image"]: data.data.link });
     setCreateBtnDisabled(false);
   };
@@ -101,7 +101,9 @@ export default function Public() {
         <Typography component="h1" variant="h5">
           Post to {topic}
         </Typography>
-        <Typography variant="comment">* Titles and subtitles are never encrypted *</Typography>
+        <Typography variant="comment">
+          * Titles and subtitles are never encrypted *
+        </Typography>
         <form className={classes.form} noValidate onSubmit={handleSubmit}>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={12}>

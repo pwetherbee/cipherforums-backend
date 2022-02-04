@@ -54,7 +54,7 @@ export default function Profile() {
   const [tab, setTab] = useState(0);
   const [tab2, setTab2] = useState(0);
   const [newUser, setNewUser] = useState(null);
-  console.log(userData);
+  // console.log(userData);
   useEffect(async () => {
     setTab(0);
     setUserData(null);
@@ -63,7 +63,7 @@ export default function Profile() {
         return res.json();
       })
       .then((result) => {
-        console.log(result);
+        // console.log(result);
         if (!result.exists) {
           history.push("/404");
         }
@@ -71,9 +71,9 @@ export default function Profile() {
       });
     const res = await fetch(`/api/user/${username}/posts`);
     const data = await res.json();
-    console.log("forums", data);
+    // console.log("forums", data);
     if (data.success) setCreatedPosts(data.data);
-    console.log("forums", data);
+    // console.log("forums", data);
 
     fetch(`/api/user/${username}/following/list/${username}`) // TODO: Fix this mess in api
       .then((res) => {
@@ -86,9 +86,9 @@ export default function Profile() {
   }, [username]);
 
   const updateSecret = function (secret) {
-    console.log(secret);
+    // console.log(secret);
     // username = "b";
-    console.log(username);
+    // console.log(username);
     setSecret(secret);
   };
 
@@ -102,7 +102,7 @@ export default function Profile() {
 
   const handleDecision = (decision) => async () => {
     if (decision === "agree") {
-      console.log(deletePostData);
+      // console.log(deletePostData);
       // make fetch to delete
       const res = await fetch("/api/delete/post", {
         method: "DELETE",

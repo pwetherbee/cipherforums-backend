@@ -150,12 +150,12 @@ export default function Post() {
         ref[comment.commentID] = i;
       } else {
         // console.log(ref)
-        console.log(ref);
+        // console.log(ref);
         if (ref[comment.parentID] === undefined) return;
 
         nestedTemp[ref[comment.parentID]].replies.push(comment);
       }
-      console.log(nestedTemp);
+      // console.log(nestedTemp);
       setNestedComments(nestedTemp);
     });
   }, [comments]);
@@ -167,7 +167,7 @@ export default function Post() {
         if (!data.success) {
           // handle error in request
         }
-        console.log(data);
+        // console.log(data);
         setForumData(data);
         setComments(data.comments);
         setSecret(data.publicTopic?.toLowerCase() || "");
@@ -211,7 +211,7 @@ export default function Post() {
     //   return;
     // }
     // Encrypt comment
-    console.log(postCommentText, secret);
+    // console.log(postCommentText, secret);
     const ciphertext = encryptMultiLine(postCommentText, secret, encType);
     const res = await fetch(`/api/threads/${topic || username}/${postname}`, {
       method: "POST",
@@ -243,8 +243,8 @@ export default function Post() {
   };
   const handleDecision = (decision) => async () => {
     if (decision === "agree") {
-      console.log("deleting comment");
-      console.log(deleteCommentData);
+      // console.log("deleting comment");
+      // console.log(deleteCommentData);
       // make fetch to delete
       const res = await fetch("/api/delete/comment", {
         method: "POST",
@@ -284,10 +284,10 @@ export default function Post() {
             handleClose={handleCloseConfirmDelete}
           />
           <Paper className={classes.titleHolder}>
-            <Typography variant="h3" className={classes.titleElements}>
+            <Typography variant="h5" className={classes.titleElements}>
               {forumData?.title.slice(0, -5)}
             </Typography>
-            <Typography variant="body2" className={classes.titleElements}>
+            <Typography variant="body1" className={classes.titleElements}>
               {forumData?.subtitle}
             </Typography>
 
@@ -371,7 +371,7 @@ export default function Post() {
                 </Toolbar>
                 <Stack>
                   {nestedComments?.map((nestedComment, i) => (
-                    <Box>
+                    <Box key={i}>
                       <Comment
                         key={i}
                         comment={nestedComment.comment}
@@ -388,6 +388,7 @@ export default function Post() {
                             secret={secret}
                             delay={i + j}
                             encType={encType}
+                            disabled
                             handleDeleteComment={handleDeleteComment}
                           />
                         ))}

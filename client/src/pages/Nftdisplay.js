@@ -73,7 +73,7 @@ export default function AutoGrid() {
       const collected = await fetchCollectedOBJKTs(address);
       setCollectedNFTs(collected);
     }
-    console.log(display);
+    // console.log(display);
   };
 
   const handleChangeTab = (e, newTab) => {
@@ -85,7 +85,7 @@ export default function AutoGrid() {
   useEffect(async () => {
     document.title = `Cipherforums | ${address}`;
     const created = await fetchCreatedOBJKTs(address);
-    console.log(created);
+    // console.log(created);
     setCreatedNFTs(created);
   }, [address]);
   return (

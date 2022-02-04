@@ -203,7 +203,7 @@ router.get("/public/:topic", async (req, res) => {
 router.post(
   "/public/:topic",
   body("title").isAscii().isLength({ min: 1, max: 250 }),
-  body("subtitle").isAscii().isLength({ min: 1, max: 250 }),
+  body("subtitle").isAscii().isLength({ min: 1, max: 500 }),
   body("image").isLength({ max: 250 }),
   async (req, res) => {
     if (!req.session.userID) {
@@ -214,16 +214,20 @@ router.post(
     }
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      console.log(errors);
+      console.log(
+        errors.errors.map((error) => error.param + " : " + error.msg).join(",")
+      );
       return res.status(400).json({
         success: false,
-        message: `invalid title, subtile, or image: ${errors.ErrorMessage}`,
+        message: `invalid title, subtile, or image: ${errors.errors
+          .map((error) => error.param + " : " + error.msg)
+          .join(",")}`,
       });
     }
     let topic = req.params["topic"];
     let data = req.body;
     console.log(req.body, topic);
-    const slug = data.title.replace(" ", "-");
+    const slug = data.title.replaceAll(" ", "-");
     const url = slug + "!" + idGen.generateHexID();
     const connection = await SQLHelper.createConnection2();
     const query = `

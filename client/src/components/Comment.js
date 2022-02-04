@@ -83,7 +83,7 @@ export const Comment = ({
   handleDeleteComment,
   delay,
   encType,
-  disable,
+  disabled,
   // replyActive,
   // changeReplyActive,
   // key,
@@ -98,7 +98,7 @@ export const Comment = ({
     body.encType = encType;
     const data = await query(`/api/threads/reply`, body);
     if (data.success) return alert(data.message);
-    console.log("response to posting reply:", data);
+    // console.log("response to posting reply:", data);
     return alert("Error replying to comment");
   };
   const classes = useStyles();
@@ -165,25 +165,26 @@ export const Comment = ({
               <IconButton>
                 <FavoriteTwoToneIcon color="primary" size="small" />
               </IconButton>
-              {!showReply ? (
-                <Button
-                  className={classes.reply}
-                  onClick={() => {
-                    setShowReply(true);
-                  }}
-                >
-                  Reply
-                </Button>
-              ) : (
-                <Button
-                  className={classes.reply}
-                  onClick={() => {
-                    setShowReply(false);
-                  }}
-                >
-                  Cancel
-                </Button>
-              )}
+              {!disabled &&
+                (!showReply ? (
+                  <Button
+                    className={classes.reply}
+                    onClick={() => {
+                      setShowReply(true);
+                    }}
+                  >
+                    Reply
+                  </Button>
+                ) : (
+                  <Button
+                    className={classes.reply}
+                    onClick={() => {
+                      setShowReply(false);
+                    }}
+                  >
+                    Cancel
+                  </Button>
+                ))}
               <Button className={classes.reply}>Report</Button>
               <Button
                 className={classes.reply}

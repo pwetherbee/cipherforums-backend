@@ -76,13 +76,13 @@ const SearchBar = () => {
   };
   const clickAwayHandler = () => setAnchorEl(null);
   const clickHandler = (e) => {
-    console.log(open);
+    // console.log(open);
     setAnchorEl(e.currentTarget);
   };
   const handleInput = async (e) => {
     setResults([]);
     setLoading(true);
-    console.log(e.target.value);
+    // console.log(e.target.value);
     if (!e.target.value?.length) {
       setLoading(false);
 

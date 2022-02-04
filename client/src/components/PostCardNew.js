@@ -38,7 +38,7 @@ export default function PostCardNew({ data, secret, onDelete, view, isOwner }) {
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
-  console.log("userpost", data);
+  // console.log("userpost", data);
   return (
     <Box>
       <Card
@@ -90,9 +90,7 @@ export default function PostCardNew({ data, secret, onDelete, view, isOwner }) {
               ) : (
                 <CardContent sx={{ height: view == "list" ? null : 300 }}>
                   <Typography variant="body2" color="text.secondary">
-                    This impressive paella is a perfect party dish and a fun
-                    meal to cook together with your guests. Add 1 cup of frozen
-                    peas along with the mussels, if you like.
+                    {data.subtitle}
                   </Typography>
                 </CardContent>
               )}
