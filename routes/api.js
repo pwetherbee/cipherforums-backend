@@ -208,7 +208,8 @@ router.post(
     let topic = req.params["topic"];
     let data = req.body;
     console.log(req.body, topic);
-    const url = data.title + "!" + idGen.generateHexID();
+    const slug = data.title.replace(" ", "-");
+    const url = slug + "!" + idGen.generateHexID();
     const connection = await SQLHelper.createConnection2();
     const query = `
   INSERT INTO Forums (url, authorID, subtitle, CreationDate, publicTopic, image, postType)

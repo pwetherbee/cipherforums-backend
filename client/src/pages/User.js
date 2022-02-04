@@ -5,7 +5,7 @@ import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
 import { createTheme } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/styles";
-import { CommentContainer } from "../components/CommentContainer";
+// import { CommentContainer } from "../components/CommentContainer";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Button from "@material-ui/core/Button";
@@ -24,10 +24,12 @@ import {
   Link,
   useRouteMatch,
   useParams,
+  useHistory,
 } from "react-router-dom";
 import FollowContainer from "../components/FollowContainer";
 import ConfirmDelete from "../components/ConfirmDelete";
 import LikedNFTs from "../components/LikedNFTs";
+import { UserComments } from "../components/UserComments";
 // import Button from "@material-ui/core/Button";
 
 function TabPanel(props) {
@@ -37,13 +39,14 @@ function TabPanel(props) {
 
 export default function Profile() {
   let match = useRouteMatch();
+  const history = useHistory();
   let { username } = useParams();
   // const classes = useStyles();
   const [openConfirmDelete, setOpenConfirmDelete] = useState(false);
   const [deletePostData, setDeletePostData] = useState({});
 
   const [createdPosts, setCreatedPosts] = useState([]);
-  const [userData, setUserData] = useState();
+  const [userData, setUserData] = useState({});
   const [secret, setSecret] = useState({});
   const [comments, setComments] = useState([]);
   const [following, setFollowing] = useState([]);
@@ -51,7 +54,7 @@ export default function Profile() {
   const [tab, setTab] = useState(0);
   const [tab2, setTab2] = useState(0);
   const [newUser, setNewUser] = useState(null);
-
+  console.log(userData);
   useEffect(async () => {
     setTab(0);
     setUserData(null);
@@ -60,18 +63,17 @@ export default function Profile() {
         return res.json();
       })
       .then((result) => {
-        setCreatedPosts(result.createdPosts);
+        console.log(result);
+        if (!result.exists) {
+          history.push("/404");
+        }
         setUserData(result);
       });
-    fetch(`/api/${username}/comments`)
-      .then((res) => {
-        return res.json();
-      })
-      .then((result) => {
-        // TODO: Rename postTime to time and CommentText to text
-        setComments(result.comments);
-      })
-      .catch((err) => console.log("Error: Could not fetch comments"));
+    const res = await fetch(`/api/user/${username}/posts`);
+    const data = await res.json();
+    console.log("forums", data);
+    if (data.success) setCreatedPosts(data.data);
+    console.log("forums", data);
 
     fetch(`/api/user/${username}/following/list/${username}`) // TODO: Fix this mess in api
       .then((res) => {
@@ -132,6 +134,7 @@ export default function Profile() {
   //   setUserData();
   //   setNewUser(1);
   // };
+  if (!userData) return <div>Loading</div>;
   return (
     <React.Fragment>
       <CssBaseline />
@@ -211,6 +214,7 @@ export default function Profile() {
               {userData ? (
                 createdPosts.length ? (
                   <UserPosts
+                    isOwner={userData.currUser}
                     secret={secret}
                     posts={createdPosts}
                     onDelete={handleClickDelete}
@@ -226,11 +230,7 @@ export default function Profile() {
             {/* -------------------------------------- */}
             {/* --------------------------------------- */}
             <TabPanel value={tab} index={1}>
-              {comments.length ? (
-                <CommentContainer comments={comments} secret={secret} />
-              ) : (
-                "This user hasn't made any comments yet"
-              )}
+              <UserComments userID={userData?.userID} />
             </TabPanel>
             <TabPanel value={tab} index={2}>
               <Container>

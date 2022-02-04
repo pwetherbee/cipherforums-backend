@@ -16,6 +16,7 @@ import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import CloseIcon from "@mui/icons-material/Close";
 import Button from "@material-ui/core/Button";
+import ImageModal from "./imageModal";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -114,7 +115,8 @@ export const PublicPost = ({ details, topic }) => {
                 square
               ></ImageCircle>
             </Button>
-            <Modal
+            <ImageModal open={open} onClose={handleClose} src={details.image} />
+            {/* <Modal
               open={open}
               onClose={handleClose}
               aria-labelledby="modal-modal-title"
@@ -126,7 +128,7 @@ export const PublicPost = ({ details, topic }) => {
                 </div>
                 <img className={classes.desc} src={details.image} />
               </Box>
-            </Modal>
+            </Modal> */}
           </div>
           {/* <img
                 className={classes.img}

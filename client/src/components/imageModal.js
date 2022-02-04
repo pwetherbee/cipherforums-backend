@@ -41,10 +41,11 @@ function ImageModal({ src, onClose, open }) {
         <img
           style={{
             maxHeight: "90vh",
+            maxWidth: "90vw",
             display: "block",
             marginLeft: "auto",
             marginRight: "auto",
-            marginTop: 40,
+            marginTop: "auto",
           }}
           src={src}
         />

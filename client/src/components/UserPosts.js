@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
   // },
 }));
 
-export default function UserPosts({ posts, secret, onDelete }) {
+export default function UserPosts({ posts, secret, onDelete, isOwner }) {
   const classes = useStyles();
   const [value, setValue] = useState("grid");
   const handleChange = (e) => {
@@ -72,7 +72,17 @@ export default function UserPosts({ posts, secret, onDelete }) {
           </RadioGroup>
         </FormControl>
       </Box>
-      <Grid container spacing={2}>
+      <Grid
+        container
+        spacing={2}
+        direction={value == "list" ? "column" : "row"}
+        alignItems="center"
+        justifyContent="center"
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
         {posts
           ? posts.map((post, i) => (
               <Grid
@@ -82,7 +92,14 @@ export default function UserPosts({ posts, secret, onDelete }) {
                 md={value == "list" ? 12 : 4}
                 xl={value == "list" ? 12 : 4}
               >
-                <PostCard secret={secret} data={post} onDelete={onDelete} />
+                {/* <PostCard secret={secret} data={post} onDelete={onDelete} /> */}
+                <PostCardNew
+                  secret={secret}
+                  data={post}
+                  onDelete={onDelete}
+                  view={value}
+                  isOwner={isOwner}
+                />
               </Grid>
             ))
           : "No Posts for this user"}

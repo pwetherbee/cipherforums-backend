@@ -35,6 +35,7 @@ router.get("/:username/info", (req, res) => {
   let info = {
     exists: false,
     username: username,
+    userID: null,
     bio: "",
     pic: "",
     createdPosts: [],
@@ -45,7 +46,7 @@ router.get("/:username/info", (req, res) => {
   // Get bio, created posts, and following list from database
   const connection = SQLHelper.createConnection();
   const query = `
-  SELECT Forums.id, Forums.url, Forums.subtitle, Forums.creationDate, Forums.image, Users.username, Users.bio, Forums.postType, Forums.publicTopic, Users.avi FROM Forums
+  SELECT Forums.id, Forums.url, Forums.subtitle, Forums.creationDate, Forums.image, Users.userID, Users.username, Users.bio, Forums.postType, Forums.publicTopic, Users.avi FROM Forums
   RIGHT JOIN Users
   ON Forums.authorID = Users.userID
   WHERE Users.username = ${connection.escape(username)}
@@ -58,9 +59,11 @@ router.get("/:username/info", (req, res) => {
       res.send(JSON.stringify(info));
       return;
     }
+    info.exists = true;
 
     info.bio = rows[0].bio;
     info.pic = rows[0].avi;
+    info.userID = rows[0].userID;
 
     rows.forEach((row) => row.url && info.createdPosts.push(row));
     if (info.currUser) {
@@ -81,6 +84,40 @@ router.get("/:username/info", (req, res) => {
       res.send(JSON.stringify(info));
       connection.end();
     });
+  });
+});
+router.get("/:username/posts", async (req, res) => {
+  let { username } = req.params;
+  const connection = await SQLHelper.createConnection2();
+  const query = `
+  SELECT Forums.id, Forums.url, Forums.creationDate, Forums.subtitle, Forums.image, Users.username, COUNT(Comments.commentID) as numComments FROM Forums
+  LEFT JOIN Comments ON Comments.forumID = Forums.id
+  LEFT JOIN Users ON Users.userID = Forums.authorID
+  WHERE Users.username = ${connection.escape(username)}
+  GROUP BY Forums.id
+  `;
+  const rows = await connection.execute(query);
+  connection.end();
+  res.json({
+    success: true,
+    data: rows[0],
+  });
+});
+
+router.get("/:userid/comments", async (req, res) => {
+  let { userid } = req.params;
+  const connection = await SQLHelper.createConnection2();
+  const query = `
+  SELECT Comments.commentID, Comments.postTime, Comments.commentText, Comments.forumID, Comments.encryptionType, Users.username FROM Comments
+  LEFT JOIN Users
+  ON Comments.authorID = Users.userID
+  WHERE Comments.authorID = ${connection.escape(userid)}
+  ORDER BY Comments.postTime ASC
+  `;
+  const rows = await connection.execute(query);
+  res.json({
+    success: true,
+    data: rows[0],
   });
 });
 
