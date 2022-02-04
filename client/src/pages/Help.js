@@ -45,9 +45,9 @@ export default function FullWidthGrid() {
               What is this website?
             </Typography>
             <Typography>
-              This website utilizes to intertwined technologies. The first is
-              encryption, and the second is blockchains. Use the slider below to
-              learn more about how each technology is implemented in this
+              This website utilizes two intertwined technologies. The first is
+              encryption, and the second is the blockchain. Use the slider below
+              to learn more about how each technology is implemented in this
               website.
             </Typography>
           </Paper>
@@ -101,8 +101,9 @@ export default function FullWidthGrid() {
           </Grid>
           <Paper className={classes.paper}>
             <Typography>
-              All operations are done client side. Our code is open source and
-              freely auditable and available at ____________.
+              All encryption and decryption operations are done client side. Our
+              code is open source and freely auditable and available at
+              ____________.
             </Typography>
           </Paper>
           <Grid item xs={11}>
