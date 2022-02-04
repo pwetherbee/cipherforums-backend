@@ -23,6 +23,7 @@ import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import CloseIcon from "@mui/icons-material/Close";
+import ImageModal from "../components/imageModal";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -262,7 +263,12 @@ export default function Post() {
                     <Button onClick={handleOpen}>
                       <img className={classes.mainimg} src={forumData.image} />
                     </Button>
-                    <Modal
+                    <ImageModal
+                      open={open}
+                      onClose={handleClose}
+                      src={forumData.image}
+                    />
+                    {/* <Modal
                       open={open}
                       onClose={handleClose}
                       aria-labelledby="modal-modal-title"
@@ -274,7 +280,7 @@ export default function Post() {
                         </div>
                         <img className={classes.desc} src={forumData.image} />
                       </Box>
-                    </Modal>
+                    </Modal> */}
                   </div>
                 )}
                 <Typography

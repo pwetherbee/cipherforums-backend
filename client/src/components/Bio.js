@@ -18,6 +18,7 @@ import LanguageIcon from "@material-ui/icons/Language";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import CloseIcon from "@mui/icons-material/Close";
+import ImageModal from "./imageModal";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -153,19 +154,34 @@ export default function Bio({ profile, currUser, canFollow }) {
                         square
                       ></ImageCircle>
                     </Button>
-                    <Modal
+                    <ImageModal
+                      src={profile.pic}
+                      onClose={handleClose}
+                      open={open}
+                    />
+                    {/* <Modal
                       open={open}
                       onClose={handleClose}
                       aria-labelledby="modal-modal-title"
                       aria-describedby="modal-modal-description"
                     >
-                      <Box>
-                        <div onClick={handleClose}>
+                      <Box
+                        sx={{
+                          position: "absolute",
+                          top: "50%",
+                          left: "50%",
+                          transform: "translate(-50%, -50%)",
+                        }}
+                      >
+                        <Box
+                          sx={{ transform: "translate(100%, 100%)" }}
+                          onClick={handleClose}
+                        >
                           <CloseIcon className={classes.iconb} />
-                        </div>
+                        </Box>
                         <img className={classes.desc2} src={profile.pic} />
                       </Box>
-                    </Modal>
+                    </Modal> */}
                   </div>
                 ) : (
                   <Avatar>{profile.username.slice(0, 2)}</Avatar>
