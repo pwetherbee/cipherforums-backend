@@ -105,6 +105,10 @@ const useStyles = makeStyles((theme) => ({
     top: 30,
     transform: "scale(1.8)",
   },
+  wid: {
+    width: "98%",
+    marginLeft: 100,
+  },
 }));
 const linkStyle = {
   margin: "1rem",
@@ -243,32 +247,36 @@ export default function Post() {
   return (
     <CssBaseline>
       {forumData ? (
-        <Grid container>
-          <Stack direction="column" className={classes.holder}>
-            <Stack>
-              <ConfirmDelete
-                open={openConfirmDelete}
-                handleDecision={handleDecision}
-                handleClose={handleCloseConfirmDelete}
-              />
-              <Paper className={classes.titleHolder}>
-                <Typography variant="h3" className={classes.titleElements}>
-                  {forumData?.title.slice(0, -5)}
-                </Typography>
-                <Typography variant="body2" className={classes.titleElements}>
-                  {forumData?.subtitle}
-                </Typography>
-                {forumData?.image && (
-                  <div className={classes.imgDiv}>
-                    <Button onClick={handleOpen}>
-                      <img className={classes.mainimg} src={forumData.image} />
-                    </Button>
-                    <ImageModal
-                      open={open}
-                      onClose={handleClose}
-                      src={forumData.image}
-                    />
-                    {/* <Modal
+        <Grid container sx={12}>
+          <div className={classes.wid}>
+            <Stack direction="column" className={classes.holder}>
+              <Stack>
+                <ConfirmDelete
+                  open={openConfirmDelete}
+                  handleDecision={handleDecision}
+                  handleClose={handleCloseConfirmDelete}
+                />
+                <Paper className={classes.titleHolder}>
+                  <Typography variant="h3" className={classes.titleElements}>
+                    {forumData?.title.slice(0, -5)}
+                  </Typography>
+                  <Typography variant="body2" className={classes.titleElements}>
+                    {forumData?.subtitle}
+                  </Typography>
+                  {forumData?.image && (
+                    <div className={classes.imgDiv}>
+                      <Button onClick={handleOpen}>
+                        <img
+                          className={classes.mainimg}
+                          src={forumData.image}
+                        />
+                      </Button>
+                      <ImageModal
+                        open={open}
+                        onClose={handleClose}
+                        src={forumData.image}
+                      />
+                      {/* <Modal
                       open={open}
                       onClose={handleClose}
                       aria-labelledby="modal-modal-title"
@@ -281,96 +289,99 @@ export default function Post() {
                         <img className={classes.desc} src={forumData.image} />
                       </Box>
                     </Modal> */}
-                  </div>
-                )}
-                <Typography
-                  variant="subtitle1"
-                  className={classes.titleElements}
-                >
-                  Post to
-                  {
-                    <RouteLink
-                      to={`/${
-                        forumData.postType == "public" ? "public/" : "@"
-                      }${forumData.publicTopic}`}
-                      style={linkStyle}
-                    >
-                      <Link>{forumData.publicTopic}</Link>
-                    </RouteLink>
-                  }
-                  by
-                  {
-                    <RouteLink to={`/@${forumData.author}`} style={linkStyle}>
-                      <Link>{"@" + forumData.author}</Link>
-                    </RouteLink>
-                  }
-                </Typography>
-              </Paper>
-            </Stack>
-            <Stack>
-              <div style={{ display: "inline-flex", alignItems: "center" }}>
-                {encType === "xor" ? (
-                  <Typography className={classes.aesType}>
-                    Using {encType.toLocaleUpperCase()}
-                  </Typography>
-                ) : (
+                    </div>
+                  )}
                   <Typography
-                    className={classes.aesType}
-                    style={{ color: "#FFFF00" }}
+                    variant="subtitle1"
+                    className={classes.titleElements}
                   >
-                    Using {encType.toLocaleUpperCase()}
+                    Post to
+                    {
+                      <RouteLink
+                        to={`/${
+                          forumData.postType == "public" ? "public/" : "@"
+                        }${forumData.publicTopic}`}
+                        style={linkStyle}
+                      >
+                        <Link>{forumData.publicTopic}</Link>
+                      </RouteLink>
+                    }
+                    by
+                    {
+                      <RouteLink to={`/@${forumData.author}`} style={linkStyle}>
+                        <Link>{"@" + forumData.author}</Link>
+                      </RouteLink>
+                    }
                   </Typography>
-                )}
-                <Switch
-                  checked={encChecked}
-                  onChange={handleChangeEnc}
-                  inputProps={{ "aria-label": "controlled" }}
-                  color="secondary"
-                />
-              </div>
-              <Stack>
-                <SecretBox updateSecret={updateSecret} secret={secret} />
-                {comments?.map((comment, i) => (
-                  <Comment
-                    key={i}
-                    comment={comment}
-                    secret={secret}
-                    delay={i}
-                    handleDeleteComment={handleDeleteComment}
-                  />
-                ))}
-
-                <TextField
-                  error={error}
-                  helperText={helperText}
-                  className={classes.comment}
-                  id="outlined-textarea"
-                  label="Reply"
-                  value={postCommentText}
-                  onInput={(e) => {
-                    setError(false);
-                    setHelperText("");
-                    setPostCommentText(e.target.value);
-                  }}
-                  placeholder="Enter your comment here"
-                  multiline
-                  fullWidth
-                  variant="outlined"
-                />
+                </Paper>
               </Stack>
-              <Container className={classes.submitBox}>
-                <Button
-                  disabled={!postCommentText.length}
-                  variant="contained"
-                  color="primary"
-                  onClick={handleSubmitComment}
-                >
-                  Submit Comment
-                </Button>
-                {/* <SecretBox updateSecret={updateSecret} secret={secret} /> */}
-              </Container>
+              <Stack>
+                <div style={{ display: "inline-flex", alignItems: "center" }}>
+                  {encType === "xor" ? (
+                    <Typography className={classes.aesType}>
+                      Using {encType.toLocaleUpperCase()}
+                    </Typography>
+                  ) : (
+                    <Typography
+                      className={classes.aesType}
+                      style={{ color: "#FFFF00" }}
+                    >
+                      Using {encType.toLocaleUpperCase()}
+                    </Typography>
+                  )}
+                  <Switch
+                    checked={encChecked}
+                    onChange={handleChangeEnc}
+                    inputProps={{ "aria-label": "controlled" }}
+                    color="secondary"
+                  />
+                </div>
+              </Stack>
             </Stack>
-          </Stack>
+          </div>
+          <div className={classes.wid}>
+            <Stack>
+              <SecretBox updateSecret={updateSecret} secret={secret} />
+              {comments?.map((comment, i) => (
+                <Comment
+                  key={i}
+                  comment={comment}
+                  secret={secret}
+                  delay={i}
+                  handleDeleteComment={handleDeleteComment}
+                />
+              ))}
+
+              <TextField
+                error={error}
+                helperText={helperText}
+                className={classes.comment}
+                id="outlined-textarea"
+                label="Reply"
+                value={postCommentText}
+                onInput={(e) => {
+                  setError(false);
+                  setHelperText("");
+                  setPostCommentText(e.target.value);
+                }}
+                placeholder="Enter your comment here"
+                multiline
+                fullWidth
+                variant="outlined"
+              />
+            </Stack>
+            <Container className={classes.submitBox}>
+              <Button
+                disabled={!postCommentText.length}
+                variant="contained"
+                color="primary"
+                onClick={handleSubmitComment}
+              >
+                Submit Comment
+              </Button>
+              {/* <SecretBox updateSecret={updateSecret} secret={secret} /> */}
+            </Container>
+          </div>
         </Grid>
       ) : (
         <LoadingIcon height={"30rem"} />
