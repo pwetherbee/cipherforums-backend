@@ -6,10 +6,9 @@ const useStyles = makeStyles((theme) => ({
   root: {
     "& .MuiTextField-root": {
       // margin: theme.spacing(1),
-      margin: "auto",
-      paddingBottom: 0,
+      // margin: "auto",
+
       width: "30ch",
-      marginLeft: 0,
     },
   },
 }));
@@ -28,7 +27,7 @@ export default function SecretBox({ updateSecret, secret }) {
     <form className={classes.root} noValidate autoComplete="off">
       <div>
         <TextField
-          transitionDuration={50}
+          // transitionduration={50}
           inputProps={{ spellCheck: "false" }}
           id="outlined-textarea"
           label="Secret Key"

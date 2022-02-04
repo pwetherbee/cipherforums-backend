@@ -139,6 +139,26 @@ export default function Post() {
   const handleClose = () => setOpen(false);
 
   const [encChecked, setEncChecked] = useState(false);
+  const [nestedComments, setNestedComments] = useState([]);
+  useEffect(() => {
+    if (!comments) return;
+    const nestedTemp = [];
+    const ref = {};
+    comments.forEach((comment, i) => {
+      if (!comment.parentID) {
+        nestedTemp.push({ comment: comment, replies: [] });
+        ref[comment.commentID] = i;
+      } else {
+        // console.log(ref)
+        console.log(ref);
+        if (ref[comment.parentID] === undefined) return;
+
+        nestedTemp[ref[comment.parentID]].replies.push(comment);
+      }
+      console.log(nestedTemp);
+      setNestedComments(nestedTemp);
+    });
+  }, [comments]);
 
   useEffect(() => {
     fetch(`/api/threads/${topic || username}/${postname}`)
@@ -326,38 +346,53 @@ export default function Post() {
             // }}
             >
               <Stack spacing={1}>
-                <Toolbar spacing={3}>
+                <Toolbar>
                   <SecretBox updateSecret={updateSecret} secret={secret} />
-                  <div style={{ display: "inline-flex", alignItems: "center" }}>
-                    {encType === "xor" ? (
-                      <Typography className={classes.aesType}>
-                        Using {encType.toLocaleUpperCase()}
-                      </Typography>
-                    ) : (
-                      <Typography
-                        className={classes.aesType}
-                        style={{ color: "#FFFF00" }}
-                      >
-                        Using {encType.toLocaleUpperCase()}
-                      </Typography>
-                    )}
-                    <Switch
-                      checked={encChecked}
-                      onChange={handleChangeEnc}
-                      inputProps={{ "aria-label": "controlled" }}
-                      color="secondary"
-                    />
-                  </div>
+
+                  <Box sx={{ width: 20 }}></Box>
+                  {encType === "xor" ? (
+                    <Typography className={classes.aesType}>
+                      Using {encType.toLocaleUpperCase()}
+                    </Typography>
+                  ) : (
+                    <Typography
+                      className={classes.aesType}
+                      style={{ color: "#FFFF00" }}
+                    >
+                      Using {encType.toLocaleUpperCase()}
+                    </Typography>
+                  )}
+                  <Switch
+                    checked={encChecked}
+                    onChange={handleChangeEnc}
+                    inputProps={{ "aria-label": "controlled" }}
+                    color="secondary"
+                  />
                 </Toolbar>
                 <Stack>
-                  {comments?.map((comment, i) => (
-                    <Comment
-                      key={i}
-                      comment={comment}
-                      secret={secret}
-                      delay={i}
-                      handleDeleteComment={handleDeleteComment}
-                    />
+                  {nestedComments?.map((nestedComment, i) => (
+                    <Box>
+                      <Comment
+                        key={i}
+                        comment={nestedComment.comment}
+                        secret={secret}
+                        delay={i}
+                        encType={encType}
+                        handleDeleteComment={handleDeleteComment}
+                      />
+                      <Box sx={{ marginLeft: 10 }}>
+                        {nestedComment.replies.map((reply, j) => (
+                          <Comment
+                            key={`${i}${j}`}
+                            comment={reply}
+                            secret={secret}
+                            delay={i + j}
+                            encType={encType}
+                            handleDeleteComment={handleDeleteComment}
+                          />
+                        ))}
+                      </Box>
+                    </Box>
                   ))}
                   <TextField
                     error={error}

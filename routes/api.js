@@ -53,7 +53,7 @@ router.get("/threads/:topic/:tag", (req, res) => {
       comments: [],
     };
     query = `
-    SELECT Comments.commentID, Comments.postTime, Comments.commentText, Comments.forumID, Comments.encryptionType, Users.username FROM Comments
+    SELECT Comments.commentID, Comments.postTime, Comments.commentText, Comments.forumID, Comments.encryptionType, Comments.parentID, Users.userID, Users.username FROM Comments
     LEFT JOIN Users
     ON Comments.authorID = Users.userID
     WHERE forumID = ${id}
@@ -68,21 +68,17 @@ router.get("/threads/:topic/:tag", (req, res) => {
       // const authorIDs = rows.map((row) => row.authorID);
 
       rows.forEach((row, i) => {
-        if (!row) {
-          res.send(forum);
-          return;
-        }
         // Generate comment for every row returned in SQL
 
-        let comment = {
-          id: row.commentID,
-          author: row.username || "Anonymous",
-          time: row.postTime,
-          text: row.commentText,
-          forumID: row.forumID,
-          encryptionType: row.encryptionType,
-        };
-        forum.comments.push(comment);
+        // let comment = {
+        //   id: row.commentID,
+        //   author: row.username || "Anonymous",
+        //   time: row.postTime,
+        //   text: row.commentText,
+        //   forumID: row.forumID,
+        //   encryptionType: row.encryptionType,
+        // };
+        forum.comments.push(row);
       });
       res.send(forum);
     });
@@ -111,6 +107,25 @@ router.get("/:username/created", (req, res) => {
 });
 
 // Post comment on thread from url
+
+router.post("/threads/reply", async (req, res) => {
+  const data = req.body;
+  const connection = await SQLHelper.createConnection2();
+  const query = `
+  INSERT INTO Comments (commentText, forumID, postTime, authorID, encryptionType, parentID)
+  VALUES (${connection.escape(data.commentText)}, ${connection.escape(
+    data.forumID
+  )}, NOW(), ${connection.escape(req.session.userID || 0)}, ${connection.escape(
+    data.encType
+  )}, ${connection.escape(data.parentID)})
+  `;
+  const rows = await connection.execute(query);
+  connection.end();
+  return res.send({
+    success: true,
+    message: "successfully posted comment",
+  });
+});
 
 router.post("/threads/:topic/:tag", (req, res) => {
   let { tag, topic } = req.params;
@@ -141,7 +156,7 @@ router.post("/threads/:topic/:tag", (req, res) => {
   res.json({
     author: req.session.username || "Anonymous",
     forumID: commentData.forumID,
-    time: "just now",
+    time: new Date().toUTCString(),
     text: commentData.text,
     encryptionType: commentData.encType,
   });
