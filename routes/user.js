@@ -90,7 +90,7 @@ router.get("/:username/posts", async (req, res) => {
   let { username } = req.params;
   const connection = await SQLHelper.createConnection2();
   const query = `
-  SELECT Forums.id, Forums.url, Forums.creationDate, Forums.subtitle, Forums.image, Users.username, COUNT(Comments.commentID) as numComments FROM Forums
+  SELECT Forums.id, Forums.url, Forums.creationDate, Forums.subtitle, Forums.image, Forums.postType, Forums.publicTopic, Users.username, COUNT(Comments.commentID) as numComments FROM Forums
   LEFT JOIN Comments ON Comments.forumID = Forums.id
   LEFT JOIN Users ON Users.userID = Forums.authorID
   WHERE Users.username = ${connection.escape(username)}

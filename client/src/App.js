@@ -102,6 +102,7 @@ const themeMui = createThemeMui({
     type: "dark",
     primary: {
       main: "#00e019",
+      main3: "#006600",
       // main: "#ffffff",
       contrastText: "#121212",
     },

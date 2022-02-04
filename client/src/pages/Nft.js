@@ -219,7 +219,7 @@ export default function Public() {
         handleDecision={handleDecision}
         handleClose={handleCloseConfirmDelete}
       />
-      <Grid item xs={12} sm={12}>
+      <Grid item xs={12} md={12}>
         <Box className={classes.paper}>
           <Media nft={nft}></Media>
         </Box>

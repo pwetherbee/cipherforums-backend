@@ -24,6 +24,7 @@ import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import CloseIcon from "@mui/icons-material/Close";
 import ImageModal from "../components/imageModal";
+import { Divider, Toolbar } from "@mui/material";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -63,11 +64,12 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: 50,
   },
   mainimg: {
-    width: "100%",
+    maxWidth: "100%",
     // marginLeft: 300,
   },
   imgDiv: {
     // maxWidth: 1000,
+    width: "50vw",
     // margin: "auto",
     textAlign: "center",
     margin: "auto",
@@ -247,142 +249,149 @@ export default function Post() {
   return (
     <CssBaseline>
       {forumData ? (
-        <Grid container sx={12}>
-          <div className={classes.wid}>
-            <Stack direction="column" className={classes.holder}>
-              <Stack>
-                <ConfirmDelete
-                  open={openConfirmDelete}
-                  handleDecision={handleDecision}
-                  handleClose={handleCloseConfirmDelete}
-                />
-                <Paper className={classes.titleHolder}>
-                  <Typography variant="h3" className={classes.titleElements}>
-                    {forumData?.title.slice(0, -5)}
-                  </Typography>
-                  <Typography variant="body2" className={classes.titleElements}>
-                    {forumData?.subtitle}
-                  </Typography>
-                  {forumData?.image && (
-                    <div className={classes.imgDiv}>
-                      <Button onClick={handleOpen}>
-                        <img
-                          className={classes.mainimg}
-                          src={forumData.image}
-                        />
-                      </Button>
-                      <ImageModal
-                        open={open}
-                        onClose={handleClose}
-                        src={forumData.image}
-                      />
-                      {/* <Modal
-                      open={open}
-                      onClose={handleClose}
-                      aria-labelledby="modal-modal-title"
-                      aria-describedby="modal-modal-description"
-                    >
-                      <Box>
-                        <div onClick={handleClose}>
-                          <CloseIcon className={classes.icon} />
-                        </div>
-                        <img className={classes.desc} src={forumData.image} />
-                      </Box>
-                    </Modal> */}
-                    </div>
-                  )}
-                  <Typography
-                    variant="subtitle1"
-                    className={classes.titleElements}
-                  >
-                    Post to
-                    {
-                      <RouteLink
-                        to={`/${
-                          forumData.postType == "public" ? "public/" : "@"
-                        }${forumData.publicTopic}`}
-                        style={linkStyle}
-                      >
-                        <Link>{forumData.publicTopic}</Link>
-                      </RouteLink>
-                    }
-                    by
-                    {
-                      <RouteLink to={`/@${forumData.author}`} style={linkStyle}>
-                        <Link>{"@" + forumData.author}</Link>
-                      </RouteLink>
-                    }
-                  </Typography>
-                </Paper>
-              </Stack>
-              <Stack>
-                <div style={{ display: "inline-flex", alignItems: "center" }}>
-                  {encType === "xor" ? (
-                    <Typography className={classes.aesType}>
-                      Using {encType.toLocaleUpperCase()}
-                    </Typography>
-                  ) : (
-                    <Typography
-                      className={classes.aesType}
-                      style={{ color: "#FFFF00" }}
-                    >
-                      Using {encType.toLocaleUpperCase()}
-                    </Typography>
-                  )}
-                  <Switch
-                    checked={encChecked}
-                    onChange={handleChangeEnc}
-                    inputProps={{ "aria-label": "controlled" }}
-                    color="secondary"
-                  />
-                </div>
-              </Stack>
-            </Stack>
-          </div>
-          <div className={classes.wid}>
-            <Stack>
-              <SecretBox updateSecret={updateSecret} secret={secret} />
-              {comments?.map((comment, i) => (
-                <Comment
-                  key={i}
-                  comment={comment}
-                  secret={secret}
-                  delay={i}
-                  handleDeleteComment={handleDeleteComment}
-                />
-              ))}
+        <Container
+          maxWidth="md"
+          // sx={{ display: "flex", justifyContent: "center" }}
+          // container
+          // direction="column"
+          // justifyContent="center"
+          // alignItems="center"
+          // className={classes.root}
+        >
+          <ConfirmDelete
+            open={openConfirmDelete}
+            handleDecision={handleDecision}
+            handleClose={handleCloseConfirmDelete}
+          />
+          <Paper className={classes.titleHolder}>
+            <Typography variant="h3" className={classes.titleElements}>
+              {forumData?.title.slice(0, -5)}
+            </Typography>
+            <Typography variant="body2" className={classes.titleElements}>
+              {forumData?.subtitle}
+            </Typography>
 
-              <TextField
-                error={error}
-                helperText={helperText}
-                className={classes.comment}
-                id="outlined-textarea"
-                label="Reply"
-                value={postCommentText}
-                onInput={(e) => {
-                  setError(false);
-                  setHelperText("");
-                  setPostCommentText(e.target.value);
-                }}
-                placeholder="Enter your comment here"
-                multiline
-                fullWidth
-                variant="outlined"
-              />
-            </Stack>
-            <Container className={classes.submitBox}>
-              <Button
-                disabled={!postCommentText.length}
-                variant="contained"
-                color="primary"
-                onClick={handleSubmitComment}
-              >
-                Submit Comment
+            <Typography variant="subtitle1" className={classes.titleElements}>
+              Post to
+              {
+                <RouteLink
+                  to={`/${forumData.postType == "public" ? "public/" : "@"}${
+                    forumData.publicTopic
+                  }`}
+                  style={linkStyle}
+                >
+                  <Link>{forumData.publicTopic}</Link>
+                </RouteLink>
+              }
+              by
+              {
+                <RouteLink to={`/@${forumData.author}`} style={linkStyle}>
+                  <Link>{"@" + forumData.author}</Link>
+                </RouteLink>
+              }
+            </Typography>
+          </Paper>
+          {forumData?.image && (
+            <Box
+              sx={{
+                backgroundColor: "rgb(0, 102, 24, 0.1)",
+                // maxWidth: 700,
+                display: "flex",
+                justifyContent: "center",
+              }}
+            >
+              <Button onClick={handleOpen}>
+                <img className={classes.mainimg} src={forumData.image} />
               </Button>
-              {/* <SecretBox updateSecret={updateSecret} secret={secret} /> */}
-            </Container>
-          </div>
-        </Grid>
+              <ImageModal
+                open={open}
+                onClose={handleClose}
+                src={forumData.image}
+              />
+            </Box>
+          )}
+
+          <Grid
+            container
+            direction="column"
+            justifyContent="flex-start"
+            alignItems="flex-start"
+          ></Grid>
+          {/* <Divider color="primary"></Divider> */}
+          <Grid item xs={12} md={12}>
+            <Box
+            // sx={{
+            //   maxWidth: 700,
+            //   display: "flex",
+            // }}
+            >
+              <Stack spacing={1}>
+                <Toolbar spacing={3}>
+                  <SecretBox updateSecret={updateSecret} secret={secret} />
+                  <div style={{ display: "inline-flex", alignItems: "center" }}>
+                    {encType === "xor" ? (
+                      <Typography className={classes.aesType}>
+                        Using {encType.toLocaleUpperCase()}
+                      </Typography>
+                    ) : (
+                      <Typography
+                        className={classes.aesType}
+                        style={{ color: "#FFFF00" }}
+                      >
+                        Using {encType.toLocaleUpperCase()}
+                      </Typography>
+                    )}
+                    <Switch
+                      checked={encChecked}
+                      onChange={handleChangeEnc}
+                      inputProps={{ "aria-label": "controlled" }}
+                      color="secondary"
+                    />
+                  </div>
+                </Toolbar>
+                <Stack>
+                  {comments?.map((comment, i) => (
+                    <Comment
+                      key={i}
+                      comment={comment}
+                      secret={secret}
+                      delay={i}
+                      handleDeleteComment={handleDeleteComment}
+                    />
+                  ))}
+                  <TextField
+                    error={error}
+                    helperText={helperText}
+                    className={classes.comment}
+                    id="outlined-textarea"
+                    label="Reply"
+                    value={postCommentText}
+                    onInput={(e) => {
+                      setError(false);
+                      setHelperText("");
+                      setPostCommentText(e.target.value);
+                    }}
+                    placeholder="Enter your comment here"
+                    multiline
+                    fullWidth
+                    variant="outlined"
+                  />
+                </Stack>
+                <Container className={classes.submitBox}>
+                  <Button
+                    disabled={!postCommentText.length}
+                    variant="contained"
+                    color="primary"
+                    onClick={handleSubmitComment}
+                  >
+                    Submit Comment
+                  </Button>
+                  {/* <SecretBox updateSecret={updateSecret} secret={secret} /> */}
+                </Container>
+              </Stack>
+            </Box>
+          </Grid>
+        </Container>
       ) : (
         <LoadingIcon height={"30rem"} />
       )}

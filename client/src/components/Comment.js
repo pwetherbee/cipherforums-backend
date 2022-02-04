@@ -76,7 +76,7 @@ export const Comment = ({ comment, secret, handleDeleteComment, delay }) => {
   const classes = useStyles();
   const convertTimeToLocal = function (date) {
     const time = new Date(date + " UTC");
-    return time.toString();
+    return time.toLocaleTimeString() + "  " + time.toLocaleDateString();
   };
   const [delayedSecret, setDelayedSecret] = useState("");
   useEffect(() => {

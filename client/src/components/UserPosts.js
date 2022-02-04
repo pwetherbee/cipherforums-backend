@@ -77,7 +77,7 @@ export default function UserPosts({ posts, secret, onDelete, isOwner }) {
         spacing={2}
         direction={value == "list" ? "column" : "row"}
         alignItems="center"
-        justifyContent="center"
+        justifyContent="flex-start"
         sx={{
           display: "flex",
           justifyContent: "center",

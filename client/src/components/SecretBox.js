@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme) => ({
       // margin: theme.spacing(1),
       margin: "auto",
       paddingBottom: 0,
-      width: "25ch",
+      width: "30ch",
       marginLeft: 0,
     },
   },
