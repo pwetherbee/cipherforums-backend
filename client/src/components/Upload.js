@@ -11,6 +11,6 @@ file.addEventListener("change", (ev) => {
   })
     .then((data) => data.json())
     .then((data) => {
-      console.log(data.data.link);
+      // console.log(data.data.link);
     });
 });

@@ -8,7 +8,7 @@ function handleClick(event) {
 }
 
 export default function Breadcrumb({ locations }) {
-  console.log(locations);
+  // console.log(locations);
   return (
     <Breadcrumbs aria-label="breadcrumb">
       {locations?.map((loc, i) => {

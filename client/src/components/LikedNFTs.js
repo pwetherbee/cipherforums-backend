@@ -53,10 +53,10 @@ function LikedNFTs() {
   const [NFTs, setNFTs] = useState([]);
   useEffect(async () => {
     const data = await query(`/api/likes?username=${username}`);
-    console.log(data.data);
+    // console.log(data.data);
     setNFTs(data.data);
   }, []);
-  console.log(NFTs.length);
+  // console.log(NFTs.length);
   return (
     <Grid container spacing={0}>
       {NFTs.map((nft, i) => (

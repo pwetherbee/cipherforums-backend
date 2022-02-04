@@ -128,7 +128,7 @@ export default function PostCard({ data, secret, onDelete }) {
           setForumData(result);
         });
     }
-    console.log(data);
+    // console.log(data);
     // load in data if not
     setExpanded(!expanded);
   };

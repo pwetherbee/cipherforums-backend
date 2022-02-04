@@ -87,7 +87,7 @@ export default function HistoryGrid({ data }) {
     const res = await fetch("https://api.tzkt.io/v1/quotes/last");
 
     const currPrice = await res.json();
-    console.log(currPrice);
+    // console.log(currPrice);
 
     // parse rows
     const parsed = data.map((row, i) => {
@@ -109,7 +109,7 @@ export default function HistoryGrid({ data }) {
         time: new Date(row.timestamp).toLocaleString(),
       };
     });
-    console.log("row data:", data);
+    // console.log("row data:", data);
     setRows(parsed);
   }, [data]);
   return (

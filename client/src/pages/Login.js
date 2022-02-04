@@ -59,7 +59,7 @@ export default function Login({ handleLogin }) {
   const [password, setPassword] = useState("");
   const onSubmit = async (e) => {
     e.preventDefault();
-    console.log("you submitted this form");
+    // console.log("you submitted this form");
     const res = await fetch("/api/login", {
       method: "POST",
       headers: {
@@ -76,7 +76,7 @@ export default function Login({ handleLogin }) {
       return;
     }
     const data = await res.json();
-    console.log(data);
+    // console.log(data);
     if (data.valid) {
       handleLogin(data.user);
       history.push(data.redirect);
@@ -85,12 +85,12 @@ export default function Login({ handleLogin }) {
       credentials: "include",
     });
     if (!res2 || res2.status != 200) {
-      console.log(res2);
+      // console.log(res2);
       console.log("error");
       return;
     }
     const data2 = await res2.json();
-    console.log(data2);
+    // console.log(data2);
   };
   return (
     <Container component="main" maxWidth="xs">

@@ -5,7 +5,7 @@ import { Comment } from "./Comment";
 import { useEffect, useState } from "react";
 
 export const UserComments = ({ secret, userID, username }) => {
-  console.log(userID);
+  //   console.log(userID);
   const [comments, setComments] = useState([]);
   useEffect(async () => {
     const res = await fetch(`/api/user/${userID}/comments`);
@@ -23,6 +23,7 @@ export const UserComments = ({ secret, userID, username }) => {
           comment={comment}
           secret={secret}
           handleDeleteComment={() => {}}
+          disabled
         />
       ))}
     </Container>

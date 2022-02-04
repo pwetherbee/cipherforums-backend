@@ -207,8 +207,8 @@ export default function App() {
       credentials: "include",
     });
     if (!res || res.status != 200) {
-      console.log(res);
-      console.log("error");
+      // console.log(res);
+      // console.log("error");
       return;
     }
     const data = await res.json();

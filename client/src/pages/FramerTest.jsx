@@ -8,7 +8,7 @@ function FramerTest() {
   const [count, setCount] = useState(0);
   const onClick = (e) => {
     setCount(count + 1);
-    console.log(count);
+    // console.log(count);
   };
   return (
     <div>
@@ -28,7 +28,7 @@ function FramerTest() {
       <div>
         <Button
           onClick={(e) => {
-            console.log(count);
+            // console.log(count);
             setCount(count + 1);
           }}
         >

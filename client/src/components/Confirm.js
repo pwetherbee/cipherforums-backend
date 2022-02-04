@@ -19,11 +19,11 @@ class AlertDialog extends React.Component {
   };
 
   handleAgree = () => {
-    console.log("I agree!");
+    // console.log("I agree!");
     this.handleClose();
   };
   handleDisagree = () => {
-    console.log("I do not agree.");
+    // console.log("I do not agree.");
     this.handleClose();
   };
   render() {

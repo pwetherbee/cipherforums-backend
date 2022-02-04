@@ -15,7 +15,7 @@ const syncWallet = async function () {
 const desyncWallet = async function () {
   dAppClient.clearActiveAccount().then(async () => {
     const account = await dAppClient.getActiveAccount();
-    console.log("Active Account", account);
+    // console.log("Active Account", account);
   });
 };
 

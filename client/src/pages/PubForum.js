@@ -77,7 +77,7 @@ export default function MediaControlCard() {
   const [loading, setLoading] = useState(true);
   const theme = useTheme();
   let { topic } = useParams();
-  console.log(topic);
+  // console.log(topic);
 
   const [topicPosts, setTopicPosts] = useState([]);
   // Load in all forums with the current topic

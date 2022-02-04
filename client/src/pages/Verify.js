@@ -36,7 +36,7 @@ export default function SimplePaper() {
       body: JSON.stringify({ emailToken: emailToken }),
     });
     const data = await res.json();
-    console.log(data);
+    // console.log(data);
     if (!data.success) {
       alert(data.message);
     } else {
