@@ -14,6 +14,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Modal from "@material-ui/core/Modal";
 import { useHistory } from "react-router";
+import PasswordChecklist from "react-password-checklist"
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -60,6 +61,14 @@ export default function Public() {
     confirmPassword: "",
     stayLoggedIn: false,
   });
+  const checkUsernameLength = () => values.username.length > 5 && values.username.length < 64;
+  const minPasswordSecurity = () => values.password.length > 7 && values.password.length < 128;
+
+  const [validPass, setValidPass ] = React.useState(false);
+
+  const validFormDataCheck = () => checkUsernameLength() && validPass;
+
+
   const history = useHistory();
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
@@ -97,6 +106,7 @@ export default function Public() {
     }, 10 * 1000);
     // on confirmation redirect to confirm by email page
   };
+
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -121,6 +131,8 @@ export default function Public() {
                 autoFocus
                 onChange={handleChange("username")}
                 value={values["username"]}
+                error={!checkUsernameLength()}
+                helperText="Username must be more than five characters"
               />
             </Grid>
             <Grid item xs={12}>
@@ -163,6 +175,13 @@ export default function Public() {
                 onChange={handleChange("confirmPassword")}
                 value={values["confirmPassword"]}
               />
+              <PasswordChecklist
+                  rules={["minLength","specialChar","number","capital","match"]}
+                  minLength={5}
+                  value={values.password}
+                  valueAgain={values.confirmPassword}
+                  onChange={(isValid)=> (setValidPass(isValid))} //function that gets called every time we update the password
+                />
               <Grid item xs={12}>
                 <FormControlLabel
                   control={
@@ -178,6 +197,7 @@ export default function Public() {
               color="primary"
               className={classes.submit}
               onClick={handleSubmit}
+              disabled={!validFormDataCheck()}
             >
               Sign Up
             </Button>
