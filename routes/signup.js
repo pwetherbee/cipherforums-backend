@@ -15,7 +15,7 @@ require("dotenv").config();
 
 router.post(
   "/",
-  body("username").isAlphanumeric().isLength({ min: 5, max: 254 }),
+  body("username").isAlphanumeric().isLength({ min: 6, max: 64 }),
   body("email").isLength({ max: 254 }).isEmail().normalizeEmail(),
   body("password").isAscii().isLength({ min: 5, max: 128 }),
   (req, res) => {
@@ -27,6 +27,7 @@ router.post(
       return res.status(200).json({
         success: false,
         message: "Invalid username or email",
+        errors: errors.error,
       });
     }
     // Password encryption
