@@ -5,7 +5,7 @@ import Typography from "@mui/material/Typography";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    marginTop: 20,
+    marginTop: 50,
     marginLeft: 20,
     marginRight: 20,
     textAlign: "center",
@@ -23,7 +23,7 @@ export default function Public() {
   const classes = useStyles();
   return (
     <Grid className={classes.root}>
-      <Typography variant="h3">404</Typography>
+      <Typography variant="h1">404</Typography>
       <Typography className={classes.bin}>
         00110100 00110000 00110100
       </Typography>

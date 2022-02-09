@@ -97,6 +97,11 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.primary.main,
     marginLeft: 50,
   },
+  henlink: {
+    textDecoration: "none",
+    color: theme.palette.primary.main,
+    marginLeft: 20,
+  },
 }));
 function TabPanel(props) {
   const { children, value, index } = props;
@@ -245,6 +250,23 @@ export default function Public() {
               by {nft.creator?.name || nft.creator?.address}
             </Typography>
           </RouteLink>
+        </Toolbar>
+        <Toolbar>
+          {" "}
+          <a
+            target="_blank"
+            className={classes.henlink}
+            href={"https://hicetnunc.art/objkt/" + nft.id}
+          >
+            View on HEN
+          </a>{" "}
+          <a
+            target="_blank"
+            className={classes.henlink}
+            href={"https://objkt.com/asset/hicetnunc/" + nft.id}
+          >
+            View on OBJKT.com
+          </a>
         </Toolbar>
         <Toolbar>
           <IconButton
