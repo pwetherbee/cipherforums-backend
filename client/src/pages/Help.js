@@ -70,7 +70,7 @@ export default function FullWidthGrid() {
           <Grid item xs={11}>
             <Paper className={classes.paper}>
               <Typography variant="h5" gutterBottom>
-                Data Modification
+                Why use data modification?
               </Typography>
               <Typography>
                 This website uses encryption and obfuscation to provide privacy,
@@ -235,10 +235,47 @@ export default function FullWidthGrid() {
           <Grid item xs={11}>
             <Paper className={classes.paper}>
               <Typography variant="h5" gutterBottom>
-                Data Storage
+                Why use blockchains?
               </Typography>
               <Typography>
-                This website uses blockchains to access and store data.
+                This website uses blockchains to store data in an immutable and
+                decentralized manner. While blockchains are not nescessary to
+                use any part of Cipherforums, their durability of data storage
+                allows users to decide how immutable they want their data to be.
+                If willing to pay the network fees on a users chain of choice, a
+                user could hypothetically store all their data on chain.
+                Blockchains allow for universaly accessable data, that could be
+                accessed even if Cipherforum's servers were down. Say for
+                instance, a user wanted to bundle up all of the comments their
+                profile had ever made, and publish them to a blockchain. If the
+                Ethereum chain was used for example, the user's Cipherforums
+                data could only be lost if the entire Ethereum network was
+                destroyed - and all backups of the chain were erased. Meaining
+                this data could also be accessed and implemented on another
+                forums website.
+              </Typography>
+            </Paper>
+            <Paper className={classes.paper}>
+              <Typography variant="h5" gutterBottom>
+                How are blockchains used to store Cipherforums data?
+              </Typography>
+              <Typography>
+                Cipherforums allows data to be bundled and published to
+                blockchains, even if it is encrypted. The combination of
+                Cipherforums AES implementation with on chain storage allows for
+                data to be securly stored, while also being universally
+                accessable.
+              </Typography>
+            </Paper>
+            <Paper className={classes.paper}>
+              <Typography variant="h5" gutterBottom>
+                How are blockchains used to store digital art?
+              </Typography>
+              <Typography>
+                Cipherforums takes advatntage of art that already exists on
+                various blockchains. This data has already been published to the
+                chain in an immmutable fashion, so it is trivial for
+                Cipherforums to access and display it.
               </Typography>
             </Paper>
           </Grid>
