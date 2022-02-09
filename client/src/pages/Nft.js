@@ -92,6 +92,11 @@ const useStyles = makeStyles((theme) => ({
   alertText: {
     color: theme.palette.primary.main,
   },
+  holders: {
+    textDecoration: "none",
+    color: theme.palette.primary.main,
+    marginLeft: 50,
+  },
 }));
 function TabPanel(props) {
   const { children, value, index } = props;
@@ -316,9 +321,15 @@ export default function Public() {
         <TabPanel value={tab} index={1}>
           <Stack>
             {nftOwners.map((owner, i) => (
-              <div key={i}>
-                {owner.quantity} {owner.holder.name || owner.holder.address}{" "}
-              </div>
+              <RouteLink
+                to={`/tz/${owner.holder.address}`}
+                // style={{ textDecoration: "none", color: "white" }}
+                className={classes.holders}
+              >
+                <div key={i}>
+                  {owner.quantity} {owner.holder.name || owner.holder.address}{" "}
+                </div>
+              </RouteLink>
             ))}
           </Stack>
         </TabPanel>

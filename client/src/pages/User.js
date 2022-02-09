@@ -230,6 +230,7 @@ export default function Profile() {
             {/* -------------------------------------- */}
             {/* --------------------------------------- */}
             <TabPanel value={tab} index={1}>
+              <SecretBox updateSecret={updateSecret} secret={secret} />
               <UserComments userID={userData?.userID} />
             </TabPanel>
             <TabPanel value={tab} index={2}>
