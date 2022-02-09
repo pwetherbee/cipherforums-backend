@@ -244,15 +244,15 @@ export default function FullWidthGrid() {
                 allows users to decide how immutable they want their data to be.
                 If willing to pay the network fees on a users chain of choice, a
                 user could hypothetically store all their data on chain.
-                Blockchains allow for universaly accessable data, that could be
+                Blockchains allow for universal accessible data, that could be
                 accessed even if Cipherforum's servers were down. Say for
                 instance, a user wanted to bundle up all of the comments their
                 profile had ever made, and publish them to a blockchain. If the
                 Ethereum chain was used for example, the user's Cipherforums
                 data could only be lost if the entire Ethereum network was
-                destroyed - and all backups of the chain were erased. Meaining
-                this data could also be accessed and implemented on another
-                forums website.
+                destroyed, and all backups of the chain were erased. Once
+                published, this data could even be accessed and implemented on
+                another forums website.
               </Typography>
             </Paper>
             <Paper className={classes.paper}>
@@ -263,8 +263,8 @@ export default function FullWidthGrid() {
                 Cipherforums allows data to be bundled and published to
                 blockchains, even if it is encrypted. The combination of
                 Cipherforums AES implementation with on chain storage allows for
-                data to be securly stored, while also being universally
-                accessable.
+                data to be securely stored, while also being universally
+                accessible.
               </Typography>
             </Paper>
             <Paper className={classes.paper}>
@@ -272,10 +272,12 @@ export default function FullWidthGrid() {
                 How are blockchains used to store digital art?
               </Typography>
               <Typography>
-                Cipherforums takes advatntage of art that already exists on
+                Cipherforums takes advantage of art that already exists on
                 various blockchains. This data has already been published to the
-                chain in an immmutable fashion, so it is trivial for
-                Cipherforums to access and display it.
+                chain in an immutable fashion, so it is trivial for Cipherforums
+                to access and display it. The Cipherforums data pertaining to
+                this art is stored on servers by default, but can be published
+                to the network at the cost of network fees.
               </Typography>
             </Paper>
           </Grid>
