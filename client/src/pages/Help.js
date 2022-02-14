@@ -277,7 +277,7 @@ export default function FullWidthGrid() {
                 chain in an immutable fashion, so it is trivial for Cipherforums
                 to access and display it. The Cipherforums data pertaining to
                 this art is stored on servers by default, but can be published
-                to the network at the cost of network fees. wyeiduyb
+                to the network at the cost of network fees.
               </Typography>
             </Paper>
           </Grid>
