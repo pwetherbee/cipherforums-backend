@@ -55,6 +55,13 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: 20,
     paddingBottom: 40,
   },
+  history: {
+    display: "inline-flex",
+    padding: 2,
+  },
+  history2: {
+    paddingLeft: 50,
+  },
 }));
 
 const displayTypes = ["created", "collected"];
@@ -106,6 +113,7 @@ export default function AutoGrid() {
         >
           <Tab label="Created"></Tab>
           <Tab label="Collected"></Tab>
+          <Tab label="info"></Tab>
         </Tabs>
         <TabPanel value={tab} index={0}>
           <Grid container spacing={0}>
@@ -145,6 +153,25 @@ export default function AutoGrid() {
               </Grid>
             ))}
           </Grid>
+        </TabPanel>
+        <TabPanel value={tab} index={2}>
+          <Grid container spacing={0}>
+            <Typography variant="h5"> Latest sales </Typography>
+          </Grid>
+          {createdNFTs.map((createdNFTs) => (
+            <div>
+              <div className={classes.history}>
+                <div>{createdNFTs.id}</div>
+                <div className={classes.history2}>{createdNFTs.title} </div>
+              </div>
+            </div>
+          ))}
+          <Grid container spacing={0}>
+            <Typography variant="h5"> Latest purchases </Typography>
+          </Grid>
+          {collectedNFTs.map((collectedNFTs) => (
+            <div>{collectedNFTs.token.title} </div>
+          ))}
         </TabPanel>
       </Grid>
     </div>
