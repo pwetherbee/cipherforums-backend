@@ -62,6 +62,9 @@ const useStyles = makeStyles((theme) => ({
   history2: {
     paddingLeft: 50,
   },
+  infoTitle: {
+    paddingBottom: 20,
+  },
 }));
 
 const displayTypes = ["created", "collected"];
@@ -156,18 +159,35 @@ export default function AutoGrid() {
         </TabPanel>
         <TabPanel value={tab} index={2}>
           <Grid container spacing={0}>
-            <Typography variant="h5"> Latest sales </Typography>
+            <Grid item xs={6}>
+              <Typography className={classes.infoTitle} variant="h4">
+                Latest sales
+              </Typography>
+              {createdNFTs.map((createdNFTs) => (
+                <Grid item xs={12}>
+                  <div className={classes.history}>
+                    <div>{createdNFTs.id}</div>
+                    <div>{createdNFTs.title} </div>
+                  </div>
+                </Grid>
+              ))}
+            </Grid>
+            <Grid item xs={6}>
+              <Typography variant="h6">Total XTZ recieved</Typography>
+              <div>45.4545 </div>
+              <Typography variant="h6">Latest transaction</Typography>
+              <div>2/5/22 </div>
+              <Typography variant="h6">First transaction</Typography>
+              <div>1/1/20 </div>
+              <Typography variant="h6">Number of transactions</Typography>
+              <div>43 </div>
+            </Grid>
           </Grid>
-          {createdNFTs.map((createdNFTs) => (
-            <div>
-              <div className={classes.history}>
-                <div>{createdNFTs.id}</div>
-                <div className={classes.history2}>{createdNFTs.title} </div>
-              </div>
-            </div>
-          ))}
           <Grid container spacing={0}>
-            <Typography variant="h5"> Latest purchases </Typography>
+            <Typography className={classes.infoTitle} variant="h4">
+              {" "}
+              Latest purchases{" "}
+            </Typography>
           </Grid>
           {collectedNFTs.map((collectedNFTs) => (
             <div>{collectedNFTs.token.title} </div>
