@@ -1,3 +1,5 @@
+import React from "react";
+import Button from "@material-ui/core/Button";
 import { generateThumbnailCR } from "../helpers/hicdex.js";
 import { makeStyles } from "@material-ui/core/styles";
 import { useState, useEffect } from "react";
@@ -6,6 +8,8 @@ import Container from "@material-ui/core/Container";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import "@google/model-viewer";
 import { Typography } from "@material-ui/core";
+import ImageModal from "../components/imageModal";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -44,6 +48,10 @@ function Media(props) {
       setLoading(false);
     }
   }, [nft]);
+
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   const [loading, setLoading] = useState(true);
   // figure out the media type
   const classes = useStyles();
@@ -105,11 +113,20 @@ function Media(props) {
           </video>
         )}
         {nft.mime?.startsWith("image") && (
-          <img
-            onLoad={() => setLoading(false)}
-            className={classes.img}
-            src={nft.artifact_uri && generateThumbnailCR(nft.artifact_uri)}
-          />
+          <div>
+            <Button onClick={handleOpen}>
+              <img
+                onLoad={() => setLoading(false)}
+                className={classes.img}
+                src={nft.artifact_uri && generateThumbnailCR(nft.artifact_uri)}
+              />
+            </Button>
+            <ImageModal
+              open={open}
+              onClose={handleClose}
+              src={nft.artifact_uri && generateThumbnailCR(nft.artifact_uri)}
+            />
+          </div>
         )}
         {nft.mime?.startsWith("application/x-directory") && (
           <iframe
