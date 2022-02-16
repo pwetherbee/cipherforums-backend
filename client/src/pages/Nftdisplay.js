@@ -10,6 +10,7 @@ import {
   fetchCollectedOBJKTs,
   fetchCreatedOBJKTs,
   generateThumbnailCR,
+  fetchLatesSalesByAddress,
 } from "../helpers/hicdex.js";
 
 function TabPanel(props) {
@@ -76,6 +77,8 @@ export default function AutoGrid() {
   const [createdNFTs, setCreatedNFTs] = useState([]);
   const [display, setDisplay] = useState("created");
   const [tab, setTab] = useState(0);
+  const [sales, setSales] = useState([]);
+
   const toggleDisplay = async () => {
     //TODO: migrate to tab change function
     setDisplay(display == "created" ? "collected" : "created");
@@ -95,9 +98,12 @@ export default function AutoGrid() {
   useEffect(async () => {
     document.title = `Cipherforums | ${address}`;
     const created = await fetchCreatedOBJKTs(address);
+    const salesData = await fetchLatesSalesByAddress(address);
     // console.log(created);
     setCreatedNFTs(created);
+    setSales(salesData);
   }, [address]);
+  console.log(sales);
   return (
     <div className={classes.root}>
       <Typography variant="h4" className={classes.info}>
@@ -140,16 +146,16 @@ export default function AutoGrid() {
 
         <TabPanel value={tab} index={1}>
           <Grid container spacing={0}>
-            {collectedNFTs.map((collectedNFTs) => (
-              <Grid key={collectedNFTs.token.id} item xs={12} sm={3}>
+            {collectedNFTs.map((collectedNFT) => (
+              <Grid key={collectedNFT.token.id} item xs={12} sm={3}>
                 <Paper className={classes.paper}>
                   <RouteLink
-                    to={`/tz/nft/${collectedNFTs.token.id}`}
+                    to={`/tz/nft/${collectedNFT.token.id}`}
                     style={{ textDecoration: "none" }}
                   >
                     <img
                       className={classes.img}
-                      src={generateThumbnailCR(collectedNFTs.token.display_uri)}
+                      src={generateThumbnailCR(collectedNFT.token.display_uri)}
                     ></img>
                   </RouteLink>
                 </Paper>
@@ -163,11 +169,11 @@ export default function AutoGrid() {
               <Typography className={classes.infoTitle} variant="h4">
                 Latest sales
               </Typography>
-              {createdNFTs.map((createdNFTs) => (
+              {sales.map((sale) => (
                 <Grid item xs={12}>
                   <div className={classes.history}>
-                    <div>{createdNFTs.id}</div>
-                    <div>{createdNFTs.title} </div>
+                    <div>{sale.swap.price / 1000000} </div>
+                    <div> {sale.token.title}</div>
                   </div>
                 </Grid>
               ))}
@@ -175,23 +181,38 @@ export default function AutoGrid() {
             <Grid item xs={6}>
               <Typography variant="h6">Total XTZ recieved</Typography>
               <div>45.4545 </div>
+              <Typography variant="h6">Collection value estimate</Typography>
+              <div>32 XTZ </div>
+              <Typography variant="h6">Number of transactions</Typography>
+              <div>43 </div>
               <Typography variant="h6">Latest transaction</Typography>
               <div>2/5/22 </div>
               <Typography variant="h6">First transaction</Typography>
               <div>1/1/20 </div>
-              <Typography variant="h6">Number of transactions</Typography>
-              <div>43 </div>
             </Grid>
           </Grid>
           <Grid container spacing={0}>
-            <Typography className={classes.infoTitle} variant="h4">
-              {" "}
-              Latest purchases{" "}
-            </Typography>
+            <Grid item xs={6}>
+              <Typography className={classes.infoTitle} variant="h4">
+                {" "}
+                Latest purchases{" "}
+              </Typography>
+
+              {collectedNFTs.map((collectedNFT) => (
+                <div>{collectedNFT.token.title} </div>
+              ))}
+            </Grid>
+            <Grid item xs={6}>
+              <Typography className={classes.infoTitle} variant="h4">
+                {" "}
+                Top purchases{" "}
+              </Typography>
+
+              {collectedNFTs.map((collectedNFT) => (
+                <div>{collectedNFT.token.title} </div>
+              ))}
+            </Grid>
           </Grid>
-          {collectedNFTs.map((collectedNFTs) => (
-            <div>{collectedNFTs.token.title} </div>
-          ))}
         </TabPanel>
       </Grid>
     </div>

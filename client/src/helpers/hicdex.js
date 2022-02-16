@@ -174,6 +174,31 @@ const queryOBJKTDetails = `
         }
       }
     `;
+
+const queryLatestSalesByAddress = `
+    query Sales($address: String!) {
+      hic_et_nunc_trade(where: {_or: [{seller: {address: {_eq: $address}}}, {token: {creator: {address: {_eq: $address}}}}]}, order_by: {timestamp: desc}, limit: 10)  {
+        timestamp
+        token {
+          id
+          artifact_uri
+          display_uri
+          mime
+          title
+          creator {
+            address
+          }
+        }
+        buyer {
+          address
+        }
+        amount
+        swap {
+          price
+        }
+      }
+    }
+  `;
 // List of Fetch Requests
 
 // Get created objkts by address
@@ -243,6 +268,23 @@ async function fetchOBJKTDetails(id) {
   return result;
 }
 
+// Fetch latest sales by address
+async function fetchLatesSalesByAddress(address) {
+  const { errors, data } = await fetchGraphQL(
+    queryLatestSalesByAddress,
+    "Sales",
+    {
+      address: address,
+    }
+  );
+  if (errors) {
+    console.error(errors);
+  }
+  const result = data.hic_et_nunc_trade;
+  console.log({ result });
+  return result;
+}
+
 const generateCreationURIs = (creations) =>
   creations.map(
     (creation) =>
@@ -268,4 +310,5 @@ export {
   fetchOBJKTPriceHistory,
   fetchOBJKTDetails,
   generateThumbnailCR,
+  fetchLatesSalesByAddress,
 };
