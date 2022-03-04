@@ -172,7 +172,8 @@ export default function AutoGrid() {
               {sales.map((sale) => (
                 <Grid item xs={12}>
                   <div className={classes.history}>
-                    <div>{sale.swap.price / 1000000} </div>
+                    <div>{sale.swap.price / 1000000}</div>
+                    <span> - </span>
                     <div> {sale.token.title}</div>
                   </div>
                 </Grid>
@@ -202,7 +203,7 @@ export default function AutoGrid() {
                 <div>{collectedNFT.token.title} </div>
               ))}
             </Grid>
-            <Grid item xs={6}>
+            {/* <Grid item xs={6}>
               <Typography className={classes.infoTitle} variant="h4">
                 {" "}
                 Top purchases{" "}
@@ -211,7 +212,17 @@ export default function AutoGrid() {
               {collectedNFTs.map((collectedNFT) => (
                 <div>{collectedNFT.token.title} </div>
               ))}
-            </Grid>
+            </Grid> */}
+            {/* <Grid item xs={6}>
+              <Typography className={classes.infoTitle} variant="h4">
+                {" "}
+                NFT Floor{" "}
+              </Typography>
+
+              {collectedNFTs.map((collectedNFT) => (
+                <div>{collectedNFT.token.title} </div>
+              ))}
+            </Grid> */}
           </Grid>
         </TabPanel>
       </Grid>
