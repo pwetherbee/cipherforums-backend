@@ -22,8 +22,8 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     // padding: 80,
-    width: "94%",
-    paddingLeft: "6%",
+    width: "96%",
+    paddingLeft: "4%",
   },
   paper: {
     padding: theme.spacing(0),
@@ -39,7 +39,8 @@ const useStyles = makeStyles((theme) => ({
     // borderStyle: "solid",
     verticalAlign: "middle",
     padding: 10,
-    maxHeight: 400,
+    maxHeight: 600,
+    // maxWidth: 500,
   },
   img: {
     width: "100%",
